@@ -1,0 +1,329 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require owl.carousel
+ *= require owl.theme
+ *= require_self
+*/
+
+/* "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+*/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+ /*
+ *= require_tree . 
+ */
+
+body{
+  min-width: 902px;
+}
+
+#wrapper{
+  position: absolute;
+  width:100%;
+  height: 80px;
+  text-align: center;
+  font-size: 20px;
+  font-family: monospace;
+  letter-spacing: normal;
+  position:fixed;
+  top: 0px;
+  background-color: #dddddd;
+  opacity: 0.9;
+}
+
+.space{
+  width:100%;
+  height: 80px;
+}
+
+#name{
+  display: inline-block;
+  width: 250px;
+  left: 20px;
+  float:left; 
+}
+
+#root{
+  display: inline-block;
+  margin: 30px;
+  float: left;
+}
+
+.border{
+  height: 15px;
+  border-right: 2px solid #000;
+}
+
+#basket{
+  height: 32px;
+  display: inline-block;
+}
+
+.empty{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  height: 32px;
+}
+.empty:active{
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  font-weight: 900;
+  text-shadow: 2px 2px 2px #fff;
+}
+
+div > div{
+  display: inline-block;
+}
+
+.btn-group{
+  float: right;
+  margin: 30px 50px 0px 0px;
+}
+
+.settings{
+  font-size: 15px;
+  margin: 30px 50px 0px 0px;
+  float:right;
+}
+
+#shopping > p{
+  font-family: monospace;
+  letter-spacing: normal;
+  font-size: 25px;
+  margin-left: 30px;
+  position: absolute;
+  display: inline-block;
+}
+
+#shopping{
+  position: relative;
+  width:100%;
+}
+
+.shop{
+  width: 1000px;
+  height: 900px;
+  margin-top: 40px;
+  padding: 0px;
+  text-align: center;
+  display: inline-block;
+}
+
+.shop:after {
+  display: inline-block;
+  content: "";
+  width: 100%;
+}
+
+#shop_item{
+  width: 300px;
+  height: 300px;
+  display: inline-block;
+}
+
+#shop_item > *{
+  display: block;
+  text-align: center;
+}
+
+#cover_item{
+  width: 300px;
+  height: 200px;
+}
+
+#categories{
+  display: inline-block;
+  width: 200px;
+  height: 300px;
+  position: absolute;
+  right: 0px;
+}
+
+ol{
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#outside{
+  width:85%;
+  margin: 0px auto;
+}
+
+#rev_wrap{
+  margin-top: 20px;
+}
+
+#rev_wrap > div {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#reviews >ol > li{
+  margin: 20px 0px 20px 0px;
+}
+
+.best{
+  position: absolute;
+  margin: 10px auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 1000px;
+  height: 900px;
+  border-radius: 3px;
+}
+
+.best > p{
+  text-align: center;
+}
+
+.book_info{
+  display: block;
+}
+.book_title{
+  font-weight: 900;
+  font-size: 20px;
+  margin: 20px 10px;
+}
+
+.cover_desc{
+  width: 1000px;
+  padding: 10px;
+}
+
+.cover{
+  width: 200px;
+  height: 300px;
+  float: left;
+  margin-left: 20px;
+}
+
+.desc{
+  height: 300px;
+  width: 700px;
+  display:inline-block;
+  margin: 0px 20px;
+}
+
+.book_ord{
+  display: block;
+  margin-top: 40px;
+}
+
+.to_cart{
+  display: inline-block;
+}
+
+#cart{
+  width: 100%;
+  margin: 30px 0px 30px 0px;
+  padding: 20px;
+  text-align: center;
+  font-size: 15px; 
+  border-bottom: 3px dotted #000;
+}
+
+#cart img{
+  width:90px;
+  height: 110px;
+}
+
+#cart .cover{
+  width:90px;
+  height: 110px;
+  overflow: hidden;
+}
+
+#cart .book_title{
+  display: block;
+  float: top;
+  font-size: 16px;
+  margin: 0px;
+  text-align: left;
+}
+
+#cart .book_info{
+  display: block;
+  height: 110px;
+  margin: 0px;
+  overflow: hidden;
+  text-align:left;
+}
+
+#cart .desc{
+  margin: 0px;
+  height: 88px;
+  width: 100%;
+}
+
+tr{
+  border-collapse:separate;
+  text-overflow:ellipsis;
+}
+
+#cart th{
+  text-align: center;
+}
+
+#sub_total{
+  width: 200px;
+  height: 30px;
+  float:right;
+  margin: 0% 2%;
+  display: block;
+}
+
+.before_order{
+  display:block;
+  width: 80%;
+  height: 50px;
+  margin: 60px 0px 10px 0px;
+}
+
+.left_buttons{
+  float:left;
+  position: relative; 
+  display: inline;
+}
+
+.right_buttons{
+  float: right;
+  position: relative; 
+  display: inline;
+}
+
+.btn-group{
+  display: inline-block;
+  width: 50%;
+}
+
+.set {
+  display: block;
+  border-bottom: 2px solid #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+

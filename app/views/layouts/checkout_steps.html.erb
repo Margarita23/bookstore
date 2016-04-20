@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bookstore</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+ 
+  
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  
+</head>
+<body>
+
+  <div id="wrapper">
+    <div id="name">
+      <h1>Bookstore</h1>
+    </div>
+    <div id="root">
+      <div id="home">
+        <%= link_to 'HOME', root_path %>
+      </div>
+      <div class="border"></div>
+      <div id="route_shop">
+        <%= link_to 'SHOP', shopping_path %>
+      </div>
+    </div>
+    
+      <div class="settings">  
+        <% if user_signed_in? && !current_user.guest %>
+        
+          <div id="basket">
+            <% if !current_user.cart.nil? %>
+            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
+            <% if current_user.cart.line_items.count!=0 %> 
+              (<%= quantity_incart %>)
+              $<%= sub_total %>
+            <% else %>
+              (EMPTY) 
+            <% end %>
+            <% else %>
+              <div class = "empty"> 
+                <%= image_tag(Cart.new.image.url) %> CART: (EMPTY)
+            </div>
+            <% end %>
+          </div>
+        
+      
+          <%= link_to 'Settings', edit_user_registration_path%>
+          <div class="border"></div>
+          <%= link_to 'Orders' %>
+          <div class="border"></div>
+          <%= link_to "Logout",  destroy_user_session_path,:method => :delete %>
+        
+        <% else %> 
+            <%= link_to 'Sign in', new_user_registration_path %>
+            <div class="border"></div>
+            <%= link_to 'Login', new_user_session_path %>
+        <% end %>
+        
+      </div>
+    
+  </div>
+  <div class="space"></div>
+  <% if notice %>
+    <div class="alert alert-info"><%= notice %></div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-warning"><%= alert %></div>
+  <% end %>
+  
+  <h1>Checkout</h1>
+
+  <div class="btn-group" role="group">
+    <%= link_to "ADDRESS", wizard_path(:address), method: :get, :class => "btn btn-default" %>
+    <%= link_to "DELIVERY", wizard_path(:delivery), method: :get, :class => "btn btn-default" %>
+    <%= link_to "PAYMENT", wizard_path(:payment), method: :get, :class => "btn btn-default"  %>
+    <%= link_to "CONFIRM", wizard_path(:confirm), method: :get, :class => "btn btn-default"  %>
+    <%= link_to "COMPLETE", wizard_path(:complete), method: :get, :class => "btn btn-default"  %>
+  </div>
+  
+
+<%= yield %>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<div id="outside">
+  <div id = "win">
+    <div class="title">
+      <%= @book.title %>
+    </div>
+
+    <div class="cover">
+      <%= link_to image_tag(@book.cover.url(:med)), @book.cover.url %>
+    </div>
+
+    <div class="price">
+      <%= @book.price %>
+    </div>
+
+    <div class="descript">
+      <%= @book.description %>
+    </div>
+  </div>
+
+<div id="rev_wrap">
+  <div>Reviews</div> 
+  <%= link_to 'Add review for this book', new_rating_path %>
+  
+</div>
+<div id="reviews">
+  <ol>
+    <% @book.ratings.each do |rat| %>
+    <li>
+      <%= rat.review %>
+    </li>
+    <% end %>
+  </ol>
+</div>
+</div>

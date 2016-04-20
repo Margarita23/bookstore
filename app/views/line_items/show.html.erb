@@ -1,0 +1,12 @@
+<p>
+  <strong>Book:</strong>
+  <%= @line_item.book.title %>
+</p>
+
+<p>
+  <strong>Cart:</strong>
+  <%= @line_item.cart.id %>
+</p>
+
+<%= link_to 'Edit', edit_line_item_path(@line_item) %> |
+<%= link_to 'Back', line_items_path %>

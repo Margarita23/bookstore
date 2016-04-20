@@ -1,0 +1,59 @@
+<table id = "cart">
+  
+  <th>BOOK</th>
+  <th>PRICE</th>
+  <th>QTY</th>
+  <th>TOTAL</th>
+  
+  <% @cart.line_items.each do |item| %>
+  <tr>
+    <td>
+      <div class="cover">
+        <%= image_tag(item.book.cover.url()) %>
+      </div>
+      <div class="book_info">
+        <div class="book_title">
+          <%= item.book.title %>
+        </div>
+        <div class = "desc">
+          <%= item.book.description %>
+        </div>
+      </div>
+    </td>
+    <td>
+      <%= item.book.price %>
+    </td>
+    <td>
+      <div class = "update">
+        <%= form_tag(cart_line_item_path(id: item.id,cart_id: @cart.id), method: :put) do %>
+        <%= number_field_tag(:new_quantity, item.quantity, in: 1..item.book.quantity, step: 1, :style => "width: 50px;") %>
+          <div class="update">
+            <%= submit_tag( "UPDATE" ) %>
+          </div>
+        <% end %>
+      </div>
+    </td>
+    <td>
+      <%= item.book.price * item.quantity %>
+    </td>
+    <td>
+      <%= link_to 'X', cart_line_item_path(id: item.id,cart_id: @cart.id), method: :delete,  :style => "color: #000" %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<div id="sub_total">
+  SUBTOTAL: $ <%= sub_total %>
+</div>
+
+<div class="before_order">
+  <div class="left_buttons">
+    <div><%= button_to 'EMPTY CART', empty_cart_path, method: :post %></div>
+    <div><%= button_to 'CONTINUE SHOPPING', shopping_path, method: :get %></div>
+  </div>
+  <div class="right_buttons">
+    <div><%= text_field_tag :coupon, 'Coupon code', :style => "width: 100px;"  %></div>
+    <div><%= button_to 'CHECKOUT', checkout_path(:address), method: :get %></div>
+  </div>
+</div>

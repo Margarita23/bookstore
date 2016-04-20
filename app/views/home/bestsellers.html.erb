@@ -1,0 +1,45 @@
+<div id="shopping">
+<div class="best">
+  <div id="owl-demo" class="owl-carousel owl-theme"> 
+    <% @bestsellers.each do |book| %>
+      <div>
+        <div class="book_info">
+          <div class="book_title">
+            <%= book.title %> 
+          </div> by <%= link_to " #{book.author.first_name} #{book.author.last_name}" %>
+        </div>
+        <div class="cover_desc">
+          <div class="cover">
+            <%= link_to image_tag(book.cover.url(:med)), book.cover.url %>
+          </div>
+          <div class="desc">
+            <%= book.description %>
+            <div class="book_ord">
+              $ <%= book.price %>                      
+            </div>
+            <div class="to_cart">
+              <% if user_signed_in? && !current_user.guest %>
+              
+                <div class = "add_to_cart">
+                  <%= form_tag(cart_line_items_path(book_id: book, cart_id: current_user.id), method: 'post') do %>
+                  <%= number_field_tag(:new_quantity, 1, in: 1..book.quantity, step: 1, :style => "width: 50px;") %>
+                    <div class="actions">
+                      <%= submit_tag( "ADD TO CART" ) %>
+                    </div>
+                  <% end %>
+                </div>
+              
+              <% else %>
+                <%= button_to 'ADD TO CART', new_user_session_path %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div> 
+    
+    <% end %>
+  </div>
+  <div class="space"></div>
+  <p>Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!</p>
+</div>
+</div>
