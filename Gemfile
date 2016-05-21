@@ -35,7 +35,7 @@ gem 'aasm'
 gem 'devise-guests', '~> 0.5.0'
 gem 'mini_magick'
 gem 'paperclip'
-gem 'formeze', '~> 3.0'
+
 
 
 # Use ActiveModel has_secure_password

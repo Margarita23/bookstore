@@ -1,45 +1,82 @@
-<%= form_for(current_user.billing_address), html: { multipart: true } do |f| %>
-  <% if @address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-      <% @address.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<table class="address">
+  <tr>
+    <th>Billing address</th>
+    <th>Shipping address</th>
+  </tr>
+  <tr>
+    <td>
+      <%= form_tag(current_user.billing_address(id: current_user.billing_address.id), method: :put) do %> 
+        <div class="field">
+          Firstname<br>
+          <%= text_field_tag :first_name, current_user.billing_address.first_name %>
+        </div>
+        <div class="field">
+          Lastname<br>
+          <%= text_field_tag :last_name, current_user.billing_address.last_name %>
+        </div>
+        <div class="field">
+          Street<br>
+          <%= text_field_tag :street, current_user.billing_address.street %> 
+        </div>
+        <div class="field">
+          City<br>
+          <%= text_field_tag :city, current_user.billing_address.city %>
+        </div>
+        <div class="field">
+          Country<br>
+          <%= text_field_tag :country, current_user.billing_address.country %>
+        </div>
+        <div class="field">
+          Zip<br>
+          <%= text_field_tag :zip, current_user.billing_address.zip %>
+        </div>
+        <div class="update">
+          <%= submit_tag( "SAVE" ) %>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </td>
+    
+    <td>
+    
+      <table>
+          <%= form_tag(current_user.shipping_address(id: current_user.shipping_address.id), method: :put) do %>
+          <p><%= check_box_tag :checkbox_use_same_address %> Use Billing Address</p>
+          <tr id="shipping">
+            <div class="field">
+              Firstname<br>
+              <%= text_field_tag :first_name, current_user.shipping_address.first_name %>
+            </div>
+            <div class="field">
+              Lastname<br>
+              <%= text_field_tag :last_name, current_user.shipping_address.last_name %>
+            </div>
+            <div class="field">
+              Street<br>
+              <%= text_field_tag :street, current_user.shipping_address.street %>
+            </div>
+            <div class="field">
+              City<br>
+              <%= text_field_tag :city, current_user.shipping_address.city %>
+            </div>
+            <div class="field">
+              Country<br>
+              <%= text_field_tag :country, current_user.shipping_address.country %>
+            </div>
+            <div class="field">
+              Zip<br>
+              <%= text_field_tag :zip, current_user.shipping_address.zip %>
+            </div>
+          </tr>
+          <tr>
+              <div class="update">
+                <%= submit_tag( "SAVE" ) %>
+              </div>
+        </tr>
+          <% end %>
+      </table> 
+    </td>
+  </tr>
+</table>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :street %><br>
-    <%= f.text_field :street %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br>
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :zip %><br>
-    <%= f.text_field :zip %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.number_field :phone %>
-  </div>
-  <div class="actions">
-    <%= f.submit "SAVE" %>
-  </div>
-<% end %>
+  
+

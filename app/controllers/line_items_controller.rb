@@ -39,15 +39,12 @@ class LineItemsController < ApplicationController
       @line_item.quantity = quan.to_i
       @line_item.price = book.price 
     end
-      
-    respond_to do |format|
-      if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: 'Line item was successfully created.' }
-        format.json { render :show, status: :created, location: @line_item }
-      else
-        format.html { render :new }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
-      end
+       
+    if @line_item.save
+      redirect_to :back
+    else
+      flash.now[:notice] = "Book can not be add to cart, please enter information."
+render :new
     end
   end
 

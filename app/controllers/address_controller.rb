@@ -1,5 +1,4 @@
 class AddressController < ApplicationController
-  
 
   # GET /addresss/1
   # GET /addresss/1.json
@@ -19,6 +18,9 @@ class AddressController < ApplicationController
   # POST /addresss.json
   def create
     @address = Address.new(address_params)
+    if params[:checkbox_use_same_address] == true
+      @address = current_user.billing_address
+    end
 
     respond_to do |format|
       if @address.save
@@ -34,15 +36,17 @@ class AddressController < ApplicationController
   # PATCH/PUT /addresss/1
   # PATCH/PUT /addresss/1.json
   def update
-    respond_to do |format|
-      if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
-        format.json { render :show, status: :ok, location: @address }
-      else
-        format.html { render :edit }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
+    @address = Address.find(params[:id]) 
+    if !@address.user_shipping_id.nil? && params[:checkbox_use_same_address] == "1"
+      @address.update(first_name: current_user.billing_address.first_name, last_name: current_user.billing_address.last_name, street: current_user.billing_address.street, city: current_user.billing_address.city, country: current_user.billing_address.country, zip: current_user.billing_address.zip)
+      @address.save
+      redirect_to :back
+    else
+      @address.update(first_name: params[:first_name], last_name: params[:last_name], street: params[:street], city: params[:city], country: params[:country], zip: params[:zip])
+      @address.save
+      redirect_to :back
     end
+      
   end
 
   # DELETE /addresss/1
@@ -58,11 +62,12 @@ class AddressController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_address
-      @address = address.find(params[:id])
+      @billing_address = address.find(params[:id])
+      @shipping_address = address.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:title, :description, :price, :quantity)
+      params.require(:address).permit(:first_name, :last_name, :street, :city, :country, :zip, :phone )
     end
 end

@@ -28,20 +28,8 @@
      
     });
 
-/*
 $(document).ready(function() {
-  var x = document.getElementsByClassName(".btn btn-default");
-  var i;
-  for (i = 0; i<x.length;i++){
-    addtocartEvent(x[i]);
-  }
+  $('#checkbox_use_same_address').on('click', function(){
+    $("#shipping tr").slideToggle(200);
+  });
 });
-
-function addtocartEvent(check){
-   $(check).on("click", function(){
-        var panelId = $(this).attr('data-panelid');
-     alert(panelId);
-     
-   });
-}
-*/

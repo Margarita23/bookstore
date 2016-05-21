@@ -7,10 +7,7 @@ class CheckoutController < ApplicationController
   
   
   def show
-    @order = current_user.temp_order
-    if @order.nil?
-      @order = TempOrder.create(user_id: current_user.id)  
-    end
+    
     render_wizard
   end
   

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :orders
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "user/registrations"} do
+    get "/signup"   => "registrations#new",   :as => :new_user_registration
+  end
   #resources :ratings
   resources :carts do
     resources :line_items
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   resources :checkout do
     resources :order_steps
   end
+  resources :address
+  resources :order, only: [:new, :create]
   
   root 'home#bestsellers'
   
