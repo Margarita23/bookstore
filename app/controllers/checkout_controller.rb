@@ -12,6 +12,8 @@ class CheckoutController < ApplicationController
   
   def create   
     set_values
+    
+    ### what about case when ???
     if params[:address_button]
       @checkout.address_step
       session[:checkout_step] = @checkout.current_step
@@ -32,7 +34,7 @@ class CheckoutController < ApplicationController
       session[:checkout_step] = @checkout.current_step
       render 'new'
       
-    elsif @checkout.last_step? 
+    elsif @checkout.last_step?
       @checkout.save 
       session[:checkout_step]= nil
       flash[:notice] = "Order saved."
@@ -51,6 +53,8 @@ class CheckoutController < ApplicationController
     @checkout.user = current_user
     @checkout.total_price = sub_total
     @delivery = Delivery.find(@checkout.delivery) if !@checkout.delivery.nil?
+    
+    @checkout.check_same_address
   end
   
 end

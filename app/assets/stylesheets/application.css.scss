@@ -325,7 +325,6 @@ tr{
 }
 
 .address > th, td{
-  border: 1px solid #000;
   padding: 50px;
   margin: 20px;
 }
@@ -346,6 +345,8 @@ tr{
 .order_address th{
   font-size: 25px;
   font-weight: 400;
+  padding: 5px;
+  margin: 20px;
 }
 
 .checkout h1{
@@ -405,7 +406,13 @@ tr{
   background: #ffc9c9;
 }
 
+#error_explanation{
+  color: #de1515;
+}
 
+#same_address{
+  margin: 0px 0px 0px 300px;
+}
 
 
 

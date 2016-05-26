@@ -7,28 +7,60 @@
   <tr>
     <td>
       <div class="field">  
-        <%= f.text_field :bill_f_name, placeholder: "First name" %>
+        <%= f.text_field :bill_f_name, placeholder: "First name", size: 25 %>
       </div>
       <div class="field">
-        <%= f.text_field :bill_l_name, placeholder: "Last name" %>
+        <%= f.text_field :bill_l_name, placeholder: "Last name", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :bill_street, placeholder: "Street Address", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :bill_city, placeholder: "City", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :bill_country, placeholder: "Country", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :bill_zip, placeholder: "Zip", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :bill_phone, placeholder: "Phone", size: 25 %>
       </div>
       <div class="to_check">
       </div>
     </td>
-    <td>
+    <td id = "shipping_add">
       <div class="field">  
-        
+        <%= f.text_field :ship_f_name, placeholder: "First name", size: 25 %>
       </div>
       <div class="field">
-        
+        <%= f.text_field :ship_f_name, placeholder: "Last name", size: 25 %>
       </div>
-      <div class="to_check">
-        <%= f.check_box :use_same_address %> Use Billing Address
+      <div class="field">
+        <%= f.text_field :ship_street, placeholder: "Street Address", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :ship_city, placeholder: "City", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :ship_country, placeholder: "Country", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :ship_zip, placeholder: "Zip", size: 25 %>
+      </div>
+      <div class="field">
+        <%= f.text_field :ship_phone, placeholder: "Phone", size: 25 %>
       </div>
     </td>
     
   </tr>
 </table>
+  <div id = "same_address">  
+    <div class="to_check">
+      <%= f.check_box :checkbox_use_same_address, id: "checkbox_use_same_address", :value => "false" %> Use Billing Address
+    </div>
+  </div>
 </div>
 
 

@@ -7,6 +7,17 @@
       <%= f.submit "PAYMENT", :name => "payment_button" %>
       <%= f.submit "CONFIRM", :name => "confirm_button" %>   
     </div>
+  
+  <% if @checkout.errors.any? %>
+    <div id="error_explanation">
+      <p>Please:</p>
+      <ul>
+      <% @checkout.errors.each do |attr,msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
     <div class="steps">   
       <%= render "#{@checkout.current_step}", :f => f %>

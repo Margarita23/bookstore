@@ -2,10 +2,6 @@ class Checkout
   include ActiveModel::Model
   include Virtus.model
   
-  attr_reader :address
-  attr_reader :delivery
-  #attr_reader :order
-  
   attribute :bill_f_name, String
   attribute :bill_l_name, String
   attribute :bill_street, String
@@ -21,7 +17,9 @@ class Checkout
   attribute :ship_country, String
   attribute :ship_zip, Integer
   attribute :ship_phone, String
-  attribute :use_same_address, Boolean, :default => 1
+  
+  #???????????????????????????What's up with checkout???
+  attribute :checkbox_use_same_address, Boolean, :default => "faulse"
 
   attribute :user
   attribute :total_price, Decimal
@@ -32,25 +30,25 @@ class Checkout
   attribute :exp_date, String
   attribute :current_step
   
-  validates_presence_of :bill_f_name
-  validates_presence_of :bill_l_name
-  #validates :bill_street, presence: true
-  #validates :bill_city, presence: true
-  #validates :bill_country, presence: true
-  #validates :bill_zip, presence: true
-  #validates :bill_phone, presence: true
+  validates_presence_of :bill_f_name, message: "Enter your first name for billing address", :if => lambda { |o| o.current_step == "address" }
+  validates_presence_of :bill_l_name, message: "Enter your last name for billing address", :if => lambda { |o| o.current_step == "address" }
   
-  #validates :ship_f_name, presence: true
-  #validates :ship_l_name, presence: true
-  #validates :ship_street, presence: true
-  #validates :ship_city, presence: true
-  #validates :ship_country, presence: true
-  #validates :ship_zip, presence: true
-  #validates :ship_phone, presence: true
+  validates_presence_of :ship_f_name, message: "Enter your first name for shipping address", :if => lambda { |o| o.current_step == "address" && o.checkbox_use_same_address == "0"}
+  validates_presence_of :ship_f_name, message: "Enter your last name for shipping address", :if => lambda { |o| o.current_step == "address" && o.checkbox_use_same_address == "0"}
   
-  #validates :card_number, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 16 }
-  #validates :card_code, presence: true, numericality: { only_integer: true, greater_than: 3 }
+  validates :card_code, {
+    presence: true, 
+    numericality: {only_integer: true, greater_than: 3, message: "Card code must contain only numbers"},
+   :if => lambda { |o| o.current_step == "payment" }
+  }
   
+  validates :card_number, {
+    presence: true, 
+    length: { is: 16, message: "Card number must be 16 digits"},
+    numericality: {only_integer: true, message: "Card number must contain only numbers"},
+   :if => lambda { |o| o.current_step == "payment" }
+  }
+     
    def current_step
     @current_step || steps.first
   end
@@ -69,7 +67,6 @@ class Checkout
     else
       self.errors.messages
     end
-   
   end
   
   def delivery_step
@@ -108,6 +105,18 @@ class Checkout
     %w[address delivery payment confirm]
   end
   
+  def check_same_address
+    if @checkbox_use_same_address == "true"
+      @checkout.ship_f_name = @bill_f_name
+      @checkout.ship_l_name = @bill_l_name
+      @checkout.ship_street = @bill_street
+      @checkout.ship_city = @bill_city
+      @checkout.ship_country = @bill_country
+      @checkout.ship_zip = @bill_zip
+      @checkout.ship_phone = @bill_phone
+    end
+  end
+  
   def persisted?
     false
   end
@@ -129,17 +138,17 @@ class Checkout
     ship_address
   end
   
-  private
-  
   def bill_address
-    @billing_address = Address.create!(first_name: @bill_f_name, last_name: @bill_l_name, order_billing_id: @order.id)
+    @billing_address = Address.create(first_name: @bill_f_name, last_name: @bill_l_name, street: @bill_street, city: @bill_city, country: @bill_country, zip: @bill_zip, phone: @bill_phone,  order_billing_id: @order.id)
   end
-  
+
   def ship_address
-    if @use_same_address == "1"
-      @shipping_address = Address.create!(first_name: @bill_f_name, last_name: @bill_l_name, order_shipping_id: @order.id)
+    if @checkbox_use_same_address == "true"
+      @shipping_address = @billing_address
+      @shipping_address.order_shipping_id = @order.id
+      @shipping_address.save!
     else
-      @shipping_address = Address.create!(first_name: @ship_f_name, last_name: @ship_l_name, order_shipping_id: @order.id)
+      @shipping_address = Address.create!(first_name: @ship_f_name, last_name: @ship_l_name, street: @ship_street, city: @ship_city, country: @ship_country, zip: @ship_zip, phone: @ship_phone,  order_shipping_id: @order.id)
     end
   end
 end

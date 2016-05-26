@@ -40,7 +40,6 @@
     
       <table>
           <%= form_tag(current_user.shipping_address(id: current_user.shipping_address.id), method: :put) do %>
-          <p><%= check_box_tag :checkbox_use_same_address %> Use Billing Address</p>
           <tr id="shipping">
             <div class="field">
               Firstname<br>

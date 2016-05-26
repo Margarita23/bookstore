@@ -30,6 +30,6 @@
 
 $(document).ready(function() {
   $('#checkbox_use_same_address').on('click', function(){
-    $("#shipping tr").slideToggle(200);
+    $("#shipping_add").slideToggle(200);
   });
 });

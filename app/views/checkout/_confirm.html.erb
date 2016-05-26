@@ -10,18 +10,19 @@
 
   <td>
     <ul>
-      <li><%= @checkout.bill_f_name %></li>
-      <li><%= @checkout.bill_l_name %></li>
-        
+      <li><%= @checkout.ship_f_name %> <%= @checkout.ship_l_name %></li>
+      <li><%= @checkout.ship_street %></li>
+      <li><%= @checkout.ship_city %> <%= @checkout.ship_country %> <%= @checkout.ship_zip %></li>
+      <li>Phone <%= @checkout.ship_phone %></li> 
     </ul>
   </td>
   
   <td>
     <ul>
-      <li><%= @checkout.bill_f_name %></li>
-      <li><%= @checkout.bill_l_name %></li>
-      
-        
+      <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
+      <li><%= @checkout.bill_street %></li>
+      <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
+      <li>Phone <%= @checkout.bill_phone %></li>
     </ul>
   </td>
   
@@ -33,8 +34,8 @@
   
   <td>
     <ul>
-      
       <li>**** **** **** <%= @checkout.card_number[-4,4] %></li>
+      <li><%= @checkout.exp_date %></li>
     </ul>
   </td>
         
