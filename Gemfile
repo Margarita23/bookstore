@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 require 'state_machine'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
@@ -35,7 +34,8 @@ gem 'aasm'
 gem 'devise-guests', '~> 0.5.0'
 gem 'mini_magick'
 gem 'paperclip'
-
+gem 'virtus'
+gem "dynamic_form"
 
 
 # Use ActiveModel has_secure_password

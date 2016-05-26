@@ -1,0 +1,16 @@
+<h1>Credit CARD</h1>
+
+<div class="field">  
+  <%= f.text_field :card_number, placeholder: "Card Number", maxlength: 16, size: 20 %>
+</div>
+<div class="field">  
+  <p>Expiration date: </p>
+  <%= f.date_select :exp_date, :start_year => Date.current.year, :end_year => 2025, :discard_day => true %>
+</div>
+
+<div class="field">  
+  <%= f.text_field :card_code, placeholder: "Card Code", size: 3, maxlength: 4 %>
+  <div id="CVV_info">
+    <%= link_to "[Wat's this?]"%>
+  </div>
+</div>

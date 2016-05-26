@@ -1,0 +1,10 @@
+<h2>Delivery</h2>
+
+<ul>
+  <% Delivery.all.each do |del| %>  
+  <li>
+    <%= f.radio_button(:delivery, del.id) %><%= del.method %> + $ <%= del.price %> 
+  </li>
+  <% end %>
+</ul>
+

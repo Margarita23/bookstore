@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TempOrderTest < ActiveSupport::TestCase
+class CheckoutFormControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

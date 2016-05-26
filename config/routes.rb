@@ -1,23 +1,19 @@
 Rails.application.routes.draw do
   
-  
-  resources :orders
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
   devise_for :users, :controllers => {:registrations => "user/registrations"} do
     get "/signup"   => "registrations#new",   :as => :new_user_registration
-  end
+    end
+
   #resources :ratings
+  
   resources :carts do
     resources :line_items
   end
+  resources :orders 
   resources :categories
   resources :books
-  resources :checkout do
-    resources :order_steps
-  end
   resources :address
-  resources :order, only: [:new, :create]
   
   root 'home#bestsellers'
   
@@ -30,7 +26,10 @@ Rails.application.routes.draw do
   get 'book/:id/rating/:id/edit' => 'ratings#edit', as: 'edit_rating'
   
   post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
+
+  resources :checkout
   
+  get 'checkout/new' => 'checkout#to_address', as: 'to_address', method: :get
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

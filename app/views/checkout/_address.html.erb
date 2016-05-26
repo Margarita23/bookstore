@@ -1,0 +1,35 @@
+<div class="order_address">
+<table class="address">
+  <tr>
+    <th>BILLING ADDRESS</th>
+    <th>SHIPPING ADDRESS</th>
+  </tr>
+  <tr>
+    <td>
+      <div class="field">  
+        <%= f.text_field :bill_f_name, placeholder: "First name" %>
+      </div>
+      <div class="field">
+        <%= f.text_field :bill_l_name, placeholder: "Last name" %>
+      </div>
+      <div class="to_check">
+      </div>
+    </td>
+    <td>
+      <div class="field">  
+        
+      </div>
+      <div class="field">
+        
+      </div>
+      <div class="to_check">
+        <%= f.check_box :use_same_address %> Use Billing Address
+      </div>
+    </td>
+    
+  </tr>
+</table>
+</div>
+
+
+

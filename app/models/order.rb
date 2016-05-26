@@ -1,5 +1,4 @@
-class Order < ActiveRecord::Base
-  
+class Order < ActiveRecord::Base 
   include AASM
 
   aasm :column => 'state', :whiny_transitions => false do
@@ -20,9 +19,6 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_one :billing_address, :class_name => "Address", :foreign_key => "order_billing_id"
   has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id"
-  
-  accepts_nested_attributes_for :billing_address, :allow_destroy => true
-  accepts_nested_attributes_for :shipping_address, :allow_destroy => true
-  
-  
+  belongs_to :delivery
+
 end

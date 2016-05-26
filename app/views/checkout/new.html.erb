@@ -1,0 +1,29 @@
+<div class="checkout">
+  <h1>Checkout</h1> 
+  <%= form_for @checkout, url: {action: "create"} do |f| %>
+    <div class="link_to_steps">
+      <%= f.submit "ADDRESS", :name => "address_button" %>
+      <%= f.submit "DELIVERY", :name => "delivery_button" %>
+      <%= f.submit "PAYMENT", :name => "payment_button" %>
+      <%= f.submit "CONFIRM", :name => "confirm_button" %>   
+    </div>
+
+    <div class="steps">   
+      <%= render "#{@checkout.current_step}", :f => f %>
+      <p><%= f.submit "SAVE AND CONTINUE" %></p>
+    </div>
+    <div class = "order_sum">
+      <% if @checkout.current_step == "payment"%>
+        <h1>ORDER SUMMARY</h1>
+        <p>ITEM TOTAL: $<%= sub_total %></p>
+        <p>SHIPPING: $<%= @delivery.price %></p>
+        <p>ORDER TOTAL: $<%= sub_total + @delivery.price %></p>
+      <% elsif @checkout.current_step == "confirm" %>
+      <% else %>
+        <h1>ORDER SUMMARY</h1>
+        <p>ITEM TOTAL: $<%= sub_total %></p>
+        <p>ORDER TOTAL: $<%= sub_total %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

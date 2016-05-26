@@ -11,7 +11,6 @@ class LineItemsController < ApplicationController
   end
   
   
-
   # GET /line_items/1
   # GET /line_items/1.json
   def show
@@ -30,16 +29,15 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     book = Book.find(params[:book_id])
-    @line_item = LineItem.find_by(book_id: book.id)
+    @line_item = Cart.find(params[:cart_id]).line_items.find_by(book_id: book)
     quan = params[:new_quantity].nil? ? 1 : params[:new_quantity]
     if !@line_item.nil?
       @line_item.quantity = @line_item.quantity.to_i + quan.to_i
     else
-      @line_item = @cart.line_items.build(book: book)  
+      @line_item = @cart.line_items.build(book: book)
       @line_item.quantity = quan.to_i
-      @line_item.price = book.price 
+      @line_item.price = book.price
     end
-       
     if @line_item.save
       redirect_to :back
     else

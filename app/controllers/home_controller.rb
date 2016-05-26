@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  
+  before_action :set_cart, only: [:create]
   def bestsellers
     @bestsellers = Book.order(:quantity)
   end

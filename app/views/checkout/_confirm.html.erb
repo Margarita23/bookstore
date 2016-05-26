@@ -1,0 +1,42 @@
+<h2>Confirm</h2>
+
+<table id="confirm">
+  <tr>
+    <th>Shipping Address <%= link_to "[edit]"%></th>
+    <th>Billing Address <%= link_to "[edit]"%></th>
+    <th>Shipmenis <%= link_to "[edit]"%></th>
+    <th>Payment Information <%= link_to "[edit]"%></th>
+  </tr>
+
+  <td>
+    <ul>
+      <li><%= @checkout.bill_f_name %></li>
+      <li><%= @checkout.bill_l_name %></li>
+        
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= @checkout.bill_f_name %></li>
+      <li><%= @checkout.bill_l_name %></li>
+      
+        
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= @delivery.method %></li>  
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      
+      <li>**** **** **** <%= @checkout.card_number[-4,4] %></li>
+    </ul>
+  </td>
+        
+
+</table>

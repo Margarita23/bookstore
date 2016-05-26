@@ -35,13 +35,13 @@
         
           <div id="basket">
             <% if !current_user.cart.nil? %>
-            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
-            <% if current_user.cart.line_items.count!=0 %> 
-              (<%= quantity_incart %>)
+              <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
+              <% if current_user.cart.line_items.count!=0 %> 
+                (<%= quantity_incart %>)
               $<%= sub_total %>
-            <% else %>
-              (EMPTY) 
-            <% end %>
+              <% else %>
+                (EMPTY) 
+              <% end %>
             <% else %>
               <div class = "empty"> 
                 <%= image_tag(Cart.new.image.url) %> CART: (EMPTY)
@@ -57,7 +57,7 @@
           <%= link_to "Logout",  destroy_user_session_path,:method => :delete %>
         
         <% else %> 
-            <%= link_to 'Sign in', new_user_registration_path %>
+            <%= link_to 'Sign up', new_user_registration_path %>
             <div class="border"></div>
             <%= link_to 'Login', new_user_session_path %>
         <% end %>
@@ -75,8 +75,6 @@
 
 <%= yield %>
 
-
-<!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </body>

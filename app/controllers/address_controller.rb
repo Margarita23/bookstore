@@ -7,6 +7,7 @@ class AddressController < ApplicationController
 
   # GET /addresss/new
   def new
+    @checkout_form = CheckoutForm.new
     @address = Address.new
   end
 
@@ -18,7 +19,8 @@ class AddressController < ApplicationController
   # POST /addresss.json
   def create
     @address = Address.new(address_params)
-    if params[:checkbox_use_same_address] == true
+    
+    if params[:checkbox_use_same_address] == true #??????????????????
       @address = current_user.billing_address
     end
 
@@ -70,4 +72,9 @@ class AddressController < ApplicationController
     def address_params
       params.require(:address).permit(:first_name, :last_name, :street, :city, :country, :zip, :phone )
     end
+  
+  def checkout_form_params
+    params.require(:checkout_form).permit!(:first_name, :last_name)
+  end
+
 end

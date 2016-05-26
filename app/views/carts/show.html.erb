@@ -5,7 +5,7 @@
   <th>QTY</th>
   <th>TOTAL</th>
   
-  <% @cart.line_items.each do |item| %>
+  <% current_user.cart.line_items.each do |item| %>
   <tr>
     <td>
       <div class="cover">
@@ -54,6 +54,6 @@
   </div>
   <div class="right_buttons">
     <div><%= text_field_tag :coupon, 'Coupon code', :style => "width: 100px;"  %></div>
-    <div><%= button_to 'CHECKOUT', checkout_path(:address), method: :get %></div>
+    <div><%= button_to 'CHECKOUT', new_checkout_path, method: :get %></div>
   </div>
 </div>

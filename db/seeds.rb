@@ -56,6 +56,10 @@ review = "Writing a book review is not the same as writing a book report or a su
 
 rating_1 = Rating.create(review: review)
 
+del_1 = Delivery.create(method: "UPS Ground", price: 5)
+del_2 = Delivery.create(method: "UPS Two Day", price: 10)
+del_3 = Delivery.create(method: "UPS One Day", price: 15)
+
 
 
 
