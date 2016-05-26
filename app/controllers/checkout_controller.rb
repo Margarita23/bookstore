@@ -12,7 +12,6 @@ class CheckoutController < ApplicationController
   
   def create   
     set_values
-    
     ### what about case when ???
     if params[:address_button]
       @checkout.address_step

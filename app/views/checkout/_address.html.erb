@@ -6,8 +6,8 @@
   </tr>
   <tr>
     <td>
-      <div class="field">  
-        <%= f.text_field :bill_f_name, placeholder: "First name", size: 25 %>
+      <div class="field"> 
+        <%= f.text_field :bill_f_name, placeholder: "First name", size: 25, val: "first name" %>
       </div>
       <div class="field">
         <%= f.text_field :bill_l_name, placeholder: "Last name", size: 25 %>
@@ -35,7 +35,7 @@
         <%= f.text_field :ship_f_name, placeholder: "First name", size: 25 %>
       </div>
       <div class="field">
-        <%= f.text_field :ship_f_name, placeholder: "Last name", size: 25 %>
+        <%= f.text_field :ship_l_name, placeholder: "Last name", size: 25 %>
       </div>
       <div class="field">
         <%= f.text_field :ship_street, placeholder: "Street Address", size: 25 %>
@@ -58,7 +58,7 @@
 </table>
   <div id = "same_address">  
     <div class="to_check">
-      <%= f.check_box :checkbox_use_same_address, id: "checkbox_use_same_address", :value => "false" %> Use Billing Address
+      <%= f.check_box :checkbox_use_same_address, id: "checkbox_use_same_address", :checked => false %> Use Billing Address
     </div>
   </div>
 </div>

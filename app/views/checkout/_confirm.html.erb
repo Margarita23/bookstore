@@ -38,6 +38,43 @@
       <li><%= @checkout.exp_date %></li>
     </ul>
   </td>
-        
-
 </table>
+
+<table id = "order_confirm">
+  
+  <th>BOOK</th>
+  <th>PRICE</th>
+  <th>QTY</th>
+  <th>TOTAL</th>
+  
+  <% current_user.cart.line_items.each do |item| %>
+  <tr>
+    <td>
+      <div class="cover">
+        <%= image_tag(item.book.cover.url()) %>
+      </div>
+      <div class="book_info">
+        <div class="book_title">
+          <%= item.book.title %>
+        </div>
+        <div class = "desc">
+          <%= item.book.description %>
+        </div>
+      </div>
+    </td>
+    <td>
+      <%= item.book.price %>
+    </td>
+    <td>
+      <%= item.quantity %>
+    </td>
+    <td>
+      <%= item.book.price * item.quantity %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<div id="sub_total">
+  SUBTOTAL: $ <%= sub_total %>
+</div>

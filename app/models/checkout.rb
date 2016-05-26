@@ -17,9 +17,8 @@ class Checkout
   attribute :ship_country, String
   attribute :ship_zip, Integer
   attribute :ship_phone, String
-  
-  #???????????????????????????What's up with checkout???
-  attribute :checkbox_use_same_address, Boolean, :default => "faulse"
+
+  attribute :checkbox_use_same_address, Boolean, :default => false
 
   attribute :user
   attribute :total_price, Decimal
@@ -30,14 +29,36 @@ class Checkout
   attribute :exp_date, String
   attribute :current_step
   
-  validates_presence_of :bill_f_name, message: "Enter your first name for billing address", :if => lambda { |o| o.current_step == "address" }
-  validates_presence_of :bill_l_name, message: "Enter your last name for billing address", :if => lambda { |o| o.current_step == "address" }
+  [:bill_f_name, :bill_l_name, :bill_street, :bill_city, :bill_country, :bill_zip, :bill_phone].each do |n|
+    validates_presence_of n, :if => lambda { |o| o.current_step == "address"}, :message => Proc.new {
+      case
+        when n == :bill_f_name then "Enter first name for billing address" 
+        when n == :bill_l_name then "Enter last name for billing address"
+        when n == :bill_street then "Enter street for billing address"
+        when n == :bill_city then "Enter city for billing address"
+        when n == :bill_country then "Enter country for billing address"
+        when n == :bill_zip then "Enter zip for billing address"
+        when n == :bill_phone then "Enter phone for billing address"
+      end
+    }
+  end
   
-  validates_presence_of :ship_f_name, message: "Enter your first name for shipping address", :if => lambda { |o| o.current_step == "address" && o.checkbox_use_same_address == "0"}
-  validates_presence_of :ship_f_name, message: "Enter your last name for shipping address", :if => lambda { |o| o.current_step == "address" && o.checkbox_use_same_address == "0"}
+  [:ship_f_name, :ship_l_name, :ship_street, :ship_city, :ship_country, :ship_zip, :ship_phone].each do |n|
+    validates_presence_of n, :if => lambda { |o| o.current_step == "address" && o.checkbox_use_same_address == false }, :message => Proc.new {
+      case
+        when n == :ship_f_name then "Enter first name for shipping address" 
+        when n == :ship_l_name then "Enter last name for shipping address"
+        when n == :ship_street then "Enter street for shipping address"
+        when n == :ship_city then "Enter city for shipping address"
+        when n == :ship_country then "Enter country for shipping address"
+        when n == :ship_zip then "Enter zip for shipping address"
+        when n == :ship_phone then "Enter phone for shipping address"
+      end
+    }
+  end
   
   validates :card_code, {
-    presence: true, 
+    presence: { message: "Enter cart code"}, 
     numericality: {only_integer: true, greater_than: 3, message: "Card code must contain only numbers"},
    :if => lambda { |o| o.current_step == "payment" }
   }
@@ -106,15 +127,16 @@ class Checkout
   end
   
   def check_same_address
-    if @checkbox_use_same_address == "true"
-      @checkout.ship_f_name = @bill_f_name
-      @checkout.ship_l_name = @bill_l_name
-      @checkout.ship_street = @bill_street
-      @checkout.ship_city = @bill_city
-      @checkout.ship_country = @bill_country
-      @checkout.ship_zip = @bill_zip
-      @checkout.ship_phone = @bill_phone
+    if @checkbox_use_same_address
+      @ship_f_name = @bill_f_name
+      @ship_l_name = @bill_l_name
+      @ship_street = @bill_street
+      @ship_city = @bill_city
+      @ship_country = @bill_country
+      @ship_zip = @bill_zip
+      @ship_phone = @bill_phone
     end
+    @checkbox_use_same_address
   end
   
   def persisted?
@@ -143,12 +165,6 @@ class Checkout
   end
 
   def ship_address
-    if @checkbox_use_same_address == "true"
-      @shipping_address = @billing_address
-      @shipping_address.order_shipping_id = @order.id
-      @shipping_address.save!
-    else
-      @shipping_address = Address.create!(first_name: @ship_f_name, last_name: @ship_l_name, street: @ship_street, city: @ship_city, country: @ship_country, zip: @ship_zip, phone: @ship_phone,  order_shipping_id: @order.id)
-    end
+    @shipping_address = Address.create!(first_name: @ship_f_name, last_name: @ship_l_name, street: @ship_street, city: @ship_city, country: @ship_country, zip: @ship_zip, phone: @ship_phone,  order_shipping_id: @order.id)
   end
 end
