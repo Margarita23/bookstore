@@ -2,10 +2,11 @@
   <h1>Checkout</h1> 
   <%= form_for @checkout, url: {action: "create"} do |f| %>
     <div class="link_to_steps">
-      <%= f.submit "ADDRESS", :name => "address_button" %>
-      <%= f.submit "DELIVERY", :name => "delivery_button" %>
-      <%= f.submit "PAYMENT", :name => "payment_button" %>
-      <%= f.submit "CONFIRM", :name => "confirm_button" %>   
+      <%= link_to "ADDRESS" %>
+      <%= link_to "DELIVERY" %>
+      <%= link_to "PAYMENT" %>
+      <%= link_to "CONFIRM" %>
+      <%= link_to "COMPLETE" %>
     </div>
   
   <% if @checkout.errors.any? %>

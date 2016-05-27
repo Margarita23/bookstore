@@ -2,10 +2,10 @@
 
 <table id="confirm">
   <tr>
-    <th>Shipping Address <%= link_to "[edit]"%></th>
-    <th>Billing Address <%= link_to "[edit]"%></th>
-    <th>Shipmenis <%= link_to "[edit]"%></th>
-    <th>Payment Information <%= link_to "[edit]"%></th>
+    <th>Shipping Address <%= f.submit "[edit]", :name => "address_button" %></th>
+    <th>Billing Address <%= f.submit "[edit]", :name => "address_button" %></th>
+    <th>Shipmenis <%= f.submit "[edit]", :name => "delivery_button" %></th>
+    <th>Payment Information <%= f.submit "[edit]", :name => "payment_button" %>  </th>
   </tr>
 
   <td>
@@ -42,7 +42,7 @@
   </td>
 </table>
 
-<table id="cart">
+<table class="cart">
   
   <th>BOOK</th>
   <th>PRICE</th>
@@ -76,7 +76,16 @@
   </tr>
   <% end %>
 </table>
-
-<div id="sub_total">
-  SUBTOTAL: $ <%= @checkout.total_price %>
+<div class="order_total">
+  <div>
+    SUBTOTAL: $ <%= sub_total %>
+  </div>
+  <div>
+   SHIPPING: $ <%= @delivery.price %>
+  </div>
+  <div>
+    ORDER TOTAL: $ <%= @checkout.total_price %>
+  </div>
 </div>
+<div class="dotted"></div>
+
