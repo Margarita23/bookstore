@@ -34,13 +34,15 @@
   
   <td>
     <ul>
+      <% if !@checkout.card_number.nil? %>
       <li>**** **** **** <%= @checkout.card_number[-4,4] %></li>
-      <li><%= @checkout.exp_date %></li>
+      <% end %>
+      <li><%=@checkout.exp_date %></li>
     </ul>
   </td>
 </table>
 
-<table id = "order_confirm">
+<table id="cart">
   
   <th>BOOK</th>
   <th>PRICE</th>
@@ -76,5 +78,5 @@
 </table>
 
 <div id="sub_total">
-  SUBTOTAL: $ <%= sub_total %>
+  SUBTOTAL: $ <%= @checkout.total_price %>
 </div>

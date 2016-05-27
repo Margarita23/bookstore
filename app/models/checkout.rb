@@ -56,15 +56,18 @@ class Checkout
       end
     }
   end
+          
+  validates :bill_phone, :numericality => {:only_integer => true, message: "Billing phone must contain only numbers"}
+  validates :ship_phone, :numericality => {:only_integer => true, message: "Shipping phone must contain only numbers"}
   
   validates :card_code, {
-    presence: { message: "Enter cart code"}, 
+    presence: {message: "Enter cart code"}, 
     numericality: {only_integer: true, greater_than: 3, message: "Card code must contain only numbers"},
    :if => lambda { |o| o.current_step == "payment" }
   }
   
   validates :card_number, {
-    presence: true, 
+    presence: {message: "Enter cart number"},  
     length: { is: 16, message: "Card number must be 16 digits"},
     numericality: {only_integer: true, message: "Card number must contain only numbers"},
    :if => lambda { |o| o.current_step == "payment" }

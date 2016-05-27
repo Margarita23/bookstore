@@ -28,7 +28,7 @@
         <h1>ORDER SUMMARY</h1>
         <p>ITEM TOTAL: $<%= sub_total %></p>
         <p>SHIPPING: $<%= @delivery.price %></p>
-        <p>ORDER TOTAL: $<%= sub_total + @delivery.price %></p>
+        <p>ORDER TOTAL: $<%= @checkout.total_price %></p>
       <% elsif @checkout.current_step == "confirm" %>
       <% else %>
         <h1>ORDER SUMMARY</h1>

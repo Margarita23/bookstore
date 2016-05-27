@@ -30,35 +30,47 @@ class LineItemsController < ApplicationController
   def create
     book = Book.find(params[:book_id])
     @line_item = Cart.find(params[:cart_id]).line_items.find_by(book_id: book)
-    quan = params[:new_quantity].nil? ? 1 : params[:new_quantity]
-    if !@line_item.nil?
-      @line_item.quantity = @line_item.quantity.to_i + quan.to_i
+    if check_quantity
+       if !@line_item.nil?
+        @line_item.quantity = @line_item.quantity.to_i + quan.to_i
+      else
+        @line_item = @cart.line_items.build(book: book)
+        @line_item.quantity = quan.to_i
+        @line_item.price = book.price
+      end
+      
+      if @line_item.save
+        redirect_to :back
+      end
     else
-      @line_item = @cart.line_items.build(book: book)
-      @line_item.quantity = quan.to_i
-      @line_item.price = book.price
-    end
-    if @line_item.save
+      flash[:alert] = "Book can not be add to your cart, please enter information."
       redirect_to :back
-    else
-      flash.now[:notice] = "Book can not be add to cart, please enter information."
-render :new
     end
   end
+  
+  def check_quantity
+    if params[:new_quantity].to_i > 0 && !params[:new_quantity].nil?
+      quan = params[:new_quantity]
+      true 
+    else
+      false
+    end
+  end
+  
+  
 
   # PATCH/PUT /line_items/1
   # PATCH/PUT /line_items/1.json
   def update
-    quan = params[:new_quantity].nil? ? 1 : params[:new_quantity]
-    @line_item.quantity = quan
-    respond_to do |format|
+    if check_quantity
+      @line_item.quantity = params[:new_quantity]
       if @line_item.update(id: @line_item.id)
-        format.html { redirect_to @line_item.cart, notice: 'Line item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @line_item }
-      else
-        format.html { render :edit }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+        flash[:notice] = "Books quantity was changed"
+        redirect_to :back
       end
+    else
+      flash[:alert] = "Books quantity can not change, please enter information."
+      redirect_to :back
     end
   end
 

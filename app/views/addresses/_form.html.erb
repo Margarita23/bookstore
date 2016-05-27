@@ -7,28 +7,25 @@
     <td>
       <%= form_tag(current_user.billing_address(id: current_user.billing_address.id), method: :put) do %> 
         <div class="field">
-          Firstname<br>
-          <%= text_field_tag :first_name, current_user.billing_address.first_name %>
+          <%= text_field_tag :first_name, current_user.billing_address.first_name, placeholder: "First name" %>
         </div>
         <div class="field">
-          Lastname<br>
-          <%= text_field_tag :last_name, current_user.billing_address.last_name %>
+          <%= text_field_tag :last_name, current_user.billing_address.last_name, placeholder: "Last name" %>
         </div>
         <div class="field">
-          Street<br>
-          <%= text_field_tag :street, current_user.billing_address.street %> 
+          <%= text_field_tag :street, current_user.billing_address.street, placeholder: "Street Address" %> 
         </div>
         <div class="field">
-          City<br>
-          <%= text_field_tag :city, current_user.billing_address.city %>
+          <%= text_field_tag :city, current_user.billing_address.city, placeholder: "City" %>
         </div>
         <div class="field">
-          Country<br>
-          <%= text_field_tag :country, current_user.billing_address.country %>
+          <%= text_field_tag :country, current_user.billing_address.country, placeholder: "Country" %>
         </div>
         <div class="field">
-          Zip<br>
-          <%= text_field_tag :zip, current_user.billing_address.zip %>
+          <%= text_field_tag :zip, current_user.billing_address.zip, placeholder: "Zip" %>
+        </div>
+        <div class="field">
+          <%= text_field_tag :phone, current_user.billing_address.phone, placeholder: "Phone" %>
         </div>
         <div class="update">
           <%= submit_tag( "SAVE" ) %>
@@ -42,28 +39,25 @@
           <%= form_tag(current_user.shipping_address(id: current_user.shipping_address.id), method: :put) do %>
           <tr id="shipping">
             <div class="field">
-              Firstname<br>
-              <%= text_field_tag :first_name, current_user.shipping_address.first_name %>
+              <%= text_field_tag :first_name, current_user.shipping_address.first_name, placeholder: "First name" %>
             </div>
             <div class="field">
-              Lastname<br>
-              <%= text_field_tag :last_name, current_user.shipping_address.last_name %>
+              <%= text_field_tag :last_name, current_user.shipping_address.last_name, placeholder: "Last name" %>
             </div>
             <div class="field">
-              Street<br>
-              <%= text_field_tag :street, current_user.shipping_address.street %>
+              <%= text_field_tag :street, current_user.shipping_address.street, placeholder: "Street Address" %>
             </div>
             <div class="field">
-              City<br>
-              <%= text_field_tag :city, current_user.shipping_address.city %>
+              <%= text_field_tag :city, current_user.shipping_address.city, placeholder: "City" %>
             </div>
             <div class="field">
-              Country<br>
-              <%= text_field_tag :country, current_user.shipping_address.country %>
+              <%= text_field_tag :country, current_user.shipping_address.country, placeholder: "Country" %>
             </div>
             <div class="field">
-              Zip<br>
-              <%= text_field_tag :zip, current_user.shipping_address.zip %>
+              <%= text_field_tag :zip, current_user.shipping_address.zip, placeholder: "Zip" %>
+            </div>
+            <div class="field">
+              <%= text_field_tag :phone, current_user.shipping_address.phone, placeholder: "Phone" %>
             </div>
           </tr>
           <tr>

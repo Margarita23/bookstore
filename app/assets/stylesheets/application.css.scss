@@ -324,9 +324,11 @@ tr{
   margin: 20px;
 }
 
-.address > th, td{
+.address > th{
   padding: 50px;
   margin: 20px;
+  font-size: 25px;
+  font-weight: 400;
 }
 
 .steps{
@@ -412,10 +414,6 @@ tr{
 
 #same_address{
   margin: 0px 0px 0px 300px;
-}
-
-#order_confirm{
-  
 }
 
 
