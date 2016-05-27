@@ -24,8 +24,6 @@ Rails.application.routes.draw do
   get 'book/:id/ratings/new' => 'ratings#new', as: 'new_rating'
   get 'book/:id/rating/:id' => 'ratings#show', as: 'rating'
   get 'book/:id/rating/:id/edit' => 'ratings#edit', as: 'edit_rating'
-  
-  post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
 
   resources :checkout
   

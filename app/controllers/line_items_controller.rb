@@ -32,10 +32,10 @@ class LineItemsController < ApplicationController
     @line_item = Cart.find(params[:cart_id]).line_items.find_by(book_id: book)
     if check_quantity
        if !@line_item.nil?
-        @line_item.quantity = @line_item.quantity.to_i + quan.to_i
+        @line_item.quantity = @line_item.quantity.to_i + @quan.to_i
       else
         @line_item = @cart.line_items.build(book: book)
-        @line_item.quantity = quan.to_i
+        @line_item.quantity = @quan.to_i
         @line_item.price = book.price
       end
       
@@ -50,7 +50,7 @@ class LineItemsController < ApplicationController
   
   def check_quantity
     if params[:new_quantity].to_i > 0 && !params[:new_quantity].nil?
-      quan = params[:new_quantity]
+      @quan = params[:new_quantity]
       true 
     else
       false
@@ -63,7 +63,7 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1.json
   def update
     if check_quantity
-      @line_item.quantity = params[:new_quantity]
+      @line_item.quantity = @quan
       if @line_item.update(id: @line_item.id)
         flash[:notice] = "Books quantity was changed"
         redirect_to :back

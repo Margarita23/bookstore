@@ -34,7 +34,8 @@ class CheckoutController < ApplicationController
       render 'new'
 
     elsif @checkout.last_step?
-        current_user.cart.line_items.destroy_all
+      current_user.cart.line_items.destroy_all
+      current_user.cart.destroy
         @checkout.save 
         session[:checkout_step]= nil
         flash[:notice] = "Order saved."
@@ -59,9 +60,3 @@ class CheckoutController < ApplicationController
   end
   
 end
-
-
-
-
-
-
