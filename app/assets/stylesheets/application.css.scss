@@ -40,6 +40,7 @@ body{
   top: 0px;
   background-color: #dddddd;
   opacity: 0.9;
+  z-index: 1;
 }
 
 .space{
@@ -431,7 +432,7 @@ tr{
   right: 0px;
   position: absolute;
   height: 250px;
-  width: 150px;
+  width: 200px;
   margin: -20px 0px 0px 0px;
 }
 .dotted{
@@ -441,5 +442,42 @@ tr{
   margin: 60px 0px 0px 0px;
 }
 
+link_to_steps > *.active{
+  border-bottom: 2px solid #000;
+}
+link_to_steps > *.visited{
+  color: #337ab7;
+}
 
+.naming{
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: 2px solid #000;
+  width: 100%;
+}
+
+.orders{
+  margin: 0px 0px 10px 0px;
+}
+
+.orders th{
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+.orders th, td{
+  margin: 10px;
+  padding: 10px;
+}
+
+.states{
+  width: 100%;
+  position: relative;
+}
+
+.states > *{
+  width: 100%;
+}
 

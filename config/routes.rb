@@ -26,9 +26,7 @@ Rails.application.routes.draw do
   get 'book/:id/rating/:id/edit' => 'ratings#edit', as: 'edit_rating'
 
   resources :checkout
-  
-  get 'checkout/new' => 'checkout#to_address', as: 'to_address', method: :get
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

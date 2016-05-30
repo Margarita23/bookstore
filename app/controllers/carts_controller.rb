@@ -21,14 +21,9 @@ class CartsController < ApplicationController
     end
   end
   
-  def empty_cart
-    current_user.cart.line_items.destroy_all
-  end
-
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    empty_cart
     @cart.destroy
     respond_to do |format|
       format.html { redirect_to shopping_url, notice: 'Cart was successfully cleared.' }

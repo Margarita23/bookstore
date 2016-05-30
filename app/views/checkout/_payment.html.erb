@@ -5,7 +5,8 @@
 </div>
 <div class="field">  
   <p>Expiration date: </p>
-  <%= f.date_select :exp_date, :start_year => Date.current.year, :end_year => 2025, :discard_day => true %>
+  <%= f.select :exp_month, "<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>".html_safe %>
+  <%= f.select :exp_year, "<option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option>".html_safe %>
 </div>
 
 <div class="field">  

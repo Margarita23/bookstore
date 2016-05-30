@@ -34,10 +34,8 @@
   
   <td>
     <ul>
-      <% if !@checkout.card_number.nil? %>
       <li>**** **** **** <%= @checkout.card_number[-4,4] %></li>
-      <% end %>
-      <li><%=@checkout.exp_date %></li>
+      <li><%= @checkout.exp_month %>/<%= @checkout.exp_year %></li>
     </ul>
   </td>
 </table>

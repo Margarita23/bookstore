@@ -8,9 +8,17 @@ class CheckoutController < ApplicationController
     @checkout.current_step = session[:checkout_step]
     session[:delivery] = @checkout.delivery
     @delivery = Delivery.find(session[:delivery])
+    check_items
   end
   
-  def create   
+  def check_items
+    if current_user.cart.line_items.count == 0
+       flash[:alert] = "Ordering should be at least one book"
+      redirect_to  shopping_path  
+     end
+  end
+  
+  def create
     set_values
     ### what about case when ???
     if params[:address_button]
@@ -34,12 +42,10 @@ class CheckoutController < ApplicationController
       render 'new'
 
     elsif @checkout.last_step?
-      current_user.cart.line_items.destroy_all
-      current_user.cart.destroy
-        @checkout.save 
-        session[:checkout_step]= nil
-        flash[:notice] = "Order saved."
-        redirect_to root_path
+      @checkout.save 
+      session[:checkout_step]= nil
+      flash[:notice] = "Order saved."
+      redirect_to order_path(:id => @checkout.order)
     else
       @checkout.next_step
       session[:checkout_step] = @checkout.current_step

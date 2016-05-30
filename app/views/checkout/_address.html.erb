@@ -7,51 +7,119 @@
   <tr>
     <td>
       <div class="field"> 
-        <%= f.text_field :bill_f_name, placeholder: "First name", size: 25, val: "first name" %>
+        <% if !current_user.billing_address.first_name.nil? %>   
+          <%= f.text_field :bill_f_name, size: 25, placeholder: "First name", value: current_user.billing_address.first_name %>   
+        <% else %>
+          <%= f.text_field :bill_f_name, size: 25, placeholder: "First name" %>
+        <% end %>
       </div>
       <div class="field">
-        <%= f.text_field :bill_l_name, placeholder: "Last name", size: 25 %>
+        <% if !current_user.billing_address.last_name.nil? %>
+          <%= f.text_field :bill_l_name, value: current_user.billing_address.last_name, placeholder: "Last name", size: 25 %>
+        <% else %>
+          <%= f.text_field :bill_l_name, placeholder: "Last name", size: 25 %>
+        <% end %>
       </div>
       <div class="field">
-        <%= f.text_field :bill_street, placeholder: "Street Address", size: 25 %>
+        <% if !current_user.billing_address.street.nil? %>
+          <%= f.text_field :bill_street, value: current_user.billing_address.street, placeholder: "Street Address", size: 25 %>
+        <% else %>
+          <%= f.text_field :bill_street, placeholder: "Street Address", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :bill_city, placeholder: "City", size: 25 %>
+        <% if !current_user.billing_address.city.nil? %>
+          <%= f.text_field :bill_city, value: current_user.billing_address.city, placeholder: "City", size: 25 %>
+        <% else %>
+          <%= f.text_field :bill_city, placeholder: "City", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :bill_country, placeholder: "Country", size: 25 %>
+        <% if !current_user.billing_address.country.nil? %>
+          <%= f.text_field :bill_country, value: current_user.billing_address.country, placeholder: "Country", size: 25 %>
+        <% else %>
+          <%= f.text_field :bill_country, placeholder: "Country", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :bill_zip, placeholder: "Zip", size: 25 %>
+        <% if !current_user.billing_address.zip.nil? %>
+          <%= f.text_field :bill_zip, value: current_user.billing_address.zip, placeholder: "Zip", size: 25 %>
+        <% else %>
+          <%= f.text_field :bill_zip, placeholder: "Zip", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :bill_phone, placeholder: "Phone", size: 25 %>
+        <% if !current_user.billing_address.phone.nil? %>
+          <%= f.text_field :bill_phone, value: current_user.billing_address.phone, placeholder: "Phone", size: 25 %>
+        <% else %>
+          <%= f.text_field :bill_phone, placeholder: "Phone", size: 25 %>
+        <% end%>
       </div>
+ 
       <div class="to_check">
       </div>
     </td>
     <td id = "shipping_add">
-      <div class="field">  
-        <%= f.text_field :ship_f_name, placeholder: "First name", size: 25 %>
-      </div>
       <div class="field">
-        <%= f.text_field :ship_l_name, placeholder: "Last name", size: 25 %>
+        <% if !current_user.shipping_address.first_name.nil? %>
+          <%= f.text_field :ship_f_name, value: current_user.shipping_address.ship_f_name, placeholder: "First name", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_f_name, placeholder: "First name", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :ship_street, placeholder: "Street Address", size: 25 %>
+        <% if !current_user.shipping_address.last_name.nil? %>
+          <%= f.text_field :ship_f_name, value: current_user.shipping_address.ship_f_name, placeholder: "Last name", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_f_name, placeholder: "Last name", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :ship_city, placeholder: "City", size: 25 %>
+        <% if !current_user.shipping_address.street.nil? %>
+          <%= f.text_field :ship_street, value: current_user.shipping_address.street, placeholder: "Street Address", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_street, placeholder: "Street Address", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :ship_country, placeholder: "Country", size: 25 %>
+        <% if !current_user.shipping_address.city.nil? %>
+          <%= f.text_field :ship_city, value: current_user.shipping_address.city, placeholder: "City", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_city, placeholder: "City", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :ship_zip, placeholder: "Zip", size: 25 %>
+        <% if !current_user.shipping_address.country.nil? %>
+          <%= f.text_field :ship_country, value: current_user.shipping_address.country, placeholder: "Country", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_country, placeholder: "Country", size: 25 %>
+        <% end%>
       </div>
+      
       <div class="field">
-        <%= f.text_field :ship_phone, placeholder: "Phone", size: 25 %>
+        <% if !current_user.shipping_address.zip.nil? %>
+          <%= f.text_field :ship_zip, value: current_user.shipping_address.zip, placeholder: "Zip", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_zip, placeholder: "Zip", size: 25 %>
+        <% end%>
       </div>
+      
+      <div class="field">
+        <% if !current_user.shipping_address.phone.nil? %>
+          <%= f.text_field :ship_phone, value: current_user.shipping_address.phone, placeholder: "Phone", size: 25 %>
+        <% else %>
+          <%= f.text_field :ship_phone, placeholder: "Phone", size: 25 %>
+        <% end%>
+      </div>
+      
     </td>
     
   </tr>

@@ -1,29 +1,82 @@
 <p id="notice"><%= notice %></p>
+<div class="checkout">
+  <h1>Orders</h1>
 
-<h1>Listing Orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Total price</th>
-      <th>Completed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
+  <table class="orders">
+    <thead>
       <tr>
-        <td><%= order.total_price %></td>
-        <td><%= order.completed %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Total price</th>
+        <th>Completed</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.total_price %></td>
+          <td><%= order.completed_date %></td>
+          <td><%= link_to 'View', order %></td>
+        </tr>
+      <% end %>
+    </tbody>
 
-<%= link_to 'New Order', new_order_path %>
+  </table>
+  <br>
+  <div class="states">
+    <div class="in_progress">
+      <div class="naming">waiting for processing</div>
+      <table class="orders">
+        <thead>
+          <th>number</th>
+          <th>completed at</th>
+          <th>total</th>
+        </thead>
+        <tbody>
+          <% @orders_prog.each do |order| %>
+          <tr>
+            <td><%= order.total_price %></td>
+            <td><%= order.completed_date %></td>
+            <td><%= link_to 'View', order %></td>
+          </tr>
+        <% end %>
+        </tbody>
+
+      </table>
+    </div>
+
+
+    <div class="in_delivery">
+      <div class="naming">in delivery</div>
+      <table class="orders">
+         <thead>
+          <th>number</th>
+          <th>completed at</th>
+          <th>total</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="delivered">
+      <div class="naming">delivered</div>
+      <table class="orders">
+         <thead>
+          <th>number</th>
+          <th>completed at</th>
+          <th>total</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%= link_to 'New Order', new_order_path %>
+
+</div>
+

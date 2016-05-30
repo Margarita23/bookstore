@@ -26,7 +26,8 @@ class Checkout
   attribute :delivery, Integer, :default => 1
   attribute :card_number, String
   attribute :card_code, Integer
-  attribute :exp_date, String
+  attribute :exp_month, String
+  attribute :exp_year, String
   attribute :current_step
   
   [:bill_f_name, :bill_l_name, :bill_street, :bill_city, :bill_country, :bill_zip, :bill_phone].each do |n|
@@ -154,13 +155,28 @@ class Checkout
       false
     end
   end
+          
+  def order
+    @order.id
+  end
 
   private
 
   def persist!
     @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery)
+    
+    @order.number = generate_number
+    while Order.exists?(:number => @order.number) do
+      @order.number = generate_number
+    end
+    @order.save
+    
     bill_address
     ship_address
+  end
+          
+  def generate_number
+    (0...ORDER_CHAR_NUM).map { (65 + rand(26)).chr }.join + (0...ORDER_DIG_NUM).map{rand(9)}.join
   end
   
   def bill_address
