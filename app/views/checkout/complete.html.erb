@@ -1,0 +1,89 @@
+<div class="checkout">
+  <h1>Order <%= @order.number %></h1> 
+  <div class="steps">  
+    <table id="confirm">
+      <tr>
+        <th>Shipping Address</th>
+        <th>Billing Address</th>
+        <th>Shipmenis</th>
+        <th>Payment Information</th>
+      </tr>
+
+      <td>
+        <ul>
+          <li><%= @order.billing_address.first_name %> <%= @order.billing_address.last_name %></li>
+          <li><%= @order.billing_address.street %></li>
+          <li><%= @order.billing_address.city %> <%= @order.billing_address.country %> <%= @order.billing_address.zip %></li>
+          <li>Phone <%= @order.billing_address.phone %></li> 
+        </ul>
+      </td>
+
+      <td>
+        <ul>
+          <li><%= @order.shipping_address.first_name %> <%= @order.shipping_address.last_name %></li>
+          <li><%= @order.shipping_address.street %></li>
+          <li><%= @order.shipping_address.city %> <%= @order.shipping_address.country %> <%= @order.shipping_address.zip %></li>
+          <li>Phone <%= @order.shipping_address.phone %></li>
+        </ul>
+      </td>
+
+      <td>
+        <ul>
+          <li><%= @order.delivery.method %></li>  
+        </ul>
+      </td>
+
+    </table>
+  </div>
+  
+  <table class="cart">
+  
+    <th>BOOK</th>
+    <th>PRICE</th>
+    <th>QTY</th>
+    <th>TOTAL</th>
+  
+    <% @order.line_items.each do |item| %>
+      <tr>
+        <td>
+          <div class="cover">
+            <%= image_tag(item.book.cover.url()) %>
+          </div>
+          <div class="book_info">
+            <div class="book_title">
+              <%= item.book.title %>
+            </div>
+            <div class = "desc">
+              <%= item.book.description %>
+            </div>
+          </div>
+        </td>
+        <td>
+          <%= item.book.price %>
+        </td>
+        <td>
+          <%= item.quantity %>
+        </td>
+        <td>
+          <%= item.book.price * item.quantity %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="order_total">
+    <div>
+      SUBTOTAL: $ <%= @order.total_price %>
+    </div>
+    <div>
+      SHIPPING: $ <%= @order.delivery.price %>
+    </div>
+    <div>
+      ORDER TOTAL: $ <%= @order.total_price + @order.delivery.price %>
+    </div>
+  </div>
+  <div class="dotted"></div>
+  <div class="back_to_store">
+    <%= button_to 'GO BACK TO STORE', shopping_path, method: :get %>
+  </div>
+</div>
+

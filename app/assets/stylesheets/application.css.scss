@@ -238,6 +238,10 @@ ol{
   border-bottom: 3px dotted #000;
 }
 
+.cart td:nth-child(n+2){
+  font-weight: 600;
+}
+
 .cart img{
   width:90px;
   height: 110px;
@@ -360,7 +364,7 @@ tr{
 }
 .checkout{
   position: relative;
-  margin: 0px 100px 0px 100px;
+  margin: 30px 100px 0px 100px;
 }
 .checkout > h1{
   display: block;
@@ -475,9 +479,16 @@ link_to_steps > *.visited{
   font-weight: 100;
 }
 
+.orders th:first-child, td:first-child{
+  padding: 0px;
+}
+.orders th:first-child{
+  text-align: center;
+}
+
 .orders th, td{
   margin: 10px;
-  padding: 10px;
+  padding: 10px 70px 10px 70px;
 }
 
 .states{
@@ -493,4 +504,29 @@ link_to_steps > *.visited{
   margin: 70px 0px 0px 0px;
 }
 
+.head_of_order{
+  display: inline-block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  margin: 0 20px 0 0;
+}
+
+.delivery_meth{
+  opacity: 0.6;
+  color: #a2a2a2;
+  display: inline-block;
+}
+
+.back_orders{
+  display: block;
+  font-size: 12px;
+}
+
+.boldy{
+  font-weight: 600;
+}
 

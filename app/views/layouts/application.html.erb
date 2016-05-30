@@ -54,7 +54,7 @@
           <div class="border"></div>
         <%= link_to 'Orders', orders_path(user_id: current_user.id) %>
           <div class="border"></div>
-          <%= link_to "Logout",  destroy_user_session_path,:method => :delete %>
+          <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
         
         <% else %> 
             <%= link_to 'Sign up', new_user_registration_path %>

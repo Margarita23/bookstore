@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   resources :checkout
   
   post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
+  
+  get '/complete/order/:order_id' => 'checkout#complete', as: 'complete_order', method: :get
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -41,12 +41,12 @@ class CheckoutController < ApplicationController
       session[:checkout_step] = @checkout.current_step
       render 'new'
       
-    elsif @checkout.last_step?
-      @checkout.save 
+    elsif @checkout.last_step? 
+      @checkout.save
       get_line_items
       session[:checkout_step]= nil
       flash[:notice] = "Order saved."
-      redirect_to order_path(:id => @checkout.order)
+      redirect_to complete_order_path(:order_id => @checkout.order)
     else
       @checkout.next_step
       session[:checkout_step] = @checkout.current_step
@@ -60,8 +60,6 @@ class CheckoutController < ApplicationController
       l.cart_id = nil
       l.save
     end
-    
-    
   end
   
   def set_values
@@ -74,6 +72,10 @@ class CheckoutController < ApplicationController
       @checkout.total_price =  sub_total + @delivery.price
     end
     @checkout.check_same_address
+  end
+  
+  def complete
+    @order = Order.find(params[:order_id])
   end
   
 end
