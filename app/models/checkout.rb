@@ -160,7 +160,7 @@ class Checkout
     @order.id
   end
 
-  private
+ # private
 
   def persist!
     @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery)

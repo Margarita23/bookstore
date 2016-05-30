@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
- 
 <div class="checkout">
   <h1>Order <%= @order.number %></h1> 
   <div class="steps">  
@@ -36,6 +34,56 @@
       </td>
 
     </table>
+  </div>
+  
+  <table class="cart">
+  
+    <th>BOOK</th>
+    <th>PRICE</th>
+    <th>QTY</th>
+    <th>TOTAL</th>
+  
+    <% @order.line_items.each do |item| %>
+      <tr>
+        <td>
+          <div class="cover">
+            <%= image_tag(item.book.cover.url()) %>
+          </div>
+          <div class="book_info">
+            <div class="book_title">
+              <%= item.book.title %>
+            </div>
+            <div class = "desc">
+              <%= item.book.description %>
+            </div>
+          </div>
+        </td>
+        <td>
+          <%= item.book.price %>
+        </td>
+        <td>
+          <%= item.quantity %>
+        </td>
+        <td>
+          <%= item.book.price * item.quantity %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="order_total">
+    <div>
+      SUBTOTAL: $ <%= @order.total_price %>
+    </div>
+    <div>
+      SHIPPING: $ <%= @order.delivery.price %>
+    </div>
+    <div>
+      ORDER TOTAL: $ <%= @order.total_price + @order.delivery.price %>
+    </div>
+  </div>
+  <div class="dotted"></div>
+  <div class="back_to_store">
+    <%= button_to 'GO BACK TO STORE', shopping_path, method: :get %>
   </div>
 </div>
 

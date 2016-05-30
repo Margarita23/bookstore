@@ -278,6 +278,7 @@ tr{
 
 .cart th{
   text-align: center;
+  padding: 10px;
 }
 
 .sub_total{
@@ -335,6 +336,7 @@ tr{
   display: inline-block;
   position: relative;
   float: left;
+  margin: 0px 0px 50px 0px;
 }
 
 .order_sum{
@@ -435,6 +437,11 @@ tr{
   width: 200px;
   margin: -20px 0px 0px 0px;
 }
+
+.in_prog{
+  margin: 0px 0px 70px 0px;
+}
+
 .dotted{
   width: 100%; 
   border-bottom: 3px dotted #000;
@@ -460,6 +467,7 @@ link_to_steps > *.visited{
 
 .orders{
   margin: 0px 0px 10px 0px;
+  text-align: center;
 }
 
 .orders th{
@@ -480,4 +488,9 @@ link_to_steps > *.visited{
 .states > *{
   width: 100%;
 }
+
+.back_to_store{
+  margin: 70px 0px 0px 0px;
+}
+
 

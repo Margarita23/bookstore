@@ -1,29 +1,52 @@
 <p id="notice"><%= notice %></p>
 <div class="checkout">
   <h1>Orders</h1>
-
-  <table class="orders">
-    <thead>
-      <tr>
-        <th>Total price</th>
-        <th>Completed</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.total_price %></td>
-          <td><%= order.completed_date %></td>
-          <td><%= link_to 'View', order %></td>
-        </tr>
-      <% end %>
-    </tbody>
-
-  </table>
-  <br>
+  
   <div class="states">
+    <div class="in_prog">
+      <div class="naming">in progress</div>
+     <table class="cart">
+
+        <th>BOOK</th>
+        <th>PRICE</th>
+        <th>QTY</th>
+        <th>TOTAL</th>
+
+        <% @orders.last.line_items.each do |item| %>
+          <tr>
+            <td>
+              <div class="cover">
+                <%= image_tag(item.book.cover.url()) %>
+              </div>
+              <div class="book_info">
+                <div class="book_title">
+                  <%= item.book.title %>
+                </div>
+                <div class = "desc">
+                  <%= item.book.description %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <%= item.book.price %>
+            </td>
+            <td>
+              <%= item.quantity %>
+            </td>
+            <td>
+              <%= item.book.price * item.quantity %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <div class="order_total">
+        <div>
+          SUBTOTAL: $ <%= @orders.last.total_price %>
+        </div>
+      </div>
+    </div>
+  
+
     <div class="in_progress">
       <div class="naming">waiting for processing</div>
       <table class="orders">
@@ -31,12 +54,15 @@
           <th>number</th>
           <th>completed at</th>
           <th>total</th>
+          <th></th>
         </thead>
         <tbody>
           <% @orders_prog.each do |order| %>
           <tr>
-            <td><%= order.total_price %></td>
-            <td><%= order.completed_date %></td>
+            <td><%= link_to order.number %></td>
+           
+            <td><%= order.created_at.to_date %></td>
+             <td><%= order.total_price %></td>
             <td><%= link_to 'View', order %></td>
           </tr>
         <% end %>
@@ -49,14 +75,24 @@
     <div class="in_delivery">
       <div class="naming">in delivery</div>
       <table class="orders">
-         <thead>
+        <thead>
           <th>number</th>
           <th>completed at</th>
           <th>total</th>
+          <th></th>
         </thead>
         <tbody>
-
+          <% @orders_ship.each do |order| %>
+          <tr>
+            <td><%= link_to order.number %></td>
+           
+            <td><%= order.created_at.to_date %></td>
+             <td><%= order.total_price %></td>
+            <td><%= link_to 'View', order %></td>
+          </tr>
+        <% end %>
         </tbody>
+
       </table>
 
     </div>
@@ -64,14 +100,24 @@
     <div class="delivered">
       <div class="naming">delivered</div>
       <table class="orders">
-         <thead>
+        <thead>
           <th>number</th>
           <th>completed at</th>
           <th>total</th>
+          <th></th>
         </thead>
         <tbody>
-
+          <% @orders_comp.each do |order| %>
+          <tr>
+            <td><%= link_to order.number %></td>
+           
+            <td><%= order.created_at.to_date %></td>
+             <td><%= order.total_price %></td>
+            <td><%= link_to 'View', order %></td>
+          </tr>
+        <% end %>
         </tbody>
+
       </table>
     </div>
   </div>

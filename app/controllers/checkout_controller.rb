@@ -40,9 +40,10 @@ class CheckoutController < ApplicationController
       @checkout.confirm_step
       session[:checkout_step] = @checkout.current_step
       render 'new'
-
+      
     elsif @checkout.last_step?
       @checkout.save 
+      get_line_items
       session[:checkout_step]= nil
       flash[:notice] = "Order saved."
       redirect_to order_path(:id => @checkout.order)
@@ -51,6 +52,16 @@ class CheckoutController < ApplicationController
       session[:checkout_step] = @checkout.current_step
       render 'new'
     end
+  end
+  
+  def get_line_items
+    current_user.cart.line_items.each do |l|
+      l.order_id = @checkout.order
+      l.cart_id = nil
+      l.save
+    end
+    
+    
   end
   
   def set_values

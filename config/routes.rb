@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   get 'book/:id/rating/:id/edit' => 'ratings#edit', as: 'edit_rating'
 
   resources :checkout
+  
+  post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
