@@ -35,7 +35,8 @@ gem 'devise-guests', '~> 0.5.0'
 gem 'mini_magick'
 gem 'paperclip'
 gem 'virtus'
-gem "dynamic_form"
+gem 'dynamic_form'
+gem 'ratyrate'
 
 
 # Use ActiveModel has_secure_password

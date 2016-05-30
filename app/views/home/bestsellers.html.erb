@@ -14,26 +14,25 @@
           </div>
           <div class="desc">
             <%= book.description %>
-            <div class="book_ord">
-              $ <%= book.price %>                      
-            </div>
-            <div class="to_cart">
-              <% if user_signed_in? && !current_user.guest %>
-              
-                <div class = "add_to_cart">
-                  <%= form_tag(cart_line_items_path(book_id: book, cart_id: current_user.id), method: 'post') do %>
-                  <%= number_field_tag(:new_quantity, 1, in: 1..book.quantity, step: 1, :style => "width: 50px;") %>
-                    <div class="actions">
-                      <%= submit_tag( "ADD TO CART" ) %>
-                    </div>
-                  <% end %>
-                </div>
-              
-              <% else %>
-                <%= button_to 'ADD TO CART', new_user_session_path %>
-              <% end %>
-            </div>
           </div>
+          <div class="to_cart">
+            <div class="book_ord">
+              <div class="boldy">$ <%= book.price %></div>                      
+            </div>
+            <% if user_signed_in? && !current_user.guest %>
+              
+              <%= form_tag(cart_line_items_path(book_id: book, cart_id: current_user.id), method: 'post') do %>
+              <%= number_field_tag(:new_quantity, 1, in: 1..book.quantity, step: 1, :style => "width: 50px;") %>
+                <div class="actions">
+                  <%= submit_tag( "ADD TO CART" ) %>
+                </div>
+              <% end %>
+              
+            <% else %>
+              <%= button_to 'ADD TO CART', new_user_session_path %>
+            <% end %>
+          </div>
+          
         </div>
       </div> 
     

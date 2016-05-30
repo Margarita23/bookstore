@@ -58,6 +58,14 @@ class LineItemsController < ApplicationController
   end
   
   
+  def update_cout
+    @line_items
+    @line_item.quantity = @quan
+      if @line_item.update(id: @line_item.id)
+        flash[:notice] = "Books quantity was changed"
+        redirect_to :back
+      end
+  end
 
   # PATCH/PUT /line_items/1
   # PATCH/PUT /line_items/1.json

@@ -162,17 +162,21 @@ ol{
   margin: 0px auto;
 }
 
-#rev_wrap{
-  margin-top: 20px;
+.rev{
+  display: block;
 }
 
-#rev_wrap > div {
+.rev_wrap{
+  display: inline-block;
+}
+
+.rev_wrap > div {
   display: inline-block;
   font-size: 18px;
   font-weight: 700;
 }
 
-#reviews >ol > li{
+.reviews >ol > li{
   margin: 20px 0px 20px 0px;
 }
 
@@ -201,6 +205,11 @@ ol{
   margin: 20px 10px;
 }
 
+.title{
+  display: block;
+  font-size: 20px;
+}
+
 .cover_desc{
   width: 1000px;
   padding: 10px;
@@ -208,26 +217,23 @@ ol{
 
 .cover{
   width: 200px;
-  height: 300px;
+  height: 250px;
   float: left;
   margin-left: 20px;
+  display: inline-block;
 }
 
 .desc{
-  height: 300px;
+  height: 200px;
   width: 700px;
-  display:inline-block;
+  display:block;
   margin: 0px 20px;
 }
 
-.book_ord{
-  display: block;
-  margin-top: 40px;
-}
-
-.to_cart{
+.to_cart > * > *{
   display: inline-block;
 }
+
 
 .cart{
   width: 100%;
@@ -529,4 +535,26 @@ link_to_steps > *.visited{
 .boldy{
   font-weight: 600;
 }
+
+.add_book{
+  display: inline-block;
+  float: right;
+  margin: 0px 20% 0px 0px;
+}
+
+.add_book > * > *{
+  display: inline-block;
+}
+#win{
+  display: inline-block;
+}
+
+#win > .desc{
+  margin: 50px 0 0 0;
+}
+
+#win > .price{
+  font-size: 18px;
+}
+
 

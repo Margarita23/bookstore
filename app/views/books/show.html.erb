@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div id="outside">
   <div id = "win">
     <div class="title">
@@ -11,26 +9,34 @@
     </div>
 
     <div class="price">
-      <%= @book.price %>
+      <div class="boldy">$<%= @book.price %></div>
+    </div>
+    
+    <div class = "add_book">
+      <%= form_tag(cart_line_items_path(book_id: @book, cart_id: current_user.id), method: 'post') do %>
+        <%= number_field_tag(:new_quantity, 1, in: 1..@book.quantity, step: 1, :style => "width: 50px;") %>
+        <%= submit_tag( "ADD TO CART" ) %>
+      <% end %>
     </div>
 
-    <div class="descript">
+    <div class="desc">
       <%= @book.description %>
     </div>
   </div>
+  <div class="rev">
+    <div class="rev_wrap">
+      <div>Reviews</div> 
+      <%= link_to 'Add review for this book', new_rating_path %>
 
-<div id="rev_wrap">
-  <div>Reviews</div> 
-  <%= link_to 'Add review for this book', new_rating_path %>
-  
-</div>
-<div id="reviews">
-  <ol>
-    <% @book.ratings.each do |rat| %>
-    <li>
-      <%= rat.review %>
-    </li>
-    <% end %>
-  </ol>
-</div>
+    </div>
+    <div class="reviews">
+      <ol>
+        <% @book.ratings.each do |rat| %>
+        <li>
+          <%= rat.review %>
+        </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
 </div>
