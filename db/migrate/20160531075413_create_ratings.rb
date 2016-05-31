@@ -3,7 +3,6 @@ class CreateRatings < ActiveRecord::Migration
     create_table :ratings do |t|
       t.string :headline
       t.text :review
-      t.integer :grade
       t.references :book, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
 

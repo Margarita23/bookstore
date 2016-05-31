@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   has_one :cart
   has_many :retings
   
-  ratyrate_rater
-  
   has_one :billing_address, :class_name => "Address", :foreign_key => "user_billing_id"
   has_one :shipping_address, :class_name => "Address", :foreign_key => "user_shipping_id"
   

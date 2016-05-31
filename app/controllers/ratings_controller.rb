@@ -14,7 +14,8 @@ class RatingsController < ApplicationController
 
   # GET /ratings/new
   def new
-    @rating = Rating.new(book_id: params[:book_id], user_id: current_user.id)
+    @book = Book.find(params[:book_id])
+    @rating = Rating.new
   end
 
   # GET /ratings/1/edit
@@ -24,17 +25,16 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    
     @rating = Rating.new(rating_params)
-
-      if @rating.save
-        redirect_to book_path(params[:book_id]) 
-        flash[:notice] = "Rating create"
-      else
-        redirect_to book_path(params[:book_id]) 
-        flash[:alert] = "Something is wrong"
-
-      end
+    @rating.book_id = params[:book_id]
+    @rating.user_id = current_user.id
+    if @rating.save
+      redirect_to book_path(params[:book_id])
+      flash[:notice] = "Your review was successfully saved"
+    else
+      redirect_to new_book_rating_path(params[:book_id])
+      flash[:alert] = "Check all of fields. Your review is not save."
+    end
   end
 
   # PATCH/PUT /ratings/1
@@ -69,6 +69,6 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:headline, :review, :grade, :book_id, :user_id)
+      params.require(:rating).permit(:headline, :review, :book_id, :user_id, :grade )
     end
 end

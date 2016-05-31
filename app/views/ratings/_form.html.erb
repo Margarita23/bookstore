@@ -10,19 +10,18 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :headline %><br>
     <%= f.text_field :headline %>
   </div>
   <div class="field">
-    <%= f.label :review %><br>
-    <%= f.text_area :review %>
+    <div class="boldy">Rating:</div> <%= f.number_field :grade, value: 5, max: 5, min: 0, :style => "width: 50px;" %><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
   </div>
-
-Rating : <%= rating_for @rating, "grade", :star => 5, :enable_half => true %>
-
+  <div class="field">
+    <%= f.label :review %><br>
+    <%= f.text_area :review, cols: "70", rows: "5", :maxlength => 500 %>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> or <%= link_to 'Cancel', book_path(params[:book_id]) %>
   </div>
 <% end %>

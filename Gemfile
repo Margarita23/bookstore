@@ -36,7 +36,6 @@ gem 'mini_magick'
 gem 'paperclip'
 gem 'virtus'
 gem 'dynamic_form'
-gem 'ratyrate'
 
 
 # Use ActiveModel has_secure_password

@@ -1,12 +1,11 @@
-<div id="outside">
-  <div id = "win">
-    <div class="title">
-      <%= @book.title %>
-    </div>
+<div id = "win">
+  <div class="title">
+    <%= @book.title %>
+  </div>
 
-    <div class="cover">
-      <%= link_to image_tag(@book.cover.url(:med)), @book.cover.url %>
-    </div>
+  <div class="cover">
+    <%= link_to image_tag(@book.cover.url(:med)), @book.cover.url %>
+  </div>
 
     <div class="price">
       <div class="boldy">$<%= @book.price %></div>
@@ -36,13 +35,24 @@
 
     </div>
     <div class="reviews">
-      <ol>
+      <ul>
         <% @book.ratings.each do |rat| %>
         <li>
-          <%= rat.review %>
+          <div class="stars">Rating: <div class="grade"><%= rat.grade %></div>
+          </div>
+          <div class="headline"><%= rat.headline %></div>
+          <div class="rev_create"><%= rat.created_at.strftime("%B %d, %Y")%></div>
+          <div class="author">
+            by
+            <% if !rat.user.billing_address.first_name.blank? %>
+              <%=link_to "#{rat.user.billing_address.first_name} #{rat.user.billing_address.last_name}" %>
+            <% else %>
+              <%=link_to rat.user.email, book_rating_path(@book.id, rat.id) %>
+            <% end %>
+          </div>
+          <div class="rev_text"><%= rat.review %></div>
         </li>
         <% end %>
-      </ol>
+      </ul>
     </div>
   </div>
-</div>

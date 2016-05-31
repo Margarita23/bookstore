@@ -151,23 +151,19 @@ div > div{
   right: 0px;
 }
 
-ol{
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-}
-
-#outside{
+.outside{
   width:85%;
-  margin: 0px auto;
+  margin: 30px auto;
 }
 
 .rev{
   display: block;
 }
 
-.rev_wrap{
-  display: inline-block;
+.rev_text{
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .rev_wrap > div {
@@ -176,7 +172,32 @@ ol{
   font-weight: 700;
 }
 
-.reviews >ol > li{
+.reviews{
+  display: block;
+}
+
+.author{
+  display: block;
+}
+
+.reviews ul{
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.stars, .headline{
+  display: inline-block;
+  margin: 0px 20px 0px 0px;
+}
+
+.rev_create{
+  display: inline-block;
+  color: #a2a2a2;
+  margin: 0px 0px 0px 20px;
+}
+
+.reviews li{
   margin: 20px 0px 20px 0px;
 }
 
@@ -225,9 +246,10 @@ ol{
 
 .desc{
   height: 200px;
-  width: 700px;
+  width: 100%;
   display:block;
   margin: 0px 20px;
+  text-overflow: ellipsis;
 }
 
 .to_cart > * > *{
@@ -557,4 +579,24 @@ link_to_steps > *.visited{
   font-size: 18px;
 }
 
+.in_center{
+ position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+}
 
+.in_center *{
+  text-align: center;
+}
+
+.linking{
+  text-align: center;
+  margin:  30px 20%;
+  width: 300px;
+  height: 30px;
+}

@@ -15,8 +15,7 @@
 //= require bootstrap-sprockets
 //= require owl.carousel
 //= require_tree .
-//= require jquery.raty
-//= require ratyrate
+
  $(document).ready(function() {
      
       $("#owl-demo").owlCarousel({
@@ -35,3 +34,41 @@ $(document).ready(function() {
     $("#shipping_add").slideToggle(200);
   });
 });
+
+//stars_count
+$(document).ready(function() {
+  var full_star = '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
+  var empty_star = '<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>'
+  for(var i = 0; i < $('.grade').length; i++){
+    var count = $('.grade')[i].innerHTML;
+    if(count=='0'){
+      $('.grade')[i].innerHTML = empty_star + empty_star + empty_star + empty_star + empty_star;
+    }
+    if(count=='1'){
+      $('.grade')[i].innerHTML = full_star + empty_star + empty_star + empty_star + empty_star;
+    }
+    if(count=='2'){
+      $('.grade')[i].innerHTML = full_star + full_star + empty_star + empty_star + empty_star;
+    }
+    if(count=='3'){
+      $('.grade')[i].innerHTML = full_star + full_star + full_star + empty_star + empty_star;
+    }
+    if(count=='4'){
+      $('.grade')[i].innerHTML = full_star + full_star + full_star + full_star + empty_star;
+    }
+    if(count=='5'){
+      $('.grade')[i].innerHTML = full_star + full_star + full_star + full_star + full_star;
+    }
+  }
+});
+
+
+
+
+
+
+
+
+
+
+

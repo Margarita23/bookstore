@@ -3,13 +3,11 @@
 one:
   headline: MyString
   review: MyText
-  grade: 1
   book_id: 
   user_id: 
 
 two:
   headline: MyString
   review: MyText
-  grade: 1
   book_id: 
   user_id: 
