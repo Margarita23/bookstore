@@ -1,8 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Headline:</strong>
+  <%= @rating.headline %>
+</p>
+
+<p>
   <strong>Review:</strong>
   <%= @rating.review %>
+</p>
+
+<p>
+  <strong>Grade:</strong>
+  <%= @rating.grade %>
 </p>
 
 <p>
@@ -10,4 +20,10 @@
   <%= @rating.book %>
 </p>
 
-<%= link_to 'Edit', edit_rating_path(@rating) %>
+<p>
+  <strong>User:</strong>
+  <%= @rating.user %>
+</p>
+
+<%= link_to 'Edit', edit_rating_path(@rating) %> |
+<%= link_to 'Back', ratings_path %>

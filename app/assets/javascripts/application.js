@@ -15,6 +15,8 @@
 //= require bootstrap-sprockets
 //= require owl.carousel
 //= require_tree .
+//= require jquery.raty
+//= require ratyrate
  $(document).ready(function() {
      
       $("#owl-demo").owlCarousel({

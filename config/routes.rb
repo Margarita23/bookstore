@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  
+  post '/rate' => 'rater#create', :as => 'rate'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => {:registrations => "user/registrations"} do
     get "/signup"   => "registrations#new",   :as => :new_user_registration
@@ -12,19 +14,15 @@ Rails.application.routes.draw do
   end
   resources :orders 
   resources :categories
-  resources :books
+  resources :books do
+    resources :ratings
+  end
   resources :address
   
   root 'home#bestsellers'
   
   get 'home/shop' => 'home#shop' , as: 'shopping'
   
-  get 'ratings' => 'ratings#index', as: 'ratings'
-  post 'ratings' => 'ratings#create' 
-  get 'book/:id/ratings/new' => 'ratings#new', as: 'new_rating'
-  get 'book/:id/rating/:id' => 'ratings#show', as: 'rating'
-  get 'book/:id/rating/:id/edit' => 'ratings#edit', as: 'edit_rating'
-
   resources :checkout
   
   post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post

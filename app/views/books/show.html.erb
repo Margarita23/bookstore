@@ -13,11 +13,17 @@
     </div>
     
     <div class = "add_book">
-      <%= form_tag(cart_line_items_path(book_id: @book, cart_id: current_user.id), method: 'post') do %>
-        <%= number_field_tag(:new_quantity, 1, in: 1..@book.quantity, step: 1, :style => "width: 50px;") %>
-        <%= submit_tag( "ADD TO CART" ) %>
+      <% if user_signed_in? && !current_user.guest %>
+        <%= form_tag(cart_line_items_path(book_id: @book, cart_id: current_user.id), method: 'post') do %>
+          <%= number_field_tag(:new_quantity, 1, in: 1..@book.quantity, step: 1, :style => "width: 50px;") %>
+          <%= submit_tag( "ADD TO CART" ) %>
+        <% end %>
+      <% else %>
+        <%= button_to 'ADD TO CART', new_user_session_path %>
       <% end %>
     </div>
+      
+          
 
     <div class="desc">
       <%= @book.description %>
@@ -26,7 +32,7 @@
   <div class="rev">
     <div class="rev_wrap">
       <div>Reviews</div> 
-      <%= link_to 'Add review for this book', new_rating_path %>
+      <%= link_to 'Add review for this book', new_book_rating_path(@book.id) %>
 
     </div>
     <div class="reviews">

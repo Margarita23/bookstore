@@ -1,6 +1,5 @@
-<% @rating.book_id = @book.id %>
-<p>New review for <%= link_to @rating.book.title, book_path %></p>
+<h1>New Rating</h1>
 
 <%= render 'form' %>
 
-
+<%= link_to 'Back', book_ratings_path %>

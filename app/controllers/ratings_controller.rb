@@ -1,7 +1,4 @@
 class RatingsController < ApplicationController
-    
-  before_filter :authenticate_user!
-  
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
 
   # GET /ratings
@@ -17,9 +14,7 @@ class RatingsController < ApplicationController
 
   # GET /ratings/new
   def new
-    @rating = Rating.new
-    @book = Book.find(params[:id])
-    @@book = @book
+    @rating = Rating.new(book_id: params[:book_id], user_id: current_user.id)
   end
 
   # GET /ratings/1/edit
@@ -29,18 +24,17 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
+    
     @rating = Rating.new(rating_params)
-    @rating.book_id = @@book.id
 
-    respond_to do |format|
       if @rating.save
-        format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
-        format.json { render :show, status: :created, location: @rating }
+        redirect_to book_path(params[:book_id]) 
+        flash[:notice] = "Rating create"
       else
-        format.html { render :new }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
+        redirect_to book_path(params[:book_id]) 
+        flash[:alert] = "Something is wrong"
+
       end
-    end
   end
 
   # PATCH/PUT /ratings/1
@@ -66,19 +60,15 @@ class RatingsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rating
       @rating = Rating.find(params[:id])
     end
-  
-    def rating_params
-      params.require(:rating).permit(:review, :book_id)
-    end
 
-  
-    # Never trust parameters from the scary internet,, :book_id only allow the white list through.
-    
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def rating_params
+      params.require(:rating).permit(:headline, :review, :grade, :book_id, :user_id)
+    end
 end
