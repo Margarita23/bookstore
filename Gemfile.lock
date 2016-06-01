@@ -256,6 +256,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
+  omniauth
   omniauth-facebook
   owlcarousel-rails
   paperclip

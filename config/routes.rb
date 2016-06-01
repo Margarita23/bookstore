@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, :controllers => {:registrations => "user/registrations"} do
+  devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"} do
     get "/signup"   => "registrations#new",   :as => :new_user_registration
     end
 
