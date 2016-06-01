@@ -5,4 +5,6 @@ class Rating < ActiveRecord::Base
   validates :review, length: { maximum: 500, message: "Your review too match long" }
   validates :review, presence: true
   validates :headline, presence: true
+  
+
 end

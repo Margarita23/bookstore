@@ -43,6 +43,7 @@ class CheckoutController < ApplicationController
       
     elsif @checkout.last_step? 
       @checkout.save
+      books_statistic
       get_line_items
       session[:checkout_step]= nil
       flash[:notice] = "Order saved."
@@ -59,6 +60,14 @@ class CheckoutController < ApplicationController
       l.order_id = @checkout.order
       l.cart_id = nil
       l.save
+    end
+  end
+  
+  def books_statistic
+    current_user.cart.line_items.each do |l|
+      book = Book.find(l.book_id)
+      book.bought = l.quantity
+      book.save
     end
   end
   

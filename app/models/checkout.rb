@@ -169,8 +169,7 @@ class Checkout
     while Order.exists?(:number => @order.number) do
       @order.number = generate_number
     end
-    @order.save
-    
+    @order.save   
     bill_address
     ship_address
   end

@@ -36,6 +36,7 @@ gem 'mini_magick'
 gem 'paperclip'
 gem 'virtus'
 gem 'dynamic_form'
+gem 'omniauth-facebook'
 
 
 # Use ActiveModel has_secure_password

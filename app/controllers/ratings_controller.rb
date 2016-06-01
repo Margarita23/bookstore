@@ -25,15 +25,23 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    @rating = Rating.new(rating_params)
-    @rating.book_id = params[:book_id]
-    @rating.user_id = current_user.id
-    if @rating.save
-      redirect_to book_path(params[:book_id])
-      flash[:notice] = "Your review was successfully saved"
+    
+    if current_user
+      @rating = Rating.new(rating_params)
+      @rating.book_id = params[:book_id]
+      @rating.user_id = current_user.id
+   
+      if @rating.save
+        redirect_to book_path(params[:book_id])
+        flash[:notice] = "Your review was successfully saved"
+      else
+        redirect_to new_book_rating_path(params[:book_id])
+        flash[:alert] = "Check all of fields. Your review is not save."
+      end
+      
     else
-      redirect_to new_book_rating_path(params[:book_id])
-      flash[:alert] = "Check all of fields. Your review is not save."
+      redirect_to new_user_session_path
+      flash[:alert] = "Review can leave only registered users"
     end
   end
 
