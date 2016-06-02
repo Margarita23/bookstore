@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base 
   include AASM
-
+  
   aasm :column => 'state', :whiny_transitions => false do
     state :in_progress, :initial => true
     state :shipped

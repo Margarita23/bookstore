@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
   
-  validates :title, :price, :category_id, :presence => true
+  validates :title, :price, :category_id, :bought, :presence => true
   
   belongs_to :category
   belongs_to :author

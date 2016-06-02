@@ -74,7 +74,7 @@ class Checkout
    :if => lambda { |o| o.current_step == "payment" }
   }
      
-   def current_step
+  def current_step
     @current_step || steps.first
   end
   
@@ -95,24 +95,24 @@ class Checkout
   end
   
   def delivery_step
-     if valid?
-       self.current_step = steps[steps.index("delivery")]
+    if valid?
+      self.current_step = steps[steps.index("delivery")]
     else
       self.errors.messages
     end
   end
   
   def payment_step
-     if valid?
-       self.current_step = steps[steps.index("payment")]
+    if valid?
+      self.current_step = steps[steps.index("payment")]
     else
       self.errors.messages
     end
   end
   
    def confirm_step
-     if valid?
-       self.current_step = steps[steps.index("confirm")]
+    if valid?
+      self.current_step = steps[steps.index("confirm")]
     else
       self.errors.messages
     end
@@ -155,12 +155,12 @@ class Checkout
       false
     end
   end
+
+  private
           
   def order
     @order.id
   end
-
- # private
 
   def persist!
     @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery)
