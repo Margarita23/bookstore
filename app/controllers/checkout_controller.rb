@@ -48,6 +48,10 @@ class CheckoutController < ApplicationController
     end
   end
   
+  def complete
+    @order = Order.find(params[:order_id])
+  end
+  
   private
   
   def get_line_items
@@ -83,10 +87,6 @@ class CheckoutController < ApplicationController
       @checkout.total_price =  sub_total + @delivery.price
     end
     @checkout.check_same_address
-  end
-  
-  def complete
-    @order = Order.find(params[:order_id])
   end
   
 end

@@ -129,6 +129,10 @@ class Checkout
   def steps
     %w[address delivery payment confirm]
   end
+          
+  def order
+    @order.id
+  end
   
   def check_same_address
     if @checkbox_use_same_address
@@ -158,10 +162,6 @@ class Checkout
 
   private
           
-  def order
-    @order.id
-  end
-
   def persist!
     @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery)
     
@@ -172,6 +172,7 @@ class Checkout
     @order.save   
     bill_address
     ship_address
+    payment
   end
           
   def generate_number
@@ -185,4 +186,11 @@ class Checkout
   def ship_address
     @shipping_address = Address.create!(first_name: @ship_f_name, last_name: @ship_l_name, street: @ship_street, city: @ship_city, country: @ship_country, zip: @ship_zip, phone: @ship_phone,  order_shipping_id: @order.id)
   end
+          
+  def payment
+    if !CreditCard.all.exists?(:number => @card_number)
+      @credit_card = CreditCard.create!(number: @card_number, month: @exp_month, year: @exp_year, cvv: @card_code, user_id: @user.id)
+    end
+  end
+          
 end
