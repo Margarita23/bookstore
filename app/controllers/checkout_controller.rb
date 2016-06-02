@@ -20,19 +20,33 @@ class CheckoutController < ApplicationController
         render 'new'
 
       elsif params[:delivery_button]
-        @checkout.delivery_step
-        session[:checkout_step] = @checkout.current_step
-        render 'new'
+        if check_full_info
+          @checkout.delivery_step
+          session[:checkout_step] = @checkout.current_step
+          render 'new'
+        else
+          render 'new'
+        endelse
+          render 'new'
+        end
 
       elsif params[:payment_button]
-        @checkout.payment_step
-        session[:checkout_step] = @checkout.current_step
-        render 'new'
+        if check_full_info
+          @checkout.payment_step
+          session[:checkout_step] = @checkout.current_step
+          render 'new'
+        else
+          render 'new'
+        end
 
       elsif params[:confirm_button]
-        @checkout.confirm_step
-        session[:checkout_step] = @checkout.current_step
-        render 'new'
+        if check_full_info
+          @checkout.confirm_step
+          session[:checkout_step] = @checkout.current_step
+          render 'new'
+        else
+          render 'new'
+        end
 
       elsif @checkout.last_step? 
         @checkout.save
@@ -90,6 +104,16 @@ class CheckoutController < ApplicationController
       @checkout.total_price =  sub_total + @delivery.price
     end
     @checkout.check_same_address
+  end
+  
+  private
+  
+  def check_full_info
+    if @checkout.delivery.nil? || @checkout.card_number.nil?
+      false
+    else
+      true
+    end
   end
   
 end

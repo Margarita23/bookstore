@@ -32,7 +32,13 @@
           <li><%= @order.delivery.method %></li>  
         </ul>
       </td>
-
+      
+      <td>
+        <ul>
+          <li><%= @order.credit_card.number %></li>  
+          <li><%= @order.credit_card.month %>/<%= @order.credit_card.year %></li>  
+        </ul>
+      </td>
     </table>
   </div>
   

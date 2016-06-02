@@ -163,7 +163,8 @@ class Checkout
   private
           
   def persist!
-    @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery)
+    payment
+    @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery, credit_card_id: @credit_card.id)
     
     @order.number = generate_number
     while Order.exists?(:number => @order.number) do
@@ -172,7 +173,7 @@ class Checkout
     @order.save   
     bill_address
     ship_address
-    payment
+    
   end
           
   def generate_number
@@ -190,6 +191,8 @@ class Checkout
   def payment
     if !CreditCard.all.exists?(:number => @card_number)
       @credit_card = CreditCard.create!(number: @card_number, month: @exp_month, year: @exp_year, cvv: @card_code, user_id: @user.id)
+    else
+      @credit_card = CreditCard.all.find_by(number: @card_number)
     end
   end
           

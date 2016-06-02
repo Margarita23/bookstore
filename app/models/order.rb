@@ -20,5 +20,6 @@ class Order < ActiveRecord::Base
   has_one :billing_address, :class_name => "Address", :foreign_key => "order_billing_id"
   has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id"
   belongs_to :delivery
+  belongs_to :credit_card
 
 end
