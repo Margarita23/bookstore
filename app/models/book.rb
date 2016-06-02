@@ -4,9 +4,7 @@ class Book < ActiveRecord::Base
   
   belongs_to :category
   belongs_to :author
-  belongs_to :cart
   has_many :ratings
-  has_one :order_item
   has_many :line_items
   
   before_destroy :ensure_not_referenced_by_any_line_item
