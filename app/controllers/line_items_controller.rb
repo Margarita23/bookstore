@@ -10,7 +10,6 @@ class LineItemsController < ApplicationController
     @line_items = LineItem.find(params[:cart_id])
   end
   
-  
   # GET /line_items/1
   # GET /line_items/1.json
   def show
@@ -53,25 +52,6 @@ class LineItemsController < ApplicationController
       redirect_to :back
     end
   end
-  
-  def check_quantity
-    if params[:new_quantity].to_i > 0 && !params[:new_quantity].nil?
-      @quan = params[:new_quantity]
-      true 
-    else
-      false
-    end
-  end
-  
-  
-  def update_cout
-    @line_items
-    @line_item.quantity = @quan
-      if @line_item.update(id: @line_item.id)
-        flash[:notice] = "Books quantity was changed"
-        redirect_to :back
-      end
-  end
 
   # PATCH/PUT /line_items/1
   # PATCH/PUT /line_items/1.json
@@ -91,7 +71,6 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    
     @line_item.destroy
     respond_to do |format|
       format.html { redirect_to  @line_item.cart, notice: 'Line item was successfully destroyed.' }
@@ -100,6 +79,25 @@ class LineItemsController < ApplicationController
   end
 
   private
+  
+    def check_quantity
+      if params[:new_quantity].to_i > 0 && !params[:new_quantity].nil?
+        @quan = params[:new_quantity]
+        true 
+      else
+        false
+      end
+    end
+
+    def update_cout
+      @line_items
+      @line_item.quantity = @quan
+      if @line_item.update(id: @line_item.id)
+        flash[:notice] = "Books quantity was changed"
+        redirect_to :back
+      end
+    end
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
       @line_item = LineItem.find(params[:id])

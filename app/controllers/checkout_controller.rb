@@ -11,13 +11,6 @@ class CheckoutController < ApplicationController
     check_items
   end
   
-  def check_items
-    if current_user.cart.line_items.count == 0
-       flash[:alert] = "Ordering should be at least one book"
-      redirect_to  shopping_path  
-     end
-  end
-  
   def create
     set_values
     ### what about case when ???
@@ -55,6 +48,8 @@ class CheckoutController < ApplicationController
     end
   end
   
+  private
+  
   def get_line_items
     current_user.cart.line_items.each do |l|
       l.order_id = @checkout.order
@@ -69,6 +64,13 @@ class CheckoutController < ApplicationController
       book.bought += l.quantity
       book.save
     end
+  end
+  
+  def check_items
+    if current_user.cart.line_items.count == 0
+       flash[:alert] = "Ordering should be at least one book"
+      redirect_to  shopping_path  
+     end
   end
   
   def set_values
