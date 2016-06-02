@@ -13,46 +13,48 @@ class CheckoutController < ApplicationController
   
   def create
     set_values
-    ### what about case when ???
-    if params[:address_button]
-      @checkout.address_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
+    if current_user.cart.line_items.count != 0
+      if params[:address_button]
+        @checkout.address_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
 
-    elsif params[:delivery_button]
-      @checkout.delivery_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
+      elsif params[:delivery_button]
+        @checkout.delivery_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
 
-    elsif params[:payment_button]
-      @checkout.payment_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
+      elsif params[:payment_button]
+        @checkout.payment_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
 
-    elsif params[:confirm_button]
-      @checkout.confirm_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
-      
-    elsif @checkout.last_step? 
-      @checkout.save
-      books_statistic
-      get_line_items
-      session[:checkout_step]= nil
-      flash[:notice] = "Order saved."
-      redirect_to complete_order_path(:order_id => @checkout.order)
+      elsif params[:confirm_button]
+        @checkout.confirm_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
+
+      elsif @checkout.last_step? 
+        @checkout.save
+        books_statistic
+        get_line_items
+        session[:checkout_step]= nil
+        flash[:notice] = "Order saved."
+        redirect_to complete_order_path(:order_id => @checkout.order)
+      else
+        @checkout.next_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
+      end
     else
-      @checkout.next_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
+      flash[:alert] = "For save order you must add books in your cart"
+      redirect_to shopping_path
     end
   end
   
   def complete
     @order = Order.find(params[:order_id])
   end
-  
-  private
   
   def get_line_items
     current_user.cart.line_items.each do |l|

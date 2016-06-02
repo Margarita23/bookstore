@@ -1,24 +1,16 @@
 <div class="checkout">
   <h1>Checkout</h1> 
-  <%= form_for @checkout, url: {action: "create"} do |f| %>
-    <div class="link_to_steps">
-      <%= link_to "ADDRESS" %>
-      <%= link_to "DELIVERY" %>
-      <%= link_to "PAYMENT" %>
-      <%= link_to "CONFIRM" %>
-      <%= link_to "COMPLETE" %>
-    </div>
-  <% if @checkout.errors.any? %>
-    <div id="error_explanation">
-      <p>Please:</p>
-      <ul>
-      <% @checkout.errors.each do |attr,msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= form_for @checkout, url: {action: "create"} do |f| %> 
+    <% if @checkout.errors.any? %>
+      <div id="error_explanation">
+        <p>Please:</p>
+        <ul>
+        <% @checkout.errors.each do |attr,msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="steps">   
       <%= render "#{@checkout.current_step}", :f => f %>
       <p><%= f.submit "SAVE AND CONTINUE" %></p>
@@ -36,5 +28,5 @@
         <p>ORDER TOTAL: $<%= sub_total %></p>
       <% end %>
     </div>
-  <% end %>
+    <% end %>
 </div>
