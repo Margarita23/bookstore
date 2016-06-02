@@ -600,3 +600,27 @@ link_to_steps > *.visited{
   width: 300px;
   height: 30px;
 }
+
+.sold_out{
+  background: url('http://res.cloudinary.com/nmetau/image/upload/c_scale,w_200/v1464859497/SORRY-SOLD-OUT_shuhgx.png');
+  width: 200px;
+  height: 133px;
+  position: absolute;
+  bottom: 0px;
+  left: 300px;
+}
+
+.sold_out_in_shop{
+  background: url('http://res.cloudinary.com/nmetau/image/upload/c_scale,w_100/v1464859497/SORRY-SOLD-OUT_shuhgx.png');
+  width: 100px;
+  height: 67px;
+  position: absolute;
+}
+
+.sold_out_show{
+  background: url('http://res.cloudinary.com/nmetau/image/upload/c_scale,w_200/v1464859497/SORRY-SOLD-OUT_shuhgx.png');
+  width: 200px;
+  height: 133px;
+  right: 0;
+  top: 0;
+}

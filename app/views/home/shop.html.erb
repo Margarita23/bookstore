@@ -7,12 +7,15 @@
   <div class="shop">
     <% @shopping.each do |book| %>
       <div id="shop_item">
-        <div class="cover_item">  
+        <div class="cover_item"> 
+          <% if book.quantity == 0 %>
+          <div class="sold_out_in_shop"></div>
+          <% end %>
           <%= link_to book do %>
           <%= link_to image_tag(book.cover.url(:med)), book.cover.url %>
           <% end %>
         </div>
-        <div class="title_item">  
+        <div class="title_item"> 
           <%= link_to book.title, book %>
         </div>
         <div class="price_item">

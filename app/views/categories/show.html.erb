@@ -3,36 +3,33 @@
   <li><%= link_to "Shop", shopping_path %></li>
   <li class="active"><%= @category.title %></li>
 </ol>
-
-<div id="shopping">
-  <div id="shop">  
-    <% @category.books.each do |book|  %>
-      <div id="shop_item">
-        <div class="cover_item">  
-          <%= link_to book do %>
-          <%= link_to image_tag(book.cover.url(:med)), book.cover.url %>
-          <% end %>
+<div class="outside">
+  <div id="shopping">
+    <div id="shop">  
+      <% @category.books.each do |book|  %>
+        <div id="shop_item">
+          <div class="cover_item">  
+            <%= link_to book do %>
+            <%= link_to image_tag(book.cover.url(:med)), book.cover.url %>
+            <% end %>
+          </div>
+          <div class="title_item">  
+            <%= link_to book.title, book %>
+          </div>
+          <div class="price_item">
+            <div class="boldy">$<%= book.price %></div>
+          </div>
         </div>
-        <div class="title_item">  
-          <%= link_to book.title, book %>
-        </div>
-        <div class="price_item">
-          <div class="boldy">$<%= book.price %></div>
-        </div>
-      </div>
-    <% end %>
-    <div id="pages">
-      
-    </div>
-  </div>
-  <div id="categories">
-    <p>Shop by categories</p>
-    <ol>
-      <% Category.all.each do |category| %>
-        <li>
-          <%= link_to category.title, category %>
-        </li>
       <% end %>
-    </ol>
+      <div id="pages"></div>
+    </div>
+    <div id="categories">
+      <p>Shop by categories</p>
+      <ol>
+        <% Category.all.each do |category| %>
+          <li> <%= link_to category.title, category %> </li>
+        <% end %>
+      </ol>
+    </div>
   </div>
 </div>

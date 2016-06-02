@@ -38,7 +38,7 @@ class LineItemsController < ApplicationController
         @line_item.price = book.price
       end 
       if @line_item.quantity > book.quantity
-        @line_item.quantity = book.quantity
+        @line_item.quantity = book.quantity if book.quantity!=0
         if @line_item.save
           flash[:alert] = "Sorry, but the stock only #{book.quantity} book(s). In your basket was(were) added all this book(s)"
           redirect_to :back

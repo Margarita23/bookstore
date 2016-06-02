@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20160602084016) do
     t.datetime "updated_at",         null: false
     t.integer  "category_id"
     t.integer  "author_id"
-    t.integer  "cart_id"
     t.string   "cover_file_name"
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
@@ -58,7 +57,6 @@ ActiveRecord::Schema.define(version: 20160602084016) do
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
-  add_index "books", ["cart_id"], name: "index_books_on_cart_id", using: :btree
   add_index "books", ["category_id"], name: "index_books_on_category_id", using: :btree
 
   create_table "carts", force: :cascade do |t|
@@ -161,7 +159,6 @@ ActiveRecord::Schema.define(version: 20160602084016) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "books", "authors"
-  add_foreign_key "books", "carts"
   add_foreign_key "books", "categories"
   add_foreign_key "carts", "users"
   add_foreign_key "credit_cards", "users"
