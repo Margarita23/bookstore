@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   before_action :set_cart, only: [:create]
   def bestsellers
-    @bestsellers = Book.order(:bought).first(10)
+    @bestsellers = Book.all.sort_by{ |k| k["bought"] }.reverse.first(10)
   end
   
   def shop

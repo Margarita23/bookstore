@@ -31,17 +31,23 @@ class LineItemsController < ApplicationController
     book = Book.find(params[:book_id])
     @line_item = Cart.find(params[:cart_id]).line_items.find_by(book_id: book)
     if check_quantity
-       if !@line_item.nil?
+      if !@line_item.nil?
         @line_item.quantity = @line_item.quantity.to_i + @quan.to_i
       else
         @line_item = @cart.line_items.build(book: book)
         @line_item.quantity = @quan.to_i
         @line_item.price = book.price
-      end
-      
-      if @line_item.save
+      end 
+      if @line_item.quantity > book.quantity
+        @line_item.quantity = book.quantity
+        if @line_item.save
+          flash[:alert] = "Sorry, but the stock only #{book.quantity} book(s). In your basket was(were) added all this book(s)"
+          redirect_to :back
+        end
+      else @line_item.save
+        flash[:notice] = "Book(s) was(were) added in your cart"
         redirect_to :back
-      end
+      end  
     else
       flash[:alert] = "Book can not be add to your cart, please enter information."
       redirect_to :back

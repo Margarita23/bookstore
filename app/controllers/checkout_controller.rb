@@ -66,7 +66,7 @@ class CheckoutController < ApplicationController
   def books_statistic
     current_user.cart.line_items.each do |l|
       book = Book.find(l.book_id)
-      book.bought = l.quantity
+      book.bought += l.quantity
       book.save
     end
   end

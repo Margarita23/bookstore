@@ -38,6 +38,7 @@ gem 'virtus'
 gem 'dynamic_form'
 gem 'omniauth-facebook'
 gem 'omniauth'
+gem 'cancancan', '~> 1.10'
 
 
 # Use ActiveModel has_secure_password

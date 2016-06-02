@@ -25,10 +25,10 @@ author_05 = Author.create(first_name: "Mikhail", last_name: "Bulgakov", biograph
 
 description = 'is one of four rhetorical modes (also known as modes of discourse), along with exposition, argumentation, and narration. Each of the rhetorical modes is present in a variety of forms and each has its own purpose and conventions. The act of description may be related to that of definition. Description is also the fiction-writing mode for transmitting a mental image of the particulars of a story.[citation needed] Definition: The pattern of development that presents a word picture of a thing, a person, a situation, or a series of events.'
 
-book_01 = Book.create(title: "Fahrenheit 451", price: 14.35, quantity: 30, author_id: author_01.id, description: description, category_id: category_sc_fic.id)
-book_02 = Book.create(title: "The Green Mile", price: 11.40, quantity: 25, author_id: author_02.id, description: description, category_id: category_sc_fic.id)
-book_03 = Book.create(title: "Small Gods", price: 10.35, quantity: 26, author_id: author_03.id, description: description, category_id: category_sc_fic.id)
-book_04 = Book.create(title: "A Clash of Kings", price: 17.35, quantity: 37, author_id: author_04.id, description: description, category_id: category_sc_fic.id)
+book_01 = Book.create(title: "Fahrenheit 451", price: 14.35, quantity: 30, author_id: author_01.id, description: description, category_id: category_sc_fic.id, bought: 0)
+book_02 = Book.create(title: "The Green Mile", price: 11.40, quantity: 25, author_id: author_02.id, description: description, category_id: category_sc_fic.id, bought: 0)
+book_03 = Book.create(title: "Small Gods", price: 10.35, quantity: 26, author_id: author_03.id, description: description, category_id: category_sc_fic.id, bought: 0)
+book_04 = Book.create(title: "A Clash of Kings", price: 17.35, quantity: 37, author_id: author_04.id, description: description, category_id: category_sc_fic.id, bought: 0)
 #book_05 = Book.create(title: "The Master and Margarita", price: 25.00, quantity: 31, description: description, category_id: category_sc_fic.id)
 
 #---------------novel
