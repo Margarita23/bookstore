@@ -21,5 +21,7 @@ class Order < ActiveRecord::Base
   has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id"
   belongs_to :delivery
   belongs_to :credit_card
+  
+  validates_presence_of :total_price, :delivery_id, :number
 
 end

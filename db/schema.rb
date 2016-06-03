@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20160602130958) do
 
   create_table "orders", force: :cascade do |t|
     t.decimal  "total_price"
-    t.date     "completed_date"
+    t.date     "completed"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "state"
