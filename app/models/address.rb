@@ -6,4 +6,6 @@ class Address < ActiveRecord::Base
   has_many :billing_address
   accepts_nested_attributes_for :shipping_address
   accepts_nested_attributes_for :billing_address
+  
+  validates :first_name, presence: true
 end

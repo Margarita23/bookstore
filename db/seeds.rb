@@ -21,7 +21,7 @@ book_01 = Book.create(title: "Fahrenheit 451", price: 14.35, quantity: 30, autho
 book_02 = Book.create(title: "The Green Mile", price: 11.40, quantity: 25, author_id: author_02.id, description: description, category_id: category_sc_fic.id, bought: 0)
 book_03 = Book.create(title: "Small Gods", price: 10.35, quantity: 26, author_id: author_03.id, description: description, category_id: category_sc_fic.id, bought: 0)
 book_04 = Book.create(title: "A Clash of Kings", price: 17.35, quantity: 37, author_id: author_04.id, description: description, category_id: category_sc_fic.id, bought: 0)
-#book_05 = Book.create(title: "The Master and Margarita", price: 25.00, quantity: 31, description: description, category_id: category_sc_fic.id)
+book_05 = Book.create(title: "The Master and Margarita", price: 25.00, quantity: 31, description: description, category_id: category_sc_fic.id)
 
 #---------------novel
 #book_11 = Book.create(title: "A Thousand Splendid Suns", price: 12, quantity:28, category_id: category_novel.id, description: description)
@@ -44,9 +44,9 @@ book_04 = Book.create(title: "A Clash of Kings", price: 17.35, quantity: 37, aut
 #book_34 = Book.create(title: "Anna Karenina", price: 11.66, quantity: 69, category_id: category_history.id, description: description)
 #book_35 = Book.create(title: "Seventeen Moments of Spring", price: 17.99, quantity:96, category_id: category_history.id, description: description)
 
-review = "Writing a book review is not the same as writing a book report or a summary. A book review is a critical analysis of a published work that assesses the work's strengths and weaknesses. Many authors strive to have their books reviewed by a professional because a published review (even a negative one) can be a great source of publicity."
+#review = "Writing a book review is not the same as writing a book report or a summary. A book review is a critical analysis of a published work that assesses the work's strengths and weaknesses. Many authors strive to have their books reviewed by a professional because a published review (even a negative one) can be a great source of publicity."
 
-rating_1 = Rating.create(review: review)
+#rating_1 = Rating.create(review: review)
 
 del_1 = Delivery.create(method: "UPS Ground", price: 5)
 del_2 = Delivery.create(method: "UPS Two Day", price: 10)

@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :billing_address, :allow_destroy => true
   accepts_nested_attributes_for :shipping_address, :allow_destroy => true
   
+  validates :email, uniqueness: true
+  validates :password, uniqueness: true
+  
   devise :database_authenticatable, 
          :registerable,
          :recoverable,
