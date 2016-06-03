@@ -26,10 +26,8 @@ class CheckoutController < ApplicationController
           render 'new'
         else
           render 'new'
-        endelse
-          render 'new'
         end
-
+ 
       elsif params[:payment_button]
         if check_full_info
           @checkout.payment_step
