@@ -17,10 +17,10 @@ class Order < ActiveRecord::Base
   
   has_many :line_items
   belongs_to :user
-  has_one :billing_address, :class_name => "Address", :foreign_key => "order_billing_id"
-  has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id"
   belongs_to :delivery
   belongs_to :credit_card
+  has_one :billing_address, :class_name => "Address", :foreign_key => "order_billing_id"
+  has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id"
   
   validates_presence_of :total_price, :delivery_id, :number
 

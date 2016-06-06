@@ -7,7 +7,7 @@ class AddressController < ApplicationController
 
   # GET /addresss/new
   def new
-    @checkout_form = CheckoutForm.new
+    #@checkout_form = CheckoutForm.new
     @address = Address.new
   end
 

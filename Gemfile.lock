@@ -312,7 +312,7 @@ DEPENDENCIES
   ruby-graphviz
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  shoulda-matchers
+  shoulda-matchers (~> 3.1)
   spring
   state_machine
   turbolinks
