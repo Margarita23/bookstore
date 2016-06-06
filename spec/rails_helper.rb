@@ -27,6 +27,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'devise'
 require 'aasm/rspec'
+require 'capybara/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -77,4 +78,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  
+  config.include Capybara::DSL
 end

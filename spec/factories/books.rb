@@ -4,8 +4,8 @@ FactoryGirl.define do
     description "cool description"
     price 15.2
     quantity 55
-    bought 12
-    author "Michel Bulhgakov"
+    bought 0
+    author
     category 
   end
 end
