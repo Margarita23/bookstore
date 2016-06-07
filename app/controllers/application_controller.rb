@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
- # before_filter :authenticate_user!
+ before_action :authenticate_user!, only: [:show]
   
   helper_method :current_user 
 

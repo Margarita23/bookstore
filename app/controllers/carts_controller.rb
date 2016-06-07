@@ -26,7 +26,7 @@ class CartsController < ApplicationController
   def destroy
     @cart.destroy
     respond_to do |format|
-      format.html { redirect_to shopping_url, notice: 'Cart was successfully cleared.' }
+      format.html { redirect_to shopping_url, notice: 'Cart was successfully destoyed.' }
       format.json { head :no_content }
     end
   end
@@ -34,7 +34,7 @@ class CartsController < ApplicationController
   def empty_cart
     current_user.cart.line_items.destroy_all
     respond_to do |format|
-      format.html { redirect_to cart_url, notice: 'Cart was successfully destroyed.' }
+      format.html { redirect_to cart_url, notice: 'Your shopping cart has been cleared' }
       format.json { head :no_content }
     end
   end

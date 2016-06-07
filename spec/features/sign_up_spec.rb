@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe BooksController, :type => :controller do
+feature "Signing up" do
   
   scenario "sign up user" do
     visit "/users/sign_up"
@@ -11,6 +11,7 @@ RSpec.describe BooksController, :type => :controller do
     click_button "Sign up"
 
     expect(page).to have_text("Welcome! You have signed up successfully.")
+    expect(current_path).to eq root_path
   end
 
   
