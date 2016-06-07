@@ -33,6 +33,7 @@ feature "Work with cart (remove, update)" do
     end
 
     scenario "empty cart" do
+      add_book_db(book_1)
       full_cart
       visit cart_path(user.id)
       find("input[type=submit][value='EMPTY CART']").click 

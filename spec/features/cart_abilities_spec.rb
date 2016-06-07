@@ -13,14 +13,13 @@ feature "Check cart`s abilities" do
     end
     after(:each) do
       book_1.destroy
-      user.cart.destroy
       user.destroy
     end
 
     scenario "when checkout is not possible without the addition of books in cart" do
-      visit cart_path(user.id)
-      #find("input[type=submit][value='CHECKOUT']").click 
-      expect(current_path).to eq "/carts/#{user.id}" 
+      visit cart_path(user.id)    
+      find("input[type=submit][value='CHECKOUT']").click
+      expect(page).to have_content 'CHECKOUT'
       #expect(page).to have_content 'Ordering should be at least one book'
     end
 

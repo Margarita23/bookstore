@@ -15,12 +15,12 @@ class Order < ActiveRecord::Base
     end 
   end
   
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   belongs_to :user
   belongs_to :delivery
   belongs_to :credit_card
-  has_one :billing_address, :class_name => "Address", :foreign_key => "order_billing_id"
-  has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id"
+  has_one :billing_address, :class_name => "Address", :foreign_key => "order_billing_id", dependent: :destroy
+  has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id", dependent: :destroy
   
   validates_presence_of :total_price, :delivery_id, :number
 

@@ -8,15 +8,16 @@ feature "Add books to cart" do
   describe "cart`s adding" do
     before(:each) do
       visit root_path
-      sign_in(user)
       add_book_db(book_1)
+      sign_in(user)
     end
     after(:each) do
       user.destroy
     end
     
     scenario "when guest add books" do
-      #user.destroy
+      user.destroy
+      visit root_path
       first(:button, "ADD TO CART").click 
       expect(page).to have_content 'Invalid email or password.'
       expect(current_path).to eq ("/users/sign_in")
