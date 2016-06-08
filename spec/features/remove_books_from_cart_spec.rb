@@ -39,6 +39,17 @@ feature "Work with cart (remove, update)" do
       find("input[type=submit][value='EMPTY CART']").click 
       expect(page).to have_content 'Your shopping cart has been cleared'
     end
+    
+    scenario "chenge count of books in cart" do
+      add_book_db(book_1)
+      full_cart
+      visit cart_path(user.id)
+      expect(page.find_field("new_quantity").value).to eq "3"
+      first( "input[type='number']").set("1")
+      click_button'UPDATE'
+      expect(page).to have_content 'Books quantity was changed'
+      expect(page.find_field("new_quantity").value).to eq "1"
+    end
   end
 
 

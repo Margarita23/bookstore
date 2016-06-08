@@ -2,66 +2,65 @@ class CheckoutController < ApplicationController
   include CartsHelper
   
   def new
-    session[:checkout_params] ||= {}
-    session[:checkout_params].deep_merge!(params[:checkout]) if params[:checkout]
-    @checkout = Checkout.new(session[:checkout_params])
-    @checkout.current_step = session[:checkout_step]
-    session[:delivery] = @checkout.delivery
-    @delivery = Delivery.find(session[:delivery])
-    check_items
-  end
-  
-  def create
-    set_values
     if current_user.cart.line_items.count != 0
-      if params[:address_button]
-        @checkout.address_step
-        session[:checkout_step] = @checkout.current_step
-        render 'new'
-
-      elsif params[:delivery_button]
-        if check_full_info
-          @checkout.delivery_step
-          session[:checkout_step] = @checkout.current_step
-          render 'new'
-        else
-          render 'new'
-        end
- 
-      elsif params[:payment_button]
-        if check_full_info
-          @checkout.payment_step
-          session[:checkout_step] = @checkout.current_step
-          render 'new'
-        else
-          render 'new'
-        end
-
-      elsif params[:confirm_button]
-        if check_full_info
-          @checkout.confirm_step
-          session[:checkout_step] = @checkout.current_step
-          render 'new'
-        else
-          render 'new'
-        end
-
-      elsif @checkout.last_step? 
-        @checkout.save
-        books_statistic
-        get_line_items
-        session[:checkout_step]= nil
-        flash[:notice] = "Order saved."
-        redirect_to complete_order_path(:order_id => @checkout.order)
-      else
-        @checkout.next_step
-        session[:checkout_step] = @checkout.current_step
-        render 'new'
-      end
+      session[:checkout_params] ||= {}
+      session[:checkout_params].deep_merge!(params[:checkout]) if params[:checkout]
+      @checkout = Checkout.new(session[:checkout_params])
+      @checkout.current_step = session[:checkout_step]
+      session[:delivery] = @checkout.delivery
+      @delivery = Delivery.find(session[:delivery])
     else
       flash[:alert] = "For save order you must add books in your cart"
       redirect_to shopping_path
     end
+  end
+  
+  def create
+    set_values
+    if params[:address_button]
+      @checkout.address_step
+      session[:checkout_step] = @checkout.current_step
+      render 'new'
+
+    elsif params[:delivery_button]
+      if check_full_info
+        @checkout.delivery_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
+      else
+        render 'new'
+      end
+ 
+    elsif params[:payment_button]
+      if check_full_info
+        @checkout.payment_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
+      else
+        render 'new'
+      end
+
+    elsif params[:confirm_button]
+      if check_full_info
+        @checkout.confirm_step
+        session[:checkout_step] = @checkout.current_step
+        render 'new'
+      else
+        render 'new'
+      end
+
+    elsif @checkout.last_step? 
+      @checkout.save
+      books_statistic
+      get_line_items
+      session[:checkout_step]= nil
+      flash[:notice] = "Order saved."
+      redirect_to complete_order_path(:order_id => @checkout.order)
+    else
+      @checkout.next_step
+      session[:checkout_step] = @checkout.current_step
+      render 'new'
+    end  
   end
   
   def complete
@@ -83,13 +82,6 @@ class CheckoutController < ApplicationController
       book.quantity = book.quantity - l.quantity
       book.save
     end
-  end
-  
-  def check_items
-    if current_user.cart.line_items.count == 0
-       flash[:alert] = "Ordering should be at least one book"
-      redirect_to  shopping_path  
-     end
   end
   
   def set_values

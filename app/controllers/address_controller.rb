@@ -19,14 +19,12 @@ class AddressController < ApplicationController
   # POST /addresss.json
   def create
     @address = Address.new(address_params)
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render :show, status: :created, location: @address }
-      else
-        format.html { render :new }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
+    if @address.save
+      redirect_to @address
+      flash[:notice] = 'Address was successfully created.'
+    else
+      redirect_to :back
+      flash[:alert] = 'Address was not created. Check data'
     end
   end
 
@@ -43,9 +41,8 @@ class AddressController < ApplicationController
   # DELETE /addresss/1.json
   def destroy
     @address.destroy
-    respond_to do |format|
-      format.html { redirect_to addresss_url, notice: 'address was successfully destroyed.' }
-      format.json { head :no_content }
+    redirect_to addresss_url
+    flash[:notice] = 'Address was successfully destroyed.'
     end
   end
 

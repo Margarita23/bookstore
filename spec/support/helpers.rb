@@ -15,4 +15,5 @@ module FeatureHelper
     first( "input[type='number']").set("3")
     first(:button, "ADD TO CART").click 
   end
+  
 end

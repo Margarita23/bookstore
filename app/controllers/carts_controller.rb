@@ -10,14 +10,12 @@ class CartsController < ApplicationController
   # PATCH/PUT /carts/1
   # PATCH/PUT /carts/1.json
   def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
+    if @cart.update(cart_params)
+      redirect_to @cart
+      flash[:notice] = 'Cart was successfully updated.'
+    else
+      redirect_to :back
+      flash[:alert] = 'Cart was not updated. Check data'
     end
   end
   
@@ -25,18 +23,14 @@ class CartsController < ApplicationController
   # DELETE /carts/1.json
   def destroy
     @cart.destroy
-    respond_to do |format|
-      format.html { redirect_to shopping_url, notice: 'Cart was successfully destoyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to shopping_url
+    flash[:notice] = 'Cart was successfully destoyed.'
   end
   
   def empty_cart
     current_user.cart.line_items.destroy_all
-    respond_to do |format|
-      format.html { redirect_to cart_url, notice: 'Your shopping cart has been cleared' }
-      format.json { head :no_content }
-    end
+    redirect_to cart_url
+    flash[:notice] = 'Your shopping cart has been cleared'
   end
   
   private
@@ -49,4 +43,5 @@ class CartsController < ApplicationController
     def cart_params
       params.fetch(:cart, {})
     end
+    
 end

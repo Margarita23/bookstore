@@ -45,14 +45,12 @@ class RatingsController < ApplicationController
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
-    respond_to do |format|
-      if @rating.update(rating_params)
-        format.html { redirect_to @rating, notice: 'Rating was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rating }
-      else
-        format.html { render :edit }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
-      end
+    if @rating.update(rating_params)
+      redirect_to @rating 
+      flash[:notice] = 'Rating was successfully updated.'
+    else
+      redirect_to :back
+      flash[:notice] = 'Rating was not updated. Check data'
     end
   end
 
@@ -60,10 +58,8 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1.json
   def destroy
     @rating.destroy
-    respond_to do |format|
-      format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to ratings_url
+    flash[:notice] = 'Rating was successfully destroyed.'
   end
 
   private

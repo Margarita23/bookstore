@@ -16,11 +16,14 @@ feature "Check cart`s abilities" do
       user.destroy
     end
 
-    scenario "when checkout is not possible without the addition of books in cart" do
+    scenario "when checkout is not possible after empty cart button click" do
+      full_cart
       visit cart_path(user.id)    
+      find("input[type=submit][value='EMPTY CART']").click
+      expect(page).to have_content 'Your shopping cart has been cleared'
       find("input[type=submit][value='CHECKOUT']").click
-      expect(page).to have_content 'CHECKOUT'
-      #expect(page).to have_content 'Ordering should be at least one book'
+      expect(current_path).to eq "/home/shop"
+      expect(page).to have_content 'For save order you must add books in your cart'
     end
 
     scenario "continue shopping button" do
@@ -28,6 +31,18 @@ feature "Check cart`s abilities" do
       visit cart_path(user.id)
       find("input[type=submit][value='CONTINUE SHOPPING']").click 
       expect(current_path).to eq "/home/shop"
+    end
+    
+    scenario "when checkout is not possible without the addition of books in cart" do
+      pending
+      full_cart
+      visit cart_path(user.id)    
+      first(:link, "X").click 
+      expect(page).to have_selector ".notice", text: "Book(s) was remove from your cart"
+      #expect(page).to have_content 'Book(s) was remove from your cart'
+      #find("input[type=submit][value='CHECKOUT']").click
+      #expect(current_path).to eq "/home/shop"
+      #expect(page).to have_content 'For save order you must add books in your cart'
     end
   end
 end

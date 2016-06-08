@@ -164,7 +164,7 @@ class Checkout
           
   def persist!
     payment
-    @order = Order.create!(total_price: @total_price, user_id: @user.id, delivery_id: @delivery, credit_card_id: @credit_card.id)
+    @order = Order.new(total_price: @total_price, user_id: @user.id, delivery_id: @delivery, credit_card_id: @credit_card.id)
     
     @order.number = generate_number
     while Order.exists?(:number => @order.number) do
@@ -173,7 +173,6 @@ class Checkout
     @order.save   
     bill_address
     ship_address
-    
   end
           
   def generate_number

@@ -27,14 +27,14 @@ feature "Add books to cart" do
       first(:button, "ADD TO CART").click 
       expect(page).to have_content 'Book(s) was(were) added in your cart'
       expect(current_path).to eq ("/")
-
     end
 
-    scenario "Default value" do  expect(first("input[type='number']").value).to eq("1")
+    scenario "Default value" do  
+     expect(first("input[type='number']").value).to eq("1")
     end
 
     scenario "add -1 book" do
-      first( "input[type='number']").set("-3")
+      first( "input[type='number']").set("-1")
       first(:button, "ADD TO CART").click 
       expect(page).to have_content 'Book can not be add to your cart, please enter information.'
     end
