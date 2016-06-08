@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :book do
-    title "Capybara"
+    title
     description "cool description"
     price 15.2
     quantity 55
