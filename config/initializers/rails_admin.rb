@@ -68,18 +68,57 @@ RailsAdmin.config do |config|
   config.model 'Book' do
     list do
       sort_by :title
-      field :title do
-        sort_reverse false
-      end
-      field :bought do
-        sort_reverse false
-      end
+      field :title
+      field :price
+      field :quantity
+      field :bought
+      field :category
+    end
+  end
+  
+  config.model 'Author' do
+    list do
+      sort_by :last_name
+      field :last_name
+      field :first_name
+      field :biography
+    end
+  end
+  
+  config.model 'Category' do
+    list do
+      field :title
+      field :created_at
+      field :updated_at
+    end
+  end
+  
+  config.model 'Delivery' do
+    list do
+      field :method
+      field :price
+    end
+  end
+  
+  config.model 'Rating' do
+    list do
+      sort_by :user
+      field :user
+      field :headline
+      field :review
+      field :book
+    end
+    
+    edit do
+      field :headline
+      field :review
     end
   end
   
   config.model 'Order' do
     list do
       sort_by :created_at
+      field :created_at
       field :number
       field :total_price
       field :delivery
@@ -93,6 +132,18 @@ RailsAdmin.config do |config|
       end
       field :state do
         label "Order State"
+      end
+    end
+  end
+  
+  config.model 'User' do
+    list do
+      field :email
+      field :sign_in_count do
+        label "Sign In Count"
+      end
+      field :last_sign_in_at do
+        label "Last Sign In"
       end
     end
   end
