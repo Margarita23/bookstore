@@ -1,16 +1,13 @@
 <p id="notice"><%= notice %></p>
 <div class="checkout">
   <h1>Orders</h1>
-  
-  <div class="states">
-    
+  <div class="states">   
     <div class="in_prog">
       <% if params[:view] %>
         <%= render 'view_order' %>
         <%= button_to 'GO TO STORE', shopping_path %>
       <% end %>
     </div>
-  
     <div class="in_progress">
       <div class="naming">waiting for processing</div>
       <table class="orders">
@@ -31,11 +28,8 @@
           </tr>
         <% end %>
         </tbody>
-
       </table>
     </div>
-
-
     <div class="in_delivery">
       <div class="naming">in delivery</div>
       <table class="orders">
@@ -48,19 +42,15 @@
         <tbody>
           <% @orders_ship.each do |order| %>
           <tr>
-            <td><%= link_to order.number, order %></td>
-           
+            <td><%= link_to order.number, order %></td>  
             <td><%= order.created_at.to_date %></td>
              <td><%= order.total_price %></td>
             <td><%= link_to 'View', orders_path(id: order.id, view: true) %></td>
           </tr>
         <% end %>
         </tbody>
-
       </table>
-
     </div>
-
     <div class="delivered">
       <div class="naming">delivered</div>
       <table class="orders">
@@ -74,19 +64,15 @@
           <% @orders_comp.each do |order| %>
           <tr>
             <td><%= link_to order.number, order %></td>
-           
             <td><%= order.created_at.to_date %></td>
              <td><%= order.total_price %></td>
             <td><%= link_to 'View', orders_path(id: order.id, view: true) %></td>
           </tr>
         <% end %>
         </tbody>
-
       </table>
     </div>
   </div>
-
   <%= link_to 'New Order', shopping_path %>
-
 </div>
 
