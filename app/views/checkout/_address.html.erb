@@ -73,7 +73,7 @@
     <td id = "shipping_add">
       <div class="field">
         <% if !current_user.shipping_address.first_name.nil? %>
-          <%= f.text_field :ship_f_name, value: current_user.shipping_address.ship_f_name, placeholder: "First name", size: 25 %>
+          <%= f.text_field :ship_f_name, value: current_user.shipping_address.first_name, placeholder: "First name", size: 25 %>
         <% else %>
           <%= f.text_field :ship_f_name, placeholder: "First name", size: 25 %>
         <% end%>
@@ -81,7 +81,7 @@
       
       <div class="field">
         <% if !current_user.shipping_address.last_name.nil? %>
-          <%= f.text_field :ship_f_name, value: current_user.shipping_address.ship_l_name, placeholder: "Last name", size: 25 %>
+          <%= f.text_field :ship_f_name, value: current_user.shipping_address.last_name, placeholder: "Last name", size: 25 %>
         <% else %>
           <%= f.text_field :ship_l_name, placeholder: "Last name", size: 25 %>
         <% end%>

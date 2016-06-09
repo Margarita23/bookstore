@@ -32,9 +32,9 @@ class AddressController < ApplicationController
   # PATCH/PUT /addresss/1.json
   def update
     @address = Address.find(params[:id]) 
-      @address.update(first_name: params[:first_name], last_name: params[:last_name], street: params[:street], city: params[:city], country: params[:country], zip: params[:zip], phone: params[:phone])
-      @address.save
-      redirect_to :back   
+    @address.update(first_name: params[:first_name], last_name: params[:last_name], street: params[:street], city: params[:city], country: params[:country], zip: params[:zip], phone: params[:phone])
+    @address.save
+    redirect_to :back   
   end
 
   # DELETE /addresss/1
@@ -43,7 +43,6 @@ class AddressController < ApplicationController
     @address.destroy
     redirect_to addresss_url
     flash[:notice] = 'Address was successfully destroyed.'
-    end
   end
 
   private
