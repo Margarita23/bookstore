@@ -1,6 +1,5 @@
-class ApplicationController < ActionController::Base
-  
- before_action :authenticate_user!, only: [:show]
+class ApplicationController < ActionController::Base 
+  before_action :authenticate_user!, only: [:show]
   
   helper_method :current_user 
 
@@ -17,9 +16,7 @@ class ApplicationController < ActionController::Base
         current_user.billing_address_id.build 
         current_user.shipping_address_id.build
       end 
-      
       current_user
-      
     else
       guest_user
     end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"} do
-    get "/signup"   => "registrations#new",   :as => :new_user_registration
+    get "/signup" => "registrations#new",   :as => :new_user_registration
     end
   
   resources :carts do
@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
   
   get '/complete/order/:order_id' => 'checkout#complete', as: 'complete_order', method: :get
-
+  
+  get 'author/:id' => 'authors#show', as: 'author', method: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

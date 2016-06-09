@@ -1,7 +1,10 @@
 <div class="outside">
   <div id = "win">
     <div class="title">
-      <%= @book.title %>
+      <%= @book.title %> by 
+      <div>
+        <%= link_to " #{@book.author.first_name} #{@book.author.last_name}", author_path(@book.author.id) %>
+      </div>
     </div>
     <div class="cover">
       <%= link_to image_tag(@book.cover.url(:med)), @book.cover.url %>
@@ -30,7 +33,7 @@
   <div class="rev">
     <div class="rev_wrap">
       <div>Reviews</div> 
-      <%= link_to 'Add review for this book', new_book_rating_path(@book.id) %>
+        <%= link_to 'Add review for this book', new_book_rating_path(@book.id) %>
     </div>
     <div class="reviews">
       <ul>

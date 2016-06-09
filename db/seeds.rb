@@ -44,9 +44,7 @@ book_05 = Book.create(title: "The Master and Margarita", price: 25.00, quantity:
 #book_34 = Book.create(title: "Anna Karenina", price: 11.66, quantity: 69, category_id: category_history.id, description: description)
 #book_35 = Book.create(title: "Seventeen Moments of Spring", price: 17.99, quantity:96, category_id: category_history.id, description: description)
 
-#review = "Writing a book review is not the same as writing a book report or a summary. A book review is a critical analysis of a published work that assesses the work's strengths and weaknesses. Many authors strive to have their books reviewed by a professional because a published review (even a negative one) can be a great source of publicity."
-
-#rating_1 = Rating.create(review: review)
+review = "Writing a book review is not the same as writing a book report or a summary. A book review is a critical analysis of a published work that assesses the work's strengths and weaknesses. Many authors strive to have their books reviewed by a professional because a published review (even a negative one) can be a great source of publicity."
 
 del_1 = Delivery.create(method: "UPS Ground", price: 5)
 del_2 = Delivery.create(method: "UPS Two Day", price: 10)

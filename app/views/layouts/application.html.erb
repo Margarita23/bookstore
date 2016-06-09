@@ -51,9 +51,9 @@
             <% end %>
           </div>
       
-          <%= link_to 'Settings', edit_user_registration_path%>
+          <%= link_to 'Settings', edit_user_registration_path %>
           <div class="border"></div>
-        <%= link_to 'Orders', orders_path(user_id: current_user.id) %>
+        <%= link_to 'Orders', orders_path %>
           <div class="border"></div>
           <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
         

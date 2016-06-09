@@ -15,7 +15,7 @@ RailsAdmin.config do |config|
   # config.current_user_method(&:current_user)
 
   ## == Cancan ==
-  # config.authorize_with :cancan
+  #config.authorize_with :cancan
 
   ## == Pundit ==
   # config.authorize_with :pundit
@@ -40,4 +40,63 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+  
+  config.model 'LineItem' do 
+    visible false
+  end
+  
+  config.model 'ShippingAddress' do 
+    visible false
+  end
+  
+  config.model 'BillingAddress' do 
+    visible false
+  end
+  
+  config.model 'Address' do 
+    visible false
+  end
+  
+  config.model 'CreditCard' do 
+    visible false
+  end
+  
+  config.model 'Cart' do 
+    visible false
+  end
+
+  config.model 'Book' do
+    list do
+      sort_by :title
+      field :title do
+        sort_reverse false
+      end
+      field :bought do
+        sort_reverse false
+      end
+    end
+  end
+  
+  config.model 'Order' do
+    list do
+      sort_by :created_at
+      field :number
+      field :total_price
+      field :delivery
+    end
+    
+    edit do
+      field :state, :enum do
+        enum do
+          ['in_progress', 'shipped','completed']
+        end
+      end
+      field :state do
+        label "Order State"
+      end
+    end
+  end
+  
+  
+  
 end

@@ -6,7 +6,7 @@
         <div class="book_info">
           <div class="book_title">
             <%= book.title %> 
-          </div> by <%= link_to " #{book.author.first_name} #{book.author.last_name}" %>
+          </div> by <%= link_to " #{book.author.first_name} #{book.author.last_name}", author_path(book.author.id) %>
         </div>
         <div class="cover_desc">
           <div class="cover">

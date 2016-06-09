@@ -5,6 +5,10 @@ class OrdersController < ApplicationController
     @orders_prog = @orders.where(:state => :in_progress)
     @orders_ship = @orders.where(:state => :shipped)
     @orders_comp = @orders.where(:state => :completed)
+    if params[:view]
+      @order = Order.find(params[:id])
+    end
+    
   end
   
   def show

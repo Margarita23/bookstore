@@ -16,51 +16,56 @@ class CheckoutController < ApplicationController
   end
   
   def create
-    set_values
-    if params[:address_button]
-      @checkout.address_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
-
-    elsif params[:delivery_button]
-      if check_full_info
-        @checkout.delivery_step
+    if current_user.cart.line_items.count != 0
+      set_values
+      if params[:address_button]
+        @checkout.address_step
         session[:checkout_step] = @checkout.current_step
         render 'new'
+
+      elsif params[:delivery_button]
+        if check_full_info
+          @checkout.delivery_step
+          session[:checkout_step] = @checkout.current_step
+          render 'new'
+        else
+          render 'new'
+        end
+
+      elsif params[:payment_button]
+        if check_full_info
+          @checkout.payment_step
+          session[:checkout_step] = @checkout.current_step
+          render 'new'
+        else
+          render 'new'
+        end
+
+      elsif params[:confirm_button]
+        if check_full_info
+          @checkout.confirm_step
+          session[:checkout_step] = @checkout.current_step
+          render 'new'
+        else
+          render 'new'
+        end
+
+      elsif @checkout.last_step? 
+        @checkout.save
+        books_statistic
+        get_line_items
+        session[:checkout_step]= nil
+        flash[:notice] = "Order saved."
+        redirect_to complete_order_path(:order_id => @checkout.order)
       else
-        render 'new'
-      end
- 
-    elsif params[:payment_button]
-      if check_full_info
-        @checkout.payment_step
+        @checkout.next_step
         session[:checkout_step] = @checkout.current_step
         render 'new'
-      else
-        render 'new'
-      end
-
-    elsif params[:confirm_button]
-      if check_full_info
-        @checkout.confirm_step
-        session[:checkout_step] = @checkout.current_step
-        render 'new'
-      else
-        render 'new'
-      end
-
-    elsif @checkout.last_step? 
-      @checkout.save
-      books_statistic
-      get_line_items
-      session[:checkout_step]= nil
-      flash[:notice] = "Order saved."
-      redirect_to complete_order_path(:order_id => @checkout.order)
+      end  
     else
-      @checkout.next_step
-      session[:checkout_step] = @checkout.current_step
-      render 'new'
-    end  
+      flash[:alert] = "For save order you must add books in your cart"
+      redirect_to shopping_path
+    end
   end
   
   def complete

@@ -138,6 +138,15 @@ div > div{
   text-align: center;
 }
 
+.title_item{
+  width: 100%;
+  height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  text-align: center;
+}
+
 #cover_item{
   width: 300px;
   height: 200px;
@@ -219,6 +228,16 @@ div > div{
 
 .book_info{
   display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+.book_info_in_cart{
+  text-align: left;
+  display: block;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }
 .book_title{
   font-weight: 900;
