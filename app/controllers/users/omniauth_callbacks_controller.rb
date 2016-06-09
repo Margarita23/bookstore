@@ -9,6 +9,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @shipping_address.user_shipping_id = resource.id
       @billing_address.save
       @shipping_address.save
+      @user.role = "member"
+      @user.save
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]

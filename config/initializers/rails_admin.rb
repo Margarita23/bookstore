@@ -1,7 +1,7 @@
 RailsAdmin.config do |config|
   
   config.authorize_with do
-    authenticate_or_request_with_http_basic('Site Message') do |username, password|
+    authenticate_or_request_with_http_basic('Enter Password') do |username, password|
       username == 'margo' && password == 'mamapapa'
     end
   end
@@ -28,7 +28,9 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
-    new
+    new do
+      except ["Order", "User"]
+    end
     export
     bulk_delete
     show
@@ -147,7 +149,4 @@ RailsAdmin.config do |config|
       end
     end
   end
-  
-  
-  
 end

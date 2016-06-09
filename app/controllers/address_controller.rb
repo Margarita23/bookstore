@@ -1,4 +1,6 @@
 class AddressController < ApplicationController
+  
+  #load_and_authorize_resource
 
   # GET /addresss/1
   # GET /addresss/1.json

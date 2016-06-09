@@ -12,6 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @shipping_address.user_shipping_id = resource.id
       @billing_address.save
       @shipping_address.save
+      resource.role = "member"
+      resource.save
     end
   end
 
