@@ -5,21 +5,20 @@ Rails.application.routes.draw do
     get "/signup" => "registrations#new",   :as => :new_user_registration
   end
   
-  resources :carts do
-    resources :line_items
+  resources :carts, only: [:show] do
+    resources :line_items, only: [:update, :create, :destroy]
   end
-  resources :orders 
-  resources :categories
-  resources :books do
-    resources :ratings
+  resources :orders, only: [:show, :index]
+  resources :categories, only: [:show]
+  resources :books, only: [:show] do
+    resources :ratings, only: [:new, :show, :create]
   end
-  resources :address
+  resources :checkout, only: [:new, :create]
+  resources :address, only: [:update]
   
   root 'home#bestsellers'
   
   get 'home/shop' => 'home#shop' , as: 'shopping'
-  
-  resources :checkout
   
   post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
   

@@ -14,17 +14,10 @@ feature "Work with cart (remove, update)" do
     after(:each) do
       user.destroy
     end
-    scenario "to cart" do
-      find("img[alt='Basket']").click
-      expect(current_path).to eq ("/")
-    end
 
     scenario "remove books from cart" do
       add_book_db(book_1)
       full_cart
-      find("img[alt='Basket']").click
-      expect(page).to have_content 'Book(s) was(were) added in your cart'
-
       visit cart_path(user.id)
       expect(page).to have_content book_1.title
 

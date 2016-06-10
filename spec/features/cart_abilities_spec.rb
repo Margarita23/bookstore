@@ -31,11 +31,11 @@ feature "Check cart`s abilities" do
     expect(current_path).to eq "/home/shop"
   end
     
-  scenario "when checkout is not possible without the addition of books in cart" do
-    pending
+  scenario "when checkout is not possible without of books in cart" do
     full_cart
-    visit cart_path(user.id)    
-    first(:link, "X").click 
-    expect(page).to have_selector ".notice", text: "Book(s) was remove from your cart"
+    visit cart_path(user.id)   
+    find(:link, "X").click
+    click_on "CHECKOUT"
+    expect(page).to have_content("For save order you must add books in your cart")
   end
 end

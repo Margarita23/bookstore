@@ -7,30 +7,28 @@ feature "Review abilities" do
   before(:each) do
     @category = create(:category)
     @book1 = create(:book)
-
     visit root_path
     sign_in(user)
-    visit shopping_path
   end
   after(:each) do
     user.destroy
   end
   
   scenario "add review" do
-    pending
-    first(:link, "SHOP").click 
-    click_on @book1.title
-    click_on("Add review for this book")
-    expect(page).to have_content("New Rating")
+    user.role = "member"
+    user.save
+    visit shopping_path
+    visit book_path(@book1.id)
+    expect(page).to have_content "Add review for this book"
+    visit "/books/#{@book1.id}/ratings/new"
+    expect(page).to have_content "New Rating"
   end
   
-  scenario "add review" do
-    first(:link, "SHOP").click 
-    click_on @book1.title
+  scenario "when guest can not add review" do
     user.destroy
-    expect(current_path).to eq ("/users/sign_in")
+    visit shopping_path
+    visit book_path(@book1.id)
+    expect(page).not_to have_content "Add review for this book"
   end
-  
-  
     
 end

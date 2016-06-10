@@ -36,7 +36,7 @@
         <% if can? :create, Rating %>
         <% if cannot? :update, Rating %>
           <div id="basket">
-            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
+            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ), id: "basket" %> CART:
             <% if current_user.cart.line_items.count!=0 %> 
               (<%= quantity_incart %>) $<%= sub_total %>
             <% else %>
