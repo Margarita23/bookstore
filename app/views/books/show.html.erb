@@ -33,7 +33,9 @@
   <div class="rev">
     <div class="rev_wrap">
       <div>Reviews</div> 
+      <% if can? :create, Rating %>
         <%= link_to 'Add review for this book', new_book_rating_path(@book.id) %>
+      <% end %>
     </div>
     <div class="reviews">
       <ul>

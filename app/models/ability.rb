@@ -8,12 +8,16 @@ class Ability
     if user.role == "guest"
       can :read, :all
     elsif user.role == "member"
-  
-    else
-      #can :access, :rails_admin       # only allow admin users to access Rails Admin
-      #can :dashboard                  # allow access to dashboard
-      #can :manage, :all
       can :read, :all
+      alias_action :crate, :update, :delete, :to => :cud
+      can :create, [Rating]
+      can :cud, [Cart, LineItem, Order, Address, Checkout] 
+    elsif user.role == "admin"
+      can :access, :rails_admin
+      can :dashboard
+      can :manage, :all
+      alias_action :crate, :update, :to => :create_update
+      cannot :create_update, [Cart, LineItem, Order, Checkout]
     end
     # Define abilities for the passed in user here. For example:
     #
