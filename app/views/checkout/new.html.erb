@@ -1,6 +1,6 @@
 <div class="checkout">
   <h1>Checkout</h1> 
-  <%= form_for @checkout, url: {action: "create"} do |f| %> 
+  <%= form_for @checkout, url: {action: "create"}, id: "checkout" do |f| %> 
     <% if @checkout.errors.any? %>
       <div id="error_explanation">
         <p>Please:</p>
