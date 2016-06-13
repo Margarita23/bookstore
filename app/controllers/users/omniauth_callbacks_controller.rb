@@ -18,7 +18,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @cart.user_id = @user.id
         @cart.save
       end
-        @user.role = "member"
+      @user.guest = false
         @user.save
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else

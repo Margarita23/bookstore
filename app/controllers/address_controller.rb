@@ -2,21 +2,6 @@ class AddressController < ApplicationController
   
   load_and_authorize_resource
 
-  # GET /addresss/1
-  # GET /addresss/1.json
-  #def show
-  #end
-
-  # GET /addresss/new
-  #def new
-    #@checkout_form = CheckoutForm.new
-   # @address = Address.new
-  #end
-
-  # GET /addresss/1/edit
-  #def edit
-  #end
-
   # POST /addresss
   # POST /addresss.json
   def create
@@ -38,14 +23,6 @@ class AddressController < ApplicationController
     @address.save
     redirect_to :back   
   end
-
-  # DELETE /addresss/1
-  # DELETE /addresss/1.json
-  #def destroy
-  #  @address.destroy
-  #  redirect_to addresss_url
-  #  flash[:notice] = 'Address was successfully destroyed.'
-  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

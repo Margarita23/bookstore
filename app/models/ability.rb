@@ -5,19 +5,22 @@ class Ability
     
     user ||= User.new
     
-    if user.role == "guest"
-      can :read, :all
-    elsif user.role == "member"
-      can :read, :all
-      alias_action :crate, :update, :delete, :to => :cud
-      can :create, [Rating]
-      can :cud, [Cart, LineItem, Order, Address, Checkout] 
-    elsif user.role == "admin"
+    if user.admin
       can :access, :rails_admin
       can :dashboard
       can :manage, :all
-      alias_action :crate, :update, :to => :create_update
-      cannot :create_update, [Cart, LineItem, Order, Checkout]
+      alias_action :create, :read, :update, :destroy, :to => :cud
+      cannot :cud, [Cart, LineItem, Order, Checkout]
+    elsif !user.guest
+      can :read, [Book, Category, Author, Rating]
+      alias_action :create, :read, :update, :destroy, :to => :cud
+      can :cud, [Cart, LineItem, Order, Address] 
+      
+      
+      
+      can :create, [Rating]
+    else
+      can :read, [Book, Category, Author, Rating]
     end
     # Define abilities for the passed in user here. For example:
     #

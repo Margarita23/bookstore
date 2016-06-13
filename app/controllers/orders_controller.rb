@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   
+  load_and_authorize_resource
+  
   def index
     @orders = Order.all.where(:user_id => current_user.id)
     @orders_prog = @orders.where(:state => :in_progress)
@@ -12,7 +14,7 @@ class OrdersController < ApplicationController
   end
   
   def show
-    @order = Order.find(params[:id])
+    #@order = Order.find(params[:id])
   end
   
   private

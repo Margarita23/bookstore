@@ -5,7 +5,7 @@
     <div class="in_prog">
       <% if params[:view] %>
         <%= render 'view_order' %>
-        <%= button_to 'GO TO STORE', shopping_path %>
+      <%= button_to( 'GO TO STORE', {:action => "shop", :controller => "home"}, :method => :get) %>
       <% end %>
     </div>
     <div class="in_progress">

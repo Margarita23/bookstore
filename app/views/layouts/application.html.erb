@@ -17,11 +17,8 @@
   
 </head>
 <body>
-
   <div id="wrapper">
-    <div id="name">
-      <h1>Bookstore</h1>
-    </div>
+    <div id="name"><h1>Bookstore</h1></div>
     <div id="root">
       <div id="home">
         <%= link_to 'HOME', root_path %>
@@ -31,31 +28,33 @@
         <%= link_to 'SHOP', shopping_path %>
       </div>
     </div>
-    
-      <div class="settings">  
-        <% if can? :create, Rating %>
-        <% if cannot? :update, Rating %>
-          <div id="basket">
-            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ), id: "basket" %> CART:
+    <div class="settings">  
+      <% if user_signed_in? && !current_user.guest %>
+        <div id="basket">
+          <% if !current_user.cart.nil? %>
+            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
             <% if current_user.cart.line_items.count!=0 %> 
               (<%= quantity_incart %>) $<%= sub_total %>
             <% else %>
               (EMPTY) 
             <% end %>
-          </div>
-          <%= link_to 'Settings', edit_user_registration_path %>
-          <div class="border"></div>
-          <%= link_to 'Orders', orders_path %>
-          <div class="border"></div>
-        <% end %>
-          <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
-        <% else %> 
-          <%= link_to 'Sign up', new_user_registration_path %>
-          <div class="border"></div>
-          <%= link_to 'Login', new_user_session_path %>
-        <% end %>
-      </div>
-    
+          <% else %>
+            <div class = "empty"> 
+              <%= image_tag(Cart.new.image.url) %> CART: (EMPTY)
+            </div>
+          <% end %>
+        </div>
+        <%= link_to 'Settings', edit_user_registration_path %>
+        <div class="border"></div>
+        <%= link_to 'Orders', orders_path %>
+        <div class="border"></div>
+        <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
+      <% else %> 
+        <%= link_to 'Sign up', new_user_registration_path %>
+        <div class="border"></div>
+        <%= link_to 'Login', new_user_session_path %>
+      <% end %>
+    </div>
   </div>
   <div class="space"></div>
   <% if notice %>
@@ -65,17 +64,7 @@
     <div class="alert alert-warning"><%= alert %></div>
   <% end %>
   <%= yield %>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.6&appId=1704494613151332";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-  
-  
 </body>
 </html>

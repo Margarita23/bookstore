@@ -2,9 +2,11 @@ class CartsController < ApplicationController
   include CartsHelper
   before_action :set_cart, only: [:show, :update, :destroy] 
 
+  
   # GET /carts/1
   # GET /carts/1.json
   def show
+    #@cart = Cart.new
   end
   
   # PATCH/PUT /carts/1

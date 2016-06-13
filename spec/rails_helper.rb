@@ -21,6 +21,7 @@ require 'rspec/rails'
 require 'devise'
 require 'aasm/rspec'
 require 'capybara/rspec'
+require "cancan/matchers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
      session[:guest_user_id] = nil
      guest_user if with_retry
   end
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 
   private
 

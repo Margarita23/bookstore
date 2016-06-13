@@ -3,11 +3,13 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   
   before_action :set_cart, only: [:create]
+  
+  load_and_authorize_resource
 
   # GET /line_items
   # GET /line_items.json
   def index
-    @line_items = LineItem.find(params[:cart_id])
+    #@line_items = LineItem.find(params[:cart_id])
   end
   
   # GET /line_items/1
@@ -103,6 +105,6 @@ class LineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
-      params.require(:line_item).permit(:book_id, :cart_id)
+      params.permit(:book_id, :cart_id)
     end
 end

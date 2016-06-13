@@ -1,5 +1,8 @@
 class RatingsController < ApplicationController
-  before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  #before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  
+  load_and_authorize_resource :book
+  load_and_authorize_resource :rating, :through => :book
 
   # GET /ratings
   # GET /ratings.json
@@ -14,6 +17,7 @@ class RatingsController < ApplicationController
 
   # GET /ratings/new
   def new
+    authorize! :create, Rating
     @book = Book.find(params[:book_id])
     @rating = Rating.new
   end
@@ -25,7 +29,8 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    if current_user
+    
+    #if current_user
       @rating = Rating.new(rating_params)
       @rating.book_id = params[:book_id]
       @rating.user_id = current_user.id
@@ -36,10 +41,10 @@ class RatingsController < ApplicationController
         redirect_to new_book_rating_path(params[:book_id])
         flash[:alert] = "Check all of fields. Your review is not save."
       end
-    else
-      redirect_to new_user_session_path
-      flash[:alert] = "Review can leave only registered users"
-    end
+    #else
+      #redirect_to new_user_session_path
+      #flash[:alert] = "Review can leave only registered users"
+    #end
   end
 
   # PATCH/PUT /ratings/1

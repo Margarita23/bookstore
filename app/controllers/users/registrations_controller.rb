@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @cart.user_id = resource.id
         @cart.save
       end
-      resource.role = "member"
+      resource.guest = false
       resource.save
     end
   end
