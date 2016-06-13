@@ -9,16 +9,16 @@ class Ability
       can :access, :rails_admin
       can :dashboard
       can :manage, :all
-      alias_action :create, :read, :update, :destroy, :to => :cud
-      cannot :cud, [Cart, LineItem, Order, Checkout]
+      alias_action :create, :update, :destroy, :to => :cud
+      cannot :cud, [Cart, LineItem, Checkout]
+      cannot :create, Order
+      
     elsif !user.guest
-      can :read, [Book, Category, Author, Rating]
-      alias_action :create, :read, :update, :destroy, :to => :cud
-      can :cud, [Cart, LineItem, Order, Address] 
+      can :read, [Book, Category, Author, Rating, Cart, LineItem, Address]
+      alias_action :create, :update, :to => :cu
+      can :cu, [Cart, LineItem, Address] 
+      can :create, [Rating, Order]
       
-      
-      
-      can :create, [Rating]
     else
       can :read, [Book, Category, Author, Rating]
     end
