@@ -109,11 +109,13 @@ RailsAdmin.config do |config|
       field :headline
       field :review
       field :book
+      field :admin_checking
     end
     
     edit do
       field :headline
       field :review
+      field :admin_checking
     end
   end
   
@@ -141,6 +143,7 @@ RailsAdmin.config do |config|
   config.model 'User' do
     list do
       field :email
+      
       field :sign_in_count do
         label "Sign In Count"
       end

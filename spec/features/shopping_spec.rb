@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "Add books to cart" do  
 
-  given(:user) { create(:user) }
+  given(:user) { create(:user, guest: false) }
     
   before(:each) do
     @category = create(:category)

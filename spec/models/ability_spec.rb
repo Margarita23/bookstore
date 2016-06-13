@@ -14,8 +14,9 @@ describe "User" do
     
     context "when is a member" do
       let(:user){ create :user, guest: false }
-
+      
       it{ should_not be_able_to(:destroy, Book, Category, Rating, Author) }
+      it{ should_not be_able_to(:create, Book, Category, Author) }
       
     end
     

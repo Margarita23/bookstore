@@ -74,7 +74,7 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1.json
   def destroy
     @line_item.destroy
-    redirect_to @line_item.cart
+    redirect_to :back
     flash[:notice] = 'Book(s) was remove from your cart'
   end
 

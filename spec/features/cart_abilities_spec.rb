@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "Check cart`s abilities" do  
     
-  given(:user) { create(:user) }
+  given(:user) { create(:user, guest: false) }
   given(:book_1) { create(:book) }
   before(:each) do
     visit root_path
@@ -31,11 +31,7 @@ feature "Check cart`s abilities" do
     expect(current_path).to eq "/home/shop"
   end
     
-  scenario "when checkout is not possible without of books in cart" do
-    full_cart
-    visit cart_path(user.id)   
-    find(:link, "X").click
-    click_on "CHECKOUT"
-    expect(page).to have_content("For save order you must add books in your cart")
-  end
 end
+
+
+

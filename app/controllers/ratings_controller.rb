@@ -7,7 +7,7 @@ class RatingsController < ApplicationController
   # GET /ratings
   # GET /ratings.json
   def index
-    @ratings = Rating.all
+    @ratings = Rating.where(admin_checking: true)
   end
 
   # GET /ratings/1
@@ -17,7 +17,6 @@ class RatingsController < ApplicationController
 
   # GET /ratings/new
   def new
-    authorize! :create, Rating
     @book = Book.find(params[:book_id])
     @rating = Rating.new
   end
@@ -29,22 +28,16 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    
-    #if current_user
-      @rating = Rating.new(rating_params)
-      @rating.book_id = params[:book_id]
-      @rating.user_id = current_user.id
-      if @rating.save
-        redirect_to book_path(params[:book_id])
-        flash[:notice] = "Your review was successfully saved"
-      else
-        redirect_to new_book_rating_path(params[:book_id])
-        flash[:alert] = "Check all of fields. Your review is not save."
-      end
-    #else
-      #redirect_to new_user_session_path
-      #flash[:alert] = "Review can leave only registered users"
-    #end
+    @rating = Rating.new(rating_params)
+    @rating.book_id = params[:book_id]
+    @rating.user_id = current_user.id
+    if @rating.save
+      redirect_to book_path(params[:book_id])
+      flash[:notice] = "Your review has been successfully saved. It will be published after administrator validation."
+    else
+      redirect_to new_book_rating_path(params[:book_id])
+      flash[:alert] = "Check all of fields. Your review is not save."
+    end
   end
 
   # PATCH/PUT /ratings/1

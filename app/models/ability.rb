@@ -12,12 +12,15 @@ class Ability
       alias_action :create, :update, :destroy, :to => :cud
       cannot :cud, [Cart, LineItem, Checkout]
       cannot :create, Order
+      can :update, Rating
       
     elsif !user.guest
       can :read, [Book, Category, Author, Rating, Cart, LineItem, Address]
-      alias_action :create, :update, :to => :cu
-      can :cu, [Cart, LineItem, Address] 
+      alias_action :create, :read, :update, :destroy, :to => :crud
+      can :crud, [Cart, LineItem, Address] 
       can :create, [Rating, Order]
+      
+      can :delete, LineItem
       
     else
       can :read, [Book, Category, Author, Rating]

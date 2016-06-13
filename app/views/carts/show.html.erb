@@ -38,7 +38,7 @@
         <%= item.book.price * item.quantity %>
       </td>
       <td>
-        <%= link_to 'X', cart_line_item_path(id: item.id,cart_id: @cart.id), method: :delete,  :style => "color: #000" %>
+        <%= link_to 'X', cart_line_item_path(cart_id: @cart.id, id: item.id), method: :delete,  :style => "color: #000" %>
       </td>
     </tr>
     <% end %>
