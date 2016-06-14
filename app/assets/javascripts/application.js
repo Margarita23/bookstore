@@ -88,7 +88,7 @@ $(document).ready(function() {
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
-  /* function checkLoginState() {
+   function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
@@ -96,7 +96,7 @@ $(document).ready(function() {
 
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '1704494613151332',
+    appId      : '1605409069769187',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -140,8 +140,8 @@ $(document).ready(function() {
         'Thanks for logging in, ' + response.name + '!';
     });
   }
-  */
 
+/*
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1605409069769187',
@@ -157,3 +157,5 @@ $(document).ready(function() {
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+   
+   */
