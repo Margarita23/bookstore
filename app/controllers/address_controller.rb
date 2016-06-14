@@ -8,10 +8,8 @@ class AddressController < ApplicationController
     @address = Address.new(address_params)
     if @address.save
       redirect_to @address
-      flash[:notice] = 'Address was successfully created.'
     else
       redirect_to :back
-      flash[:alert] = 'Address was not created. Check data'
     end
   end
 
@@ -19,9 +17,14 @@ class AddressController < ApplicationController
   # PATCH/PUT /addresss/1.json
   def update
     @address = Address.find(params[:id]) 
-    @address.update(first_name: params[:first_name], last_name: params[:last_name], street: params[:street], city: params[:city], country: params[:country], zip: params[:zip], phone: params[:phone])
-    @address.save
-    redirect_to :back   
+    if @address.update(first_name: params[:first_name], last_name: params[:last_name], street: params[:street], city: params[:city], country: params[:country], zip: params[:zip], phone: params[:phone])
+      @address.save
+      redirect_to :back   
+      flash[:notice] = 'Address was successfully updated.'
+    else
+      redirect_to :back
+      flash[:alert] = 'Address was not updated. Check data. (Zip and phone number must be only digits)'
+    end
   end
 
   private

@@ -21,7 +21,9 @@ describe "User" do
     end
     
     context "when is a admin" do
-
+      let(:user){ create :user, admin: true }
+      
+      it{ should be_able_to(:destroy, Book, Category, Rating, Author) }
     end
   end
 end

@@ -6,8 +6,8 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :street
       t.string :city
       t.string :country
-      t.integer :zip
-      t.string :phone
+      t.integer :zip, :default => 0
+      t.string :phone, :default => 0
       t.integer :user_billing_id
       t.integer :user_shipping_id
       t.integer :order_billing_id

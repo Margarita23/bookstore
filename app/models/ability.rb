@@ -15,7 +15,7 @@ class Ability
       can :update, Rating
       
     elsif !user.guest
-      can :read, [Book, Category, Author, Rating, Cart, LineItem, Address]
+      can :read, [Book, Category, Author, Rating, Cart, LineItem, Address, Order]
       alias_action :create, :read, :update, :destroy, :to => :crud
       can :crud, [Cart, LineItem, Address] 
       can :create, [Rating, Order]

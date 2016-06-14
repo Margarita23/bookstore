@@ -6,12 +6,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if !Address.exists?(:user_billing_id => @user.id)
         @billing_address = Address.new()
         @billing_address.user_billing_id = @user.id
-        @billing_address.save
+        @billing_address.save!
       end
       if !Address.exists?(:user_shipping_id => @user.id)
         @shipping_address = Address.new()
         @shipping_address.user_shipping_id = @user.id
-        @shipping_address.save
+        @shipping_address.save!
       end
       if !Cart.exists?(:user_id => @user.id)
         @cart = Cart.new()

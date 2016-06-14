@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryGirl.define do 
   factory :book do
     title
     description "cool description"
