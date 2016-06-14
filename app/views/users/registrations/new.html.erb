@@ -3,11 +3,6 @@
   <p>
     <%= link_to(image_tag("http://res.cloudinary.com/nmetau/image/upload/c_scale,h_64,w_64/v1465912336/1465930217_facebook_oeresm.png"), user_omniauth_authorize_path(:facebook)) %>
   </p>
-  <p>
-    <%= link_to user_omniauth_authorize_path(:facebook) do %>
-      <img src = "http://res.cloudinary.com/nmetau/image/upload/c_scale,h_64,w_64/v1465912336/1465930217_facebook_oeresm.png">
-    <% end %>
-  </p>
   <p>or</p>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
