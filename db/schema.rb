@@ -22,14 +22,14 @@ ActiveRecord::Schema.define(version: 20160613105749) do
     t.string   "street"
     t.string   "city"
     t.string   "country"
-    t.integer  "zip",               default: 0
-    t.string   "phone",             default: "0"
+    t.integer  "zip"
+    t.string   "phone"
     t.integer  "user_billing_id"
     t.integer  "user_shipping_id"
     t.integer  "order_billing_id"
     t.integer  "order_shipping_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "authors", force: :cascade do |t|

@@ -8,12 +8,14 @@ class Address < ActiveRecord::Base
   
   validates :zip, {  
     length: { maximum: 10 , message: "Zip must be 10 digits"},
-    numericality: {only_integer: true, message: "Zip must contain only numbers"}
+    numericality: {only_integer: true, message: "Zip must contain only numbers"},
+    allow_nil: true
   }
   
   validates :phone, {  
     length: { maximum: 16 , message: "Phone must be 16 digits"},
-    numericality: {only_integer: true, message: "Phone must contain only numbers"}
+    numericality: {only_integer: true, message: "Phone must contain only numbers"},
+    allow_nil: true
   }
 
 end
