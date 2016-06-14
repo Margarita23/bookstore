@@ -163,6 +163,7 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.4)
+    puma (3.4.0)
     rack (1.6.4)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -308,6 +309,7 @@ DEPENDENCIES
   owlcarousel-rails
   paperclip
   pg
+  puma
   rails (= 4.2.4)
   rails_12factor
   rails_admin
