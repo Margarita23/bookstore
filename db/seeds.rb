@@ -1,5 +1,5 @@
 #---------------admin
-adminchik = User.create(email: "adminchik@mail.ru", password: "mamapapa", admin: true)
+adminchik = User.create(email: "adminchik@mail.ru", password: "mamapapa", admin: true, guest: false)
 
 #---------------category
 category_sc_fic = Category.create(title: "Science Fiction")

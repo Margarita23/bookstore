@@ -1,5 +1,15 @@
 RailsAdmin.config do |config|
 
+  config.authorize_with do
+    unless current_user && current_user.admin
+      redirect_to(
+        main_app.root_path,
+        alert: "You are not permitted to view this page"
+      )
+    end
+  end
+
+  config.current_user_method { current_user }
   ### Popular gems integration
 
   ## == Devise ==
@@ -8,7 +18,7 @@ RailsAdmin.config do |config|
   # end
 
   ## == Cancan ==
-  config.authorize_with :cancan
+ # config.authorize_with :cancan
 
   ## == Pundit ==
   # config.authorize_with :pundit
