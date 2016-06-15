@@ -16,9 +16,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @shipping_address.user_shipping_id = resource.id
         @shipping_address.save
       end
-      if !Cart.exists?(user_id: resource.id)
-        @cart = Cart.new()
-        @cart.user_id = resource.id
+      if !Cart.exists?(user_id: resource.id) && !resource.admin
+        @cart = Cart.new(id: resource.id, user_id: resource.id)
         @cart.save
       end
       resource.guest = false

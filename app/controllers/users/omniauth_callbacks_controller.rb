@@ -13,9 +13,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @shipping_address.user_shipping_id = @user.id
         @shipping_address.save!
       end
-      if !Cart.exists?(:user_id => @user.id)
-        @cart = Cart.new()
-        @cart.user_id = @user.id
+      if !Cart.exists?(:user_id => @user.id) && !@user.admin
+        @cart = Cart.new(id: @user.id, user_id: @user.id)
         @cart.save
       end
       @user.guest = false
