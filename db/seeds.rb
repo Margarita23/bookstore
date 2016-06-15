@@ -7,7 +7,6 @@ category_novel = Category.create(title: "Novels")
 category_adventures = Category.create(title: "Adventures")
 category_history = Category.create(title: "History")
 
-
 biography = 'A biography (or simply bio) is a detailed description of a person`s life. It involves more than just the basic facts like education, work, relationships, and death, but also portrays a subject`s experience of these life events. Unlike a profile or curriculum vitae (résumé), a biography presents a subject`s life story, highlighting various aspects of his or her life, including intimate details of experience, and may include an analysis of the subject`s personality.'
 
 #---------------authors
