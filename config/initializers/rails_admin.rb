@@ -1,10 +1,4 @@
 RailsAdmin.config do |config|
-  
-  config.authorize_with do
-    authenticate_or_request_with_http_basic('Enter Password') do |username, password|
-      username == 'margo' && password == 'mamapapa'
-    end
-  end
 
   ### Popular gems integration
 
@@ -12,10 +6,9 @@ RailsAdmin.config do |config|
   # config.authenticate_with do
   #   warden.authenticate! scope: :user
   # end
-  # config.current_user_method(&:current_user)
 
   ## == Cancan ==
-  #config.authorize_with :cancan
+  config.authorize_with :cancan
 
   ## == Pundit ==
   # config.authorize_with :pundit
