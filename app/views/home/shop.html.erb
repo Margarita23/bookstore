@@ -9,11 +9,9 @@
       <div id="shop_item">
         <div class="cover_item"> 
           <% if book.quantity == 0 %>
-          <div class="sold_out_in_shop"></div>
+            <div class="sold_out_in_shop"></div>
           <% end %>
-          <%= link_to book do %>
-          <%= link_to image_tag(book.cover.url(:med)), book.cover.url %>
-          <% end %>
+          <%= link_to image_tag(book.cover.url(:med)), book %>
         </div>
         <div class="title_item"> 
           <%= link_to book.title, book %>
