@@ -30,25 +30,29 @@
     </div>
     <div class="settings">  
       <% if user_signed_in? && !current_user.guest %>
-        <div id="basket">
-          <% if !current_user.cart.nil? %>
-            <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
-            <% if current_user.cart.line_items.count!=0 %> 
-              (<%= quantity_incart %>) $<%= sub_total %>
+        <% if !current_user.admin %>
+          <div id="basket">
+            <% if !current_user.cart.nil? %>
+              <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
+              <% if current_user.cart.line_items.count!=0 %> 
+                (<%= quantity_incart %>) $<%= sub_total %>
+              <% else %>
+                (EMPTY) 
+              <% end %>
             <% else %>
-              (EMPTY) 
+              <div class = "empty"> 
+                <%= image_tag(Cart.new.image.url) %> CART: (EMPTY)
+              </div>
             <% end %>
-          <% else %>
-            <div class = "empty"> 
-              <%= image_tag(Cart.new.image.url) %> CART: (EMPTY)
-            </div>
-          <% end %>
-        </div>
-        <%= link_to 'Settings', edit_user_registration_path %>
-        <div class="border"></div>
-        <%= link_to 'Orders', orders_path %>
-        <div class="border"></div>
-        <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
+          </div>
+          <%= link_to 'Settings', edit_user_registration_path %>
+          <div class="border"></div>
+          <%= link_to 'Orders', orders_path %>
+          <div class="border"></div>
+          <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
+        <% else %>
+          <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
+        <% end %>
       <% else %> 
         <%= link_to 'Sign up', new_user_registration_path %>
         <div class="border"></div>
