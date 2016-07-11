@@ -13,8 +13,10 @@ class OrdersController < ApplicationController
     
   end
   
+  def new_order
+  end
+  
   def show
-    #@order = Order.find(params[:id])
   end
   
   private

@@ -50,12 +50,12 @@
 
   <div class="before_order">
     <div class="left_buttons">
-      <div><%= button_to 'EMPTY CART', empty_cart_path, method: :post %></div>
+      <div><%= button_to 'EMPTY CART', cart_path, method: :delete %></div>
       <div><%= button_to 'CONTINUE SHOPPING', shopping_path, method: :get %></div>
     </div>
     <div class="right_buttons">
       <div><%= text_field_tag :coupon, 'Coupon code', :style => "width: 100px;"  %></div>
-      <div><%= button_to 'CHECKOUT', new_checkout_path, method: :get %></div>
+      <div><%= button_to 'CHECKOUT', checkout_path(session[:last_step]), method: :get %></div>
     </div>
   </div>
 </div>

@@ -12,7 +12,5 @@ feature "Signing up" do
 
     expect(page).to have_text("Welcome! You have signed up successfully.")
     expect(current_path).to eq root_path
-  end
-
-  
+  end 
 end

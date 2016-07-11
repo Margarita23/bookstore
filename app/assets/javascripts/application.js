@@ -35,6 +35,13 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('#CVV_info').on('click', function(){
+    $(".what_cvv").slideToggle(200);
+  });
+});
+
+
 //stars_count
 $(document).ready(function() {
   var full_star = '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';

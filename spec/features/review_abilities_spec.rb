@@ -5,7 +5,7 @@ feature "Review abilities" do
   given(:user) { create(:user, guest: false) }
   given(:book1) { create(:book) }
     
-  before(:each) do
+  before do
     @category = create(:category)
     visit root_path
     sign_in(user)

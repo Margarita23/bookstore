@@ -5,7 +5,7 @@ FactoryGirl.define do
     street { Faker::Address.street_name }
     city "Winterfell"
     country "Seven Kingdom"
-    zip 48029
-    phone 67490024730
+    zip { Faker::Number.number(5) }
+    phone { Faker::Number.number(10) }
   end
 end

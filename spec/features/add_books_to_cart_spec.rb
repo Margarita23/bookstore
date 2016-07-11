@@ -4,17 +4,17 @@ feature "Add books to cart" do
   
   given(:user) { create(:user, guest: false) }
   given(:book_1) { create(:book) }
+  
+  before do
+    visit root_path
+    add_book_db(book_1)
+    sign_in(user)
+  end
+  after do
+    user.destroy
+  end
  
   describe "cart`s adding" do
-    before(:each) do
-      visit root_path
-      add_book_db(book_1)
-      sign_in(user)
-    end
-    after(:each) do
-      user.destroy
-    end
-    
     scenario "when guest add books" do
       user.destroy
       visit root_path

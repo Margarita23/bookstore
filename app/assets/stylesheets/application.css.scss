@@ -383,21 +383,12 @@ tr{
   font-weight: 400;
 }
 
-.steps{
-  display: inline-block;
-  float: left;
-  margin: 0px 0px 50px 0px;
-}
-
-.current_step{
-  border-bottom: 2px solid #000;
-}
-
 .order_sum{
   text-align: right;
   display: inline-block;
   position: absolute;
   right: 30px;
+  top: 60px;
 }
 
 .order_address{
@@ -412,27 +403,16 @@ tr{
 }
 
 .checkout h1{
-  font-weight: 600;
+  font-weight: 400;
   font-size: 25px;
-  display: block;
 }
 .checkout{
   position: relative;
   margin: 30px 100px 0px 100px;
 }
 .checkout > h1{
-  display: block;
-  width: 150px;
-}
-
-.link_to_steps{
-  color: black;
-  right: 0;
-  top: 0;
-  color: black;
-  font-size: 20px;
-  position: absolute;
   display: inline-block;
+  width: 150px;
 }
 
 #confirm th > *{
@@ -443,21 +423,55 @@ tr{
   background: none;
 }
 
-.link_to_steps > * > *{
-  background-color: white;
-  border: none;
-  display: inline-block;
+.link_to_steps{
+  right: 0;
+  margin: 18px 50px 0px 0px;
+  font-size: 20px;
+  position: absolute;
 }
 
-.link_to_steps > *:hover{
-  border: none;
-  color: black;
+.link_to_steps > * > *{
+  color: #000;
+}
+
+.link_to_steps > *{
+  color: #000;
+  cursor: pointer;
+}
+
+.link_to_steps > * > *:hover{
+  color: #000;
+  text-decoration-line: none;
+}
+
+.current_step{
   border-bottom: 2px solid #000;
 }
 
-.step_visit{
+.step_visit *{
   color: #337ab7;
   border-bottom: 2px solid #337ab7;
+}
+
+#CVV_info > p{
+  cursor: pointer;
+  color: #337ab7;
+  border-bottom: 1px solid #fff;
+}
+
+#CVV_info > p:hover{
+  border-bottom: 1px solid #337ab7;
+}
+
+.what_cvv{
+  display: none;
+  width: 300px;
+  border: 1px solid #337ab7;
+  background: #ededed;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 8px;
+  padding: 15px;
+  position: absolute;
 }
 
 .field{

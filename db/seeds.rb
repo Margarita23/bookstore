@@ -23,7 +23,7 @@ book_01 = Book.create(title: "Fahrenheit 451", price: 14.35, quantity: 30, autho
 book_02 = Book.create(title: "The Green Mile", price: 11.40, quantity: 25, author_id: author_02.id, description: description, category_id: category_sc_fic.id, bought: 0)
 book_03 = Book.create(title: "Small Gods", price: 10.35, quantity: 26, author_id: author_03.id, description: description, category_id: category_sc_fic.id, bought: 0)
 book_04 = Book.create(title: "A Clash of Kings", price: 17.35, quantity: 37, author_id: author_04.id, description: description, category_id: category_sc_fic.id, bought: 0)
-book_05 = Book.create(title: "The Master and Margarita", price: 25.00, quantity: 31, description: description, category_id: category_sc_fic.id)
+book_05 = Book.create(title: "The Master and Margarita", price: 25.00, quantity: 31, description: description, category_id: category_sc_fic.id, bought: 0, author_id: author_04.id)
 
 #---------------novel
 #book_11 = Book.create(title: "A Thousand Splendid Suns", price: 12, quantity:28, category_id: category_novel.id, description: description)

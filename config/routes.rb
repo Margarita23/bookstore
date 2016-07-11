@@ -5,26 +5,27 @@ Rails.application.routes.draw do
     get "/signup" => "registrations#new",   :as => :new_user_registration
   end
   
-  resources :carts, only: [:show] do
+  resources :carts, only: [:show, :destroy] do
     resources :line_items, only: [:update, :create, :destroy]
   end
-  resources :orders, only: [:show, :index]
+  resources :orders#, only: [:show, :index]
   resources :categories, only: [:show]
   resources :books, only: [:show] do
     resources :ratings, only: [:new, :show, :create]
   end
-  resources :checkout, only: [:new, :create]
   resources :address, only: [:update]
   
   root 'home#bestsellers'
   
   get 'home/shop' => 'home#shop' , as: 'shopping'
   
-  post 'cart/:id' => 'carts#empty_cart', as: 'empty_cart', method: :post
-  
-  get '/complete/order/:order_id' => 'checkout#complete', as: 'complete_order', method: :get
+  #get '/complete/order/:order_id' => 'checkout#complete', as: 'complete_order', method: :get
   
   get 'author/:id' => 'authors#show', as: 'author', method: :get
+  
+  get 'new_order/:id' => 'orders#new_order', as: 'new_order_show', method: :get
+  
+  resources :checkouts#, only: [:new, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -26,7 +26,7 @@
     <div id="categories">
       <p>Shop by categories</p>
       <ol>
-        <% Category.all.each do |category| %>
+        <% @categories.each do |category| %>
           <li> <%= link_to category.title, category %> </li>
         <% end %>
       </ol>

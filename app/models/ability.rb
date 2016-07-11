@@ -19,7 +19,8 @@ class Ability
       alias_action :create, :read, :update, :destroy, :to => :crud
       can :crud, [Cart, LineItem, Address] 
       can :create, [Rating, Order]
-      can :delete, LineItem
+      can :new_order, Order
+    
     else
       can :read, [Book, Category, Author, Rating]
     end

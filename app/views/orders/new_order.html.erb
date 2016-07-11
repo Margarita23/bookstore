@@ -1,5 +1,5 @@
 <div class="checkout">
-  <h1>Order <%= @order.number %></h1>
+  <h3>Order <%= @order.number %></h3>
   <div class="steps">  
     <table id="confirm">
       <tr>
@@ -78,13 +78,13 @@
   </table>
   <div class="order_total">
     <div>
-      SUBTOTAL: $ <%= @order.total_price %>
+      SUBTOTAL: $ <%= @order.total_price - @order.delivery.price %>
     </div>
     <div>
       SHIPPING: $ <%= @order.delivery.price %>
     </div>
     <div>
-      ORDER TOTAL: $ <%= @order.total_price + @order.delivery.price %>
+      ORDER TOTAL: $ <%= @order.total_price %>
     </div>
   </div>
   <div class="dotted"></div>

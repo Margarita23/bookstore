@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :rating do
-    headline "Best book all over the world"
-    review "Some awesome review"
+    headline { Faker::Lorem.sentence }
+    review { Faker::Lorem.paragraph }
     book
     user
-    grade 3
+    grade { Faker::Number.between(0, 5) }
   end
 end

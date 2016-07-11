@@ -1,0 +1,112 @@
+<div class="checkout">
+  <h1>Checkout</h1>
+  <div class="link_to_steps">
+      <div class="step_visit"><%= link_to "ADDRESS", checkout_path(:address), method: :get %></div> 
+      <div class="step_visit"><%= link_to "DELIVERY", checkout_path(:delivery), method: :get %></div>
+      <div class="step_visit"><%= link_to "PAYMENT", checkout_path(:payment), method: :get %></div>
+      <div class="current_step"><%= link_to "CONFIRM", checkout_path(:confirm), method: :get %></div>
+      <div>COMPLETE</div>
+  </div>
+  
+  <h3>CONFIRM</h3>
+  
+  <table id="confirm">
+  <tr>
+    <th>Shipping Address</th>
+    <th>Billing Address</th>
+    <th>Shipmenis</th>
+    <th>Payment Information</th>
+  </tr>
+
+  <td>
+    <ul>
+      <% if @checkout.same_address != "1" %>
+        <li><%= @checkout.ship_f_name %> <%= @checkout.ship_l_name %></li>
+        <li><%= @checkout.ship_street %></li>
+        <li><%= @checkout.ship_city %> <%= @checkout.ship_country %> <%= @checkout.ship_zip %></li>
+        <li>Phone <%= @checkout.ship_phone %></li> 
+      <% else %>
+        <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
+        <li><%= @checkout.bill_street %></li>
+        <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
+        <li>Phone <%= @checkout.bill_phone %></li>
+      <% end %>
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
+      <li><%= @checkout.bill_street %></li>
+      <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
+      <li>Phone <%= @checkout.bill_phone %></li>
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= @checkout.get_delivery.method %></li>  
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li>**** **** **** <%= @checkout.card_number[-4,4] %></li>
+      <li><%= @checkout.exp_month %>/<%= @checkout.exp_year %></li>
+    </ul>
+  </td>
+</table>
+
+<table class="cart">
+  
+  <th>BOOK</th>
+  <th>PRICE</th>
+  <th>QTY</th>
+  <th>TOTAL</th>
+  
+  <% current_user.cart.line_items.each do |item| %>
+  <tr>
+    <td>
+      <div class="cover">
+        <%= image_tag(item.book.cover.url()) %>
+      </div>
+      <div class="book_info_in_cart">
+        <div class="book_title">
+          <%= item.book.title %>
+        </div>
+        <div class = "desc">
+          <%= item.book.description %>
+        </div>
+      </div>
+    </td>
+    <td>
+      <%= item.book.price %>
+    </td>
+    <td>
+      <%= item.quantity %>
+    </td>
+    <td>
+      <%= item.book.price * item.quantity %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<div class="order_total">
+  <div>
+    SUBTOTAL: $ <%= sub_total %>
+  </div>
+  <div>
+   SHIPPING: $ <%= @checkout.get_delivery.price %>
+  </div>
+  <div>
+    ORDER TOTAL: $ <%= @checkout.total_price %>
+  </div>
+</div>
+<div class="dotted"></div>
+
+  <%= form_for @checkout, url: checkouts_path, method: :post do |f| %>   
+    <div class="actions">
+      <%= f.submit "PLACE ORDER" %>
+    </div>
+  <% end %>
+</div>
