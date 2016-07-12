@@ -21,12 +21,18 @@ class CheckoutsController < ApplicationController
       redirect_to new_order_show_path(@checkout.order_id)
       flash[:notice] = "Order has been saved"
     else
-      redirect_to checkout_path(:confirm), method: :get
-      dodick = "Order has not been saved. Please, enter information. "
-      @checkout.errors.each do |attr, msg|
-        dodick << msg + ". " 
-      end
-      flash[:alert] = dodick 
+      redirect_to checkout_path(:confirm), method: :get  
+      flash[:alert] = error_msg
     end
+  end
+  
+  private
+  
+  def error_msg
+    sentences = "Order has not been saved. Please, enter information. "
+    @checkout.errors.each do |attr, msg|
+      sentences << msg + ". " 
+    end
+    sentences
   end
 end
