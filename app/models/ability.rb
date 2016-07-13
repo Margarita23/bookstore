@@ -13,6 +13,7 @@ class Ability
       cannot :cud, [Cart, LineItem, Checkout]
       cannot :create, Order
       can :update, Rating
+      cannot :create, Rating
       
     elsif !user.guest
       can :read, [Book, Category, Author, Rating, Cart, LineItem, Address, Order]
