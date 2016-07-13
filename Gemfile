@@ -37,12 +37,12 @@ gem 'aasm'
 gem 'devise-guests', '~> 0.5.0'
 gem 'mini_magick'
 gem 'paperclip'
-#gem 'virtus'
 gem 'dynamic_form'
 gem 'omniauth-facebook'
 gem 'omniauth'
 gem 'cancancan', '~> 1.10'
 gem 'rails_12factor', group: :production
+gem 'globalize3'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

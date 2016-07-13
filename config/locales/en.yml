@@ -20,4 +20,119 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!"
+  site_name: "Bookstore"
+  home_page: "HOME"
+  shopping: "SHOP"
+  cart: "CART"
+  empty: "(EMPTY)"
+  settings: "Settings"
+  orders: "Orders"
+  sign_out: "Sign out"
+  sign_up: "Sign up"
+  login: "Login"
+  russian: "RU"
+  english: "EN"
+  add_to_cart: "ADD TO CART"
+  categories: "Shop by categories"
+  reviews: "Reviews"
+  add_review: "Add review for this book"
+  back: "BACK"
+  email: "Email"
+  password: "Password"
+  leave_blank: "(leave blank if you don't want to change it)"
+  password_confirmation: "Password confirmation"
+  current_password: "Current password"
+  need_cur_pass: "(we need your current password to confirm your changes)"
+  update: "UPDATE"
+  cancel_account: "Cancel my account"
+  unhappy: "Unhappy?"
+  bill_address: "Billing address"
+  ship_address: "Shipping address"
+  save: "Save"
+  first_name: "First name"
+  last_name: "Last name"
+  street_address: "Street Address"
+  city: "City"
+  country: "Country"
+  zip: "Zip"
+  phone: "Phone"
+  by: "by"
+  order: "Order"
+  book: "BOOK"
+  price: "PRICE"
+  qty: "QTY"
+  total: "TOTAL"
+  subtotal: "SUBTOTAL"
+  empry_cart: "EMPTY CART"
+  continue_shop: "CONTINUE SHOPPING"
+  coupon: "Coupon code"
+  checkout: "Checkout"
+  to_store: "GO TO STORE"
+  wait_proc: "waiting for processing"
+  number_ord: "number"
+  completed_at: "completed at"
+  view: "View"
+  in_delivery: "in delivery"
+  delivered: "delivered"
+  new_order: "New Order"
+  in_progress: "in progress"
+  to_orders: "<< Back to orders"
+  shipping: "SHIPPING"
+  ord_total: "ORDER TOTAL"
+  new_rating: "New Rating"
+  headline: "Headline"
+  rating: "Rating"
+  review: "Review"
+  cancel: "Cancel"
+  or: "or"
+  user: "User"
+  to_book: "Back to book"
+  address: "ADDRESS"
+  delivery: "DELIVERY"
+  payment: "PAYMENT"
+  confirm: "CONFIRM"
+  complete: "COMPLETE"
+  
+    
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

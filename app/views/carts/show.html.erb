@@ -1,10 +1,10 @@
 <div class="checkout">
   <table class = "cart">
 
-    <th>BOOK</th>
-    <th>PRICE</th>
-    <th>QTY</th>
-    <th>TOTAL</th>
+    <th><%= t(:book) %></th>
+    <th><%= t(:price) %></th>
+    <th><%= t(:qty) %></th>
+    <th><%= t(:total) %></th>
 
     <% current_user.cart.line_items.each do |item| %>
     <tr>
@@ -29,7 +29,7 @@
           <%= form_tag(cart_line_item_path(id: item.id,cart_id: @cart.id), method: :put) do %>
           <%= number_field_tag(:new_quantity, item.quantity, in: 1..item.book.quantity, step: 1, :style => "width: 50px;") %>
             <div class="update">
-              <%= submit_tag( "UPDATE" ) %>
+              <%= submit_tag( t(:update) ) %>
             </div>
           <% end %>
         </div>
@@ -45,17 +45,17 @@
   </table>
 
   <div class="sub_total">
-    SUBTOTAL: <div class="boldy">$ <%= sub_total %></div>
+    <%= t(:subtotal)%> : <div class="boldy">$ <%= sub_total %></div>
   </div>
 
   <div class="before_order">
     <div class="left_buttons">
-      <div><%= button_to 'EMPTY CART', cart_path, method: :delete %></div>
-      <div><%= button_to 'CONTINUE SHOPPING', shopping_path, method: :get %></div>
+      <div><%= button_to t(:empty_cart), cart_path, method: :delete %></div>
+      <div><%= button_to t(:continue_shop), shopping_path, method: :get %></div>
     </div>
     <div class="right_buttons">
-      <div><%= text_field_tag :coupon, 'Coupon code', :style => "width: 100px;"  %></div>
-      <div><%= button_to 'CHECKOUT', checkout_path(session[:last_step]), method: :get %></div>
+      <div><%= text_field_tag :coupon, t(:coupon), :style => "width: 100px;"  %></div>
+      <div><%= button_to t(:checkout), checkout_path(session[:last_step]), method: :get %></div>
     </div>
   </div>
 </div>

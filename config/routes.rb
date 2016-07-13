@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks", :registrations => "users/registrations"} do
     get "/signup" => "registrations#new",   :as => :new_user_registration
   end
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:show, :destroy] do
     resources :line_items, only: [:update, :create, :destroy]
   end
-  resources :orders#, only: [:show, :index]
+  resources :orders, only: [:show, :index, :new_order]
   resources :categories, only: [:show]
   resources :books, only: [:show] do
     resources :ratings, only: [:new, :show, :create]
@@ -19,14 +20,15 @@ Rails.application.routes.draw do
   
   get 'home/shop' => 'home#shop' , as: 'shopping'
   
-  #get '/complete/order/:order_id' => 'checkout#complete', as: 'complete_order', method: :get
-  
   get 'author/:id' => 'authors#show', as: 'author', method: :get
   
   get 'new_order/:id' => 'orders#new_order', as: 'new_order_show', method: :get
+    
+  resources :checkouts, only: [:show, :create]
   
-  resources :checkouts#, only: [:new, :update]
-
+  get '/:locale' => 'application#change_language', as: 'change_language'
+    
+ # get '/:locale' => 'application#change_language', as: 'change_language', method: :get
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -43,6 +43,22 @@ body{
   z-index: 1;
 }
 
+.breadcrumb li > *{
+  color: #000;
+  padding: 0px 12px;
+}
+
+.langueges{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 2px;
+  background-color: #cecece;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(255,255,255,1);
+  font-size: 15px;
+}
+
 .space{
   width:100%;
   height: 80px;
@@ -50,7 +66,7 @@ body{
 
 #name{
   display: inline-block;
-  width: 250px;
+  padding: 0px 20px;
   left: 20px;
   float:left; 
 }

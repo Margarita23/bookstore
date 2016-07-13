@@ -1,10 +1,10 @@
-<div class="naming">in progress</div>
+<div class="naming"><%= t(:in_progress) %></div>
      <table class="cart">
 
-        <th>BOOK</th>
-        <th>PRICE</th>
-        <th>QTY</th>
-        <th>TOTAL</th>
+        <th><%= t(:book) %></th>
+        <th><%= t(:price) %></th>
+        <th><%= t(:qty) %></th>
+        <th><%= t(:total) %></th>
 
         <% @order.line_items.each do |item| %>
           <tr>
@@ -35,7 +35,7 @@
       </table>
       <div class="order_total">
         <div>
-          SUBTOTAL: <div class="boldy">$ <%= @orders.last.total_price %>
+          <%= t(:subtotal)%>: <div class="boldy">$ <%= @orders.last.total_price %>
           </div>
         </div>
       </div>

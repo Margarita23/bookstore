@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
-  <li><%= link_to "Home", root_path%></li>
-  <li><%= link_to "Shop", shopping_path %></li>
+  <li><%= link_to t( :home_page ), root_path%></li>
+  <li><%= link_to t( :shopping ), shopping_path %></li>
   <li class="active"><%= @category.title %></li>
 </ol>
 <div class="outside">
@@ -24,7 +24,7 @@
       <div id="pages"></div>
     </div>
     <div id="categories">
-      <p>Shop by categories</p>
+      <p><%= t(:categories) %></p>
       <ol>
         <% @categories.each do |category| %>
           <li> <%= link_to category.title, category %> </li>

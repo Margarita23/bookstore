@@ -1,15 +1,15 @@
 <div class="checkout">
   <div class="back_orders">
-    <%= link_to '<< Back to orders', orders_path %>
+    <%= link_to t(:to_orders), orders_path %>
   </div>
-  <div class="head_of_order">Order <%= @order.number %></div><div class="delivery_meth"><%= @order.state %></div>
+  <div class="head_of_order"><%= t(:order)%> <%= @order.number %></div><div class="delivery_meth"><%= @order.state %></div>
   
   <table class="cart">
   
-    <th>BOOK</th>
-    <th>PRICE</th>
-    <th>QTY</th>
-    <th>TOTAL</th>
+    <th><%= t(:book) %></th>
+    <th><%= t(:price) %></th>
+    <th><%= t(:qty) %></th>
+    <th><%= t(:total) %></th>
   
     <% @order.line_items.each do |item| %>
       <tr>
@@ -40,13 +40,13 @@
   </table>
   <div class="order_total">
     <div>
-      SUBTOTAL: $ <%= @order.total_price %>
+      <%= t(:subtotal)%> : $ <%= @order.total_price %>
     </div>
     <div>
-      SHIPPING: $ <%= @order.delivery.price %>
+     <%= t(:shipping) %>: $ <%= @order.delivery.price %>
     </div>
     <div>
-      ORDER TOTAL: $ <%= @order.total_price + @order.delivery.price %>
+      <%= t(:ord_total) %>: $ <%= @order.total_price + @order.delivery.price %>
     </div>
   </div>
   <div class="dotted"></div>

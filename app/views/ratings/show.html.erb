@@ -2,12 +2,12 @@
   
 <div class="reviews">
   <div class="stars">
-    Rating: <div class="grade"><%= @rating.grade %></div>
+    <%= t(:rating)%>: <div class="grade"><%= @rating.grade %></div>
   </div>
   <div class="headline"><%= @rating.headline %></div>
-  <div class="rev_create"><%= @rating.created_at.strftime("%B %d, %Y")%></div>
+  <div class="rev_create"><%= l(@rating.created_at, format: :long)%></div>
   <div class="author">
-    by
+    <%=t(:by)%>
     <% if !@rating.user.billing_address.first_name.blank? %>
       <%=link_to "#{@rating.user.billing_address.first_name} #{@rating.user.billing_address.last_name}" %>
     <% else %>
@@ -16,5 +16,5 @@
   </div>
   <div class="rev_text"><%= @rating.review %></div>
 </div>
-  <%= link_to 'Back to book', book_path(params[:book_id]) %>
+  <%= link_to t(:to_book), book_path(params[:book_id]) %>
 </div>

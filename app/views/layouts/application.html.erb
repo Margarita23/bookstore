@@ -18,14 +18,14 @@
 </head>
 <body>
   <div id="wrapper">
-    <div id="name"><h1>Bookstore</h1></div>
+    <div id="name"><h1><%=t :site_name %></h1></div>
     <div id="root">
       <div id="home">
-        <%= link_to 'HOME', root_path %>
+        <%= link_to t(:home_page), root_path %>
       </div>
       <div class="border"></div>
       <div id="route_shop">
-        <%= link_to 'SHOP', shopping_path %>
+        <%= link_to t(:shopping), shopping_path %>
       </div>
     </div>
     <div class="settings">  
@@ -33,32 +33,33 @@
         <% if !current_user.admin %>
           <div id="basket">
             <% if !current_user.cart.nil? %>
-              <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> CART:
+              <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> <%= t :cart %>
               <% if current_user.cart.line_items.count!=0 %> 
                 (<%= quantity_incart %>) $<%= sub_total %>
               <% else %>
-                (EMPTY) 
+                <%= t(:empty) %> 
               <% end %>
             <% else %>
               <div class = "empty"> 
-                <%= image_tag(Cart.new.image.url) %> CART: (EMPTY)
+                <%= image_tag(Cart.new.image.url) %> <%= t(:cart) + ":" + t(:empty) %>
               </div>
             <% end %>
           </div>
-          <%= link_to 'Settings', edit_user_registration_path %>
+          <%= link_to t(:settings), edit_user_registration_path %>
           <div class="border"></div>
-          <%= link_to 'Orders', orders_path %>
+          <%= link_to t(:orders), orders_path %>
           <div class="border"></div>
-          <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
+          <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
         <% else %>
-          <%= link_to "Sign out",  destroy_user_session_path,:method => :delete %>
+          <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
         <% end %>
       <% else %> 
-        <%= link_to 'Sign up', new_user_registration_path %>
+        <%= link_to t(:sign_up), new_user_registration_path %>
         <div class="border"></div>
-        <%= link_to 'Login', new_user_session_path %>
+        <%= link_to t(:login), new_user_session_path %>
       <% end %>
     </div>
+    <div class="langueges"><%= link_to(t(:russian), change_language_path(:ru))%> | <%= link_to(t(:english), change_language_path(:en))%></div>
   </div>
   <div class="space"></div>
   <% if notice %>
