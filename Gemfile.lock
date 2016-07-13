@@ -96,9 +96,9 @@ GEM
       railties (>= 3.2, < 5.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    globalize3 (0.1.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
     haml (4.0.7)
       tilt
     hashie (3.4.3)
@@ -289,7 +289,7 @@ DEPENDENCIES
   dynamic_form
   factory_girl_rails
   faker
-  globalize3
+  globalize (~> 5.0.0)
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick

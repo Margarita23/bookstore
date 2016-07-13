@@ -42,7 +42,7 @@ gem 'omniauth-facebook'
 gem 'omniauth'
 gem 'cancancan', '~> 1.10'
 gem 'rails_12factor', group: :production
-gem 'globalize3'
+gem 'globalize', '~> 5.0.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

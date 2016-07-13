@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712124624) do
+ActiveRecord::Schema.define(version: 20160713135211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20160712124624) do
   create_table "billing_addresses", force: :cascade do |t|
   end
 
+  create_table "book_translations", force: :cascade do |t|
+    t.integer  "book_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "book_translations", ["book_id"], name: "index_book_translations_on_book_id", using: :btree
+  add_index "book_translations", ["locale"], name: "index_book_translations_on_locale", using: :btree
+
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -57,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160712124624) do
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
     t.integer  "bought"
+    t.string   "locale"
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
@@ -78,7 +91,19 @@ ActiveRecord::Schema.define(version: 20160712124624) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "locale"
   end
+
+  create_table "category_translations", force: :cascade do |t|
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+  end
+
+  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
+  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
   create_table "credit_cards", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -97,7 +122,19 @@ ActiveRecord::Schema.define(version: 20160712124624) do
     t.decimal  "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "locale"
   end
+
+  create_table "delivery_translations", force: :cascade do |t|
+    t.integer  "delivery_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "method"
+  end
+
+  add_index "delivery_translations", ["delivery_id"], name: "index_delivery_translations_on_delivery_id", using: :btree
+  add_index "delivery_translations", ["locale"], name: "index_delivery_translations_on_locale", using: :btree
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "book_id"
