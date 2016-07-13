@@ -49,6 +49,7 @@ en:
   unhappy: "Unhappy?"
   bill_address: "Billing address"
   ship_address: "Shipping address"
+  same_address: "Use Billing Address"
   save: "Save"
   first_name: "First name"
   last_name: "Last name"
@@ -93,7 +94,24 @@ en:
   payment: "PAYMENT"
   confirm: "CONFIRM"
   complete: "COMPLETE"
-  
+  save_continue: "SAVE AND CONTINUE"
+  ord_summary: "ORDER SUMMARY"
+  item_total: "ITEM TOTAL"
+  credit_card: "CREDIT CARD"
+  card_number: "Card Number"
+  exp_date: "Expiration date"
+  card_code: "Card Code"
+  what_this: "Wat's this?"
+  this_is: "The CVV Number ('Card Verification Value') on your credit card or debit card is a 3 digit number on VISA®, MasterCard® and Discover® branded credit and debit cards. On your American Express® branded credit or debit card it is a 4 digit numeric code."
+  confirm: "CONFIRM"
+  pay_data: "Payment Information"
+  delivery: "Delivery"
+  save_order: "PLACE ORDER"
+  have_account: "Have an account?"
+  passwords: "passwords"
+  forgot_pass: "Forgot your password?"
+  not_confirm: "Didn't receive confirmation instructions?"
+  receive_unlock: "Didn't receive unlock instructions?"
     
 
   

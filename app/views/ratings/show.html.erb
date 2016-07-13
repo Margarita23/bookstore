@@ -5,7 +5,7 @@
     <%= t(:rating)%>: <div class="grade"><%= @rating.grade %></div>
   </div>
   <div class="headline"><%= @rating.headline %></div>
-  <div class="rev_create"><%= l(@rating.created_at, format: :long)%></div>
+  <div class="rev_create"><%= l(@rating.created_at, format: :short)%></div>
   <div class="author">
     <%=t(:by)%>
     <% if !@rating.user.billing_address.first_name.blank? %>

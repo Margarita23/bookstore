@@ -31,6 +31,7 @@ ru:
   save: "Сохранить"
   bill_address: "Платежный адрес"
   ship_address: "Адрес доставки"
+  same_address: "Используйте платежный адрес"
   save: "Сохранить"
   first_name: "Имя"
   last_name: "Фамилия"
@@ -75,7 +76,25 @@ ru:
   payment: "ОПЛАТА"
   confirm: "ПОДТВЕРЖДЕНИЕ"
   complete: "ЗАВЕРШИТЬ"
-   
+  save_continue: "СОХРАНИТЬ И ПРОДОЛЖИТЬ"
+  ord_summary: "ИТОГ ЗАКАЗА"
+  item_total: "КОЛ-ВО КНИГ"
+  credit_card: "КРЕДИТНАЯ КАРТА"
+  card_number: "Номер карты"
+  exp_date: "Срок годности"
+  card_code: "CVV"
+  what_this: "Что это?"
+  this_is: "The CVV номер ('Card Verification Value') на вашей кредитной или дебетовой карты является 3-значный номер на Visa®, MasterCard® и Discover® фирменные кредитные и дебетовые карты на вашем American Express® марочного кредитной или дебетовой карты. это 4-значный цифровой код "
+  confirm: "ПОДТВЕРЖДЕНИЕ"
+  pay_data: "Платежная информация"
+  delivery: "Доставка"
+  save_order: "ОФОРМИТЬ ЗАКАЗ"
+  have_account: "Уже зарегистрированы ?"
+  passwords: "пароли"
+  forgot_pass: "Забыли пароль?"
+  not_confirm: "Не получили подтверждения инструкции?"
+  receive_unlock: "Не получили инструкции разблокировки?"
+  
    
   
   
@@ -91,6 +110,10 @@ ru:
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+          
+  time:
+    formats:
+      short: "%B %d, %Y"
   date:
     abbr_day_names:
     - Вс
@@ -122,10 +145,6 @@ ru:
     - четверг
     - пятница
     - суббота
-    formats:
-      default: "%d.%m.%Y"
-      long: "%-d %B %Y"
-      short: "%B %d, %Y"
     month_names:
     -
     - января
