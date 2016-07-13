@@ -11,7 +11,7 @@ feature "Add books to cart" do
   describe "checkout moving step by step" do
     
     scenario "when user on first step" do
-      visit new_checkout_path
+      visit checkout_path(:address)
       expect(page).to have_content("BILLING ADDRESS")
     end
   

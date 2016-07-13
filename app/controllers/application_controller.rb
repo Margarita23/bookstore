@@ -12,11 +12,6 @@ class ApplicationController < ActionController::Base
         guest_user(with_retry = false).try(:destroy)
         session[:guest_user_id] = nil
       end
-      
-    #  if current_user.billing_address.id.nil? && current_user.shipping_address.id.nil?
-     #   current_user.billing_address_id.build 
-      #  current_user.shipping_address_id.build
-      #end 
       current_user
     else
       guest_user
