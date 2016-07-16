@@ -36,14 +36,14 @@ class Checkout
   validates_presence_of :bill_country, :message => I18n.t(:'enter.billing_data.country')
   validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip')
   validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone')
-
-  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name')
-  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name')
-  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street')
-  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city')
-  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country')
-  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip')
-  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone')
+  
+  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), :unless => :same_address
+  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), :unless => :same_address
+  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), :unless => :same_address
+  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), :unless => :same_address
+  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), :unless => :same_address
+  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), :unless => :same_address
+  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), :unless => :same_address
   
   validates :bill_phone, :numericality => {:only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers')}
   

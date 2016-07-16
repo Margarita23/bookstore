@@ -65,7 +65,7 @@ en:
   qty: "QTY"
   total: "TOTAL"
   subtotal: "SUBTOTAL"
-  empry_cart: "EMPTY CART"
+  empty_cart: "EMPTY CART"
   continue_shop: "CONTINUE SHOPPING"
   coupon: "Coupon code"
   checkout: "Checkout"
@@ -136,7 +136,7 @@ en:
     card_number: "Enter cart number"
     16_digits: "Card number must be 16 digits"
     card_only_num: "Card number must contain only numbers"
-  address:
+  addresses:
     updated: 'Address was successfully updated.'
     not_updated: 'Address was not updated. Check data. (Zip and phone number must be only digits)'
   cart_cleared: 'Your shopping cart has been cleared. '

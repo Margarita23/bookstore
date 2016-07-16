@@ -24,10 +24,10 @@ class AddressController < ApplicationController
                       phone: params[:phone])
       @address.save
       redirect_to :back   
-      flash[:notice] = t(:'address.updated')
+      flash[:notice] = t(:'addresses.updated')
     else
       redirect_to :back
-      flash[:alert] = t(:'addres.not_updated')
+      flash[:alert] = t(:'addreses.not_updated')
     end
   end
 
