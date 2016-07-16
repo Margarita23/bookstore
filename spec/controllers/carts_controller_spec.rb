@@ -37,7 +37,7 @@ RSpec.describe CartsController, :type => :controller do
     
     it "check flash" do
       delete :destroy, :id => cart.id
-      expect(flash[:notice]).to eq "Your shopping cart has been cleared"
+      expect(flash[:notice]).to eq "Your shopping cart has been cleared. "
     end
     
      it "redirect to cart_path" do

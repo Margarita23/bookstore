@@ -27,7 +27,7 @@ RSpec.describe LineItemsController, :type => :controller do
         end
         it "check flash" do
           subject
-          expect(flash[:alert]).to eq "Book can not be add to your cart, please enter information."
+          expect(flash[:alert]).to eq "Book can not be add to your cart, please enter information. "
         end 
       end
       describe "line_items new quantity is valid" do
@@ -51,7 +51,7 @@ RSpec.describe LineItemsController, :type => :controller do
         end
         it "flash alert after save" do 
           subject
-          expect(flash[:alert]).to eq "Book can not be add to your cart, please enter information."
+          expect(flash[:alert]).to eq I18n.t(:books_not_added)
         end
       end
     end
@@ -74,7 +74,7 @@ RSpec.describe LineItemsController, :type => :controller do
           allow(controller).to receive(:check_quantity).and_return(true)
           controller.instance_variable_set(:@quan, 3)
           subject
-          expect(flash[:notice]).to eq "Books quantity was changed"
+          expect(flash[:notice]).to eq I18n.t(:quan_changed)
         end
       end
 
@@ -82,7 +82,7 @@ RSpec.describe LineItemsController, :type => :controller do
         it { expect(subject).to redirect_to "where_i_came_from" }
         it "check alert" do 
           subject 
-          expect(flash[:alert]).to eq "Books quantity can not change, please enter information."
+          expect(flash[:alert]).to eq I18n.t(:quan_not_changed)
         end
       end
       

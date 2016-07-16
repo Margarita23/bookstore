@@ -20,10 +20,7 @@ feature "Check cart`s abilities" do
     find("input[type=submit][value='EMPTY CART']").click
     
     expect(page).to have_content 'Your shopping cart has been cleared'
-    find("input[type=submit][value='CHECKOUT']").click
-    expect(current_path).to eq "/home/shop"
-    expect(page).to have_content 'For save order you must add books in your cart'
-  end
+end
 
   scenario "continue shopping button" do
     visit cart_path(user.id)

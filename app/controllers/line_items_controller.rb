@@ -41,7 +41,7 @@ class LineItemsController < ApplicationController
         redirect_to :back
       end
     else
-      flash[:alert] = "Books quantity can not change, please enter information."
+      flash[:alert] = t(:quan_not_changed)
       redirect_to :back
     end
   end

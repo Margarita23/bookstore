@@ -146,6 +146,7 @@ en:
   books_added: "Book(s) was(were) added in your cart"
   books_not_added: "Book can not be add to your cart, please enter information. "
   quan_changed: "Books quantity was changed. "
+  quan_not_changed: "Books quantity can not change, please enter information. "
   remove_books: 'Book(s) was remove from your cart. '
   rating_saved: "Your review has been successfully saved. It will be published after administrator validation. "
   rating_not_saved: "Check all of fields. Your review is not save. "
@@ -153,7 +154,7 @@ en:
   zip_only_num: "Zip must contain only numbers. "
   phone_length: "Phone must be 16 digits. "
   phone_only_num: "Phone must contain only numbers"
-  book_quan: "Check quantity of books that you want to add to your cart"
+  book_quan: "Check quantity of books that you want to add to your cart. "
   review_length: "Your review too match long"
     
     
