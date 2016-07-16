@@ -19,7 +19,7 @@ class CheckoutsController < ApplicationController
     @checkout.user_id = current_user.id 
     if @checkout.save
       redirect_to new_order_show_path(@checkout.order_id)
-      flash[:notice] = "Order has been saved"
+      flash[:notice] = t(:order_saved)
     else
       redirect_to checkout_path(:confirm), method: :get  
       flash[:alert] = error_msg
@@ -29,9 +29,9 @@ class CheckoutsController < ApplicationController
   private
   
   def error_msg
-    sentences = "Order has not been saved. Please, enter information. "
+    sentences = t(:ord_not_save)
     @checkout.errors.each do |attr, msg|
-      sentences << msg + ". " 
+      sentences << msg
     end
     sentences
   end

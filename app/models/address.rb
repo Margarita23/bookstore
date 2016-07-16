@@ -7,14 +7,14 @@ class Address < ActiveRecord::Base
   accepts_nested_attributes_for :billing_address
   
   validates :zip, {  
-    length: { maximum: 10 , message: "Zip must be 10 digits"},
-    numericality: {only_integer: true, message: "Zip must contain only numbers"},
+    length: { maximum: 10 , message: t(:zip_length)},
+    numericality: {only_integer: true, message: t(:zip_only_num)},
     allow_nil: true
   }
   
   validates :phone, {  
-    length: { maximum: 16 , message: "Phone must be 16 digits"},
-    numericality: {only_integer: true, message: "Phone must contain only numbers"},
+    length: { maximum: 16 , message: t(:phone_length)},
+    numericality: {only_integer: true, message: t(:phone_oly_num)},
     allow_nil: true
   }
 

@@ -104,14 +104,58 @@ en:
   what_this: "Wat's this?"
   this_is: "The CVV Number ('Card Verification Value') on your credit card or debit card is a 3 digit number on VISA®, MasterCard® and Discover® branded credit and debit cards. On your American Express® branded credit or debit card it is a 4 digit numeric code."
   confirm: "CONFIRM"
+  delivery_confirm: "Delivery"
   pay_data: "Payment Information"
-  delivery: "Delivery"
   save_order: "PLACE ORDER"
   have_account: "Have an account?"
   passwords: "passwords"
   forgot_pass: "Forgot your password?"
   not_confirm: "Didn't receive confirmation instructions?"
   receive_unlock: "Didn't receive unlock instructions?"
+  ord_not_save: "Order has not been saved. Please, check information. " 
+  enter:
+    billing_data:
+      first_name: "Enter first name for billing address. " 
+      last_name: "Enter last name for billing address. "
+      street: "Enter street for billing address. "
+      city: "Enter city for billing address. "
+      country: "Enter country for billing address. "
+      zip: "Enter zip for billing address. "
+      phone: "Enter phone for billing address. "
+      only_numbers: "Billing phone must contain only numbers"
+    shipping_data:
+      first_name: "Enter first name for shipping address. " 
+      last_name: "Enter last name for shipping address. "
+      street: "Enter street for shipping address. "
+      city: "Enter city for shipping address. "
+      country: "Enter country for shipping address. "
+      zip: "Enter zip for shipping address. "
+      phone: "Enter phone for shipping address. "
+    card_code: "Enter card code"
+    code_numbers: "Card code must contain only numbers"
+    card_number: "Enter cart number"
+    16_digits: "Card number must be 16 digits"
+    card_only_num: "Card number must contain only numbers"
+  address:
+    updated: 'Address was successfully updated.'
+    not_updated: 'Address was not updated. Check data. (Zip and phone number must be only digits)'
+  cart_cleared: 'Your shopping cart has been cleared. '
+  order_saved: "Order has been saved. "
+  books_in_store_1: "Sorry, but the stock only " 
+  books_in_store_2: " book(s). In your basket was(were) added all this book(s)"
+  books_added: "Book(s) was(were) added in your cart"
+  books_not_added: "Book can not be add to your cart, please enter information. "
+  quan_changed: "Books quantity was changed. "
+  remove_books: 'Book(s) was remove from your cart. '
+  rating_saved: "Your review has been successfully saved. It will be published after administrator validation. "
+  rating_not_saved: "Check all of fields. Your review is not save. "
+  zip_length: "Zip must be 10 digits. "
+  zip_only_num: "Zip must contain only numbers. "
+  phone_length: "Phone must be 16 digits. "
+  phone_only_num: "Phone must contain only numbers"
+  book_quan: "Check quantity of books that you want to add to your cart"
+  review_length: "Your review too match long"
+    
     
 
   

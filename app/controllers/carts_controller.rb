@@ -11,6 +11,6 @@ class CartsController < ApplicationController
   def destroy
     current_user.cart.line_items.destroy_all
     redirect_to cart_url
-    flash[:notice] = 'Your shopping cart has been cleared'
+    flash[:notice] = t(:'cart_cleared')
   end
 end

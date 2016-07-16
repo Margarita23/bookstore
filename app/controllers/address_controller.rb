@@ -15,13 +15,19 @@ class AddressController < ApplicationController
   # PATCH/PUT /addresss/1
   def update
     @address = Address.find(params[:id]) 
-    if @address.update(first_name: params[:first_name], last_name: params[:last_name], street: params[:street], city: params[:city], country: params[:country], zip: params[:zip], phone: params[:phone])
+    if @address.update(first_name: params[:first_name], 
+                      last_name: params[:last_name], 
+                      street: params[:street], 
+                      city: params[:city], 
+                      country: params[:country], 
+                      zip: params[:zip], 
+                      phone: params[:phone])
       @address.save
       redirect_to :back   
-      flash[:notice] = 'Address was successfully updated.'
+      flash[:notice] = t(:'address.updated')
     else
       redirect_to :back
-      flash[:alert] = 'Address was not updated. Check data. (Zip and phone number must be only digits)'
+      flash[:alert] = t(:'addres.not_updated')
     end
   end
 

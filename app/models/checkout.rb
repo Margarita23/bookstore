@@ -28,46 +28,34 @@ class Checkout
     :current_step,
     :user_id
     )
+
+  validates_presence_of :bill_f_name, :message => I18n.t(:'enter.billing_data.first_name')
+  validates_presence_of :bill_l_name, :message => I18n.t(:'enter.billing_data.last_name')
+  validates_presence_of :bill_street, :message => I18n.t(:'enter.billing_data.street')
+  validates_presence_of :bill_city, :message => I18n.t(:'enter.billing_data.city')
+  validates_presence_of :bill_country, :message => I18n.t(:'enter.billing_data.country')
+  validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip')
+  validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone')
+
+  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name')
+  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name')
+  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street')
+  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city')
+  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country')
+  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip')
+  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone')
   
-  [:bill_f_name, :bill_l_name, :bill_street, :bill_city, :bill_country, :bill_zip, :bill_phone].each do |n|
-    validates_presence_of n, :message => Proc.new {
-      case
-        when n == :bill_f_name then "Enter first name for billing address" 
-        when n == :bill_l_name then "Enter last name for billing address"
-        when n == :bill_street then "Enter street for billing address"
-        when n == :bill_city then "Enter city for billing address"
-        when n == :bill_country then "Enter country for billing address"
-        when n == :bill_zip then "Enter zip for billing address"
-        when n == :bill_phone then "Enter phone for billing address"
-      end
-    }
-  end
-  
-  [:ship_f_name, :ship_l_name, :ship_street, :ship_city, :ship_country, :ship_zip, :ship_phone].each do |n|
-    validates_presence_of n, :if => lambda { |o| o.same_address == false }, :message => Proc.new {
-      case
-        when n == :ship_f_name then "Enter first name for shipping address" 
-        when n == :ship_l_name then "Enter last name for shipping address"
-        when n == :ship_street then "Enter street for shipping address"
-        when n == :ship_city then "Enter city for shipping address"
-        when n == :ship_country then "Enter country for shipping address"
-        when n == :ship_zip then "Enter zip for shipping address"
-        when n == :ship_phone then "Enter phone for shipping address"
-      end
-    }
-end
-  
-  validates :bill_phone, :numericality => {:only_integer => true, message: "Billing phone must contain only numbers"}
+  validates :bill_phone, :numericality => {:only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers')}
   
   validates :card_code, {
-    presence: {message: "Enter cart code"}, 
-    numericality: {only_integer: true, greater_than: 3, message: "Card code must contain only numbers"}
+    presence: {message: I18n.t(:"enter.card_code")}, 
+    numericality: {only_integer: true, greater_than: 3, message: I18n.t(:"enter.code_numbers") }
   }
   
   validates :card_number, {
-    presence: {message: "Enter cart number"},  
-    length: { is: 16, message: "Card number must be 16 digits"},
-    numericality: {only_integer: true, message: "Card number must contain only numbers"}
+    presence: {message: I18n.t(:"enter.card_number") },  
+    length: { is: 16, message: I18n.t(:"enter.16_digits") },
+    numericality: {only_integer: true, message: I18n.t(:"enter.1card_only_num") }
   }
   
   def save
@@ -135,8 +123,6 @@ private
   
   def shipping
     if same_address
-      #@ship_address = @bill_address
-      #@ship_address.order_shipping_id = @order.id
       @ship_address = Address.create(first_name: bill_f_name, last_name: bill_l_name, street: bill_street, city: bill_city, country: bill_country, zip: bill_zip, phone: bill_phone, order_shipping_id: @order.id)
       @ship_address.save
     else

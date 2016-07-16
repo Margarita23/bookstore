@@ -25,10 +25,10 @@ class RatingsController < ApplicationController
     @rating.user_id = current_user.id
     if @rating.save
       redirect_to book_path(params[:book_id])
-      flash[:notice] = "Your review has been successfully saved. It will be published after administrator validation."
+      flash[:notice] = t(:rating_saved)
     else
       redirect_to new_book_rating_path(params[:book_id])
-      flash[:alert] = "Check all of fields. Your review is not save."
+      flash[:alert] = t(:rating_not_saved)
     end
   end
   

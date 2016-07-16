@@ -18,16 +18,16 @@ class LineItemsController < ApplicationController
       @line_item = check_nil(@cart, @line_item, @book, @quan)
       if less_or_more(@line_item, @book)
         if @line_item.save
-          flash[:alert] = "Sorry, but the stock only #{@book.quantity} book(s). In your basket was(were) added all this book(s)"
+          flash[:alert] = t(:books_in_store_1) + "#{@book.quantity}" + t(:books_in_store_2)
           redirect_to :back
         end
       else
         @line_item.save
-        flash[:notice] = "Book(s) was(were) added in your cart"
+        flash[:notice] = t(:books_added)
         redirect_to :back
       end
     else
-      flash[:alert] = "Book can not be add to your cart, please enter information."
+      flash[:alert] = t(:books_not_added)
       redirect_to :back
     end
   end
@@ -37,7 +37,7 @@ class LineItemsController < ApplicationController
     if check_quantity(@line_item)
       @line_item.quantity = @quan
       if @line_item.update(id: @line_item.id)
-        flash[:notice] = "Books quantity was changed"
+        flash[:notice] = t(:quan_changed)
         redirect_to :back
       end
     else
@@ -50,7 +50,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     redirect_to :back
-    flash[:notice] = 'Book(s) was remove from your cart'
+    flash[:notice] = t(:remove_books)
   end
 
   private
