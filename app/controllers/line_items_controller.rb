@@ -12,9 +12,9 @@ class LineItemsController < ApplicationController
   # POST /line_items
   def create
     book = Book.find(params[:book_id])
-    line_item = set_quantity(book)
-    if line_item.save
-      flash[:notice] = qty_less_books(line_item, book)
+    @line_item = set_quantity(book)
+    if @line_item.save
+      flash[:notice] = qty_less_books(@line_item, book)
       redirect_to :back
     else
       flash[:alert] = t(:books_not_added)
@@ -24,8 +24,9 @@ class LineItemsController < ApplicationController
 
   # PATCH/PUT /line_items/1
   def update
+    book = Book.find_by(id: item.book_id)
     if check_quantity(@line_item)
-      @line_item.quantity = @quan
+      @line_item.quantity = params[:new_quantity]
       if @line_item.update(id: @line_item.id)
         flash[:notice] = t(:quan_changed)
         redirect_to :back
@@ -61,13 +62,20 @@ class LineItemsController < ApplicationController
       quan = params[:new_quantity]
       if !item.nil?
         item.quantity = item.quantity.to_i + quan.to_i
-        item
       else
         item = @cart.line_items.build(book: book)
         item.quantity = quan.to_i
         item.price = book.price
-        item
       end 
+      item
+    end
+  end
+  
+  def check_quantity(item)
+    if check_params && book.quantity >= params[:new_quantity].to_i
+      true 
+    else
+      false
     end
   end
   
@@ -75,24 +83,11 @@ class LineItemsController < ApplicationController
     params[:new_quantity].to_i > 0 && !params[:new_quantity].nil?
   end
   
-  def check_quantity(item)
-      book = Book.find_by(id: item.book_id)
-      if params[:new_quantity].to_i > 0 && !params[:new_quantity].nil?
-        if book.quantity >= params[:new_quantity].to_i
-          @quan = params[:new_quantity]
-          true 
-        else
-          false
-        end
-      end
-    end
-    
+  def set_line_item
+    @line_item = LineItem.find(params[:id])
+  end
 
-    def set_line_item
-      @line_item = LineItem.find(params[:id])
-    end
-
-    def line_item_params
-      params.permit(:book_id, :cart_id)
-    end
+  def line_item_params
+    params.permit(:book_id, :cart_id)
+  end
 end
