@@ -8,4 +8,5 @@ class LineItem < ActiveRecord::Base
     :numericality => {:greater_than => 0, :message => I18n.t(:book_quan)}
   }
   
+  
 end

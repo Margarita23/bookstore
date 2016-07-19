@@ -5,11 +5,9 @@ class CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm
 
   def show   
-    session[:checkout] ||= {}
-    session[:checkout].deep_merge!(params[:checkout]) if params[:checkout]
-    @checkout = Checkout.new(session[:checkout])
-    session[:last_step] = params[:id]
+    @checkout = Checkout.new(checkout_params)
     @checkout.current_step = session[:last_step] 
+    session[:last_step] = params[:id]
     @checkout.user_id = current_user.id 
     render_wizard 
   end
@@ -27,6 +25,12 @@ class CheckoutsController < ApplicationController
   end
   
   private
+  
+  def checkout_params
+    session[:checkout] ||= {}
+    session[:checkout].deep_merge!(params[:checkout]) if params[:checkout]
+    session[:checkout]
+  end
   
   def error_msg
     sentences = t(:ord_not_save)

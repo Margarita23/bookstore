@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td>
-      <%= form_tag(current_user.billing_address(id: current_user.billing_address.id), method: :put) do %>    
+      <%= form_for current_user.billing_address,  method: :put do %>    
         <div class="field">
           <%= text_field_tag :first_name, current_user.billing_address.first_name, placeholder: t(:first_name) %>
         </div>

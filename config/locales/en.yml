@@ -1,26 +1,5 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere!"
+  welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere! "
   site_name: "Bookstore"
   home_page: "HOME"
   shopping: "SHOP"
@@ -110,8 +89,8 @@ en:
   have_account: "Have an account?"
   passwords: "passwords"
   forgot_pass: "Forgot your password?"
-  not_confirm: "Didn't receive confirmation instructions?"
-  receive_unlock: "Didn't receive unlock instructions?"
+  not_confirm: "Didn't receive confirmation instructions? "
+  receive_unlock: "Didn't receive unlock instructions? "
   ord_not_save: "Order has not been saved. Please, check information. " 
   enter:
     billing_data:
@@ -131,14 +110,14 @@ en:
       country: "Enter country for shipping address. "
       zip: "Enter zip for shipping address. "
       phone: "Enter phone for shipping address. "
-    card_code: "Enter card code"
-    code_numbers: "Card code must contain only numbers"
-    card_number: "Enter cart number"
-    16_digits: "Card number must be 16 digits"
-    card_only_num: "Card number must contain only numbers"
+    card_code: "Enter card code. "
+    code_numbers: "Card code must contain only numbers. "
+    card_number: "Enter cart number. "
+    16_digits: "Card number must be 16 digits. "
+    card_only_num: "Card number must contain only numbers. "
   addresses:
-    updated: 'Address was successfully updated.'
-    not_updated: 'Address was not updated. Check data. (Zip and phone number must be only digits)'
+    updated: 'Address was successfully updated. '
+    not_updated: 'Address was not updated. Check data. '
   cart_cleared: 'Your shopping cart has been cleared. '
   order_saved: "Order has been saved. "
   books_in_store_1: "Sorry, but the stock only " 
@@ -156,46 +135,3 @@ en:
   phone_only_num: "Phone must contain only numbers"
   book_quan: "Check quantity of books that you want to add to your cart. "
   review_length: "Your review too match long"
-    
-    
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  

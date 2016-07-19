@@ -15,29 +15,29 @@ class AddressController < ApplicationController
   # PATCH/PUT /addresss/1
   def update
     @address = Address.find(params[:id]) 
-    if @address.update(first_name: params[:first_name], 
-                      last_name: params[:last_name], 
-                      street: params[:street], 
-                      city: params[:city], 
-                      country: params[:country], 
-                      zip: params[:zip], 
-                      phone: params[:phone])
+    if @address.update(address_params)
       @address.save
       redirect_to :back   
-      flash[:notice] = t(:'addresses.updated')
+      flash[:notice] = I18n.t(:'addresses.updated')
     else
       redirect_to :back
-      flash[:alert] = t(:'addreses.not_updated')
+      flash[:alert] = I18n.t(:'addresses.not_updated')
     end
   end
 
   private
     def address_params
-      params.require(:address).permit(:first_name, :last_name, :street, :city, :country, :zip, :phone )
+      address_params = {first_name: params[:first_name], 
+                      last_name: params[:last_name], 
+                      street: params[:street], 
+                      city: params[:city], 
+                      country: params[:country], 
+                      zip: params[:zip], 
+                      phone: params[:phone]}
     end
   
-  def checkout_form_params
-    params.require(:checkout_form).permit!(:first_name, :last_name)
-  end
+  #def checkout_form_params
+   # params.require(:checkout_form).permit!(:first_name, :last_name)
+#  end
 
 end
