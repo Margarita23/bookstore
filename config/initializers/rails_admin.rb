@@ -58,10 +58,6 @@ RailsAdmin.config do |config|
     visible false
   end
   
-  config.model 'Address' do 
-    visible false
-  end
-  
   config.model 'CreditCard' do 
     visible false
   end
