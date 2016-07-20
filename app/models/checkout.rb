@@ -101,7 +101,7 @@ class Checkout
 private
 
   def order
-    @order = Order.create(total_price: total_price, delivery_id: delivery, credit_card_id: @credit_card.id, number: generate_number, user_id: user_id) 
+    @order = Order.create(order_params) 
     get_line_items
   end
   
@@ -112,31 +112,50 @@ private
       l.save
     end
   end
-  
-  def generate_number
-    (0...ORDER_CHAR_NUM).map { (65 + rand(26)).chr }.join + (0...ORDER_DIG_NUM).map{rand(9)}.join
-  end
 
   def billing
-    @bill_address = Address.create(first_name: bill_f_name, last_name: bill_l_name, street: bill_street, city: bill_city, country: bill_country, zip: bill_zip, phone: bill_phone, order_billing_id: @order.id)
+    @bill_address = Address.create(billing_params)
+    @bill_address.order_billing_id = order_id
+    @bill_address.save
   end
   
   def shipping
-    if same_address
-      @ship_address = Address.create(first_name: bill_f_name, last_name: bill_l_name, street: bill_street, city: bill_city, country: bill_country, zip: bill_zip, phone: bill_phone, order_shipping_id: @order.id)
-      @ship_address.save
+    @ship_address = if same_address
+       Address.create(billing_params)
     else
-      @ship_address = Address.create(first_name: ship_f_name, last_name: ship_l_name, street: ship_street, city: ship_city, country: ship_country, zip: ship_zip, phone: ship_phone, order_shipping_id: @order.id)
+       Address.create(shipping_params)
     end
+    @ship_address.order_shipping_id = order_id
+    @ship_address.save
   end
   
   def payment
-    if !CreditCard.all.exists?(:number => card_number)
-      @credit_card = CreditCard.create(number: card_number, month: exp_month, year: exp_year, cvv: card_code, user_id: user_id)
+    if !CreditCard.all.exists?(number: card_number)
+      @credit_card = CreditCard.create(credit_card_params)
     else
       @credit_card = CreditCard.all.find_by(number: card_number)
       @credit_card.user_id = user_id
       @credit_card.save
     end
+  end
+
+  def generate_number
+    (0...ORDER_CHAR_NUM).map { (65 + rand(26)).chr }.join + (0...ORDER_DIG_NUM).map{rand(9)}.join
+  end
+
+  def order_params
+    {total_price: total_price, delivery_id: delivery, credit_card_id: @credit_card.id, number: generate_number, user_id: user_id}
+  end
+  
+  def credit_card_params
+    {number: card_number, month: exp_month, year: exp_year, cvv: card_code, user_id: user_id}
+  end
+  
+  def billing_params
+    {first_name: bill_f_name, last_name: bill_l_name, street: bill_street, city: bill_city, country: bill_country, zip: bill_zip, phone: bill_phone}
+  end
+  
+  def shipping_params
+    {first_name: ship_f_name, last_name: ship_l_name, street: ship_street, city: ship_city, country: ship_country, zip: ship_zip, phone: ship_phone}
   end
 end

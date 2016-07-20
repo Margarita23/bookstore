@@ -18,6 +18,8 @@ class Book < ActiveRecord::Base
   validates_attachment_content_type :cover, 
                                     :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   
+  scope :bestsellers, -> { order(bought: :desc).reverse.first(10) }
+  
   private
   
     def ensure_not_referenced_by_any_line_item

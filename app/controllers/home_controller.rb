@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   
   def bestsellers
-    @bestsellers = Book.all.sort_by{ |k| k["bought"] }.reverse.first(10)
+    @bestsellers = Book.bestsellers
   end
   
   def shop

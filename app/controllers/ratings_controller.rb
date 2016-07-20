@@ -24,7 +24,7 @@ class RatingsController < ApplicationController
     @rating.book_id = params[:book_id]
     @rating.user_id = current_user.id
     if @rating.save
-      redirect_to book_path(params[:book_id])
+      redirect_to book_path(@rating.book_id)
       flash[:notice] = t(:rating_saved)
     else
       redirect_to new_book_rating_path(params[:book_id])
@@ -34,7 +34,6 @@ class RatingsController < ApplicationController
   
   private
     def rating_params
-      params.require(:rating).permit(:headline, :review, :book_id, :user_id, :grade )
+      params.require(:rating).permit( :headline, :grade, :review)
     end
-  
 end

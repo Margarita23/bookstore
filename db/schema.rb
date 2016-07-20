@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713135211) do
+ActiveRecord::Schema.define(version: 20160720044825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +32,26 @@ ActiveRecord::Schema.define(version: 20160713135211) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "author_translations", force: :cascade do |t|
+    t.integer  "author_id",  null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "biography"
+  end
+
+  add_index "author_translations", ["author_id"], name: "index_author_translations_on_author_id", using: :btree
+  add_index "author_translations", ["locale"], name: "index_author_translations_on_locale", using: :btree
+
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.text     "biography"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "locale"
   end
 
   create_table "billing_addresses", force: :cascade do |t|

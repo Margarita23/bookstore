@@ -36,7 +36,7 @@
     <td>
     
       <table>
-          <%= form_tag(current_user.shipping_address(id: current_user.shipping_address.id), method: :put) do %>
+          <%= form_for current_user.shipping_address,  method: :put do %>
           <tr id="shipping">
             <div class="field">
               <%= text_field_tag :first_name, current_user.shipping_address.first_name, placeholder: t(:first_name) %>

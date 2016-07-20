@@ -35,9 +35,4 @@ class AddressController < ApplicationController
                       zip: params[:zip], 
                       phone: params[:phone]}
     end
-  
-  #def checkout_form_params
-   # params.require(:checkout_form).permit!(:first_name, :last_name)
-#  end
-
 end

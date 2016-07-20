@@ -1,6 +1,5 @@
 class Order < ActiveRecord::Base 
   include AASM
-  
   aasm :column => 'state', :whiny_transitions => false do
     state :in_progress, :initial => true
     state :shipped
@@ -23,5 +22,9 @@ class Order < ActiveRecord::Base
   has_one :shipping_address, :class_name => "Address", :foreign_key => "order_shipping_id", dependent: :destroy
   
   validates_presence_of :total_price, :delivery_id, :number
+  
+  scope :in_progress, -> { where(state: :in_progress) }
+  scope :shipped, -> { where(state: :shipped) }
+  scope :completed, -> { where(state: :completed) }
 
 end
