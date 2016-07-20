@@ -26,8 +26,7 @@ class Checkout
     :exp_month, 
     :exp_year,
     :current_step,
-    :user_id,
-    :book_in_stock
+    :user_id
     )
 
   validates_presence_of :bill_f_name, :message => I18n.t(:'enter.billing_data.first_name')
