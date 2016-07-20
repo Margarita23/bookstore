@@ -32,40 +32,37 @@
         </div>
       <% end %>
     </td>
-    
     <td>
-    
       <table>
           <%= form_for current_user.shipping_address,  method: :put do %>
-          <tr id="shipping">
-            <div class="field">
-              <%= text_field_tag :first_name, current_user.shipping_address.first_name, placeholder: t(:first_name) %>
-            </div>
-            <div class="field">
-              <%= text_field_tag :last_name, current_user.shipping_address.last_name, placeholder: t(:last_name) %>
-            </div>
-            <div class="field">
-              <%= text_field_tag :street, current_user.shipping_address.street, placeholder: t(:street_address) %>
-            </div>
-            <div class="field">
-              <%= text_field_tag :city, current_user.shipping_address.city, placeholder: t(:city) %>
-            </div>
-            <div class="field">
-              <%= text_field_tag :country, current_user.shipping_address.country, placeholder: t(:country) %>
-            </div>
-            <div class="field">
-              <%= text_field_tag :zip, current_user.shipping_address.zip, placeholder: t(:zip) %>
-            </div>
-            <div class="field">
-              <%= text_field_tag :phone, current_user.shipping_address.phone, placeholder: t(:phone) %>
-            </div>
-          </tr>
-          <tr>
+            <tr id="shipping">
+              <div class="field">
+                <%= text_field_tag :first_name, current_user.shipping_address.first_name, placeholder: t(:first_name) %>
+              </div>
+              <div class="field">
+                <%= text_field_tag :last_name, current_user.shipping_address.last_name, placeholder: t(:last_name) %>
+              </div>
+              <div class="field">
+                <%= text_field_tag :street, current_user.shipping_address.street, placeholder: t(:street_address) %>
+              </div>
+              <div class="field">
+                <%= text_field_tag :city, current_user.shipping_address.city, placeholder: t(:city) %>
+              </div>
+              <div class="field">
+                <%= text_field_tag :country, current_user.shipping_address.country, placeholder: t(:country) %>
+              </div>
+              <div class="field">
+                <%= text_field_tag :zip, current_user.shipping_address.zip, placeholder: t(:zip) %>
+              </div>
+              <div class="field">
+                <%= text_field_tag :phone, current_user.shipping_address.phone, placeholder: t(:phone) %>
+              </div>
+            </tr>
+            <tr>
               <div class="update">
                 <%= submit_tag( t(:save) ) %>
               </div>
-        </tr>
-        
+            </tr>
           <% end %>
       </table> 
     </td>

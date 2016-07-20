@@ -1,8 +1,5 @@
 class LineItemsController < ApplicationController
-  include CurrentCart
-  
-  before_action :set_cart, only: [:create]
-  
+  include CartsHelper
   load_and_authorize_resource
 
   # GET /line_items/1
@@ -24,8 +21,8 @@ class LineItemsController < ApplicationController
 
   # PATCH/PUT /line_items/1
   def update
-    book = Book.find_by(id: item.book_id)
-    if check_quantity(@line_item)
+    book = Book.find_by(id: @line_item.book_id)
+    if check_quantity(@line_item, book)
       @line_item.quantity = params[:new_quantity]
       if @line_item.update(id: @line_item.id)
         flash[:notice] = t(:quan_changed)
@@ -57,13 +54,13 @@ class LineItemsController < ApplicationController
   end
   
   def set_quantity(book)
-    item = Cart.find_by(id: params[:cart_id]).line_items.find_by(book_id: book)
+    item = current_cart.line_items.find_by(book_id: book)
     if check_params
       quan = params[:new_quantity]
       if !item.nil?
         item.quantity = item.quantity.to_i + quan.to_i
       else
-        item = @cart.line_items.build(book: book)
+        item = current_cart.line_items.build(book: book)
         item.quantity = quan.to_i
         item.price = book.price
       end 
@@ -71,7 +68,7 @@ class LineItemsController < ApplicationController
     end
   end
   
-  def check_quantity(item)
+  def check_quantity(item, book)
     if check_params && book.quantity >= params[:new_quantity].to_i
       true 
     else
@@ -88,6 +85,6 @@ class LineItemsController < ApplicationController
   end
 
   def line_item_params
-    params.permit(:book_id, :cart_id)
+    params.permit(:book_id)
   end
 end

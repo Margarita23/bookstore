@@ -26,7 +26,8 @@ class Checkout
     :exp_month, 
     :exp_year,
     :current_step,
-    :user_id
+    :user_id,
+    :book_in_stock
     )
 
   validates_presence_of :bill_f_name, :message => I18n.t(:'enter.billing_data.first_name')
@@ -59,7 +60,7 @@ class Checkout
   }
   
   def save
-    if valid? && books_price != 0
+    if valid? && books_price > 0 
       payment
       order
       billing
@@ -87,8 +88,8 @@ class Checkout
   end
   
   def books_price
-    if current_user.cart.line_items.count != 0
-      current_user.cart.line_items.collect{|book| book.price * book.quantity}.sum(:price)
+    if order_items.count != 0
+      order_items.collect{|book| book.price * book.quantity}.sum(:price)
     else
       0
     end
@@ -96,6 +97,10 @@ class Checkout
   
   def total_price
     books_price.to_i + get_delivery.price.to_i
+  end
+  
+  def order_items
+    current_user.cart.line_items
   end
   
 private
@@ -106,11 +111,19 @@ private
   end
   
   def get_line_items
-    current_user.cart.line_items.each do |l|
+    order_items.each do |l|
+      book_bought(l, l.book_id)
       l.order_id = order_id
       l.cart_id = nil
       l.save
     end
+  end
+  
+  def book_bought(item, book_id)
+    book = Book.find_by(id: book_id)
+    book.bought += item.quantity
+    book.quantity -= item.quantity
+    book.save
   end
 
   def billing

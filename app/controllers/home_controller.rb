@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  
   def bestsellers
     @bestsellers = Book.bestsellers
   end

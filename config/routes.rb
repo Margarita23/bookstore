@@ -6,9 +6,8 @@ Rails.application.routes.draw do
     get "/signup" => "registrations#new",   :as => :new_user_registration
   end
   
-  resources :carts, only: [:show, :destroy] do
-    resources :line_items, only: [:update, :create, :destroy]
-  end
+  resources :carts, only: [:show, :destroy]
+  resources :line_items, only: [:update, :create, :destroy]
   resources :orders, only: [:show, :index, :new_order]
   resources :categories, only: [:show]
   resources :books, only: [:show] do

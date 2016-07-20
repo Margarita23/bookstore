@@ -3,7 +3,7 @@
     <div class="title">
       <%= @book.title %> <%= t(:by) %> 
       <div>
-        <%= link_to " #{@book.author.first_name} #{@book.author.last_name}", author_path(@book.author.id) %>
+        <%= link_to books_authors_link(@book), author_path(@book.author.id) %>
       </div>
     </div>
     <div class="cover">
@@ -13,17 +13,13 @@
       <div class="boldy">$<%= @book.price %></div>
     </div>
     <div class = "add_book">
-      <% if user_signed_in? && !current_user.guest %>
-        <% if @book.quantity == 0 %>
-          <div class="sold_out_show"></div>
-        <% else %>
-          <%= form_tag(cart_line_items_path(book_id: @book, cart_id: current_user.id), method: 'post') do %>
-          <%= number_field_tag(:new_quantity, 1, in: 1..@book.quantity, step: 1, :style => "width: 50px;") %>
-          <%= submit_tag(t( :add_to_cart )) %>
-          <% end %>
-        <% end %>
+      <% if @book.quantity == 0 %>
+        <div class="sold_out_show"></div>
       <% else %>
-        <%= button_to t( :add_to_cart ), new_user_session_path %>
+        <%= form_tag(line_items_path(book_id: @book), method: 'post') do %>
+        <%= number_field_tag(:new_quantity, 1, in: 1..@book.quantity, step: 1, :style => "width: 50px;") %>
+        <%= submit_tag(t( :add_to_cart )) %>
+        <% end %>
       <% end %>
     </div>
     <div class="desc">

@@ -6,7 +6,7 @@
         <div class="book_info">
           <div class="book_title">
             <%= book.title %> 
-          </div> <%= t(:by) %> <%= link_to " #{book.author.first_name} #{book.author.last_name}", author_path(book.author.id) %>
+          </div> <%= t(:by) %> <%= link_to books_authors_link(book), author_path(book.author.id) %>
         </div>
         <div class="cover_desc">
           <div class="cover">
@@ -19,25 +19,19 @@
             <div class="book_ord">
               <div class="boldy">$ <%= book.price %></div>                      
             </div>
-            <% if user_signed_in? && !current_user.guest %>
-              <% if book.quantity == 0 %>
-                <div class="sold_out"></div>
-              <% else %>
-                <%= form_tag(cart_line_items_path(book_id: book, cart_id: current_user.id), method: 'post') do %>
-                <%= number_field_tag(:new_quantity, 1, in: 1..book.quantity, step: 1, :style => "width: 50px;") %>
-                  <div class="actions">
-                    <%= submit_tag( t(:add_to_cart) ) %>
-                  </div>
-                <% end %>
-            <% end %>
+            <% if book.quantity == 0 %>
+              <div class="sold_out"></div>
             <% else %>
-              <%= button_to t(:add_to_cart), new_user_session_path %>
+              <%= form_tag(line_items_path(book_id: book), method: 'post') do %>
+              <%= number_field_tag(:new_quantity, 1, in: 1..book.quantity, step: 1, :style => "width: 50px;") %>
+                <div class="actions">
+                  <%= submit_tag( t(:add_to_cart) ) %>
+                </div>
+              <% end %>
             <% end %>
           </div>
-          
         </div>
-      </div> 
-    
+      </div>
     <% end %>
   </div>
   <div class="space"></div>
