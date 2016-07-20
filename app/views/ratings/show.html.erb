@@ -8,11 +8,7 @@
   <div class="rev_create"><%= l(@rating.created_at, format: :short)%></div>
   <div class="author">
     <%=t(:by)%>
-    <% if !@rating.user.billing_address.first_name.blank? %>
-      <%=link_to "#{@rating.user.billing_address.first_name} #{@rating.user.billing_address.last_name}" %>
-    <% else %>
-      <%=link_to @rating.user.email, book_rating_path(@rating.book.id, @rating.id) %>
-    <% end %>
+      <%=link_to rating_author, book_rating_path(@rating.book.id, @rating.id) %>
   </div>
   <div class="rev_text"><%= @rating.review %></div>
 </div>

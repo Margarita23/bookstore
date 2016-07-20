@@ -15,4 +15,12 @@ module CartsHelper
     current_user.cart
   end
   
+  def cart_fully
+    if current_cart.line_items.count!=0  
+      "(#{quantity_incart})" + "$#{sub_total}"
+    else
+      t(:empty)
+    end
+  end
+  
 end

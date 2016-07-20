@@ -1,83 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Bookstore</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
- 
-  
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-  
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  
-</head>
-<body>
-  <div id="wrapper">
-    <div id="name"><h1><%=t :site_name %></h1></div>
-    <div id="root">
-      <div id="home">
-        <%= link_to t(:home_page), root_path %>
-      </div>
-      <div class="border"></div>
-      <div id="route_shop">
-        <%= link_to t(:shopping), shopping_path %>
-      </div>
-    </div>
-    <div class="settings">  
-      <% if user_signed_in? && !current_user.guest %>
-        <% if !current_user.admin %>
-          <div id="basket">
-            <% if !current_user.cart.nil? %>
-              <%= link_to image_tag( current_user.cart.image.url ), cart_path(id: current_user.id ) %> <%= t :cart %>
-              <% if current_user.cart.line_items.count!=0 %> 
-                (<%= quantity_incart %>) $<%= sub_total %>
-              <% else %>
-                <%= t(:empty) %> 
-              <% end %>
-            <% else %>
-              <div class = "empty"> 
-                <%= image_tag(Cart.new.image.url) %> <%= t(:cart) + ":" + t(:empty) %>
-              </div>
-            <% end %>
-          </div>
-          <%= link_to t(:settings), edit_user_registration_path %>
-          <div class="border"></div>
-          <%= link_to t(:orders), orders_path %>
-          <div class="border"></div>
-          <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
-        <% else %>
-          <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
-        <% end %>
-      <% else %> 
-        <%= link_to t(:sign_up), new_user_registration_path %>
+  <head>
+    <title>Bookstore</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="name"><h1><%=t :site_name %></h1></div>
+      <div id="root">
+        <div id="home">
+          <%= link_to t(:home_page), root_path %>
+        </div>
         <div class="border"></div>
-        <%= link_to t(:login), new_user_session_path %>
-      <% end %>
+        <div id="route_shop">
+          <%= link_to t(:shopping), shopping_path %>
+        </div>
+      </div>
+      <div class="settings">  
+        <% if user_signed_in? && !current_user.guest %>
+          <% if !current_user.admin %>
+            <div id="basket">
+              <%= link_to image_tag( current_cart.image.url ), cart_path(id: current_user.id ) %> <%= t :cart %>
+              <%= cart_fully %>
+            </div>
+            <%= link_to t(:settings), edit_user_registration_path %>
+            <div class="border"></div>
+            <%= link_to t(:orders), orders_path %>
+            <div class="border"></div>
+            <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
+          <% else %>
+            <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
+          <% end %>
+        <% else %> 
+          <%= link_to t(:sign_up), new_user_registration_path %>
+          <div class="border"></div>
+          <%= link_to t(:login), new_user_session_path %>
+        <% end %>
+      </div>
+      <div class="langueges"><%= link_to(t(:russian), change_language_path(:ru))%> | <%= link_to(t(:english), change_language_path(:en))%></div>
     </div>
-    <div class="langueges"><%= link_to(t(:russian), change_language_path(:ru))%> | <%= link_to(t(:english), change_language_path(:en))%></div>
-  </div>
-  <div class="space"></div>
-  <% if notice %>
-    <div class="alert alert-info"><%= notice %></div>
-  <% end %>
-  <% if alert %>
-    <div class="alert alert-warning"><%= alert %></div>
-  <% end %>
-  <%= yield %>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.6&appId=1605409069769187";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-</body>
+    <div class="space"></div>
+    <% if notice %>
+      <div class="alert alert-info"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-warning"><%= alert %></div>
+    <% end %>
+    <%= yield %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.6&appId=1605409069769187";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+  </body>
 </html>
