@@ -50,13 +50,17 @@ RailsAdmin.config do |config|
     visible false
   end
   
-  config.model 'ShippingAddress' do 
-    visible false
-  end
+ # config.model 'ShippingAddress' do 
+  #  visible false
+  #end
   
-  config.model 'BillingAddress' do 
-    visible false
-  end
+#  config.model 'BillingAddress' do 
+ #   visible false
+#  end
+  
+ # config.model 'Address' do 
+  #  visible false
+#  end
   
   config.model 'CreditCard' do 
     visible false
