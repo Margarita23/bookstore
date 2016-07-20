@@ -50,17 +50,13 @@ RailsAdmin.config do |config|
     visible false
   end
   
- # config.model 'ShippingAddress' do 
-  #  visible false
-  #end
+  config.model 'ShippingAddress' do 
+    visible false
+  end
   
-#  config.model 'BillingAddress' do 
- #   visible false
-#  end
-  
- # config.model 'Address' do 
-  #  visible false
-#  end
+  config.model 'BillingAddress' do 
+    visible false
+  end
   
   config.model 'CreditCard' do 
     visible false
@@ -68,6 +64,24 @@ RailsAdmin.config do |config|
   
   config.model 'Cart' do 
     visible false
+  end
+
+  config.model 'Address' do 
+    list do
+      field :first_name
+      field :last_name
+      field :street
+      field :city
+      field :country
+      field :zip
+      field :phone
+      field :user_billing_id
+      field :user_shipping_id
+      field :order_billing_id
+      field :order_shipping_id
+      field :created_at
+      field :updated_at
+    end
   end
 
   config.model 'Book' do
