@@ -91,7 +91,7 @@ en:
   forgot_pass: "Forgot your password?"
   not_confirm: "Didn't receive confirmation instructions? "
   receive_unlock: "Didn't receive unlock instructions? "
-  ord_not_save: "Order has not been saved. Please, check information. " 
+  ord_not_save: "Please, check information. " 
   enter:
     billing_data:
       first_name: "Enter first name for billing address. " 

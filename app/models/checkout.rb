@@ -29,34 +29,30 @@ class Checkout
     :user_id
     )
 
-  validates_presence_of :bill_f_name, :message => I18n.t(:'enter.billing_data.first_name')
-  validates_presence_of :bill_l_name, :message => I18n.t(:'enter.billing_data.last_name')
-  validates_presence_of :bill_street, :message => I18n.t(:'enter.billing_data.street')
-  validates_presence_of :bill_city, :message => I18n.t(:'enter.billing_data.city')
-  validates_presence_of :bill_country, :message => I18n.t(:'enter.billing_data.country')
-  validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip')
-  validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone')
+  validates_presence_of :bill_f_name, :message => I18n.t(:'enter.billing_data.first_name'), if: :on_address_step 
+  validates_presence_of :bill_l_name, :message => I18n.t(:'enter.billing_data.last_name'), if: :on_address_step 
+  validates_presence_of :bill_street, :message => I18n.t(:'enter.billing_data.street'), if: :on_address_step 
+  validates_presence_of :bill_city, :message => I18n.t(:'enter.billing_data.city'), if: :on_address_step 
+  validates_presence_of :bill_country, :message => I18n.t(:'enter.billing_data.country'), if: :on_address_step 
+  validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip'), if: :on_address_step 
+  validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone'), if: :on_address_step 
   
-  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), :unless => :same_address
-  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), :unless => :same_address
-  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), :unless => :same_address
-  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), :unless => :same_address
-  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), :unless => :same_address
-  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), :unless => :same_address
-  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), :unless => :same_address
+  #validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), :if => !:same_address_box && :on_address_step
+  #validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), :if => !:same_address_box && :on_address_step
+  #validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), :if => !:same_address_box && :on_address_step
+  #validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), :if => !:same_address_box && :on_address_step
+  #validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), :if => !:same_address_box && :on_address_step
+  #validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), :if => !:same_address_box && :on_address_step
+  #validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), :if => !:same_address_box && :on_address_step
   
-  validates :bill_phone, :numericality => {:only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers')}
+  validates_numericality_of :bill_phone, :only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers'), if: :on_address_step
   
-  validates :card_code, {
-    presence: {message: I18n.t(:"enter.card_code")}, 
-    numericality: {only_integer: true, greater_than: 3, message: I18n.t(:"enter.code_numbers") }
-  }
+  validates_presence_of :card_code, message: I18n.t(:"enter.card_code"), if: :on_payment_step
+  validates_numericality_of :card_code, only_integer: true, greater_than: 3, message: I18n.t(:"enter.code_numbers"), if: :on_payment_step
   
-  validates :card_number, {
-    presence: {message: I18n.t(:"enter.card_number") },  
-    length: { is: 16, message: I18n.t(:"enter.16_digits") },
-    numericality: {only_integer: true, message: I18n.t(:"enter.1card_only_num") }
-  }
+  validates_presence_of :card_number, message: I18n.t(:"enter.card_number"), if: :on_payment_step
+  validates_length_of :card_number, is: 16, message: I18n.t(:"enter.16_digits"), if: :on_payment_step
+  validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.1card_only_num"), if: :on_payment_step
   
   def save
     if valid? && books_price > 0 
@@ -149,6 +145,26 @@ private
       @credit_card.user_id = user_id
       @credit_card.save
     end
+  end
+
+  def same_address_box
+    self.same_address == "1"
+  end
+
+  def on_address_step
+    self.current_step == 'address'
+  end
+  
+  def on_delivery_step
+    self.current_step == 'delivery'
+  end
+  
+  def on_payment_step
+    self.current_step == 'payment'
+  end
+  
+  def on_confirm_step
+    self.current_step == 'confirm'
   end
 
   def generate_number

@@ -19,50 +19,50 @@
         <tr>
           <td>
             <div class="field">  
-              <%= f.text_field :bill_f_name, size: 25, placeholder: t(:first_name), value: current_user.billing_address.first_name %> 
+              <%= f.text_field :bill_f_name, size: 25, placeholder: t(:first_name), value: bill_first_name_value %> 
             </div>
             <div class="field">
-              <%= f.text_field :bill_l_name, placeholder: t(:last_name), size: 25, value: current_user.billing_address.last_name %>
+              <%= f.text_field :bill_l_name, placeholder: t(:last_name), size: 25, value: bill_last_name_value %>
             </div>
             <div class="field">
-              <%= f.text_field :bill_street, value: current_user.billing_address.street, placeholder: t(:street_address), size: 25 %>
+              <%= f.text_field :bill_street, value: bill_street_value, placeholder: t(:street_address), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :bill_city, value: current_user.billing_address.city, placeholder: t(:city), size: 25 %>
+              <%= f.text_field :bill_city, value: bill_city_value, placeholder: t(:city), size: 25 %>
             </div>
             <div class="field"> 
-              <%= f.text_field :bill_country, value: current_user.billing_address.country, placeholder: t(:country), size: 25 %>
+              <%= f.text_field :bill_country, value: bill_country_value, placeholder: t(:country), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :bill_zip, value: current_user.billing_address.zip, placeholder: t(:zip), size: 25 %>
+              <%= f.text_field :bill_zip, value: bill_zip_value, placeholder: t(:zip), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :bill_phone, value: current_user.billing_address.phone, placeholder: t(:phone), size: 25 %>
+              <%= f.text_field :bill_phone, value: bill_phone_value, placeholder: t(:phone), size: 25 %>
             </div>
             <div class="to_check">
             </div>
           </td>
           <td id = "shipping_add">
             <div class="field">
-              <%= f.text_field :ship_f_name, value: current_user.shipping_address.first_name, placeholder: t(:first_name), size: 25 %>
+              <%= f.text_field :ship_f_name, value: ship_first_name_value, placeholder: t(:first_name), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_f_name, value: current_user.shipping_address.last_name, placeholder: t(:last_name), size: 25 %>
+              <%= f.text_field :ship_f_name, value: ship_last_name_value, placeholder: t(:last_name), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_street, value: current_user.shipping_address.street, placeholder: t(:street_address), size: 25 %>
+              <%= f.text_field :ship_street, value: ship_street_value, placeholder: t(:street_address), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_city, value: current_user.shipping_address.city, placeholder: t(:city), size: 25 %>
+              <%= f.text_field :ship_city, value: ship_city_value, placeholder: t(:city), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_country, value: current_user.shipping_address.country, placeholder: t(:country), size: 25 %>
+              <%= f.text_field :ship_country, value: ship_country_value, placeholder: t(:country), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_zip, value: current_user.shipping_address.zip, placeholder: t(:zip), size: 25 %>
+              <%= f.text_field :ship_zip, value: ship_zip_value, placeholder: t(:zip), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_phone, value: current_user.shipping_address.phone, placeholder: t(:phone), size: 25 %>
+              <%= f.text_field :ship_phone, value: ship_phone_value, placeholder: t(:phone), size: 25 %>
             </div>
           </td>
         </tr>
