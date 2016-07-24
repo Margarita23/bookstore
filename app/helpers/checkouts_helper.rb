@@ -59,6 +59,14 @@ module CheckoutsHelper
     current_user.cart.card_number || session[:checkout]['ship_phone']
   end
   
+  def checkout_errors_message(resource)
+    all_errors = ''
+    resource.errors.each do |attr,msg| 
+      all_errors << msg 
+    end 
+    all_errors 
+  end
+  
 end
 
 

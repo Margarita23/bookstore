@@ -9,14 +9,10 @@ class CheckoutsController < ApplicationController
     @checkout = Checkout.new(checkout_params)
     @checkout.current_step = session[:last_step] 
     @checkout.user_id = current_user.id 
-    session[:past_step] = future_step?(session[:last_step].to_sym)
     if future_step?(session[:last_step].to_sym)
       session[:last_step] = step
     elsif @checkout.valid?
-      #@checkout.save
       session[:last_step] = step
-    elsif !@checkout.valid?
-      flash[:alert] = error_msg
     end
     render checkout_path(session[:last_step]), method: :get
   end
@@ -49,39 +45,3 @@ class CheckoutsController < ApplicationController
     sentences
   end
 end
-
-
-
-
-
-
-
-
-
-
-  
- # def show
-  #  @checkout = Checkout.new(checkout_params)
-  #  @checkout.user_id = current_user.id
-  #  @checkout.current_step = session[:last_step]
-   # if @checkout.valid?
-   #   session[:last_step] = step
-  #    @checkout.current_step = session[:last_step]
-  #    flash[:alert] = "VALID!!!!0o0"
-  #  end
-  #  render checkout_path(@checkout.current_step), method: :get
-  #  flash[:alert] = "not_valid"
-    
-#  end
-  
-#  def create
-#    @checkout = Checkout.new(checkout_params)
-#    if @checkout.valid?
-#      @checkout.save
-#      session[:last_step] = params[:format]#@checkout.current_step
-#      render checkout_path(session[:last_step]), method: :get
-#    else
-#      render checkout_path(session[:last_step]), method: :get
-#    end
-#  end
-  

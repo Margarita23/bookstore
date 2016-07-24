@@ -13,6 +13,7 @@
  *= require owl.carousel
  *= require owl.theme
  *= require_self
+
 */
 
 /* "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
@@ -404,7 +405,7 @@ tr{
   display: inline-block;
   position: absolute;
   right: 30px;
-  top: 60px;
+  top: 160px;
 }
 
 .order_address{
@@ -682,4 +683,13 @@ tr{
   height: 133px;
   right: 0;
   top: 0;
+}
+
+.checkout_errors{
+  width: 1000px;
+  line-height: 2.1;
+  border-radius: 8px;
+  background-color: #ffffff;
+  background: linear-gradient(to top, #ffc4c4, #ffffff);
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
 }

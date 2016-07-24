@@ -1,6 +1,9 @@
 <div class="checkout">
+  <div class="checkout_errors">
+    <%= checkout_errors_message(@checkout)  %>
+  </div>
   <h1><%= t(:checkout) %></h1>
-
+  
   <div class="link_to_steps">
       <div class="current_step"><%= link_to t(:address), checkout_path(:address), method: :get %></div> 
       <div><%= link_to t(:delivery), checkout_path(:delivery), method: :get %></div>
@@ -47,7 +50,7 @@
               <%= f.text_field :ship_f_name, value: ship_first_name_value, placeholder: t(:first_name), size: 25 %>
             </div>
             <div class="field">
-              <%= f.text_field :ship_f_name, value: ship_last_name_value, placeholder: t(:last_name), size: 25 %>
+              <%= f.text_field :ship_l_name, value: ship_last_name_value, placeholder: t(:last_name), size: 25 %>
             </div>
             <div class="field">
               <%= f.text_field :ship_street, value: ship_street_value, placeholder: t(:street_address), size: 25 %>

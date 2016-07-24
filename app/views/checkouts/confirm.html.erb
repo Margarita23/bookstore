@@ -1,4 +1,7 @@
 <div class="checkout">
+  <div class="checkout_errors">
+    <%= checkout_errors_message(@checkout) %>
+  </div>
   <h1><%= t(:checkout)%></h1>
   <div class="link_to_steps">
       <div class="step_visit"><%= link_to t(:address), checkout_path(:address), method: :get %></div> 

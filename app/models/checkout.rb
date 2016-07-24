@@ -37,15 +37,15 @@ class Checkout
   validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip'), if: :on_address_step 
   validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone'), if: :on_address_step 
   
-  #validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), :if => !:same_address_box && :on_address_step
-  #validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), :if => !:same_address_box && :on_address_step
-  #validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), :if => !:same_address_box && :on_address_step
-  #validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), :if => !:same_address_box && :on_address_step
-  #validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), :if => !:same_address_box && :on_address_step
-  #validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), :if => !:same_address_box && :on_address_step
-  #validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), :if => !:same_address_box && :on_address_step
+  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), :if => :valid_ship_address
+  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), :if => :valid_ship_address
+  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), :if => :valid_ship_address
+  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), :if => :valid_ship_address
+  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), :if => :valid_ship_address
+  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), :if => :valid_ship_address
+  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), :if => :valid_ship_address
   
-  validates_numericality_of :bill_phone, :only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers'), if: :on_address_step
+  #validates_numericality_of :bill_phone, :only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers'), if: :on_address_step
   
   validates_presence_of :card_code, message: I18n.t(:"enter.card_code"), if: :on_payment_step
   validates_numericality_of :card_code, only_integer: true, greater_than: 3, message: I18n.t(:"enter.code_numbers"), if: :on_payment_step
@@ -53,6 +53,10 @@ class Checkout
   validates_presence_of :card_number, message: I18n.t(:"enter.card_number"), if: :on_payment_step
   validates_length_of :card_number, is: 16, message: I18n.t(:"enter.16_digits"), if: :on_payment_step
   validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.1card_only_num"), if: :on_payment_step
+  
+  def valid_ship_address
+    :same_address_box != '1' && :on_address_step
+  end
   
   def save
     if valid? && books_price > 0 

@@ -43,6 +43,7 @@ gem 'omniauth'
 gem 'cancancan', '~> 1.10'
 gem 'rails_12factor', group: :production
 gem 'globalize', '~> 5.0.0'
+gem 'bootstrap_form'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
