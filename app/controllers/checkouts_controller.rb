@@ -15,8 +15,8 @@ class CheckoutsController < ApplicationController
     elsif @checkout.valid?
       #@checkout.save
       session[:last_step] = step
-    #else
-      #flash[:alert] = error_msg
+    else
+      flash[:alert] = error_msg
     end
     render checkout_path(session[:last_step]), method: :get
   end
