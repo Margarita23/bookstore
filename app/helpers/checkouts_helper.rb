@@ -59,6 +59,14 @@ module CheckoutsHelper
     current_user.cart.card_number || session[:checkout]['ship_phone']
   end
   
+  def hidden_card_number
+    if !@checkout.card_number.nil?
+      hidden_number = @checkout.card_number[-4,4]
+    else
+      hidden_number = ''
+    end
+  end
+  
   def checkout_errors_message(resource)
     all_errors = ''
     resource.errors.each do |attr,msg| 
@@ -66,25 +74,4 @@ module CheckoutsHelper
     end 
     all_errors 
   end
-  
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

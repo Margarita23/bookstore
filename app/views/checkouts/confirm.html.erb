@@ -54,7 +54,7 @@
   
   <td>
     <ul>
-      <li>**** **** **** <%= @checkout.card_number[-4,4] %></li>
+      <li>**** **** **** <%= hidden_card_number %></li>
       <li><%= @checkout.exp_month %>/<%= @checkout.exp_year %></li>
     </ul>
   </td>
@@ -67,7 +67,7 @@
   <th><%= t(:qty) %></th>
   <th><%= t(:total) %></th>
   
-  <% current_user.cart.line_items.each do |item| %>
+  <% @checkout.order_items.each do |item| %>
   <tr>
     <td>
       <div class="cover">
@@ -102,7 +102,7 @@
    <%= t(:shipping)%>: $ <%= @checkout.get_delivery.price %>
   </div>
   <div>
-    <%= t(:ord_total)%>: $ <%= @checkout.total_price %>
+    <%= t(:ord_total)%>: $ <%= total_price(@checkout) %>
   </div>
 </div>
 <div class="dotted"></div>

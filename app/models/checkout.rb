@@ -61,6 +61,7 @@ class Checkout
     if valid? && books_price > 0
       payment
       order
+      get_line_items
       billing
       shipping
       true
@@ -101,12 +102,13 @@ class Checkout
     end
   end
   
+  def order_price(collection)
+    collection.collect{|book| book.price * book.quantity}.sum(:price)
+  end
+  
   def books_price
-    if order_items.count != 0
-      price = order_items.collect{|book| book.price * book.quantity}.sum(:price)
-    else
-      price = 0
-    end
+    return 0 if order_items.count == 0
+    price = order_price(order_items)
   end
   
   def total_price
@@ -121,7 +123,6 @@ private
 
   def order
     @order = Order.create(order_params) 
-    get_line_items
   end
   
   def get_line_items
@@ -142,18 +143,14 @@ private
 
   def billing
     @bill_address = Address.create(billing_params)
-    @bill_address.order_billing_id = order_id
-    @bill_address.save
   end
   
   def shipping
-    @ship_address = if same_address
+    @ship_address = if self.same_address == '1'
        Address.create(billing_params)
     else
        Address.create(shipping_params)
     end
-    @ship_address.order_shipping_id = order_id
-    @ship_address.save
   end
   
   def payment
@@ -195,10 +192,10 @@ private
   end
   
   def billing_params
-    {first_name: bill_f_name, last_name: bill_l_name, street: bill_street, city: bill_city, country: bill_country, zip: bill_zip, phone: bill_phone}
+    {first_name: bill_f_name, last_name: bill_l_name, street: bill_street, city: bill_city, country: bill_country, zip: bill_zip, phone: bill_phone, order_billing_id: order_id}
   end
   
   def shipping_params
-    {first_name: ship_f_name, last_name: ship_l_name, street: ship_street, city: ship_city, country: ship_country, zip: ship_zip, phone: ship_phone}
+    {first_name: ship_f_name, last_name: ship_l_name, street: ship_street, city: ship_city, country: ship_country, zip: ship_zip, phone: ship_phone, order_shipping_id: order_id}
   end
 end
