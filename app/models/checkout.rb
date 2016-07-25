@@ -37,15 +37,13 @@ class Checkout
   validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip'), if: :on_address_step 
   validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone'), if: :on_address_step 
   
-  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), :if => :valid_ship_address
-  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), :if => :valid_ship_address
-  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), :if => :valid_ship_address
-  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), :if => :valid_ship_address
-  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), :if => :valid_ship_address
-  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), :if => :valid_ship_address
-  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), :if => :valid_ship_address
-  
-  #validates_numericality_of :bill_phone, :only_integer => true, message: I18n.t(:'enter.billing_data.only_numbers'), if: :on_address_step
+  validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), unless: :valid_ship_address
+  validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), unless: :valid_ship_address
+  validates_presence_of :ship_street, :message => I18n.t(:'enter.shipping_data.street'), unless: :valid_ship_address
+  validates_presence_of :ship_city, :message => I18n.t(:'enter.shipping_data.city'), unless: :valid_ship_address
+  validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), unless: :valid_ship_address
+  validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), unless: :valid_ship_address
+  validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), unless: :valid_ship_address
   
   validates_presence_of :card_code, message: I18n.t(:"enter.card_code"), if: :on_payment_step
   validates_numericality_of :card_code, only_integer: true, greater_than: 3, message: I18n.t(:"enter.code_numbers"), if: :on_payment_step
@@ -55,11 +53,12 @@ class Checkout
   validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.1card_only_num"), if: :on_payment_step
   
   def valid_ship_address
-    :same_address_box != '1' && :on_address_step
+    self.same_address == '1'  && :on_address_step 
   end
   
   def save
-    if valid? && books_price > 0 
+    valid_new_quantity
+    if valid? && books_price > 0
       payment
       order
       billing
@@ -67,6 +66,22 @@ class Checkout
       true
     else 
        false
+    end
+  end
+  
+  def valid_new_quantity
+    order_items.each do |l|
+      book = Book.find_by(id: l.book_id)
+      new_quan = book.quantity - l.quantity
+      if new_quan < 0
+        l.quantity = l.quantity + new_quan
+        l.update(quantity: l.quantity)
+        if book.quantity == 0
+          l.destroy 
+        end
+        elsif new_quan == 0
+        l.update(quantity: l.quantity)
+      end
     end
   end
   
@@ -88,9 +103,9 @@ class Checkout
   
   def books_price
     if order_items.count != 0
-      order_items.collect{|book| book.price * book.quantity}.sum(:price)
+      price = order_items.collect{|book| book.price * book.quantity}.sum(:price)
     else
-      0
+      price = 0
     end
   end
   
@@ -117,11 +132,11 @@ private
       l.save
     end
   end
-  
+    
   def book_bought(item, book_id)
     book = Book.find_by(id: book_id)
+    book.quantity -= item.quantity 
     book.bought += item.quantity
-    book.quantity -= item.quantity
     book.save
   end
 
@@ -149,10 +164,6 @@ private
       @credit_card.user_id = user_id
       @credit_card.save
     end
-  end
-
-  def same_address_box
-    self.same_address == "1"
   end
 
   def on_address_step

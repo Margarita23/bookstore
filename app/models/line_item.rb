@@ -4,6 +4,6 @@ class LineItem < ActiveRecord::Base
   
   validates :quantity, {
     presence: true,
-    :numericality => {:greater_than => 0, :message => I18n.t(:book_quan)}
+    :numericality => {:greater_than => 0, :message => I18n.t(:book_quan), on: :create}
   }
 end

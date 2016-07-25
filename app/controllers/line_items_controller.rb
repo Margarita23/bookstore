@@ -8,7 +8,8 @@ class LineItemsController < ApplicationController
   
   # POST /line_items
   def create
-    book = Book.find(params[:book_id])
+    book = Book.find_by(id: params[:book_id])
+    return redirect_to root_path if book.nil?
     @line_item = set_quantity(book)
     if @line_item.save
       flash[:notice] = qty_less_books(@line_item, book)

@@ -6,6 +6,7 @@ class CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm
 
   def show   
+    return redirect_to new_user_session_path if current_user.nil?
     @checkout = Checkout.new(checkout_params)
     @checkout.current_step = session[:last_step] 
     @checkout.user_id = current_user.id 
@@ -18,14 +19,16 @@ class CheckoutsController < ApplicationController
   end
   
   def create
+    return redirect_to new_user_session_path if current_user.nil?
     @checkout = Checkout.new(session[:checkout])
     @checkout.user_id = current_user.id 
     if @checkout.save
+      session[:checkout] = nil
       redirect_to new_order_show_path(@checkout.order_id)
       flash[:notice] = t(:order_saved)
     else
-      redirect_to checkout_path(:confirm), method: :get  
       flash[:alert] = error_msg
+      redirect_to checkout_path(:confirm), method: :get 
     end
   end
   

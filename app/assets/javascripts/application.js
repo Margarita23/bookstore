@@ -17,16 +17,12 @@
 //= require_tree .
 
  $(document).ready(function() {
-     
       $("#owl-demo").owlCarousel({
-     
-          navigation : true, // Show next and prev buttons
+          navigation : true,
           slideSpeed : 300,
           paginationSpeed : 400,
           singleItem:true
-     
-      });
-     
+      });  
     });
 
 $(document).ready(function() {
@@ -41,8 +37,6 @@ $(document).ready(function() {
   });
 });
 
-
-//stars_count
 $(document).ready(function() {
   var full_star = '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
   var empty_star = '<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>'
@@ -68,21 +62,16 @@ $(document).ready(function() {
     }
   }
 });
-// This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
    
     if (response.status === 'connected') {
-      // Logged into your app and Facebook.
       testAPI();
     } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
     } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
     }
@@ -109,7 +98,6 @@ $(document).ready(function() {
 
   };
 
-  // Load the SDK asynchronously
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -118,8 +106,6 @@ $(document).ready(function() {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
@@ -128,22 +114,3 @@ $(document).ready(function() {
         'Thanks for logging in, ' + response.name + '!';
     });
   }
-
-/*
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1605409069769187',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-   
-   */

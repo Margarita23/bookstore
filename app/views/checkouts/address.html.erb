@@ -1,7 +1,11 @@
 <div class="checkout">
+  
   <div class="checkout_errors">
-    <%= checkout_errors_message(@checkout)  %>
+    <% if params[:commit] == "SAVE AND CONTINUE" %>
+      <%= checkout_errors_message(@checkout)  %>
+    <% end %>
   </div>
+  
   <h1><%= t(:checkout) %></h1>
   
   <div class="link_to_steps">
@@ -13,6 +17,7 @@
   </div>
 
   <%= form_for Checkout.new, url: checkout_path(:delivery), method: :get do |f| %>
+  
     <div class="order_address">
       <table class="address">
         <tr>
@@ -72,7 +77,7 @@
       </table>
       <div id = "same_address">  
         <div class="to_check">
-          <%= f.check_box :same_address, id: "checkbox_use_same_address", :checked => false %> <%= t(:same_address)%>
+          <%= f.check_box :same_address, id: "checkbox_use_same_address" %> <%= t(:same_address)%>
         </div>
       </div>
     </div>

@@ -91,7 +91,7 @@ en:
   forgot_pass: "Forgot your password?"
   not_confirm: "Didn't receive confirmation instructions? "
   receive_unlock: "Didn't receive unlock instructions? "
-  ord_not_save: "Please, check information. " 
+  ord_not_save: "Please, check information. Perhaps you selected the books left in the stock." 
   enter:
     billing_data:
       first_name: "Enter first name for billing address. " 
@@ -119,7 +119,7 @@ en:
     updated: 'Address was successfully updated. '
     not_updated: 'Address was not updated. Check data. '
   cart_cleared: 'Your shopping cart has been cleared. '
-  order_saved: "Order has been saved. "
+  order_saved: "Order has been saved. If the number of books in order to change, you have taken away the last of the book in stock. "
   books_in_store_1: "Sorry, but the stock only " 
   books_in_store_2: " book(s). In your basket was(were) added all this book(s)"
   books_added: "Book(s) was(were) added in your cart"
