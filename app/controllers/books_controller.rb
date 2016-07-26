@@ -4,6 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books/1
   def show
-    @ratings = @book.ratings.where(:admin_checking => true)
+    @ratings = @book.ratings.books_ratings
   end
+
 end
