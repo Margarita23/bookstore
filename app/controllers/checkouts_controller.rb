@@ -9,17 +9,17 @@ class CheckoutsController < ApplicationController
     return redirect_to new_user_session_path if current_user.nil?
     @checkout = Checkout.new(checkout_params)
     @checkout.current_step = session[:last_step] 
-    @checkout.user_id = current_user.id 
+    @checkout.user_id = current_user.id
     if future_step?(session[:last_step].to_sym)
       session[:last_step] = step
     elsif @checkout.valid?
-      session[:last_step] = step
+      session[:last_step] = step 
     end
     render checkout_path(session[:last_step]), method: :get
   end
   
   def create
-    return redirect_to new_user_session_path if current_user.nil?
+    return redirect_to new_user_session_path if current_user.nil? || current_user.guest
     @checkout = Checkout.new(session[:checkout])
     @checkout.user_id = current_user.id 
     if @checkout.save
