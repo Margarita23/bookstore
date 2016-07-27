@@ -102,7 +102,7 @@
    <%= t(:shipping)%>: $ <%= @checkout.get_delivery.price %>
   </div>
   <div>
-    <%= t(:ord_total)%>: $ <%= total_price(@checkout) %>
+    <%= t(:ord_total)%>: $ <%= @checkout.total_price %>
   </div>
 </div>
 <div class="dotted"></div>

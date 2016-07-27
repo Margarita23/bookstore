@@ -50,7 +50,7 @@ class Checkout
   
   validates_presence_of :card_number, message: I18n.t(:"enter.card_number"), if: :on_payment_step
   validates_length_of :card_number, is: 16, message: I18n.t(:"enter.16_digits"), if: :on_payment_step
-  validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.1card_only_num"), if: :on_payment_step
+  validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.card_only_num"), if: :on_payment_step
   
   def valid_ship_address
     self.same_address == '1'  && :on_address_step 

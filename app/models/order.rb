@@ -26,5 +26,6 @@ class Order < ActiveRecord::Base
   scope :in_progress, -> { where(state: :in_progress) }
   scope :shipped, -> { where(state: :shipped) }
   scope :completed, -> { where(state: :completed) }
+  scope :user_orders, lambda {|user_id| where('user_id = ?', user_id)}
 
 end

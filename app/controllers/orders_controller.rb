@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
-  
+  include OrdersHelper
   load_and_authorize_resource
   
   def index
-    @orders = Order.all.where(:user_id => current_user.id)
     if params[:view]
       @order = Order.find(params[:id])
     end
