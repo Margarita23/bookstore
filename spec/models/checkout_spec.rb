@@ -23,5 +23,5 @@ RSpec.describe Checkout, type: :model do
   it { should validate_presence_of(:card_code).with_message(I18n.t(:"enter.card_code")) }
   it { should validate_numericality_of(:card_code).with_message(I18n.t(:"enter.code_numbers")) }
   it { should validate_presence_of(:card_number).with_message(I18n.t(:"enter.16_digits")) }
-  it { should validate_numericality_of(:card_number).with_message(I18n.t(:"enter.1card_only_num")) }
+  it { should validate_numericality_of(:card_number).with_message(I18n.t(:"enter.card_only_num")) }
 end
