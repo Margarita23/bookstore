@@ -48,6 +48,7 @@ ru:
   total: "ВСЕГО"
   subtotal: "ИТОГО"
   empty_cart: "ОЧИСТИТЬ КОРЗИНУ"
+  already_empty: "Корзина уже пуста. "
   continue_shop: "ПРОДОЛЖИТЬ ПОКУПКИ"
   coupon: "Код купона"
   checkout: "Оформление заказа"

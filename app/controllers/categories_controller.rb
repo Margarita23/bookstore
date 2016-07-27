@@ -1,9 +1,7 @@
 class CategoriesController < ApplicationController
-  
+  include CategoriesHelper
   load_and_authorize_resource
 
-  # GET /categories/1
   def show
-    @categories = Category.all
   end
 end

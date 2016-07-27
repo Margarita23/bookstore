@@ -9,14 +9,9 @@ class CartsController < ApplicationController
   end
   
   def destroy
-    user_cart.line_items.destroy_all
+    return redirect_to cart_url, alert: I18n.t(:already_empty) if carts_items.empty?
+    carts_items.destroy_all
     redirect_to cart_url
     flash[:notice] = t(:'cart_cleared')
-  end
-  
-  private
-  
-  def user_cart
-    current_user.cart
   end
 end

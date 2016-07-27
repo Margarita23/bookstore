@@ -6,6 +6,6 @@ FactoryGirl.define do
     city "Winterfell"
     country "Seven Kingdom"
     zip { Faker::Number.number(5) }
-    phone { Faker::Number.number(10) }
+    phone "123456789"
   end
 end

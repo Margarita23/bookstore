@@ -1,8 +1,6 @@
 class AddressController < ApplicationController
-  
   load_and_authorize_resource
 
-  # POST /addresss
   def create
     @address = Address.new(address_params)
     if @address.save
@@ -12,7 +10,6 @@ class AddressController < ApplicationController
     end
   end
 
-  # PATCH/PUT /addresss/1
   def update
     @address = Address.find(params[:id]) 
     if @address.update(address_params)

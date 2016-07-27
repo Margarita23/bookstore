@@ -7,5 +7,4 @@ class Rating < ActiveRecord::Base
   validates :headline, presence: true
   
   scope :books_ratings, -> { where("admin_checking = true") }
-
 end

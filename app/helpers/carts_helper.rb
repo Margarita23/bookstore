@@ -11,6 +11,10 @@ module CartsHelper
     @quantity = current_user.cart.line_items.sum(:quantity)
   end 
   
+  def carts_items
+    current_user.cart.line_items
+  end
+  
   def current_cart
     current_user.cart
   end

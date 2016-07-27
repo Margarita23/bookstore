@@ -49,6 +49,9 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FeatureHelper, type: :feature
   config.include Devise::TestHelpers, :type => :controller
+  config.mock_with :rspec do |mocks|
+    mocks.allow_message_expectations_on_nil = true
+  end
 
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

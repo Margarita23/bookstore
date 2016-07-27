@@ -45,6 +45,7 @@ en:
   total: "TOTAL"
   subtotal: "SUBTOTAL"
   empty_cart: "EMPTY CART"
+  already_empty: "Cart is already empty"
   continue_shop: "CONTINUE SHOPPING"
   coupon: "Coupon code"
   checkout: "Checkout"

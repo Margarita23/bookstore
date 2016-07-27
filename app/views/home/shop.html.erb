@@ -29,7 +29,7 @@
   <div id="categories">
     <p><%= t(:categories) %></p>
     <ol class="links_cat">
-      <% @categories_shop.each do |category| %>
+      <% categories.each do |category| %>
         <li>
           <%= link_to category.title, category %>
         </li>
