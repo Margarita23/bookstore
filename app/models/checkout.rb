@@ -26,6 +26,7 @@ class Checkout
     :exp_month, 
     :exp_year,
     :current_step,
+    :coupon,
     :user_id
     )
 
@@ -112,7 +113,7 @@ class Checkout
   end
   
   def total_price
-    books_price.to_i + get_delivery.price.to_i
+    books_price.to_d + get_delivery.price.to_d
   end
   
   def order_items
@@ -146,10 +147,13 @@ private
   end
   
   def shipping
-    @ship_address = if self.same_address == '1'
-       Address.create(billing_params)
+    if self.same_address == '1'
+      @ship_address = Address.create(billing_params)
+      @ship_address.order_shipping_id = order_id
+      @ship_address.order_billing_id = nil
+      @ship_address.save
     else
-       Address.create(shipping_params)
+       @ship_address = Address.create(shipping_params)
     end
   end
   
@@ -184,7 +188,7 @@ private
   end
 
   def order_params
-    {total_price: total_price, delivery_id: delivery, credit_card_id: @credit_card.id, number: generate_number, user_id: user_id}
+    {total_price: total_price, delivery_id: delivery, credit_card_id: @credit_card.id, number: generate_number, coupon: coupon, user_id: user_id}
   end
   
   def credit_card_params

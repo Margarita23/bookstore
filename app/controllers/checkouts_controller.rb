@@ -24,6 +24,7 @@ class CheckoutsController < ApplicationController
     @checkout.user_id = current_user.id 
     if @checkout.save
       session[:checkout] = nil
+      session[:last_step] = 'address'
       redirect_to new_order_show_path(@checkout.order_id)
       flash[:notice] = t(:order_saved)
     else

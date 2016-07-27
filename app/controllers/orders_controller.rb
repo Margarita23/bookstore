@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
   end
   
   def new_order
+    @order = Order.find(params[:id])
   end
   
   def show

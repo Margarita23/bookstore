@@ -54,8 +54,9 @@
       <div><%= button_to t(:continue_shop), shopping_path, method: :get %></div>
     </div>
     <div class="right_buttons">
-      <div><%= text_field_tag :coupon, t(:coupon), :style => "width: 100px;"  %></div>
-      <div><%= button_to t(:checkout), checkout_path(session[:last_step]), method: :get %></div>
+      <%= form_for Checkout.new, url: checkout_path(session[:last_step]), method: :get do |f| %>
+        <%= f.text_field :coupon, :style => "width: 100px;", placeholder: t(:coupon) %> <%= f.submit t(:checkout) %>
+      <% end %>
     </div>
   </div>
 </div>

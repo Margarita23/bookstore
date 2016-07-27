@@ -143,6 +143,7 @@ RailsAdmin.config do |config|
       field :number
       field :total_price
       field :delivery
+      field :coupon
     end
     
     edit do

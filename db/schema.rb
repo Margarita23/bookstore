@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720091857) do
+ActiveRecord::Schema.define(version: 20160727140420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 20160720091857) do
     t.integer  "delivery_id"
     t.string   "number"
     t.integer  "credit_card_id"
+    t.string   "coupon"
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
