@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   load_and_authorize_resource
   def show
-    @ratings = @book.ratings.books_ratings
+    @ratings = @book.ratings.checking
   end
 end

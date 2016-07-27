@@ -3,22 +3,17 @@ class RatingsController < ApplicationController
   load_and_authorize_resource :book
   load_and_authorize_resource :rating, :through => :book
 
-  # GET /ratings
-  def index
-    @ratings = Rating.where(admin_checking: true)
-  end
+  #def index
+   # @ratings = Rating.checking
+  #end
 
-  # GET /ratings/1
   def show
   end
 
-  # GET /ratings/new
   def new
-    @book = Book.find(params[:book_id])
     @rating = Rating.new
   end
-  
-  # POST /ratings
+
   def create
     @rating = Rating.new(rating_params)
     @rating.book_id = params[:book_id]
