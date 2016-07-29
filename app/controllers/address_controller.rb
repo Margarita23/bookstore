@@ -3,23 +3,18 @@ class AddressController < ApplicationController
 
   def create
     @address = Address.new(address_params)
-    if @address.save
-      redirect_to @address
-    else
-      redirect_to :back
-    end
+    path = @address.save ? @address : :back
+    redirect_to path
   end
 
   def update
     @address = Address.find(params[:id]) 
-    if @address.update(address_params)
-      @address.save
-      redirect_to :back   
+    if @address.update(address_params)      
       flash[:notice] = I18n.t(:'addresses.updated')
     else
-      redirect_to :back
       flash[:alert] = I18n.t(:'addresses.not_updated')
     end
+    redirect_to :back
   end
 
   private

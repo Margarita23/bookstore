@@ -1,15 +1,3 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
@@ -63,8 +51,6 @@ $(document).ready(function() {
   }
 });
   function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
    
     if (response.status === 'connected') {
       testAPI();
@@ -82,20 +68,16 @@ $(document).ready(function() {
       statusChangeCallback(response);
     });
   }
-
   window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1605409069769187',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
-  });
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
+    FB.init({
+      appId      : '1605409069769187',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
   };
 
   (function(d, s, id) {
@@ -107,9 +89,7 @@ $(document).ready(function() {
   }(document, 'script', 'facebook-jssdk'));
 
   function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });

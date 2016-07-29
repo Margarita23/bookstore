@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base 
-  
   before_action :set_locale
-
   helper_method :current_user 
-
   protect_from_forgery
 
   def current_or_guest_user
