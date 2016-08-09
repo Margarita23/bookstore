@@ -5,7 +5,7 @@
   </ol>
   
   <div class="shop">
-    <% shopping.each do |book| %>
+    <% @books.each do |book| %>
       <div id="shop_item">
         <div class="cover_item"> 
           <% if book.quantity == 0 %>
@@ -29,7 +29,7 @@
   <div id="categories">
     <p><%= t(:categories) %></p>
     <ol class="links_cat">
-      <% categories.each do |category| %>
+      <% @categories.each do |category| %>
         <li>
           <%= link_to category.title, category %>
         </li>

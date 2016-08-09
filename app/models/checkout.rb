@@ -37,6 +37,7 @@ class Checkout
   validates_presence_of :bill_country, :message => I18n.t(:'enter.billing_data.country'), if: :on_address_step 
   validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip'), if: :on_address_step 
   validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone'), if: :on_address_step 
+  validates_numericality_of :bill_phone, message: I18n.t(:only_numbers), only_integer: true, if: :on_address_step
   
   validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), unless: :valid_ship_address
   validates_presence_of :ship_l_name, :message => I18n.t(:'enter.shipping_data.last_name'), unless: :valid_ship_address
@@ -45,6 +46,7 @@ class Checkout
   validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), unless: :valid_ship_address
   validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), unless: :valid_ship_address
   validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), unless: :valid_ship_address
+  validates_numericality_of :ship_phone, only_integer: true, message: I18n.t(:only_numbers), unless: :valid_ship_address
   
   validates_presence_of :card_code, message: I18n.t(:"enter.card_code"), if: :on_payment_step
   validates_numericality_of :card_code, only_integer: true, greater_than: 3, message: I18n.t(:"enter.code_numbers"), if: :on_payment_step
@@ -52,7 +54,7 @@ class Checkout
   validates_presence_of :card_number, message: I18n.t(:"enter.card_number"), if: :on_payment_step
   validates_length_of :card_number, is: 16, message: I18n.t(:"enter.16_digits"), if: :on_payment_step
   validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.card_only_num"), if: :on_payment_step
-  
+
   def valid_ship_address
     self.same_address == '1'  && :on_address_step 
   end
@@ -76,14 +78,10 @@ class Checkout
       book = Book.find_by(id: l.book_id)
       new_quan = book.quantity - l.quantity
       if new_quan < 0
-        l.quantity = l.quantity + new_quan
-        l.update(quantity: l.quantity)
-        if book.quantity == 0
-          l.destroy 
-        end
-        elsif new_quan == 0
-        l.update(quantity: l.quantity)
+        l.update(quantity: l.quantity + new_quan)
+        l.destroy if book.quantity == 0
       end
+      l.update(quantity: l.quantity) if new_quan == 0
     end
   end
   
@@ -92,14 +90,14 @@ class Checkout
   end
   
   def current_user
-    user = User.all.find_by(id: user_id.to_i)
+    user = User.find_by(id: user_id.to_i)
   end
   
   def get_delivery
-    if !delivery.nil? || delivery == ""
-      delivery = Delivery.all.find_by(id: self.delivery)
+    if delivery.nil? || delivery == ''
+      Delivery.first
     else
-      delivery = Delivery.first
+      Delivery.find_by(id: self.delivery)
     end
   end
   
@@ -109,7 +107,7 @@ class Checkout
   
   def books_price
     return 0 if order_items.count == 0
-    price = order_price(order_items)
+    order_price(order_items)
   end
   
   def total_price
@@ -120,26 +118,22 @@ class Checkout
     current_user.cart.line_items
   end
   
-private
-
   def order
-    @order = Order.create(order_params) 
+    @order = Order.create!(order_params) 
   end
+  
+private
   
   def get_line_items
     order_items.each do |l|
       book_bought(l, l.book_id)
-      l.order_id = order_id
-      l.cart_id = nil
-      l.save
+      l.update_attributes(order_id: order_id, cart_id: nil)
     end
   end
     
   def book_bought(item, book_id)
     book = Book.find_by(id: book_id)
-    book.quantity -= item.quantity 
-    book.bought += item.quantity
-    book.save
+    book.update_attributes(quantity: book.quantity -= item.quantity, bought: book.bought += item.quantity)
   end
 
   def billing
@@ -149,34 +143,31 @@ private
   def shipping
     if self.same_address == '1'
       @ship_address = Address.create(billing_params)
-      @ship_address.order_shipping_id = order_id
-      @ship_address.order_billing_id = nil
-      @ship_address.save
+      @ship_address.update_attributes(order_shipping_id: order_id, order_billing_id: nil)
     else
        @ship_address = Address.create(shipping_params)
     end
   end
   
   def payment
-    if !CreditCard.all.exists?(number: card_number)
+    if !CreditCard.exists?(number: card_number)
       @credit_card = CreditCard.create(credit_card_params)
     else
-      @credit_card = CreditCard.all.find_by(number: card_number)
-      @credit_card.user_id = user_id
-      @credit_card.save
+      @credit_card = CreditCard.find_by(number: card_number)
+      @credit_card.update_attributes(user_id: user_id)
     end
   end
 
   def on_address_step
-    self.current_step == 'address'
+    self.current_step == 'address' || self.current_step == 'confirm'
   end
   
   def on_delivery_step
-    self.current_step == 'delivery'
+    self.current_step == 'delivery' || self.current_step == 'confirm'
   end
   
   def on_payment_step
-    self.current_step == 'payment'
+    self.current_step == 'payment' || self.current_step == 'confirm'
   end
   
   def on_confirm_step
@@ -184,11 +175,11 @@ private
   end
 
   def generate_number
-    (0...ORDER_CHAR_NUM).map { (65 + rand(26)).chr }.join + (0...ORDER_DIG_NUM).map{rand(9)}.join
+    (0...ORDER_CHAR_NUM).map{(65 + rand(26)).chr}.join + (0...ORDER_DIG_NUM).map{rand(9)}.join
   end
 
   def order_params
-    {total_price: total_price, delivery_id: delivery, credit_card_id: @credit_card.id, number: generate_number, coupon: coupon, user_id: user_id}
+    {total_price: total_price, delivery_id: get_delivery.id, credit_card_id: @credit_card.id, number: generate_number, coupon: coupon, user_id: user_id}
   end
   
   def credit_card_params

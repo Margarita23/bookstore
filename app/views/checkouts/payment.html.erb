@@ -14,6 +14,8 @@
   
   <h3><%= t(:credit_card)%></h3>
   <%= form_for @checkout, url: checkout_path(:confirm), method: :get do |f| %>
+    <%= f.hidden_field :current_step, value: session[:last_step] %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="field">  
       <%= f.text_field :card_number, placeholder: t(:card_number), maxlength: 16, size: 20 %>
     </div>

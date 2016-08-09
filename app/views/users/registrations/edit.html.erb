@@ -38,14 +38,5 @@
     <%= f.submit t( :update ) %>
   </div>
 <% end %>
-  
 </div>
-
-<div class="set">
-<h3><%= t( :cancel_account )%></h3>
-
-<p><%= t(:unhappy)%> <%= button_to t( :cancel_account ), registration_path(resource_name), data: { confirm:  "Are you sure?" }, method: :delete %></p>
-  
-</div>
-
-<%= link_to t( :back ), :back %>
+<div><%= link_to t( :back ), :back %></div>

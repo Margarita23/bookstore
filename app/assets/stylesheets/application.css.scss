@@ -13,7 +13,6 @@
  *= require owl.carousel
  *= require owl.theme
  *= require_self
-
 */
 
 /* "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
@@ -42,6 +41,7 @@ body{
   background-color: #dddddd;
   opacity: 0.9;
   z-index: 1;
+  min-width: 825px;
 }
 
 .breadcrumb li > *{
@@ -74,7 +74,7 @@ body{
 
 #root{
   display: inline-block;
-  margin: 30px;
+  margin: 30px 10px 30px 30px;
   float: left;
 }
 
@@ -93,6 +93,7 @@ body{
   -webkit-user-select: none;
   height: 32px;
 }
+
 .empty:active{
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -110,9 +111,12 @@ div > div{
 }
 
 .settings{
+  text-align: right;
   font-size: 15px;
-  margin: 30px 50px 0px 0px;
+  margin: 30px 5px 0px 0px;
   float:right;
+  width: 32%;
+  min-width: 420px;
 }
 
 #shopping > p{
@@ -202,6 +206,10 @@ div > div{
   display: block;
 }
 
+img.raty-cancel {
+     display: none;
+  }
+
 .author{
   display: block;
 }
@@ -256,6 +264,7 @@ div > div{
   overflow: hidden;
   text-overflow:ellipsis;
 }
+
 .book_title{
   font-weight: 900;
   font-size: 20px;
@@ -291,7 +300,6 @@ div > div{
 .to_cart > * > *{
   display: inline-block;
 }
-
 
 .cart{
   width: 100%;
@@ -358,7 +366,6 @@ tr{
 
 .before_order{
   display:block;
-  width: 80%;
   height: 50px;
   margin: 60px 0px 10px 0px;
 }
@@ -372,6 +379,13 @@ tr{
 .right_buttons{
   float: right;
   position: relative; 
+  display: inline;
+}
+
+.update_items{
+  bottom: 19px;
+  right: 192px;
+  position: absolute;
   display: inline;
 }
 
@@ -423,10 +437,13 @@ tr{
   font-weight: 400;
   font-size: 25px;
 }
+
 .checkout{
   position: relative;
   margin: 30px 100px 0px 100px;
+  min-width: 760px;
 }
+
 .checkout > h1{
   display: inline-block;
   width: 150px;
@@ -491,10 +508,16 @@ tr{
   position: absolute;
 }
 
+.checking_field{
+  height: 30px;
+  width: 227px;
+}
+
 .field{
   margin-bottom: 10px;
   display: table;
 }
+
 .to_check{
   width: 150px;
   height: 10px;
@@ -504,6 +527,7 @@ tr{
   margin: 0px 10px;
   padding: 0px 10px;
 }
+
 #confirm ul, li{
   list-style: none;
   text-align: left;
@@ -529,10 +553,10 @@ tr{
   display: inline-block;
   margin: 10px;
 }
+
 .order_total{
   right: 0px;
   position: absolute;
-  height: 250px;
   width: 200px;
   margin: -20px 0px 0px 0px;
 }
@@ -570,6 +594,7 @@ tr{
 .orders th:first-child, td:first-child{
   padding: 0px;
 }
+
 .orders th:first-child{
   text-align: center;
 }
@@ -627,6 +652,7 @@ tr{
 .add_book > * > *{
   display: inline-block;
 }
+
 #win{
   display: inline-block;
 }

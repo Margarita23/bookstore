@@ -61,17 +61,13 @@ module CheckoutsHelper
   
   def hidden_card_number
     if !@checkout.card_number.nil?
-      hidden_number = @checkout.card_number[-4,4]
+      hidden_number = "**** **** **** " + @checkout.card_number[-4,4]
     else
       hidden_number = ''
     end
   end
   
   def checkout_errors_message(resource)
-    all_errors = ''
-    resource.errors.each do |attr,msg| 
-      all_errors << msg 
-    end 
-    all_errors 
+    resource.errors.map{|attr,msg| msg}.join
   end
 end

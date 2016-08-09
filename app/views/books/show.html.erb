@@ -3,7 +3,7 @@
     <div class="title">
       <%= @book.title %> <%= t(:by) %> 
       <div>
-        <%= link_to books_authors_link(@book), author_path(@book.author.id) %>
+        <%= link_to @book.authors_link, author_path(@book.author.id) %>
       </div>
     </div>
     <div class="cover">
@@ -38,15 +38,11 @@
           <div class="stars">
             <%= t(:rating)%>: <div class="grade"><%= rat.grade %></div>
           </div>
-          <div class="headline"><%= rat.headline %></div>
+          <div class="headline"><%= rat.headline %></div>        
           <div class="rev_create"><%= l(rat.created_at, format: :long)%></div>
           <div class="author">
             <%= t(:by)%>
-            <% if !rat.user.billing_address.first_name.blank? %>
-              <%=link_to "#{rat.user.billing_address.first_name} #{rat.user.billing_address.last_name}" %>
-            <% else %>
-              <%=link_to rat.user.email, book_rating_path(@book.id, rat.id) %>
-            <% end %>
+            <%= link_to rat.author_name, book_rating_path(rat.book.id, rat.id) %>
           </div>
           <div class="rev_text"><%= rat.review %></div>
         </li>

@@ -3,53 +3,53 @@
 //= require bootstrap-sprockets
 //= require owl.carousel
 //= require_tree .
+//= require jquery.raty
+//= require ratyrate
 
- $(document).ready(function() {
-      $("#owl-demo").owlCarousel({
+$(document).ready(function() {
+  $("#owl-demo").owlCarousel({
           navigation : true,
           slideSpeed : 300,
           paginationSpeed : 400,
           singleItem:true
       });  
-    });
-
-$(document).ready(function() {
+  
   $('#checkbox_use_same_address').on('click', function(){
     $("#shipping_add").slideToggle(200);
   });
-});
-
-$(document).ready(function() {
+  
+  if ($('#checkbox_use_same_address').prop("checked")){
+    $("#shipping_add").css( "display", "none" );
+  }
+  
   $('#CVV_info').on('click', function(){
     $(".what_cvv").slideToggle(200);
   });
 });
 
 $(document).ready(function() {
-  var full_star = '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>';
-  var empty_star = '<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>'
+  var full_star = '<img src = "http://res.cloudinary.com/nmetau/image/upload/c_scale,h_18,w_18/v1470213961/star_on_kipzbw.png" >';
+  var empty_star = '<img src = "http://res.cloudinary.com/nmetau/image/upload/c_scale,w_18/v1470213961/star_of_nwm4nm.png" >';
   for(var i = 0; i < $('.grade').length; i++){
     var count = $('.grade')[i].innerHTML;
-    if(count=='0'){
-      $('.grade')[i].innerHTML = empty_star + empty_star + empty_star + empty_star + empty_star;
-    }
     if(count=='1'){
-      $('.grade')[i].innerHTML = full_star + empty_star + empty_star + empty_star + empty_star;
+      $('.grade')[i].innerHTML = full_star + empty_star.repeat(4) ;
     }
     if(count=='2'){
-      $('.grade')[i].innerHTML = full_star + full_star + empty_star + empty_star + empty_star;
+      $('.grade')[i].innerHTML = full_star.repeat(2) + empty_star.repeat(3);
     }
     if(count=='3'){
-      $('.grade')[i].innerHTML = full_star + full_star + full_star + empty_star + empty_star;
+      $('.grade')[i].innerHTML = full_star.repeat(3) + empty_star.repeat(2);
     }
     if(count=='4'){
-      $('.grade')[i].innerHTML = full_star + full_star + full_star + full_star + empty_star;
+      $('.grade')[i].innerHTML = full_star.repeat(4) + empty_star;
     }
     if(count=='5'){
-      $('.grade')[i].innerHTML = full_star + full_star + full_star + full_star + full_star;
+      $('.grade')[i].innerHTML = full_star.repeat(5);
     }
   }
 });
+
   function statusChangeCallback(response) {
    
     if (response.status === 'connected') {

@@ -10,6 +10,7 @@ RailsAdmin.config do |config|
   end
 
   config.current_user_method { current_user }
+
   ### Popular gems integration
 
   ## == Devise ==
@@ -104,6 +105,18 @@ RailsAdmin.config do |config|
     end
   end
   
+  config.model 'AverageCache' do 
+    visible false
+  end
+  
+  config.model 'Rate' do 
+    visible false
+  end
+  
+  config.model 'RatingCache' do 
+    visible false
+  end
+  
   config.model 'Category' do
     list do
       field :title
@@ -134,6 +147,10 @@ RailsAdmin.config do |config|
       field :review
       field :admin_checking
     end
+  end
+  
+  config.model 'OverallAverage' do 
+    visible false
   end
   
   config.model 'Order' do

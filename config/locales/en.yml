@@ -1,5 +1,6 @@
 en:
   welcome: "Welcome to our amazing Bookstore! Choose anything you wish, we'll ship it anywhere! "
+  authorize_please: "Authorize please. "
   site_name: "Bookstore"
   home_page: "HOME"
   shopping: "SHOP"
@@ -10,6 +11,7 @@ en:
   sign_out: "Sign out"
   sign_up: "Sign up"
   login: "Login"
+  control_panel: "Control panel"
   russian: "RU"
   english: "EN"
   add_to_cart: "ADD TO CART"
@@ -93,6 +95,7 @@ en:
   not_confirm: "Didn't receive confirmation instructions? "
   receive_unlock: "Didn't receive unlock instructions? "
   ord_not_save: "Please, check information. Perhaps you selected the books left in the stock." 
+  only_numbers: "Phone must contain only numbers. "
   enter:
     billing_data:
       first_name: "Enter first name for billing address. " 
@@ -102,7 +105,6 @@ en:
       country: "Enter country for billing address. "
       zip: "Enter zip for billing address. "
       phone: "Enter phone for billing address. "
-      only_numbers: "Billing phone must contain only numbers"
     shipping_data:
       first_name: "Enter first name for shipping address. " 
       last_name: "Enter last name for shipping address. "
@@ -125,7 +127,7 @@ en:
   books_in_store_2: " book(s). In your basket was(were) added all this book(s)"
   books_added: "Book(s) was(were) added in your cart"
   books_not_added: "Book can not be add to your cart, please enter information. "
-  quan_changed: "Books quantity was changed. "
+  quantity_changed: "Books quantity was changed. "
   quan_not_changed: "Books quantity can not change, please enter information. "
   remove_books: 'Book(s) was remove from your cart. '
   rating_saved: "Your review has been successfully saved. It will be published after administrator validation. "
@@ -136,3 +138,4 @@ en:
   phone_only_num: "Phone must contain only numbers"
   book_quan: "Check quantity of books that you want to add to your cart. "
   review_length: "Your review too match long"
+  order_must_contain_books: "Order must contain books. "

@@ -1,53 +1,53 @@
 <div class="checkout">
   <table class = "cart">
-
     <th><%= t(:book) %></th>
     <th><%= t(:price) %></th>
     <th><%= t(:qty) %></th>
     <th><%= t(:total) %></th>
-
-    <% carts_items.each do |item| %>
-    <tr>
-      <td>
-        <div class="cover">
-          <%= link_to image_tag(item.book.cover.url(:med)), item.book %>
-        </div>
-        <div class="book_info_in_cart">
-          <div class="book_title">
-            <%= item.book.title %>
-          </div>
-          <div class = "desc">
-            <%= item.book.description %>
-          </div>
-        </div>
-      </td>
-      <td>
-        <%= item.book.price %>
-      </td>
-      <td>
-        <div class = "update">
-          <%= form_tag(line_item_path(id: item.id), method: :put) do %>
-          <%= number_field_tag(:new_quantity, item.quantity, in: 1..item.book.quantity, step: 1, :style => "width: 50px;") %>
-            <div class="update">
-              <%= submit_tag( t(:update) ) %>
+    
+    <%= form_for @cart, url: update_carts_items_path(@cart.id), method: :put do |f| %>
+  
+    <%= fields_for :ids do |id| %>
+      <% carts_items.each do |item| %>
+        <tr>
+          <td>
+            <div class="cover">
+              <%= link_to image_tag(item.book.cover.url(:med)), item.book %>
             </div>
-          <% end %>
-        </div>
-      </td>
-      <td>
-        <%= item.book.price * item.quantity %>
-      </td>
-      <td>
-        <%= link_to 'X', line_item_path(id: item.id), method: :delete,  :style => "color: #000" %>
-      </td>
-    </tr>
+            <div class="book_info_in_cart">
+              <div class="book_title">
+                <%= item.book.title %>
+              </div>
+              <div class = "desc">
+                <%= item.book.description %>
+              </div>
+            </div>
+          </td>
+          <td>
+            <%= item.book.price %>
+          </td>
+          <td>
+            <div class = "update">
+              <%= id.number_field :"#{item.id}", value: item.quantity, in: 1..item.book.quantity, step: 1, :style => "width: 50px;" %>
+            </div>
+          </td>
+          <td>
+            <%= item.book.price * item.quantity %>
+          </td>
+          <td>
+            <%= link_to 'X', line_item_path(id: item.id), method: :delete,  :style => "color: #000" %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
+    <div class="update_items">
+      <%= f.submit t(:update), method: :put %>
+    </div>
+  <% end %>
   </table>
-
   <div class="sub_total">
     <%= t(:subtotal)%> : <div class="boldy">$ <%= sub_total %></div>
   </div>
-
   <div class="before_order">
     <div class="left_buttons">
       <div><%= button_to t(:empty_cart), cart_path, method: :delete %></div>
@@ -55,8 +55,8 @@
     </div>
     <div class="right_buttons">
       <%= form_for Checkout.new, url: checkout_path(session[:last_step]), method: :get do |f| %>
-        <%= f.text_field :coupon, :style => "width: 100px;", placeholder: t(:coupon) %> <%= f.submit t(:checkout) %>
+        <%= f.text_field :coupon, :style => "width: 100px; height: 29px;", placeholder: t(:coupon) %> <%= f.submit t(:checkout) %>
       <% end %>
     </div>
-  </div>
+  </div> 
 </div>

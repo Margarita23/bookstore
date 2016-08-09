@@ -54,7 +54,7 @@
   
   <td>
     <ul>
-      <li>**** **** **** <%= hidden_card_number %></li>
+      <li><%= hidden_card_number %></li>
       <li><%= @checkout.exp_month %>/<%= @checkout.exp_year %></li>
     </ul>
   </td>
@@ -108,6 +108,8 @@
 <div class="dotted"></div>
 
   <%= form_for @checkout, url: checkouts_path, method: :post do |f| %>   
+    <%= f.hidden_field :current_step, value: session[:last_step] %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="actions">
       <%= f.submit t(:save_order) %>
     </div>

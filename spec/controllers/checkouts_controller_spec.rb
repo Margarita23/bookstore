@@ -24,12 +24,12 @@ RSpec.describe CheckoutsController, :type => :controller do
   end
    
   describe "POST #create" do 
-      let(:user) {create :user} 
-      subject { post :create, checkout: FactoryGirl.attributes_for(:checkout)}  
+    let(:user2) {create :user, guest: false} 
+    subject { post :create, checkout: FactoryGirl.attributes_for(:checkout)}  
           
-      it "when current_user is guest" do
-        allow(controller).to receive(:current_user).and_return user
-        expect(subject).to redirect_to new_user_session_path
-      end
+    it "when current_user is guest" do
+      allow(controller).to receive(:current_user).and_return user2
+      expect(subject).to redirect_to new_user_session_path
+    end
   end  
 end

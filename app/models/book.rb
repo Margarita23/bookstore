@@ -8,8 +8,10 @@ class Book < ActiveRecord::Base
   belongs_to :author
   has_many :ratings, dependent: :destroy
   has_many :line_items
-  
-  before_destroy :ensure_not_referenced_by_any_line_item
+   
+  delegate :first_name, :last_name, to: :author
+
+  before_destroy :not_referenced_by_any_item
   
   has_attached_file :cover, 
                     styles: { small: "64x64", med: "200x300", large: "400x400" }, 
@@ -22,11 +24,7 @@ class Book < ActiveRecord::Base
   
   private
   
-    def ensure_not_referenced_by_any_line_item
-      if line_items.empty?
-        return true
-      else
-        return false
-      end
+    def not_referenced_by_any_item
+      line_items.empty?
     end
 end

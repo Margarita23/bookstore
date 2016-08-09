@@ -1,13 +1,9 @@
 class RatingsController < ApplicationController
-  
   load_and_authorize_resource :book
   load_and_authorize_resource :rating, :through => :book
 
-  #def index
-   # @ratings = Rating.checking
-  #end
-
   def show
+    @rating = Rating.find(params[:id]).decorate
   end
 
   def new
@@ -16,8 +12,7 @@ class RatingsController < ApplicationController
 
   def create
     @rating = Rating.new(rating_params)
-    @rating.book_id = params[:book_id]
-    @rating.user_id = current_user.id
+    @rating.grade = params[:score]
     if @rating.save
       redirect_to book_path(@rating.book_id)
       flash[:notice] = t(:rating_saved)
@@ -29,6 +24,6 @@ class RatingsController < ApplicationController
   
   private
     def rating_params
-      params.require(:rating).permit( :headline, :grade, :review)
+      params.require(:rating).permit( :headline, :review, :book_id, :user_id)
     end
 end

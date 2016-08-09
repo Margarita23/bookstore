@@ -8,7 +8,7 @@
   <div class="rev_create"><%= l(@rating.created_at, format: :short)%></div>
   <div class="author">
     <%=t(:by)%>
-      <%=link_to rating_author, book_rating_path(@rating.book.id, @rating.id) %>
+      <%=link_to @rating.author_name, book_rating_path(@rating.book.id, @rating.id) %>
   </div>
   <div class="rev_text"><%= @rating.review %></div>
 </div>

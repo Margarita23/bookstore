@@ -1,13 +1,10 @@
 <div class="checkout">
-  
   <div class="checkout_errors">
     <% if params[:commit] == "SAVE AND CONTINUE" %>
       <%= checkout_errors_message(@checkout)  %>
     <% end %>
   </div>
-  
   <h1><%= t(:checkout) %></h1>
-  
   <div class="link_to_steps">
       <div class="current_step"><%= link_to t(:address), checkout_path(:address), method: :get %></div> 
       <div><%= link_to t(:delivery), checkout_path(:delivery), method: :get %></div>
@@ -15,9 +12,9 @@
       <div><%= link_to t(:confirm), checkout_path(:confirm), method: :get %></div>
       <div><%= t(:complete) %></div>
   </div>
-
-  <%= form_for Checkout.new, url: checkout_path(:delivery), method: :get do |f| %>
-  
+  <%= form_for Checkout.new, url: checkout_path(:delivery), method: :get do |f| %> 
+    <%= f.hidden_field :current_step, value: session[:last_step] %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="order_address">
       <table class="address">
         <tr>
@@ -26,6 +23,8 @@
         </tr>
         <tr>
           <td>
+            <div class="checking_field">
+            </div>
             <div class="field">  
               <%= f.text_field :bill_f_name, size: 25, placeholder: t(:first_name), value: bill_first_name_value %> 
             </div>
@@ -47,39 +46,37 @@
             <div class="field">
               <%= f.text_field :bill_phone, value: bill_phone_value, placeholder: t(:phone), size: 25 %>
             </div>
-            <div class="to_check">
-            </div>
           </td>
-          <td id = "shipping_add">
-            <div class="field">
-              <%= f.text_field :ship_f_name, value: ship_first_name_value, placeholder: t(:first_name), size: 25 %>
+          <td>          
+            <div class="checking_field">
+              <%= f.check_box :same_address, id: "checkbox_use_same_address", value: "1", checked: true %> <%= t(:same_address)%>
             </div>
-            <div class="field">
-              <%= f.text_field :ship_l_name, value: ship_last_name_value, placeholder: t(:last_name), size: 25 %>
-            </div>
-            <div class="field">
-              <%= f.text_field :ship_street, value: ship_street_value, placeholder: t(:street_address), size: 25 %>
-            </div>
-            <div class="field">
-              <%= f.text_field :ship_city, value: ship_city_value, placeholder: t(:city), size: 25 %>
-            </div>
-            <div class="field">
-              <%= f.text_field :ship_country, value: ship_country_value, placeholder: t(:country), size: 25 %>
-            </div>
-            <div class="field">
-              <%= f.text_field :ship_zip, value: ship_zip_value, placeholder: t(:zip), size: 25 %>
-            </div>
-            <div class="field">
-              <%= f.text_field :ship_phone, value: ship_phone_value, placeholder: t(:phone), size: 25 %>
+            <div id = "shipping_add">
+              <div class="field">
+                <%= f.text_field :ship_f_name, value: ship_first_name_value, placeholder: t(:first_name), size: 25 %>
+              </div>
+              <div class="field">
+                <%= f.text_field :ship_l_name, value: ship_last_name_value, placeholder: t(:last_name), size: 25 %>
+              </div>
+              <div class="field">
+                <%= f.text_field :ship_street, value: ship_street_value, placeholder: t(:street_address), size: 25 %>
+              </div>
+              <div class="field">
+                <%= f.text_field :ship_city, value: ship_city_value, placeholder: t(:city), size: 25 %>
+              </div>
+              <div class="field">
+                <%= f.text_field :ship_country, value: ship_country_value, placeholder: t(:country), size: 25 %>
+              </div>
+              <div class="field">
+                <%= f.text_field :ship_zip, value: ship_zip_value, placeholder: t(:zip), size: 25 %>
+              </div>
+              <div class="field">
+                <%= f.text_field :ship_phone, value: ship_phone_value, placeholder: t(:phone), size: 25 %>
+              </div>
             </div>
           </td>
         </tr>
       </table>
-      <div id = "same_address">  
-        <div class="to_check">
-          <%= f.check_box :same_address, id: "checkbox_use_same_address" %> <%= t(:same_address)%>
-        </div>
-      </div>
     </div>
     <div class="actions">
       <%= f.submit t(:save_continue) %>

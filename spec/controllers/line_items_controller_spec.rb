@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe LineItemsController, :type => :controller do
   describe "line_item controller" do
-    let(:user) {create :user, guest: false}
+    let(:user) {create :user}
     let(:cart) {create :cart, id: user.id, user_id: user.id}
     let(:book) {create :book }
     let(:line_item) {create :line_item, cart_id: cart.id, book_id: book.id, price: book.price}

@@ -13,6 +13,8 @@
   </div>
 
   <%= form_for @checkout, url: checkout_path(:payment), method: :get do |f| %>
+    <%= f.hidden_field :current_step, value: session[:last_step] %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
     <ul>
       <% Delivery.all.each do |del| %>  
       <li>
