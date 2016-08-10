@@ -24,7 +24,7 @@ class Book < ActiveRecord::Base
   
   private
   
-    def not_referenced_by_any_item
-      line_items.empty?
-    end
+  def not_referenced_by_any_item
+    line_items.empty?
+  end
 end

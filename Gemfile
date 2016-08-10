@@ -30,6 +30,7 @@ gem 'devise'
 gem 'wicked'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'rails_admin'
+gem 'rails_admin_aasm'
 gem 'owlcarousel-rails'
 gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz'
@@ -46,6 +47,7 @@ gem 'globalize', '~> 5.0.0'
 gem 'bootstrap_form'
 gem 'ratyrate'
 gem 'draper'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

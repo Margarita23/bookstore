@@ -8,9 +8,8 @@ class Ability
       can :dashboard
       can :manage, :all
       alias_action :create, :update, :destroy, :to => :cud
-      cannot :cud, [Cart, LineItem, Checkout]
+      cannot :cud, [Cart, Checkout]
       cannot :create, Order
-      can :update, Rating
       cannot :create, Rating
     elsif !user.new_record?
       can :read, [Book, Category, Author, Rating, Cart, LineItem, Address, Order]

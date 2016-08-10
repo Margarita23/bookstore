@@ -1,11 +1,11 @@
 class AddressController < ApplicationController
   load_and_authorize_resource
 
-  def create
-    @address = Address.new(address_params)
-    path = @address.save ? @address : :back
-    redirect_to path
-  end
+  #def create
+  #  @address = Address.new(address_params)
+  #  path = @address.save ? @address : :back
+  #  redirect_to path
+  #end
 
   def update
     @address = Address.find(params[:id]) 

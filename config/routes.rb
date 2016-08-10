@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :ratings, only: [:new, :show, :create]
   end
   
-  put 'carts/:id/update_items' => "carts#update_items", as: 'update_carts_items', method: :put
+  put 'carts/:id/update_items' => "carts#update_items", as: 'update_carts_items'
   
   resources :address, only: [:update]
   

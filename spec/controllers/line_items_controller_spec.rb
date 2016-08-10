@@ -34,7 +34,6 @@ RSpec.describe LineItemsController, :type => :controller do
           allow(Book).to receive("find_by").and_return book
         end
         it "check flash" do
-          allow(controller).to receive(:set_quantity).and_return LineItem.new
           subject
           expect(flash[:alert]).to eq I18n.t(:books_not_added)
         end 
@@ -42,23 +41,22 @@ RSpec.describe LineItemsController, :type => :controller do
       describe "line_items new quantity is valid" do
         before do
           allow(Book).to receive("find_by").and_return book
-          allow(controller).to receive(:set_quantity).and_return(line_item)
         end
         it "flash notice after save" do 
-          allow(controller).to receive(:qty_less_books).and_return(I18n.t(:books_added))
+          allow(SetLessQuantityService).to receive_message_chain("new.call").and_return I18n.t(:books_added)
           post :create, cart_id: cart.id, :new_quantity => '3' 
           expect(flash[:notice]).to eq I18n.t(:books_added)
         end
         it "new_quantity more than book.quantity" do 
           p = I18n.t(:books_in_store_1) + "#{book.quantity}" + I18n.t(:books_in_store_2)
-          allow(controller).to receive(:qty_less_books).and_return p
+          allow(SetLessQuantityService).to receive_message_chain("new.call").and_return p
           post :create, cart_id: cart.id, :new_quantity => '300' 
           expect(flash[:notice]).to eq p
         end
         it "flash alert after save" do 
-          allow(controller).to receive(:qty_less_books).and_return(I18n.t(:books_added))
+          allow(ItemWithCheckingQuantityService).to receive_message_chain("new.call").and_return(nil)
           subject
-          expect(flash[:notice]).to eq I18n.t(:books_added)
+          expect(flash[:alert]).to eq I18n.t(:books_not_added)
         end
       end
     end
@@ -73,40 +71,6 @@ RSpec.describe LineItemsController, :type => :controller do
         expect{subject}.to change(LineItem, :count).by(-1)
       end
     end
-    
-    describe "PUT #update" do
-      context "valid params" do
-        it "check alert" do 
-          put :update, id: line_item.id, line_item: FactoryGirl.attributes_for(:line_item), new_quantity: '2'
-          expect(flash[:notice]).to eq I18n.t(:quan_changed)
-        end
-      end
-
-      context "invalid params" do
-        it "path after unsuccessful updating  " do 
-          expect(put :update, id: line_item.id, line_item: FactoryGirl.attributes_for(:line_item), new_quantity: '240').to redirect_to "back"
-        end
-        it "check alert" do 
-          put :update, id: line_item.id, line_item: FactoryGirl.attributes_for(:line_item), new_quantity: '250'
-          expect(flash[:alert]).to eq I18n.t(:quan_not_changed)
-        end
-      end
-      
-      describe "method check_quantity return true" do
-        subject { put :update, cart_id: cart.id, id: line_item.id, :new_quantity => '4' }
-        it "return true" do
-          subject
-          expect(controller.send(:check_quantity,line_item, book, 2)).to eq true
-        end
-        it "check_quantity return false" do
-          put :update, cart_id: cart.id, id: line_item.id, :new_quantity => '150'
-          expect(controller.send(:check_quantity,line_item, book, 150)).to eq false
-        end
-      end
-end
-
-    
-    
-    
+  
   end
 end

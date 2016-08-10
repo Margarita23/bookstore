@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "Review abilities" do  
 
-  let!(:user) { create(:user, guest: false, admin: false) }
+  let!(:user) { create(:user, admin: false) }
   let!(:category) { create :category }
   let!(:book1) { create :book }
 

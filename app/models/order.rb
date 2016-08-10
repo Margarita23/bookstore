@@ -2,15 +2,15 @@ class Order < ActiveRecord::Base
   include AASM
   aasm :column => 'state', :whiny_transitions => false do
     state :in_progress, :initial => true
-    state :shipped
+    state :in_delivery
     state :completed
 
-    event :ship do
-      transitions :from => :in_progress, :to => :shipped
+    event :shipped do
+      transitions :from => :in_progress, :to => :in_delivery
     end
 
     event :complete do
-      transitions :from => :shipped, :to => :completed
+      transitions :from => :in_delivery, :to => :completed
     end 
   end
   
@@ -24,8 +24,7 @@ class Order < ActiveRecord::Base
   validates_presence_of :total_price, :delivery_id, :number
   
   scope :in_progress, -> { where(state: :in_progress) }
-  scope :shipped, -> { where(state: :shipped) }
+  scope :in_delivery, -> { where(state: :in_delivery) }
   scope :completed, -> { where(state: :completed) }
-  #scope :user_orders, lambda {|user_id| where('user_id = ?', user_id)}
 
 end

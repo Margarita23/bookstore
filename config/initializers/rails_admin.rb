@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-
+    state
     ## With an audit adapter, you can add:
     # history_index
     # history_show
@@ -94,6 +94,14 @@ RailsAdmin.config do |config|
       field :bought
       field :category
     end
+    edit do
+      exclude_fields :id 
+      exclude_fields :created_at 
+      exclude_fields :updated_at 
+      exclude_fields :line_items
+      exclude_fields :ratings
+    end
+    
   end
   
   config.model 'Author' do
@@ -164,27 +172,7 @@ RailsAdmin.config do |config|
     end
     
     edit do
-      field :state, :enum do
-        enum do
-          ['in_progress', 'shipped','completed']
-        end
-      end
-      field :state do
-        label "Order State"
-      end
+      field :state, :state
     end
-  end
-  
-  config.model 'User' do
-    list do
-      field :email
-      
-      field :sign_in_count do
-        label "Sign In Count"
-      end
-      field :last_sign_in_at do
-        label "Last Sign In"
-      end
-    end
-  end
+  end 
 end
