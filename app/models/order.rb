@@ -15,6 +15,7 @@ class Order < ActiveRecord::Base
   end
   
   has_many :line_items, dependent: :destroy
+  has_one :coupon
   belongs_to :user
   belongs_to :delivery
   belongs_to :credit_card
@@ -27,4 +28,7 @@ class Order < ActiveRecord::Base
   scope :in_delivery, -> { where(state: :in_delivery) }
   scope :completed, -> { where(state: :completed) }
 
+  def order_sub_total
+    self.line_items.collect{|book| book.price * book.quantity}.sum(:price)
+  end
 end

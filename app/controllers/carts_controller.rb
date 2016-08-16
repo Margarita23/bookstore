@@ -20,13 +20,18 @@ class CartsController < ApplicationController
       line_item = LineItem.find_by(id: item_id.to_i)
       line_item.update_attributes(quantity: params[:ids][:"#{item_id}"])
     end
+    @cart.coupon = Coupon.find_by(code: params[:coupon][:code])
+    flash[:alert] = "Coupon code isn`t right" if check_coupon_code
     flash[:notice] = t(:quantity_changed)
     redirect_to :back
   end
   
-  private 
+  private
   
-  def all_items_ids
-    params.require(:cart).permit(:ids)
+  def check_coupon_code
+    params[:coupon][:code].to_s.strip.length != 0 && @cart.coupon.nil?
   end
+  #def all_items_ids
+  #  params.require(:cart).permit(:ids)
+  #end
 end

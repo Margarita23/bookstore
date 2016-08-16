@@ -99,6 +99,12 @@
     <%= t(:subtotal)%>: $ <%= sub_total %>
   </div>
   <div>
+    <%= t(:discount)%>: $ <%= discount %>
+  </div>
+  <div>
+    <%= t(:total)%>: $ <%= sub_total_with_discount %>
+  </div>
+  <div>
    <%= t(:shipping)%>: $ <%= @checkout.get_delivery.price %>
   </div>
   <div>

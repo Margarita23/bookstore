@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :destroy]
   resources :orders, only: [:show, :index, :new_order]
   resources :categories, only: [:show]
+  resources :coupons, only: [:update]
   resources :books, only: [:show] do
     resources :ratings, only: [:new, :show, :create]
   end

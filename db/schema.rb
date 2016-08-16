@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802172724) do
+ActiveRecord::Schema.define(version: 20160815090329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,20 @@ ActiveRecord::Schema.define(version: 20160802172724) do
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
 
+  create_table "coupons", force: :cascade do |t|
+    t.string   "code"
+    t.decimal  "discount"
+    t.integer  "order_id"
+    t.integer  "user_id"
+    t.integer  "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "coupons", ["cart_id"], name: "index_coupons_on_cart_id", using: :btree
+  add_index "coupons", ["order_id"], name: "index_coupons_on_order_id", using: :btree
+  add_index "coupons", ["user_id"], name: "index_coupons_on_user_id", using: :btree
+
   create_table "credit_cards", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -187,7 +201,6 @@ ActiveRecord::Schema.define(version: 20160802172724) do
     t.integer  "delivery_id"
     t.string   "number"
     t.integer  "credit_card_id"
-    t.string   "coupon"
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
@@ -272,6 +285,9 @@ ActiveRecord::Schema.define(version: 20160802172724) do
   add_foreign_key "books", "authors"
   add_foreign_key "books", "categories"
   add_foreign_key "carts", "users"
+  add_foreign_key "coupons", "carts"
+  add_foreign_key "coupons", "orders"
+  add_foreign_key "coupons", "users"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "line_items", "books"
   add_foreign_key "line_items", "carts"

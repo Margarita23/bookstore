@@ -3,5 +3,6 @@ FactoryGirl.define do
     headline { Faker::Lorem.sentence }
     review { Faker::Lorem.paragraph }
     grade { Faker::Number.between(0, 5) }
+    book
   end
 end

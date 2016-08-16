@@ -40,7 +40,7 @@
   
   <div class = "order_sum">
     <h1><%= t(:ord_summary)%></h1>
-    <p><%= t(:item_total)%>: $<%= sub_total %></p>
+    <p><%= t(:item_total)%>: $<%= sub_total_with_discount %></p>
     <p><%= t(:shipping)%>: $<%= @checkout.get_delivery.price %></p>
     <p><%= t(:ord_total)%>: $<%=  @checkout.total_price %></p>
   </div>

@@ -1,5 +1,6 @@
 class Cart < ActiveRecord::Base  
   has_many :line_items, dependent: :destroy
+  has_one :coupon
   belongs_to :user
   has_attached_file :image, 
                     styles:{icon:"32x32"}, 

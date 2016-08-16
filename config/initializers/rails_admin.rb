@@ -4,7 +4,7 @@ RailsAdmin.config do |config|
     unless current_user && current_user.admin
       redirect_to(
         main_app.root_path,
-        alert: "You are not permitted to view this page"
+        alert: I18n.t(:authorize_please)
       )
     end
   end
@@ -169,6 +169,7 @@ RailsAdmin.config do |config|
       field :total_price
       field :delivery
       field :coupon
+      field :state
     end
     
     edit do

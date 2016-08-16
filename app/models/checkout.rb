@@ -26,7 +26,6 @@ class Checkout
     :exp_month, 
     :exp_year,
     :current_step,
-    :coupon,
     :user_id
     )
 
@@ -64,6 +63,7 @@ class Checkout
     if valid? && books_price > 0
       payment
       order
+      get_coupon
       get_line_items
       billing
       shipping
@@ -94,7 +94,7 @@ class Checkout
   end
   
   def get_delivery
-    if delivery.nil? || delivery == ''
+    if delivery.to_s.empty?
       Delivery.first
     else
       Delivery.find_by(id: self.delivery)
@@ -102,7 +102,7 @@ class Checkout
   end
   
   def order_price(collection)
-    collection.collect{|book| book.price * book.quantity}.sum(:price)
+    collection.collect{|book| book.price * book.quantity}.sum(:price).round(2)
   end
   
   def books_price
@@ -111,7 +111,8 @@ class Checkout
   end
   
   def total_price
-    books_price.to_d + get_delivery.price.to_d
+    total = books_price.to_d - (books_price.to_d*coupon.discount/100) + get_delivery.price.to_d
+    total.round(2)
   end
   
   def order_items
@@ -120,6 +121,16 @@ class Checkout
   
   def order
     @order = Order.create!(order_params) 
+  end
+  
+  def coupon
+    current_user.cart.coupon
+  end
+  
+  def get_coupon
+    if coupon
+      Coupon.find_by(id: coupon.id).update(user_id: nil, cart_id: nil, order_id: order_id)
+    end
   end
   
 private
@@ -179,7 +190,7 @@ private
   end
 
   def order_params
-    {total_price: total_price, delivery_id: get_delivery.id, credit_card_id: @credit_card.id, number: generate_number, coupon: coupon, user_id: user_id}
+    {total_price: total_price, delivery_id: get_delivery.id, credit_card_id: @credit_card.id, number: generate_number, user_id: user_id}
   end
   
   def credit_card_params

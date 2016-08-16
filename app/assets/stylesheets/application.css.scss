@@ -41,7 +41,7 @@ body{
   background-color: #dddddd;
   opacity: 0.9;
   z-index: 1;
-  min-width: 830px;
+  min-width: 850px;
 }
 
 .breadcrumb li > *{
@@ -115,8 +115,8 @@ div > div{
   font-size: 15px;
   margin: 30px 5px 0px 0px;
   float:right;
-  width: 33%;
-  min-width: 425px;
+  width: 34%;
+  min-width: 445px;
 }
 
 #shopping > p{
@@ -360,15 +360,23 @@ tr{
 
 .sub_total{
   position: absolute;
-  right: 40px;
+  right: 20px;
   margin: 0% 2%;
   display: inline-block;
+}
+
+.price_right {
+  float: right;
+}
+
+.sub_total li:last-child{
+  font-weight: 600;
 }
 
 .before_order{
   display:block;
   height: 50px;
-  margin: 60px 0px 10px 0px;
+  margin: 100px 0px 10px 0px;
 }
 
 .left_buttons{
@@ -552,7 +560,11 @@ tr{
 .order_total > *{
   float: right;
   display: inline-block;
-  margin: 10px;
+  margin: 2px;
+}
+
+.order_total > *:last_child{
+  color:red;
 }
 
 .order_total{
@@ -570,7 +582,7 @@ tr{
   width: 100%; 
   border-bottom: 3px dotted #000;
   position: relative;
-  margin: 60px 0px 0px 0px;
+  margin: 75px 0px 0px 0px;
 }
 
 .naming{
@@ -642,6 +654,7 @@ tr{
 
 .boldy{
   font-weight: 600;
+  display: inline-block;
 }
 
 .add_book{

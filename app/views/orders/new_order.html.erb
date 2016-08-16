@@ -76,7 +76,13 @@
       </tr>
     <% end %>
   </table>
-  <div class="order_total">
+  <div class="order_total">  
+    <div>
+    <%= t(:subtotal)%>: $ <%= @order.order_sub_total %>
+    </div>
+    <div>
+      <%= t(:discount)%>: <%= discount %> %
+    </div>
     <div>
       <%= t(:subtotal)%>: $ <%= @order.total_price - @order.delivery.price %>
     </div>

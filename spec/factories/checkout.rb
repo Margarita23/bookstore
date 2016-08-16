@@ -15,7 +15,7 @@ FactoryGirl.define do
     ship_zip nil
     ship_phone nil
     same_address '1'
-    delivery
+    #delivery
     card_number '1234567890123456'
     card_code '123'
     exp_month '3'

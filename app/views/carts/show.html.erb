@@ -41,22 +41,25 @@
       <% end %>
     <% end %>
     <div class="update_items">
+      <%= fields_for :coupon do |coupon| %>
+        <%= coupon.text_field :code, value: coupon_code_value, :style => "width: 100px; height: 29px;", placeholder: t(:coupon) %>
+      <% end %>
       <%= f.submit t(:update), method: :put %>
     </div>
   <% end %>
   </table>
-  <div class="sub_total">
-    <%= t(:subtotal)%> : <div class="boldy">$ <%= sub_total %></div>
-  </div>
+  <ul class="sub_total">
+    <li><%= t(:subtotal)%> : <div class="price_right">$ <%= sub_total %></div></li>
+    <li><%= t(:discount)%> : <div class="price_right"><%= discount %> %</div></li>
+    <li><%= t(:total)%> : <div class="price_right">$ <%= sub_total_with_discount %></div></li>
+  </ul>
   <div class="before_order">
     <div class="left_buttons">
       <div><%= button_to t(:empty_cart), cart_path, method: :delete %></div>
       <div><%= button_to t(:continue_shop), shopping_path, method: :get %></div>
     </div>
     <div class="right_buttons">
-      <%= form_for Checkout.new, url: checkout_path(session[:last_step]), method: :get do |f| %>
-        <%= f.text_field :coupon, :style => "width: 100px; height: 29px;", placeholder: t(:coupon) %> <%= f.submit t(:checkout) %>
-      <% end %>
+      <div><%= button_to t(:checkout), checkout_path(session[:last_step]), method: :get %></div>
     </div>
   </div> 
 </div>

@@ -3,7 +3,7 @@ module CartsHelper
     @sub_total = if carts_items.count ==  0
       0
     else
-      carts_items.collect{|book| book.price * book.quantity}.sum(:price)
+      carts_items.collect{|book| book.price * book.quantity}.sum(:price).round(2)
     end
   end
   
@@ -25,6 +25,24 @@ module CartsHelper
     else
       t(:empty)
     end
+  end 
+
+  def coupon_code_value
+    current_cart.coupon.nil? ? nil : current_cart.coupon.code 
+  end
+
+  def discount
+    if current_cart.coupon.nil?
+      0
+    else
+      current_cart.coupon.discount
+    end
+  end
+
+  def sub_total_with_discount
+    @discount = (sub_total * discount)/100 
+    total = sub_total - @discount
+    total.round(2)
   end
   
 end
