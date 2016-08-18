@@ -85,14 +85,22 @@ class Checkout
     end
   end
   
-  def order_id
-    @order.id
-  end
-  
   def current_user
     user = User.find_by(id: user_id.to_i)
   end
   
+  def order_id
+    @order.id
+  end
+  
+  def order_items
+    current_user.cart.line_items
+  end
+  
+  def coupon
+    current_user.cart.coupon
+  end
+
   def get_delivery
     if delivery.to_s.empty?
       Delivery.first
@@ -101,13 +109,9 @@ class Checkout
     end
   end
   
-  def order_price(collection)
-    collection.collect{|book| book.price * book.quantity}.sum(:price).round(2)
-  end
-  
   def books_price
     return 0 if order_items.count == 0
-    order_price(order_items)
+    order_items.collect{|book| book.price * book.quantity}.sum(:price).round(2)
   end
   
   def total_price
@@ -115,16 +119,8 @@ class Checkout
     total.round(2)
   end
   
-  def order_items
-    current_user.cart.line_items
-  end
-  
   def order
     @order = Order.create!(order_params) 
-  end
-  
-  def coupon
-    current_user.cart.coupon
   end
   
   def get_coupon
@@ -137,13 +133,13 @@ private
   
   def get_line_items
     order_items.each do |l|
-      book_bought(l, l.book_id)
+      book_bought(l)
       l.update_attributes(order_id: order_id, cart_id: nil)
     end
   end
     
-  def book_bought(item, book_id)
-    book = Book.find_by(id: book_id)
+  def book_bought(item)
+    book = Book.find_by(id: item.book_id)
     book.update_attributes(quantity: book.quantity -= item.quantity, bought: book.bought += item.quantity)
   end
 
@@ -161,11 +157,11 @@ private
   end
   
   def payment
-    if !CreditCard.exists?(number: card_number)
-      @credit_card = CreditCard.create(credit_card_params)
-    else
+    if CreditCard.exists?(number: card_number)
       @credit_card = CreditCard.find_by(number: card_number)
       @credit_card.update_attributes(user_id: user_id)
+    else
+      @credit_card = CreditCard.create(credit_card_params)
     end
   end
 
