@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
   
   def change_language
-    current_user.update_attribute(locale, params[:locale])
+    current_user.update_attribute(:locale, params[:locale]) if !current_user.nil?
     redirect_to :back
     rescue ActionController::RedirectBackError
     redirect_to root_path

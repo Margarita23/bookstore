@@ -33,6 +33,7 @@
             <%= link_to t(:orders), orders_path %>
             <div class="border"></div>
             <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
+            <div class="langueges"><%= link_to(t(:russian), change_language_path(:ru))%> | <%= link_to(t(:english), change_language_path(:en))%></div>
           <% elsif current_user.admin %>
             <%= link_to t(:control_panel), rails_admin.dashboard_path %>
             <div class="border"></div>
@@ -46,7 +47,6 @@
           <%= link_to t(:login), new_user_session_path %>
         <% end %>
       </div>
-      <div class="langueges"><%= link_to(t(:russian), change_language_path(:ru))%> | <%= link_to(t(:english), change_language_path(:en))%></div>
     </div>
     <div class="space"></div>
     <% if notice %>

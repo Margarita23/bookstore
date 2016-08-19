@@ -1,65 +1,69 @@
 <div class="checkout">
-  <table class = "cart">
-    <th><%= t(:book) %></th>
-    <th><%= t(:price) %></th>
-    <th><%= t(:qty) %></th>
-    <th><%= t(:total) %></th>
-    
-    <%= form_for @cart, url: update_carts_items_path(@cart.id), method: :put do |f| %>
-  
-    <%= fields_for :ids do |id| %>
-      <% carts_items.each do |item| %>
-        <tr>
-          <td>
-            <div class="cover">
-              <%= link_to image_tag(item.book.cover.url(:med)), item.book %>
-            </div>
-            <div class="book_info_in_cart">
-              <div class="book_title">
-                <%= item.book.title %>
+  <% if @cart.line_items.count != 0 %>
+    <table class = "cart">
+      <th><%= t(:book) %></th>
+      <th><%= t(:price) %></th>
+      <th><%= t(:qty) %></th>
+      <th><%= t(:total) %></th>
+
+      <%= form_for @cart, url: update_carts_items_path(@cart.id), method: :put do |f| %>
+
+      <%= fields_for :ids do |id| %>
+        <% carts_items.each do |item| %>
+          <tr>
+            <td>
+              <div class="cover">
+                <%= link_to image_tag(item.book.cover.url(:med)), item.book %>
               </div>
-              <div class = "desc">
-                <%= item.book.description %>
+              <div class="book_info_in_cart">
+                <div class="book_title">
+                  <%= item.book.title %>
+                </div>
+                <div class = "desc">
+                  <%= item.book.description %>
+                </div>
               </div>
-            </div>
-          </td>
-          <td>
-            <%= item.book.price %>
-          </td>
-          <td>
-            <div class = "update">
-              <%= id.number_field :"#{item.id}", value: item.quantity, in: 1..item.book.quantity, step: 1, :style => "width: 50px;" %>
-            </div>
-          </td>
-          <td>
-            <%= item.book.price * item.quantity %>
-          </td>
-          <td>
-            <%= link_to 'X', line_item_path(id: item.id), method: :delete,  :style => "color: #000" %>
-          </td>
-        </tr>
+            </td>
+            <td>
+              <%= item.book.price %>
+            </td>
+            <td>
+              <div class = "update">
+                <%= id.number_field :"#{item.id}", value: item.quantity, in: 1..item.book.quantity, step: 1, :style => "width: 50px;" %>
+              </div>
+            </td>
+            <td>
+              <%= item.book.price * item.quantity %>
+            </td>
+            <td>
+              <%= link_to 'X', line_item_path(id: item.id), method: :delete,  :style => "color: #000" %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
+      <div class="update_items">
+        <%= fields_for :coupon do |coupon| %>
+          <%= coupon.text_field :code, value: coupon_code_value, :style => "width: 100px; height: 29px;", placeholder: t(:coupon) %>
+        <% end %>
+        <%= f.submit t(:update), method: :put %>
+      </div>
     <% end %>
-    <div class="update_items">
-      <%= fields_for :coupon do |coupon| %>
-        <%= coupon.text_field :code, value: coupon_code_value, :style => "width: 100px; height: 29px;", placeholder: t(:coupon) %>
-      <% end %>
-      <%= f.submit t(:update), method: :put %>
-    </div>
+    </table>
+    <ul class="sub_total">
+      <li><%= t(:subtotal)%> : <div class="price_right">$ <%= sub_total %></div></li>
+      <li><%= t(:discount)%> : <div class="price_right"><%= discount %> %</div></li>
+      <li><%= t(:total)%> : <div class="price_right">$ <%= sub_total_with_discount %></div></li>
+    </ul>
+    <div class="before_order">
+      <div class="left_buttons">
+        <div><%= button_to t(:empty_cart), cart_path, method: :delete %></div>
+        <div><%= button_to t(:continue_shop), shopping_path, method: :get %></div>
+      </div>
+      <div class="right_buttons">
+        <div><%= button_to t(:checkout), checkout_path(session[:last_step]), method: :get %></div>
+      </div>
+    </div> 
+  <% else %>
+    <p style="text-align: center;"><%= t(:cart_is_empty)%></p>
   <% end %>
-  </table>
-  <ul class="sub_total">
-    <li><%= t(:subtotal)%> : <div class="price_right">$ <%= sub_total %></div></li>
-    <li><%= t(:discount)%> : <div class="price_right"><%= discount %> %</div></li>
-    <li><%= t(:total)%> : <div class="price_right">$ <%= sub_total_with_discount %></div></li>
-  </ul>
-  <div class="before_order">
-    <div class="left_buttons">
-      <div><%= button_to t(:empty_cart), cart_path, method: :delete %></div>
-      <div><%= button_to t(:continue_shop), shopping_path, method: :get %></div>
-    </div>
-    <div class="right_buttons">
-      <div><%= button_to t(:checkout), checkout_path(session[:last_step]), method: :get %></div>
-    </div>
-  </div> 
 </div>

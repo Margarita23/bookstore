@@ -40,13 +40,13 @@
   </table>
   <div class="order_total">
     <div>
-    <%= t(:subtotal)%>: $ <%= @order.order_sub_total %>
+      <%= t(:subtotal)%>: $ <%= @order.order_sub_total %>
     </div>
     <div>
-      <%= t(:discount)%>: <%= @order.coupon.discount %> %
+      <%= t(:discount)%>: <%= @order.coupon.nil? ? 0 : @order.coupon.discount %> %
     </div>
     <div>
-      <%= t(:subtotal)%> : $ <%= @order.total_price - @order.delivery.price %>
+      <%= t(:total)%> : $ <%= @order.total_price - @order.delivery.price %>
     </div>
     <div>
      <%= t(:shipping) %>: $ <%= @order.delivery.price %>
@@ -57,4 +57,3 @@
   </div>
   <div class="dotted"></div>
 </div>
-

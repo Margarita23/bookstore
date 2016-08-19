@@ -49,6 +49,7 @@ en:
   discount: "DISCOUNT"
   empty_cart: "EMPTY CART"
   already_empty: "Cart is already empty"
+  cart_is_empty: "Cart is EMPTY"
   continue_shop: "CONTINUE SHOPPING"
   coupon: "Coupon code"
   get_discount: "GET DISCOUNT"

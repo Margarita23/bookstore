@@ -100,6 +100,14 @@ class Checkout
   def coupon
     current_user.cart.coupon
   end
+  
+  def coupon_discount
+    if coupon
+      coupon.discount
+    else
+      0
+    end
+  end
 
   def get_delivery
     if delivery.to_s.empty?
@@ -115,7 +123,7 @@ class Checkout
   end
   
   def total_price
-    total = books_price.to_d - (books_price.to_d*coupon.discount/100) + get_delivery.price.to_d
+    total = books_price.to_d - (books_price.to_d*coupon_discount/100) + get_delivery.price.to_d
     total.round(2)
   end
   
@@ -125,7 +133,7 @@ class Checkout
   
   def get_coupon
     if coupon
-      Coupon.find_by(id: coupon.id).update(user_id: nil, cart_id: nil, order_id: order_id)
+      @coupon = Coupon.find_by(id: coupon.id).update(user_id: nil, cart_id: nil, order_id: order_id)
     end
   end
   
