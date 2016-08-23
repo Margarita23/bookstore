@@ -52,7 +52,7 @@ RSpec.describe CheckoutsController, :type => :controller do
     
     it "when line_item`s count is 0" do
       allow(controller).to receive(:current_user) {user} 
-      allow(assigns(:checkout)).to receive(:order_items) {[]}
+      allow(controller).to receive_message_chain("current_user.cart.line_items") {[]}
       expect(subject).to redirect_to shopping_path
     end
     
