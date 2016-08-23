@@ -54,7 +54,7 @@ feature "Add books to cart" do
       visit root_path
       first(:button, "ADD TO CART").click 
       expect(page).to have_content 'You are not authorized to access this page. '
-      expect(current_path).to eq ("/")
+      expect(current_path).to eq ("/users/sign_in")
     end
 
 end

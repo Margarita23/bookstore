@@ -32,11 +32,7 @@ module CartsHelper
   end
 
   def discount
-    if current_cart.coupon.nil?
-      0
-    else
-      current_cart.coupon.discount
-    end
+    current_cart.coupon.nil? ? 0 : current_cart.coupon.discount
   end
 
   def sub_total_with_discount

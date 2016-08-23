@@ -15,23 +15,16 @@ class CartsController < ApplicationController
   
   def update_items
     return redirect_to root_path if @cart.nil? || params[:ids].nil?
-    items_ids = params[:ids].keys
-    items_ids.each do |item_id|
-      line_item = LineItem.find_by(id: item_id.to_i)
-      line_item.update_attributes(quantity: params[:ids][:"#{item_id}"])
-    end
+    @cart.update_items_quantity(params[:ids])
     @cart.coupon = Coupon.find_by(code: params[:coupon][:code])
-    flash[:alert] = "Coupon code isn`t right" if check_coupon_code
+    flash[:alert] = t(:coupon_code_is_not_right) if invalid_coupon_code
     flash[:notice] = t(:quantity_changed)
     redirect_to :back
   end
   
   private
   
-  def check_coupon_code
+  def invalid_coupon_code
     params[:coupon][:code].to_s.strip.length != 0 && @cart.coupon.nil?
   end
-  #def all_items_ids
-  #  params.require(:cart).permit(:ids)
-  #end
 end

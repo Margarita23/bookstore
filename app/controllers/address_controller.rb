@@ -1,12 +1,6 @@
 class AddressController < ApplicationController
   load_and_authorize_resource
 
-  #def create
-  #  @address = Address.new(address_params)
-  #  path = @address.save ? @address : :back
-  #  redirect_to path
-  #end
-
   def update
     @address = Address.find(params[:id]) 
     if @address.update(address_params)      
@@ -19,7 +13,7 @@ class AddressController < ApplicationController
 
   private
     def address_params
-      address_params = {first_name: params[:first_name], 
+      @address_params = {first_name: params[:first_name], 
                       last_name: params[:last_name], 
                       street: params[:street], 
                       city: params[:city], 

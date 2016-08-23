@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start 'rails'
 require "bundler/setup"
 ::Bundler.require(:default, :test)
 
@@ -22,6 +24,9 @@ require 'devise'
 require 'aasm/rspec'
 require 'capybara/rspec'
 require "cancan/matchers"
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

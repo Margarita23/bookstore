@@ -53,8 +53,15 @@ RSpec.describe LineItemsController, :type => :controller do
           post :create, cart_id: cart.id, :new_quantity => '300' 
           expect(flash[:notice]).to eq p
         end
-        it "flash alert after save" do 
+        it "flash alert if @line_item is nil" do 
           allow(ItemWithCheckingQuantityService).to receive_message_chain("new.call").and_return(nil)
+          subject
+          expect(flash[:alert]).to eq I18n.t(:books_not_added)
+        end
+        it "flash alert after save" do 
+          allow(ItemWithCheckingQuantityService).to receive_message_chain("new.call").and_return p
+          allow(assigns(:line_item)).to receive(:save) {false}
+          #allow(assigns(:line_item)).to receive(:nil?) {false}
           subject
           expect(flash[:alert]).to eq I18n.t(:books_not_added)
         end

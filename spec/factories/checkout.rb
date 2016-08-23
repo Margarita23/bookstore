@@ -19,5 +19,6 @@ FactoryGirl.define do
     card_code '123'
     exp_month '3'
     exp_year '2017'
+    user
   end
 end

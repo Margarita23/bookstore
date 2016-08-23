@@ -12,20 +12,17 @@ Rails.application.routes.draw do
   resources :line_items, only: [:create, :destroy]
   resources :orders, only: [:show, :index, :new_order]
   resources :categories, only: [:show]
-  resources :coupons, only: [:update]
   resources :books, only: [:show] do
     resources :ratings, only: [:new, :show, :create]
   end
+  resources :authors, only: [:show]
+  resources :address, only: [:update]
   
   put 'carts/:id/update_items' => "carts#update_items", as: 'update_carts_items'
-  
-  resources :address, only: [:update]
   
   root 'home#bestsellers'
   
   get 'home/shop' => 'home#shop' , as: 'shopping'
-  
-  get 'author/:id' => 'authors#show', as: 'author', method: :get
   
   get 'new_order/:id' => 'orders#new_order', as: 'new_order_show', method: :get
     

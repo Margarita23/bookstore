@@ -55,15 +55,11 @@ module CheckoutsHelper
     current_user.shipping_address.phone || session[:checkout]['ship_phone']
   end
   
-  def card_number_value
-    current_user.cart.card_number || session[:checkout]['ship_phone']
-  end
-  
   def hidden_card_number
-    if !@checkout.card_number.nil?
-      hidden_number = "**** **** **** " + @checkout.card_number[-4,4]
+    hidden_number = if !@checkout.card_number.nil?
+      "**** **** **** " + @checkout.card_number[-4,4]
     else
-      hidden_number = ''
+      ''
     end
   end
   

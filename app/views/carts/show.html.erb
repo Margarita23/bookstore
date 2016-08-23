@@ -7,7 +7,6 @@
       <th><%= t(:total) %></th>
 
       <%= form_for @cart, url: update_carts_items_path(@cart.id), method: :put do |f| %>
-
       <%= fields_for :ids do |id| %>
         <% carts_items.each do |item| %>
           <tr>

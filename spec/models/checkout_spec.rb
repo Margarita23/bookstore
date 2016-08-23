@@ -33,47 +33,49 @@ RSpec.describe Checkout, type: :model do
     let(:user) {create :user}
     let!(:cart) {create :cart, user_id: user.id}
     let!(:cart2) {create :cart}
-    let!(:books) {create_list :book, 2}
+    let(:books) {FactoryGirl.create_list :book, 2}
     let!(:item) {create :line_item, book_id: books.last.id, cart_id: cart.id}
     let(:line_items) {create_list :line_item, 2}
-    let!(:deliveries) {create_list :delivery, 2}
+    let!(:delivery) {create :delivery}
     let!(:coupon) {create :coupon, user_id: user, cart_id: cart.id}
     let!(:credit_card) {create :credit_card, user_id: user.id}
-    let!(:order) {create :order}
+    let(:order) {create :order}
       
-      before do
-        @checkout = Checkout.new(FactoryGirl.attributes_for(:checkout))
-      end
-      
-      it "get delivery if it nil" do
-        expect(@checkout.get_delivery).to eq deliveries.first
-      end
+    before do
+      @checkout = Checkout.new(FactoryGirl.attributes_for(:checkout))
+      allow(User).to receive(:find_by) {user}
+    end
       
       it "get delivery if it nil" do
-        @checkout.delivery = deliveries.last
-        expect(@checkout.get_delivery).to eq deliveries.last
+        expect(@checkout.get_delivery).to eq delivery
+      end
+      
+      it "get delivery if it  not nil" do
+        @checkout.delivery = delivery
+        expect(@checkout.get_delivery).to eq delivery
       end
       
       it "current_user" do
-        allow(User).to receive(:find_by) {user}
         expect(@checkout.current_user).to eq user
       end
       
       it "order_items" do
-        allow(User).to receive(:find_by) {user}
         allow_any_instance_of(User).to receive(:cart) {cart}
         expect(@checkout.order_items).to eq [item]
       end
       
       it "books_price when order_items count is 0" do
-        allow(User).to receive(:find_by) {user}
         allow_any_instance_of(User).to receive(:cart) {cart2}
         expect(@checkout.books_price).to eq 0
       end
     
       it "coupon" do
-        allow(User).to receive(:find_by) {user}
         expect(@checkout.coupon).to eq coupon
+      end
+    
+      it "coupon_discount" do
+        allow(@checkout).to receive(:coupon) {nil}
+        expect(@checkout.coupon_discount).to eq 0
       end
     
       it "total_price" do
@@ -84,13 +86,11 @@ RSpec.describe Checkout, type: :model do
       end
     
     it "get_coupon when coupon is nil" do
-      allow(User).to receive(:find_by) {user}
       allow(@checkout).to receive(:coupon) {nil}
       expect(@checkout.get_coupon).to eq nil
     end
     
     it "get_coupon when coupon isn't nil" do
-      allow(User).to receive(:find_by) {user}
       allow(@checkout).to receive(:coupon) {coupon}
       allow(@checkout).to receive(:order_id) {order.id}
       expect(@checkout.get_coupon).to eq true
@@ -161,28 +161,53 @@ RSpec.describe Checkout, type: :model do
       expect(@checkout.send(:on_payment_step)).to eq true
     end
     
+    it "on_confirm_step is true" do
+      allow(@checkout).to receive(:current_step) {'confirm'}
+      expect(@checkout.send(:on_confirm_step)).to eq true
+    end
+    
     it "generate_number" do
       expect(@checkout.send(:generate_number).length).to eq 10 
     end
     
     it "valid_new_quantity" do
-      allow(User).to receive(:find_by) {user}
       allow_any_instance_of(User).to receive(:cart) {cart}
       expect(@checkout.valid_new_quantity).to eq [item] 
+    end
+    
+    it "valid_ship_address return false" do
+      allow(@checkout).to receive(:same_address) {'0'}
+      expect(@checkout.valid_ship_address).to eq false
+    end
+    
+    it "valid_ship_address return true" do
+      allow(@checkout).to receive(:same_address) {'1'}
+      expect(@checkout.valid_ship_address).to eq true
+    end
+    
+    it "save return true" do
+      allow(subject).to receive(:valid?) {true}
+      allow(@checkout).to receive(:books_price) {45}
+      expect(@checkout.save).to eq true
+    end
+    
+    it "save return false" do
+      allow(subject).to receive(:valid?) {true}
+      allow(@checkout).to receive(:books_price) {0}
+      expect(@checkout.save).to eq false
     end
     
     describe "valid_new_quantity" do
       let(:user_2) {create :user}
       let(:cart_2) {create :cart, user_id: user_2.id}
-      let!(:book) {create :book, quantity: 3}
-      let!(:item_2) {create :line_item, book_id: book.id, cart_id: cart_2.id, quantity: 10}
+      let!(:some_book) {create :book, quantity: 3}
+      let!(:item_2) {create :line_item, book_id: some_book.id, cart_id: cart_2.id, quantity: 10}
       let(:user_0) {create :user}
       let(:cart_0) {create :cart, user_id: user_0.id}
-      let(:book_0) {create :book, quantity: 0}
-      let(:item_0) {create :line_item, book_id: book_0.id, cart_id: cart_0.id, quantity: 10}
+      let!(:book_0) {create :book, quantity: 0}
+      let(:item_0) {create :line_item, book_id: book_0.id, cart_id: cart_0.id, quantity: 100}
 
       it "when book_quantity more than item quantity" do
-        allow(User).to receive(:find_by) {user}
         allow_any_instance_of(User).to receive(:cart) {cart}
         expect(@checkout.valid_new_quantity).to eq [item]
       end
@@ -190,12 +215,13 @@ RSpec.describe Checkout, type: :model do
       it "when book_quantity less than item quantity" do
         allow(User).to receive(:find_by) {user_2}
         allow_any_instance_of(User).to receive(:cart) {cart_2}      
-        expect(@checkout.valid_new_quantity.first.quantity).to eq book.quantity
+        expect(@checkout.valid_new_quantity.first.quantity).to eq some_book.quantity
       end
       
       it "when book_quantity is 0" do
         allow(User).to receive(:find_by) {user_0}
         allow_any_instance_of(User).to receive(:cart) {cart_0}
+        allow(Book).to receive(:find_by) {book_0}
         expect(@checkout.valid_new_quantity).to eq []
       end 
     end

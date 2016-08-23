@@ -55,6 +55,7 @@ ru:
   cart_is_empty: "Корзина ПУСТА"
   continue_shop: "ПРОДОЛЖИТЬ ПОКУПКИ"
   coupon: "Код купона"
+  coupon_code_is_not_right: "Код купона введён неправильно. "
   get_discount: "GET DISCOUNT"
   checkout: "Оформить заказ"
   to_store: "В МАГАЗИН"

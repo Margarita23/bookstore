@@ -2,7 +2,7 @@ require "rails_helper"
 RSpec.describe OrdersController, :type => :controller do
   describe "GET #index" do 
     let(:user) {create :user}
-    let(:orders) {create_list :order, 3}
+    let!(:orders) {create_list :order, 3}
     
     before do
       allow(controller).to receive(:current_user).and_return(user)

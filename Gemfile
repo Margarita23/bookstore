@@ -47,6 +47,8 @@ gem 'globalize', '~> 5.0.0'
 gem 'bootstrap_form'
 gem 'ratyrate'
 gem 'draper'
+gem 'poltergeist'
+gem 'simplecov', :require => false, :group => :test
 
 
 # Use ActiveModel has_secure_password

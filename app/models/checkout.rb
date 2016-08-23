@@ -55,7 +55,7 @@ class Checkout
   validates_numericality_of :card_number, only_integer: true, message: I18n.t(:"enter.card_only_num"), if: :on_payment_step
 
   def valid_ship_address
-    self.same_address == '1'  && :on_address_step 
+    :on_address_step && self.same_address == '1'
   end
   
   def save
@@ -77,11 +77,8 @@ class Checkout
     order_items.each do |l|
       book = Book.find_by(id: l.book_id)
       new_quan = book.quantity - l.quantity
-      if new_quan < 0
-        l.update(quantity: l.quantity + new_quan)
-        l.destroy if book.quantity == 0
-      end
-      l.update(quantity: l.quantity) if new_quan == 0
+      l.update(quantity: book.quantity) if new_quan < 0 
+      l.destroy if book.quantity == 0
     end
   end
   

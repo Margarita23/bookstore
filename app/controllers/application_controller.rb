@@ -10,12 +10,10 @@ class ApplicationController < ActionController::Base
   def change_language
     current_user.update_attribute(:locale, params[:locale]) if !current_user.nil?
     redirect_to :back
-    rescue ActionController::RedirectBackError
-    redirect_to root_path
   end
   
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_app.root_path, :alert => exception.message
+    redirect_to main_app.new_user_session_path, :alert => exception.message
   end
 
 end
