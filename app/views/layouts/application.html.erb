@@ -48,7 +48,8 @@
         <% end %>
       </div>
     </div>
-    <div class="space"><%= cl_image_tag("bookshop/Anna_Karenina.jpg", :alt => "Sample Image")%></div>
+    <div class="space"><%= cl_image_tag("sample.jpg", :secure => true, 
+                  :width => 100, :height => 150, :crop => :fill)%></div>
     <% if notice %>
       <div class="alert alert-info"><%= notice %></div>
     <% end %>
