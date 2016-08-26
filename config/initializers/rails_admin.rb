@@ -94,13 +94,13 @@ RailsAdmin.config do |config|
       field :bought
       field :category
     end
-    edit do
-      exclude_fields :id 
-      exclude_fields :created_at 
-      exclude_fields :updated_at 
-      exclude_fields :line_items
-      exclude_fields :ratings
-    end
+    #edit do
+    #  exclude_fields :id 
+    #  exclude_fields :created_at 
+    #  exclude_fields :updated_at 
+    #  exclude_fields :line_items
+    #  exclude_fields :ratings
+    #end
     
   end
   

@@ -38,6 +38,10 @@ gem 'aasm'
 gem 'devise-guests', '~> 0.5.0'
 gem 'mini_magick'
 gem 'paperclip'
+#gem 'paperclip-cloudinary'
+gem 'carrierwave'
+gem 'cloudinary'
+#gem 'aws-sdk', '~> 2.3'
 gem 'dynamic_form'
 gem 'omniauth-facebook'
 gem 'omniauth'
@@ -47,7 +51,6 @@ gem 'globalize', '~> 5.0.0'
 gem 'bootstrap_form'
 gem 'ratyrate'
 gem 'draper'
-gem 'poltergeist'
 gem 'simplecov', :require => false, :group => :test
 
 

@@ -9,9 +9,6 @@ class LineItemsController < ApplicationController
     return redirect_to :back, alert: t(:books_not_added) if @line_item.nil?
     if @line_item.save
       flash[:notice] = SetLessQuantityService.new(@line_item, book).call
-    #else
-    #  flash[:alert] = t(:books_not_added)
-    #  redirect_to :back
     end
     redirect_to :back
   end
@@ -23,9 +20,6 @@ class LineItemsController < ApplicationController
   end
 
   private
-  #def set_line_item
-  #  @line_item = LineItem.find(params[:id])
-  #end
   def line_item_params
     params.permit(:book_id)
   end
