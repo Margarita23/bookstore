@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="cover">
-      <%= link_to image_tag(@book.cover.url(:med)), @book.cover.url %>
+      <%= link_to cl_image_tag("bookshop/#{@book.cover_line}", :secure => true, :width => 180, :height => 250, :crop => :fill), @book %>
     </div>
     <div class="price">
       <div class="boldy">$<%= @book.price %></div>

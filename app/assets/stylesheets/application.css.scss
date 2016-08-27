@@ -150,7 +150,7 @@ div > div{
 
 #shop_item{
   width: 300px;
-  height: 300px;
+  height: 320px;
   display: inline-block;
 }
 
@@ -166,11 +166,14 @@ div > div{
   overflow: hidden;
   text-overflow:ellipsis;
   text-align: center;
+  margin-top: 25px;
 }
 
-#cover_item{
-  width: 300px;
-  height: 200px;
+.cover_item > * > *{
+  -webkit-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
+  box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
+  transform: perspective(600px) rotate3d(0,-45,0,-25deg); 
 }
 
 #categories{
@@ -275,6 +278,7 @@ img.raty-cancel {
 .title{
   display: block;
   font-size: 20px;
+  margin: 0 0 15px 0;
 }
 
 .cover_desc{
@@ -284,10 +288,17 @@ img.raty-cancel {
 
 .cover{
   width: 200px;
-  height: 250px;
+  height: 300px;
   float: left;
   margin-left: 20px;
   display: inline-block;
+}
+
+.cover > * > *{
+  -webkit-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
+  box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
+  transform: perspective(600px) rotate3d(0,-45,0,-25deg);   
 }
 
 .desc{

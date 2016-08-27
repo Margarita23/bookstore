@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815090329) do
+ActiveRecord::Schema.define(version: 20160826202235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,16 +86,13 @@ ActiveRecord::Schema.define(version: 20160815090329) do
     t.string   "description"
     t.decimal  "price"
     t.integer  "quantity"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.integer  "author_id"
-    t.string   "cover_file_name"
-    t.string   "cover_content_type"
-    t.integer  "cover_file_size"
-    t.datetime "cover_updated_at"
     t.integer  "bought"
     t.string   "locale"
+    t.string   "cover_line"
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
