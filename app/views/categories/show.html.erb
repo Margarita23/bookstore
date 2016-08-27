@@ -21,6 +21,9 @@
           </div>
         </div>
       <% end %>
+      <% if @category.books.count == 0 %>
+        <p><%= I18n.t(:no_books)%></p>
+      <% end %>
       <div id="pages"></div>
     </div>
     <div id="categories">

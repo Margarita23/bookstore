@@ -9,7 +9,10 @@
       <% end %>
     </div>
     <div class="in_progress">
-      <div class="naming"><%= t(:wait_proc)%></div>
+      <% if @orders.in_progress.count == 0 %>
+        <div class="naming"><%= t(:wait_proc)%></div>
+        <p><%= I18n.t(:no_orders) %></p>
+      <% else %>
       <table class="orders">
         <thead>
           <th><%=t(:number_ord)%></th>
@@ -26,12 +29,16 @@
              <td><%= order.total_price %></td>
             <td><%= link_to t(:view), orders_path(id: order.id, view: true) %></td>
           </tr>
-        <% end %>
+          <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
     <div class="in_delivery">
-      <div class="naming"><%= t(:in_delivery) %></div>
+      <% if @orders.in_delivery.count == 0 %>
+        <div class="naming"><%= t(:in_delivery) %></div>
+        <p><%= I18n.t(:no_orders) %></p>
+      <% else %>
       <table class="orders">
         <thead>
           <th><%= t(:number_ord) %></th>
@@ -39,7 +46,7 @@
           <th><%= t(:total) %></th>
           <th></th>
         </thead>
-        <tbody>
+        <tbody>     
           <% @orders.in_delivery.each do |order| %>
           <tr>
             <td><%= link_to order.number, order %></td>  
@@ -47,12 +54,16 @@
              <td><%= order.total_price %></td>
             <td><%= link_to t(:view), orders_path(id: order.id, view: true) %></td>
           </tr>
-        <% end %>
+          <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
     <div class="delivered">
-      <div class="naming"><%= t(:delivered)%></div>
+      <% if @orders.completed.count == 0 %>
+        <div class="naming"><%= t(:delivered)%></div>
+        <p><%= I18n.t(:no_orders) %></p>        
+      <% else %>
       <table class="orders">
         <thead>
           <th><%= t(:number_ord) %></th>
@@ -68,9 +79,10 @@
              <td><%= order.total_price %></td>
             <td><%= link_to t(:view), orders_path(id: order.id, view: true) %></td>
           </tr>
-        <% end %>
+          <% end %>
         </tbody>
       </table>
+      <% end %>
     </div>
   </div>
   <%= link_to t(:new_order), shopping_path %>
