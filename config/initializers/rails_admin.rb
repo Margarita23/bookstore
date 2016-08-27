@@ -93,6 +93,7 @@ RailsAdmin.config do |config|
       field :quantity
       field :bought
       field :category
+      field :cover_line
     end
     #edit do
     #  exclude_fields :id 
