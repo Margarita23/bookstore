@@ -24,727 +24,663 @@
  *= require_tree . 
  */
 
-body{
-  min-width: 902px;
+//colors
+$color_alto_approx: #dddddd;
+$black: #000;
+$color_celeste_approx: #cecece;
+$white_100: rgba(255,255,255,1);
+$white: #fff;
+$black_75: rgba(0,0,0,0.75);
+$color_delta_approx: #a2a2a2;
+$color_steel_blue_approx: #337ab7;
+$color_gallery_approx: #ededed;
+$black_50: rgba(0,0,0,0.5);
+$color_alizarin_crimson_approx: #dd2339;
+$color_pink_approx: #ffc9c9;
+$color_monza_approx: #de1515;
+$red: red;
+$color_your_pink_approx: #ffc4c4;
+$black_20: rgba(0,0,0,0.2);
+
+//fonts
+$font_0: monospace;
+
+//urls
+$url_0: url(http://res.cloudinary.com/nmetau/image/upload/c_scale,w_200/v1464859497/SORRY-SOLD-OUT_shuhgx.png);
+$url_1: url(http://res.cloudinary.com/nmetau/image/upload/c_scale,w_100/v1464859497/SORRY-SOLD-OUT_shuhgx.png);
+
+//@extend-elements
+//original selectors
+//#confirm ul, li
+%extend_1 {
+	list-style: none;
+	text-align: left;
+	margin: 0 0 0 -15px;
 }
 
-#wrapper{
-  position: absolute;
-  width:100%;
-  height: 80px;
-  text-align: center;
-  font-size: 20px;
-  font-family: monospace;
-  letter-spacing: normal;
-  position:fixed;
-  top: 0px;
-  background-color: #dddddd;
-  opacity: 0.9;
-  z-index: 1;
-  min-width: 850px;
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+body {
+	min-width: 902px;
 }
-
-.breadcrumb li > *{
-  color: #000;
-  padding: 0px 12px;
+#wrapper {
+	position: absolute;
+	width: 100%;
+	height: 80px;
+	text-align: center;
+	font-size: 20px;
+	font-family: $font_0;
+	letter-spacing: normal;
+	position: fixed;
+	top: 0;
+	background-color: $color_alto_approx;
+	opacity: 0.9;
+	z-index: 1;
+	min-width: 850px;
 }
-
-.langueges{
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 2px;
-  background-color: #cecece;
-  border-radius: 8px;
-  box-shadow: 0 0 4px rgba(255,255,255,1);
-  font-size: 15px;
+.langueges {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	padding: 2px;
+	background-color: $color_celeste_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 8px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 4px $white_100;
+	font-size: 15px;
 }
-
-.space{
-  width:100%;
-  height: 80px;
+.space {
+	width: 100%;
+	height: 80px;
 }
-
-#name{
-  display: inline-block;
-  padding: 0px 20px;
-  left: 20px;
-  float:left; 
+#name {
+	display: inline-block;
+	padding: 0 20px;
+	left: 20px;
+	float: left;
 }
-
-#root{
-  display: inline-block;
-  margin: 30px 10px 30px 30px;
-  float: left;
+#root {
+	display: inline-block;
+	margin: 30px 10px 30px 30px;
+	float: left;
 }
-
-.border{
-  height: 15px;
-  border-right: 2px solid #000;
+.border {
+	height: 15px;
+	border-right: 2px solid $black;
 }
-
-#basket{
-  height: 32px;
-  display: inline-block;
+#basket {
+	height: 32px;
+	display: inline-block;
 }
-
-.empty{
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  height: 32px;
+.empty {
+	height: 32px;
+	&:active {
+		font-weight: 900;
+		//Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		text-shadow: 2px 2px 2px $white;
+	}
 }
-
-.empty:active{
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  font-weight: 900;
-  text-shadow: 2px 2px 2px #fff;
+.btn-group {
+	float: right;
+	margin: 30px 50px 0 0;
+	display: inline-block;
+	width: 50%;
 }
-
-div > div{
-  display: inline-block;
+.settings {
+	text-align: right;
+	font-size: 15px;
+	margin: 30px 5px 0 0;
+	float: right;
+	width: 34%;
+	min-width: 445px;
 }
-
-.btn-group{
-  float: right;
-  margin: 30px 50px 0px 0px;
+#shopping {
+	position: relative;
+	width: 100%;
+	> p {
+		font-family: $font_0;
+		letter-spacing: normal;
+		font-size: 25px;
+		margin-left: 30px;
+		position: absolute;
+		display: inline-block;
+	}
 }
-
-.settings{
-  text-align: right;
-  font-size: 15px;
-  margin: 30px 5px 0px 0px;
-  float:right;
-  width: 34%;
-  min-width: 445px;
+.shop {
+	width: 1000px;
+	height: 900px;
+	margin-top: 40px;
+	padding: 0;
+	text-align: center;
+	display: inline-block;
+	&:after {
+		display: inline-block;
+		content: "";
+		width: 100%;
+	}
 }
-
-#shopping > p{
-  font-family: monospace;
-  letter-spacing: normal;
-  font-size: 25px;
-  margin-left: 30px;
-  position: absolute;
-  display: inline-block;
+#shop_item {
+	width: 300px;
+	height: 320px;
+	display: inline-block;
+	> * {
+		display: block;
+		text-align: center;
+	}
 }
-
-#shopping{
-  position: relative;
-  width:100%;
+.title_item {
+	width: 100%;
+	height: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	margin-top: 25px;
 }
-
-.shop{
-  width: 1000px;
-  height: 900px;
-  margin-top: 40px;
-  padding: 0px;
-  text-align: center;
-  display: inline-block;
+#categories {
+	display: inline-block;
+	width: 200px;
+	height: 300px;
+	position: absolute;
+	right: 0;
 }
-
-.shop:after {
-  display: inline-block;
-  content: "";
-  width: 100%;
+.outside {
+	width: 85%;
+	margin: 30px auto;
 }
-
-#shop_item{
-  width: 300px;
-  height: 320px;
-  display: inline-block;
+.rev {
+	display: block;
+	margin-top: 20px;
 }
-
-#shop_item > *{
-  display: block;
-  text-align: center;
+.rev_text {
+	width: 100%;
+	overflow-wrap: break-word;
+	//Instead of the line below you could use @include word-break($value)
+	word-break: break-all;
 }
-
-.title_item{
-  width: 100%;
-  height: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow:ellipsis;
-  text-align: center;
-  margin-top: 25px;
+.reviews {
+	display: block;
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		margin: 20px 0;
+	}
 }
-
-.cover_item > * > *{
-  -webkit-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
-  box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
-  transform: perspective(600px) rotate3d(0,-45,0,-25deg); 
+.author {
+	display: block;
 }
-
-#categories{
-  display: inline-block;
-  width: 200px;
-  height: 300px;
-  position: absolute;
-  right: 0px;
+.stars {
+	display: inline-block;
+	margin: 0 20px 0 0;
 }
-
-.outside{
-  width:85%;
-  margin: 30px auto;
+.headline {
+	display: inline-block;
+	margin: 0 20px 0 0;
 }
-
-.rev{
-  display: block;
-  margin-top: 20px;
+.rev_create {
+	display: inline-block;
+	color: $color_delta_approx;
+	margin: 0 0 0 20px;
 }
-
-.rev_text{
-  width: 100%;
-  overflow-wrap: break-word;
-  word-break: break-all;
+.best {
+	position: absolute;
+	margin: 10px auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 1000px;
+	height: 900px;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 3px;
+	> p {
+		text-align: center;
+	}
 }
-
-.rev_wrap > div {
-  display: inline-block;
-  font-size: 18px;
-  font-weight: 700;
+.book_info {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-
-.reviews{
-  display: block;
+.book_info_in_cart {
+	text-align: left;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-
-img.raty-cancel {
-     display: none;
-  }
-
-.author{
-  display: block;
+.book_title {
+	font-weight: 900;
+	font-size: 20px;
+	margin: 20px 10px;
 }
-
-.reviews ul{
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
+.title {
+	display: block;
+	font-size: 20px;
+	margin: 0 0 15px 0;
 }
-
-.stars, .headline{
-  display: inline-block;
-  margin: 0px 20px 0px 0px;
+.cover_desc {
+	width: 1000px;
+	padding: 10px;
 }
-
-.rev_create{
-  display: inline-block;
-  color: #a2a2a2;
-  margin: 0px 0px 0px 20px;
+.cover {
+	width: 200px;
+	height: 300px;
+	float: left;
+	margin-left: 20px;
+	display: inline-block;
+	> * > * {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: -5px 0 6px 0 $black_75;
+		//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+		transform: perspective(600px) rotate3d(0,-45,0,-25deg);
+	}
 }
-
-.reviews li{
-  margin: 20px 0px 20px 0px;
+.desc {
+	height: 200px;
+	width: 95%;
+	display: block;
+	margin: 0 20px;
+	text-overflow: ellipsis;
 }
-
-.best{
-  position: absolute;
-  margin: 10px auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 1000px;
-  height: 900px;
-  border-radius: 3px;
+.cart {
+	width: 100%;
+	margin: 30px 0;
+	padding: 20px;
+	text-align: center;
+	font-size: 15px;
+	border-bottom: 3px dotted $black;
+	img {
+		width: 90px;
+		height: 110px;
+	}
+	.cover {
+		width: 90px;
+		height: 110px;
+		overflow: hidden;
+	}
+	.book_title {
+		display: block;
+		float: top;
+		font-size: 16px;
+		margin: 0;
+		text-align: left;
+	}
+	.book_info {
+		display: block;
+		height: 110px;
+		margin: 0;
+		overflow: hidden;
+		text-align: left;
+	}
+	.desc {
+		margin: 0;
+		height: 88px;
+		width: 100%;
+	}
+	th {
+		text-align: center;
+		padding: 10px;
+	}
+	td:nth-child(n + 2) {
+		font-weight: 600;
+	}
 }
-
-.best > p{
-  text-align: center;
+tr {
+	border-collapse: separate;
+	text-overflow: ellipsis;
 }
-
-.book_info{
-  display: block;
-  width: 100%;
-  overflow: hidden;
-  text-overflow:ellipsis;
+.sub_total {
+	position: absolute;
+	right: 20px;
+	margin: 0 2%;
+	display: inline-block;
+	li:last-child {
+		font-weight: 600;
+	}
 }
-
-.book_info_in_cart{
-  text-align: left;
-  display: block;
-  overflow: hidden;
-  text-overflow:ellipsis;
-}
-
-.book_title{
-  font-weight: 900;
-  font-size: 20px;
-  margin: 20px 10px;
-}
-
-.title{
-  display: block;
-  font-size: 20px;
-  margin: 0 0 15px 0;
-}
-
-.cover_desc{
-  width: 1000px;
-  padding: 10px;
-}
-
-.cover{
-  width: 200px;
-  height: 300px;
-  float: left;
-  margin-left: 20px;
-  display: inline-block;
-}
-
-.cover > * > *{
-  -webkit-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
-  box-shadow: -5px 0px 6px 0px rgba(0,0,0,0.75);
-  transform: perspective(600px) rotate3d(0,-45,0,-25deg);   
-}
-
-.desc{
-  height: 200px;
-  width: 95%;
-  display:block;
-  margin: 0px 20px;
-  text-overflow: ellipsis;
-}
-
-.to_cart > * > *{
-  display: inline-block;
-}
-
-.cart{
-  width: 100%;
-  margin: 30px 0px 30px 0px;
-  padding: 20px;
-  text-align: center;
-  font-size: 15px; 
-  border-bottom: 3px dotted #000;
-}
-
-.cart td:nth-child(n+2){
-  font-weight: 600;
-}
-
-.cart img{
-  width:90px;
-  height: 110px;
-}
-
-.cart .cover{
-  width:90px;
-  height: 110px;
-  overflow: hidden;
-}
-
-.cart .book_title{
-  display: block;
-  float: top;
-  font-size: 16px;
-  margin: 0px;
-  text-align: left;
-}
-
-.cart .book_info{
-  display: block;
-  height: 110px;
-  margin: 0px;
-  overflow: hidden;
-  text-align:left;
-}
-
-.cart .desc{
-  margin: 0px;
-  height: 88px;
-  width: 100%;
-}
-
-tr{
-  border-collapse:separate;
-  text-overflow:ellipsis;
-}
-
-.cart th{
-  text-align: center;
-  padding: 10px;
-}
-
-.sub_total{
-  position: absolute;
-  right: 20px;
-  margin: 0% 2%;
-  display: inline-block;
-}
-
 .price_right {
-  float: right;
+	float: right;
 }
-
-.sub_total li:last-child{
-  font-weight: 600;
+.before_order {
+	display: block;
+	height: 50px;
+	margin: 100px 0 10px;
 }
-
-.before_order{
-  display:block;
-  height: 50px;
-  margin: 100px 0px 10px 0px;
+.left_buttons {
+	float: left;
+	position: relative;
+	display: inline;
 }
-
-.left_buttons{
-  float:left;
-  position: relative; 
-  display: inline;
+.right_buttons {
+	float: right;
+	position: relative;
+	display: inline;
 }
-
-.right_buttons{
-  float: right;
-  position: relative; 
-  display: inline;
+.update_items {
+	bottom: 19px;
+	right: 192px;
+	position: absolute;
+	display: inline;
 }
-
-.update_items{
-  bottom: 19px;
-  right: 192px;
-  position: absolute;
-  display: inline;
-}
-
-.btn-group{
-  display: inline-block;
-  width: 50%;
-}
-
 .set {
-  display: block;
-  border-bottom: 2px solid #000;
+	display: block;
+	border-bottom: 2px solid $black;
 }
-
-.address{
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-  margin: 20px;
+.address {
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+	padding: 20px;
+	margin: 20px;
+	> th {
+		padding: 50px;
+		margin: 20px;
+		font-size: 25px;
+		font-weight: 400;
+	}
 }
-
-.address > th{
-  padding: 50px;
-  margin: 20px;
-  font-size: 25px;
-  font-weight: 400;
+.order_sum {
+	text-align: right;
+	display: inline-block;
+	position: absolute;
+	right: 30px;
+	top: 160px;
 }
-
-.order_sum{
-  text-align: right;
-  display: inline-block;
-  position: absolute;
-  right: 30px;
-  top: 160px;
+.order_address {
+	display: inline-block;
+	th {
+		font-size: 25px;
+		font-weight: 400;
+		padding: 5px;
+		margin: 20px;
+	}
 }
-
-.order_address{
-  display: inline-block;
+.checkout {
+	position: relative;
+	margin: 30px 100px 0;
+	min-width: 760px;
+	h1 {
+		font-weight: 400;
+		font-size: 25px;
+	}
+	> h1 {
+		display: inline-block;
+		width: 150px;
+	}
 }
-
-.order_address th{
-  font-size: 25px;
-  font-weight: 400;
-  padding: 5px;
-  margin: 20px;
+#confirm {
+	th {
+		margin: 0 10px;
+		padding: 0 10px;
+		> * {
+			margin-bottom: 10px;
+			color: $color_steel_blue_approx;
+			padding: 0;
+			border: none;
+			background: none;
+		}
+	}
+	ul {
+		@extend %extend_1;
+	}
 }
-
-.checkout h1{
-  font-weight: 400;
-  font-size: 25px;
+.link_to_steps {
+	right: 0;
+	margin: 18px 50px 0 0;
+	font-size: 20px;
+	position: absolute;
+	> * {
+		color: $black;
+		cursor: pointer;
+		> * {
+			color: $black;
+			&:hover {
+				color: $black;
+				text-decoration-line: none;
+			}
+		}
+	}
 }
-
-.checkout{
-  position: relative;
-  margin: 30px 100px 0px 100px;
-  min-width: 760px;
+.current_step {
+	border-bottom: 2px solid $black;
 }
-
-.checkout > h1{
-  display: inline-block;
-  width: 150px;
+.what_cvv {
+	display: none;
+	width: 300px;
+	border: 1px solid $color_steel_blue_approx;
+	background: $color_gallery_approx;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 0 10px $black_50;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 8px;
+	padding: 15px;
+	position: absolute;
 }
-
-#confirm th > *{
-  margin-bottom: 10px;
-  color: #337ab7;
-  padding: 0;
-  border: none;
-  background: none;
+.checking_field {
+	height: 30px;
+	width: 227px;
 }
-
-.link_to_steps{
-  right: 0;
-  margin: 18px 50px 0px 0px;
-  font-size: 20px;
-  position: absolute;
+.field {
+	margin-bottom: 10px;
+	display: table;
 }
-
-.link_to_steps > * > *{
-  color: #000;
+.to_check {
+	width: 150px;
+	height: 10px;
 }
-
-.link_to_steps > *{
-  color: #000;
-  cursor: pointer;
+td {
+	margin: 0 10px;
+	padding: 0 10px;
+	margin: 10px;
+	padding: 10px 70px;
+	&:first-child {
+		padding: 0;
+	}
 }
-
-.link_to_steps > * > *:hover{
-  color: #000;
-  text-decoration-line: none;
+li {
+	@extend %extend_1;
 }
-
-.current_step{
-  border-bottom: 2px solid #000;
+.field_with_errors {
+	border: 2px solid $color_alizarin_crimson_approx;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 6px;
+	background: $color_pink_approx;
 }
-
-.step_visit *{
-  color: #337ab7;
-  border-bottom: 2px solid #337ab7;
+#error_explanation {
+	color: $color_monza_approx;
 }
-
-#CVV_info > p{
-  cursor: pointer;
-  color: #337ab7;
-  border-bottom: 1px solid #fff;
+#same_address {
+	margin: 0 0 0 300px;
 }
-
-#CVV_info > p:hover{
-  border-bottom: 1px solid #337ab7;
+.order_total {
+	right: 0;
+	position: absolute;
+	width: 200px;
+	margin: -20px 0 0;
+	> * {
+		float: right;
+		display: inline-block;
+		margin: 2px;
+		&:last_child {
+			color: $red;
+		}
+	}
 }
-
-.what_cvv{
-  display: none;
-  width: 300px;
-  border: 1px solid #337ab7;
-  background: #ededed;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  border-radius: 8px;
-  padding: 15px;
-  position: absolute;
+.in_prog {
+	margin: 0 0 30px 0;
 }
-
-.checking_field{
-  height: 30px;
-  width: 227px;
+.dotted {
+	width: 100%;
+	border-bottom: 3px dotted $black;
+	position: relative;
+	margin: 75px 0 0;
 }
-
-.field{
-  margin-bottom: 10px;
-  display: table;
+.naming {
+	display: inline-block;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 20px;
+	border-bottom: 2px solid $black;
+	width: 100%;
 }
-
-.to_check{
-  width: 150px;
-  height: 10px;
+.orders {
+	margin: 0 0 10px 0;
+	text-align: center;
+	th {
+		text-transform: uppercase;
+		font-weight: 100;
+		margin: 10px;
+		padding: 10px 70px;
+		&:first-child {
+			padding: 0;
+			text-align: center;
+		}
+	}
 }
-
-#confirm th, td{
-  margin: 0px 10px;
-  padding: 0px 10px;
+.states {
+	width: 100%;
+	position: relative;
+	> * {
+		width: 100%;
+	}
 }
-
-#confirm ul, li{
-  list-style: none;
-  text-align: left;
-  margin: 0px 0px 0px -15px;
+.back_to_store {
+	margin: 70px 0 0;
 }
-
-.field_with_errors{
-  border: 2px solid #dd2339;
-  border-radius: 6px;
-  background: #ffc9c9;
+.head_of_order {
+	display: inline-block;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	margin-left: 0;
+	margin-right: 0;
+	font-weight: bold;
+	margin: 0 20px 0 0;
 }
-
-#error_explanation{
-  color: #de1515;
+.delivery_meth {
+	opacity: 0.6;
+	color: $color_delta_approx;
+	display: inline-block;
 }
-
-#same_address{
-  margin: 0px 0px 0px 300px;
+.back_orders {
+	display: block;
+	font-size: 12px;
 }
-
-.order_total > *{
-  float: right;
-  display: inline-block;
-  margin: 2px;
+.boldy {
+	font-weight: 600;
+	display: inline-block;
 }
-
-.order_total > *:last_child{
-  color:red;
+.add_book {
+	display: inline-block;
+	float: right;
+	margin: 0 20% 0 0;
+	> * > * {
+		display: inline-block;
+	}
 }
-
-.order_total{
-  right: 0px;
-  position: absolute;
-  width: 200px;
-  margin: -20px 0px 0px 0px;
+#win {
+	display: inline-block;
+	> {
+		.desc {
+			margin: 50px 0 0;
+		}
+		.price {
+			font-size: 18px;
+		}
+	}
 }
-
-.in_prog{
-  margin: 0px 0px 30px 0px;
+.in_center {
+	position: absolute;
+	margin: 100px auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 500px;
+	height: 500px;
+	* {
+		text-align: center;
+	}
+	h2 {
+		display: none;
+	}
 }
-
-.dotted{
-  width: 100%; 
-  border-bottom: 3px dotted #000;
-  position: relative;
-  margin: 75px 0px 0px 0px;
+.linking {
+	text-align: center;
+	margin: 30px 20%;
+	width: 300px;
+	height: 30px;
 }
-
-.naming{
-  display: inline-block;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 20px;
-  border-bottom: 2px solid #000;
-  width: 100%;
+.sold_out {
+	background: $url_0;
+	width: 200px;
+	height: 133px;
+	position: absolute;
+	bottom: 0;
+	left: 300px;
 }
-
-.orders{
-  margin: 0px 0px 10px 0px;
-  text-align: center;
+.sold_out_in_shop {
+	background: $url_1;
+	width: 100px;
+	height: 67px;
+	position: absolute;
 }
-
-.orders th{
-  text-transform: uppercase;
-  font-weight: 100;
+.sold_out_show {
+	background: $url_0;
+	width: 200px;
+	height: 133px;
+	right: 0;
+	top: 0;
 }
-
-.orders th:first-child, td:first-child{
-  padding: 0px;
+.checkout_errors {
+	width: 1000px;
+	line-height: 2.1;
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 8px;
+	background-color: $white;
+	background: linear-gradient(to top, $color_your_pink_approx, $white);
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 3px 3px $black_20;
 }
-
-.orders th:first-child{
-  text-align: center;
+.breadcrumb li > * {
+	color: $black;
+	padding: 0 12px;
 }
-
-.orders th, td{
-  margin: 10px;
-  padding: 10px 70px 10px 70px;
+div > div {
+	display: inline-block;
 }
-
-.states{
-  width: 100%;
-  position: relative;
+.cover_item > * > * {
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: -5px 0 6px 0 $black_75;
+	//Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+	transform: perspective(600px) rotate3d(0,-45,0,-25deg);
 }
-
-.states > *{
-  width: 100%;
+.rev_wrap > div {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 700;
 }
-
-.back_to_store{
-  margin: 70px 0px 0px 0px;
+img.raty-cancel {
+	display: none;
 }
-
-.head_of_order{
-  display: inline-block;
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
-  margin: 0 20px 0 0;
+.to_cart > * > * {
+	display: inline-block;
 }
-
-.delivery_meth{
-  opacity: 0.6;
-  color: #a2a2a2;
-  display: inline-block;
+.step_visit * {
+	color: $color_steel_blue_approx;
+	border-bottom: 2px solid $color_steel_blue_approx;
 }
-
-.back_orders{
-  display: block;
-  font-size: 12px;
-}
-
-.boldy{
-  font-weight: 600;
-  display: inline-block;
-}
-
-.add_book{
-  display: inline-block;
-  float: right;
-  margin: 0px 20% 0px 0px;
-}
-
-.add_book > * > *{
-  display: inline-block;
-}
-
-#win{
-  display: inline-block;
-}
-
-#win > .desc{
-  margin: 50px 0 0 0;
-}
-
-#win > .price{
-  font-size: 18px;
-}
-
-.in_center{
- position: absolute;
-  margin: 100px auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 500px;
-  height: 500px;
-}
-
-.in_center *{
-  text-align: center;
-}
-
-.in_center  h2{
-  display: none;
-}
-
-.linking{
-  text-align: center;
-  margin:  30px 20%;
-  width: 300px;
-  height: 30px;
-}
-
-.sold_out{
-  background: url('http://res.cloudinary.com/nmetau/image/upload/c_scale,w_200/v1464859497/SORRY-SOLD-OUT_shuhgx.png');
-  width: 200px;
-  height: 133px;
-  position: absolute;
-  bottom: 0px;
-  left: 300px;
-}
-
-.sold_out_in_shop{
-  background: url('http://res.cloudinary.com/nmetau/image/upload/c_scale,w_100/v1464859497/SORRY-SOLD-OUT_shuhgx.png');
-  width: 100px;
-  height: 67px;
-  position: absolute;
-}
-
-.sold_out_show{
-  background: url('http://res.cloudinary.com/nmetau/image/upload/c_scale,w_200/v1464859497/SORRY-SOLD-OUT_shuhgx.png');
-  width: 200px;
-  height: 133px;
-  right: 0;
-  top: 0;
-}
-
-.checkout_errors{
-  width: 1000px;
-  line-height: 2.1;
-  border-radius: 8px;
-  background-color: #ffffff;
-  background: linear-gradient(to top, #ffc4c4, #ffffff);
-  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+#CVV_info > p {
+	cursor: pointer;
+	color: $color_steel_blue_approx;
+	border-bottom: 1px solid $white;
+	&:hover {
+		border-bottom: 1px solid $color_steel_blue_approx;
+	}
 }

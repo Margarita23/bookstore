@@ -1,6 +1,6 @@
 $.fn.raty.defaults.half = false;
 $.fn.raty.defaults.halfShow = true;
-$.fn.raty.defaults.path = "/assets";
+$.fn.raty.defaults.path = "/assets/images";
 $.fn.raty.defaults.cancel = false;
 
 $(function(){
@@ -40,7 +40,7 @@ $(function(){
       click: function(score, evt) {
         var _this = this;
         if (score == null) { score = 0; }
-        $.post('<%= Rails.application.class.routes.url_helpers.rate_path %>',
+        $.post('/rate',
         {
           score: score,
           dimension: $(this).attr('data-dimension'),
