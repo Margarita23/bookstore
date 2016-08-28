@@ -747,7 +747,7 @@
     space        : true,
     starHalf     : 'star-half.png',
     starOff      : "<%= cl_image_tag('bookshop/star-on_mqnofr.png') %>",
-    starOn       : "<%= asset_path('star-on.png') %>",
+    starOn       : "<%= cl_image_tag('bookshop/star-off_xppmcl.png') %>",
     starType     : 'img',
     target       : undefined,
     targetFormat : '{score}',
