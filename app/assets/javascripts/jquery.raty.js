@@ -746,7 +746,7 @@
     single       : false,
     space        : true,
     starHalf     : 'star-half.png',
-    starOff      : "<%= asset_path('star-off.png') %>",
+    starOff      : "<%= cl_image_tag('bookshop/star-on_mqnofr.png') %>",
     starOn       : "<%= asset_path('star-on.png') %>",
     starType     : 'img',
     target       : undefined,
