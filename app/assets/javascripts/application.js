@@ -12,8 +12,8 @@ $(document).ready(function() {
           slideSpeed : 300,
           paginationSpeed : 400,
           singleItem:true
-      });  
-  
+      }); 
+
   $('#checkbox_use_same_address').on('click', function(){
     $("#shipping_add").slideToggle(200);
   });

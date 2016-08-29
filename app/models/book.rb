@@ -13,13 +13,6 @@ class Book < ActiveRecord::Base
 
   before_destroy :not_referenced_by_any_item
   
-  #has_attached_file :cover, 
-  #                  styles: { small: "64x64", med: "200x300", large: "400x400" }, 
-  #                  :default_url => "http://res.cloudinary.com/nmetau/image/upload/v1459851257/sJ3CT4V_yqfnoq.gif"
-  
-  #validates_attachment_content_type :cover, 
-  #                                  :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  
   scope :bestsellers, -> { order(bought: :desc).reverse.first(10) }
   
   private
