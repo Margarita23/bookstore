@@ -23,10 +23,7 @@ require 'rspec/rails'
 require 'devise'
 require 'aasm/rspec'
 require 'capybara/rspec'
-require "cancan/matchers"
-require 'capybara/poltergeist'
-
-Capybara.javascript_driver = :poltergeist
+require 'cancan/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

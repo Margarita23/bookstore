@@ -11,7 +11,7 @@ feature "Signing in" do
     fill_in "Email", :with => "qqq@mail.ru"
     fill_in "Password", :with => "][';/./.]"
     click_button "Log in"
-    expect(page).to have_content 'Invalid email or password'
+    expect(page).to have_content "Invalid Email or password."
     
     expect(current_path).to eq ("/users/sign_in")
     
