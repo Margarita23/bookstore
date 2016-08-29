@@ -15,7 +15,7 @@
       <tr>
         <td>
           <div class="cover">
-            <%= image_tag(item.book.cover.url()) %>
+            <%= link_to cl_image_tag("bookshop/#{item.book.cover_line}", :secure => true, :width => 180, :height => 250, :crop => :fill), item.book %>
           </div>
           <div class="book_info_in_cart">
             <div class="book_title">
