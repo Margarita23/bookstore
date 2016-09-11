@@ -303,6 +303,7 @@ body {
 		width: 90px;
 		height: 110px;
 		overflow: hidden;
+        margin-bottom: 15px;
 	}
 	.book_title {
 		display: block;
@@ -330,7 +331,7 @@ body {
 	td:nth-child(n + 2) {
 		font-weight: 600;
 	}
-}
+  }
 tr {
 	border-collapse: separate;
 	text-overflow: ellipsis;
@@ -401,6 +402,12 @@ tr {
 		margin: 20px;
 	}
 }
+.new_checkout {  
+    >.actions  {
+      margin-left: 20px;
+    }
+}
+
 .checkout {
 	position: relative;
 	margin: 30px 100px 0;
@@ -683,4 +690,12 @@ img.raty-cancel {
 	&:hover {
 		border-bottom: 1px solid $color_steel_blue_approx;
 	}
+}
+
+.edit_user {
+    margin: 20px;
+}
+
+.back {
+    margin: 20px;
 }
