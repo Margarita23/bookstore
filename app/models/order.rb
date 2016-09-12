@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
   end
   
   has_many :line_items, dependent: :destroy
-  has_one :coupon
+  has_one :coupon, dependent: :destroy
   belongs_to :user
   belongs_to :delivery
   belongs_to :credit_card
