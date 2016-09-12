@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.update_attributes(provider: auth.provider,uid: auth.uid, email: auth.info.email, password: Devise.friendly_token[0,20])
+      user.update_attributes(provider: auth.provider,uid: auth.uid, name: auth.info.name, email: auth.info.email, password: Devise.friendly_token[0,20])
     end
   end
   
