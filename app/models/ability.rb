@@ -7,9 +7,9 @@ class Ability
       can :access, :rails_admin
       can :dashboard
       can :manage, :all
-      alias_action :create, :update, :destroy, :to => :cud
-      cannot :cud, [Cart, Checkout, Address]
-      cannot :create, [Order, Rating]
+      #alias_action :create, :update, :destroy, :to => :cud
+      #cannot :cud, [Cart, Checkout, Address]
+      #cannot :create, [Order, Rating]
     elsif !user.new_record?
       can :read, [Book, Category, Author, Rating, Cart, LineItem, Address, Order]
       alias_action :create, :read, :update, :destroy, :to => :crud
