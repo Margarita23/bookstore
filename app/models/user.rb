@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_one :cart, dependent: :destroy
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   has_one :coupon, dependent: :destroy
   
   ratyrate_rater
