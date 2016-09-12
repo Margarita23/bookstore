@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_one :cart, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_one :coupon, dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
+  
   
   ratyrate_rater
   
