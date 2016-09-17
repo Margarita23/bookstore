@@ -9,8 +9,8 @@
       <% end %>
     </div>
     <div class="in_progress">
+      <div class="naming"><%= t(:wait_proc)%></div>
       <% if @orders.in_progress.count == 0 %>
-        <div class="naming"><%= t(:wait_proc)%></div>
         <p><%= I18n.t(:no_orders) %></p>
       <% else %>
       <table class="orders">
@@ -35,8 +35,8 @@
       <% end %>
     </div>
     <div class="in_delivery">
+      <div class="naming"><%= t(:in_delivery) %></div>
       <% if @orders.in_delivery.count == 0 %>
-        <div class="naming"><%= t(:in_delivery) %></div>
         <p><%= I18n.t(:no_orders) %></p>
       <% else %>
       <table class="orders">
@@ -60,8 +60,8 @@
       <% end %>
     </div>
     <div class="delivered">
+      <div class="naming"><%= t(:delivered)%></div>
       <% if @orders.completed.count == 0 %>
-        <div class="naming"><%= t(:delivered)%></div>
         <p><%= I18n.t(:no_orders) %></p>        
       <% else %>
       <table class="orders">

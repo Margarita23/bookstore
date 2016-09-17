@@ -116,7 +116,7 @@
   <%= form_for @checkout, url: checkouts_path, method: :post do |f| %>   
     <%= f.hidden_field :current_step, value: session[:last_step] %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <div class="actions">
+    <div class="confirm_buttomn">
       <%= f.submit t(:save_order) %>
     </div>
   <% end %>

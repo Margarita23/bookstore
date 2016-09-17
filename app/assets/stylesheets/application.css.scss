@@ -272,7 +272,7 @@ body {
 	width: 200px;
 	height: 300px;
 	float: left;
-	margin-left: 20px;
+	margin: 0px 10px 0px 10px;
 	display: inline-block;
 	> * > * {
 		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
@@ -378,7 +378,7 @@ tr {
 	width: 100%;
 	text-align: center;
 	padding: 20px;
-	margin: 20px;
+	//margin: 20px;
 	> th {
 		padding: 50px;
 		margin: 20px;
@@ -403,14 +403,18 @@ tr {
 	}
 }
 .new_checkout {  
-    >.actions  {
-      margin-left: 20px;
-    }
+  #delivery {
+    margin-top: 30px;
+    padding: 20px 20px 0px 20px;
+  }
+  .confirm_buttomn{
+    margin: 30px 0px 30px 0px;
+  }
 }
 
 .checkout {
 	position: relative;
-	margin: 30px 100px 0;
+	margin: 30px 100px;
 	min-width: 760px;
 	h1 {
 		font-weight: 400;
