@@ -1,5 +1,4 @@
 require "rails_helper"
-
 feature "Add books to cart" do  
 
   let!(:user) { create(:user) }
@@ -37,5 +36,4 @@ feature "Add books to cart" do
     click_on("ADD TO CART")
     expect(page).to have_content "You are not authorized to access this page. "
   end
-  
 end

@@ -114,8 +114,4 @@ describe CheckoutsHelper do
     assign(:checkout, @checkout)
     expect(helper.checkout_errors_message(@checkout)).to eq ''
   end
-  
 end
-
-
-

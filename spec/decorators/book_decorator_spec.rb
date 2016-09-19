@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 describe BookDecorator do
   let!(:book) { FactoryGirl.create(:book).decorate }
   it "#author_first_name return author`s first_name" do

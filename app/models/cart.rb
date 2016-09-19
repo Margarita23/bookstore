@@ -13,5 +13,4 @@ class Cart < ActiveRecord::Base
       line_item.update_attributes(quantity: ids_with_quantity[:"#{item_id}"])
     end
   end
-  
 end

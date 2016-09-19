@@ -1,0 +1,46 @@
+<table id="confirm">
+  <tr>
+    <th><%= t(:ship_address)%></th>
+    <th><%= t(:bill_address)%></th>
+    <th><%= t(:delivery_confirm)%></th>
+    <th><%= t(:pay_data)%></th>
+  </tr>
+
+  <td>
+    <ul>
+      <% if @checkout.same_address != "1" %>
+        <li><%= @checkout.ship_f_name %> <%= @checkout.ship_l_name %></li>
+        <li><%= @checkout.ship_street %></li>
+        <li><%= @checkout.ship_city %> <%= @checkout.ship_country %> <%= @checkout.ship_zip %></li>
+        <li><%= t(:phone)%> <%= @checkout.ship_phone %></li> 
+      <% else %>
+        <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
+        <li><%= @checkout.bill_street %></li>
+        <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
+        <li><%= t(:phone)%> <%= @checkout.bill_phone %></li>
+      <% end %>
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
+      <li><%= @checkout.bill_street %></li>
+      <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
+      <li>Phone <%= @checkout.bill_phone %></li>
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= @checkout.get_delivery.method %></li>  
+    </ul>
+  </td>
+  
+  <td>
+    <ul>
+      <li><%= hidden_card_number %></li>
+      <li><%= @checkout.exp_month %>/<%= @checkout.exp_year %></li>
+    </ul>
+  </td>
+</table>

@@ -4,5 +4,4 @@ FactoryGirl.define do
     book
     cart
   end
-
 end

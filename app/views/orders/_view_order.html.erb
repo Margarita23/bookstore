@@ -1,41 +1,13 @@
 <div class="naming"><%= t(:in_progress) %></div>
-     <table class="cart">
-
-        <th><%= t(:book) %></th>
-        <th><%= t(:price) %></th>
-        <th><%= t(:qty) %></th>
-        <th><%= t(:total) %></th>
-
-        <% @order.line_items.each do |item| %>
-          <tr>
-            <td>
-              <div class="cover">
-                <%= link_to cl_image_tag("bookshop/#{item.book.cover_line}", :secure => true, :width => 180, :height => 250, :crop => :fill), item.book %>
-              </div>
-              <div class="book_info_in_cart">
-                <div class="book_title">
-                  <%= item.book.title %>
-                </div>
-                <div class = "desc">
-                  <%= item.book.description %>
-                </div>
-              </div>
-            </td>
-            <td>
-              <%= item.book.price %>
-            </td>
-            <td>
-              <%= item.quantity %>
-            </td>
-            <td>
-              <%= item.book.price * item.quantity %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-      <div class="order_total">
-        <div>
-          <%= t(:subtotal)%>: <div class="boldy">$ <%= @order.total_price %>
-          </div>
-        </div>
-      </div>
+<table class="cart">
+  <th><%= t(:book) %></th>
+  <th><%= t(:price) %></th>
+  <th><%= t(:qty) %></th>
+  <th><%= t(:total) %></th>
+  <%= render "orders_items", collection: @order.line_items %>
+</table>
+<div class="order_total">
+  <div>
+    <%= t(:subtotal)%>: <div class="boldy">$ <%= @order.total_price %></div>
+  </div>
+</div>

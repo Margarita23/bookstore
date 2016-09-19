@@ -11,42 +11,7 @@
   </head>
   <body>
     <div id="wrapper">
-      <div id="name"><h1><%=t :site_name %></h1></div>
-      <div id="root">
-        <div id="home">
-          <%= link_to t(:home_page), root_path %>
-        </div>
-        <div class="border"></div>
-        <div id="route_shop">
-          <%= link_to t(:shopping), shopping_path %>
-        </div>
-      </div>
-      <div class="settings">  
-        <% if user_signed_in? %>
-          <% if !current_user.admin %>
-            <div id="basket">
-              <%= link_to image_tag( current_cart.image.url ), cart_path(id: current_user.id ) %> <%= t :cart %>
-              <%= cart_fully %>
-            </div>
-            <%= link_to t(:settings), edit_user_registration_path %>
-            <div class="border"></div>
-            <%= link_to t(:orders), orders_path %>
-            <div class="border"></div>
-            <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
-            <div class="langueges"><%= link_to(t(:russian), change_language_path(:ru))%> | <%= link_to(t(:english), change_language_path(:en))%></div>
-          <% elsif current_user.admin %>
-            <%= link_to t(:control_panel), rails_admin.dashboard_path %>
-            <div class="border"></div>
-            <%= link_to t(:sign_out),  destroy_user_session_path,:method => :delete %>
-          <% else %>
-            <%= link_to t(:sign_out), destroy_user_session_path,:method => :delete %>
-          <% end %>
-        <% else %> 
-          <%= link_to t(:sign_up), new_user_registration_path %>
-          <div class="border"></div>
-          <%= link_to t(:login), new_user_session_path %>
-        <% end %>
-      </div>
+      <%= render "layouts/menu" %>
     </div>
     <div class="space"></div>
     <% if notice %>

@@ -1,5 +1,4 @@
 require "rails_helper"
-  
 feature "Signing in" do
   
   background do
@@ -12,9 +11,7 @@ feature "Signing in" do
     fill_in "Password", :with => "][';/./.]"
     click_button "Log in"
     expect(page).to have_content "Invalid Email or password."
-    
     expect(current_path).to eq ("/users/sign_in")
-    
   end
 
   scenario "Signing in with correct credentials" do
@@ -24,5 +21,4 @@ feature "Signing in" do
     click_button 'Log in'
     expect(page).to have_content 'Signed in successfully.'
   end
-
 end

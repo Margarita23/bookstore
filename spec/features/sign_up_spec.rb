@@ -1,5 +1,4 @@
 require "rails_helper"
-
 feature "Signing up" do
   
   scenario "sign up user" do

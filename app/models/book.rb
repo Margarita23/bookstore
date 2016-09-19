@@ -1,9 +1,6 @@
 class Book < ActiveRecord::Base
-  
   validates :title, :price, :category_id, :bought, :quantity, :presence => true
-  
   translates :title, :description
-  
   belongs_to :category
   belongs_to :author
   has_many :ratings, dependent: :destroy

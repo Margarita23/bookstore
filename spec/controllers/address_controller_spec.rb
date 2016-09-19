@@ -18,9 +18,7 @@ RSpec.describe AddressController, :type => :controller do
         allow_any_instance_of(Address).to receive(:update) {@bill_address}
         put :update, :id => address.id, address: @bill_address
         expect(flash[:notice]).to eq I18n.t(:'addresses.updated')
-        
       end
-      
     end
     
     describe "invalid attributes" do

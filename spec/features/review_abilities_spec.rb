@@ -1,5 +1,4 @@
 require "rails_helper"
-
 feature "Review abilities" do  
 
   let!(:user) { create(:user, admin: false) }
@@ -26,5 +25,4 @@ feature "Review abilities" do
     click_on "Add review for this book"
     expect(page).to have_content "You are not authorized to access this page."
   end
-    
 end

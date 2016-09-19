@@ -1,0 +1,26 @@
+<% collection.each do |item| %>
+  <tr>
+    <td>
+      <div class="cover">
+        <%= cl_image_tag("bookshop/#{item.book.cover_line}", :secure => true, :width => 180, :height => 250, :crop => :fill) %>
+      </div>
+      <div class="book_info_in_cart">
+        <div class="book_title">
+          <%= item.book.title %>
+        </div>
+        <div class = "desc">
+          <%= item.book.description %>
+        </div>
+      </div>
+    </td>
+    <td>
+      <%= item.book.price %>
+    </td>
+    <td>
+      <%= item.quantity %>
+    </td>
+    <td>
+      <%= item.book.price * item.quantity %>
+    </td>
+  </tr>
+<% end %>

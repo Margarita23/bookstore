@@ -1,7 +1,5 @@
 require "rails_helper"
-
 RSpec.describe AuthorsController, :type => :controller do
-  
   describe "GET#show" do
     let(:user) {create :user}
     let!(:author) {create :author}
@@ -19,8 +17,6 @@ RSpec.describe AuthorsController, :type => :controller do
       allow(controller).to receive(:current_user) {user}
       get :show, id: author.id
       expect(assigns(:author)).to eq author
-    end
-    
-    
+    end   
   end
 end

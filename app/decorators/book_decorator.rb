@@ -12,5 +12,4 @@ class BookDecorator < Draper::Decorator
   def author_last_name
     object.last_name
   end
-
 end

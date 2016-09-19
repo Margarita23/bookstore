@@ -1,6 +1,5 @@
 require 'rails_helper'
 require "cancan/matchers"
-
 describe "User" do
   describe "abilities" do
     subject(:ability){ Ability.new(user) }
@@ -13,15 +12,12 @@ describe "User" do
     
     context "when is a member" do
       let(:user){ create :user }
-      
       it{ should_not be_able_to(:destroy, Book, Category, Rating, Author) }
       it{ should_not be_able_to(:create, Book, Category, Author) }
-      
     end
     
     context "when is a admin" do
       let(:user){ create :user, admin: true }
-      
       it{ should be_able_to(:destroy, Book, Category, Rating, Author) }
     end
   end

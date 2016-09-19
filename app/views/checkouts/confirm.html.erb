@@ -10,108 +10,33 @@
       <div class="current_step"><%= link_to t(:confirm), checkout_path(:confirm), method: :get %></div>
       <div><%= t(:complete)%></div>
   </div>
-  
   <h3><%= t(:confirm)%></h3>
-  
-  <table id="confirm">
-  <tr>
-    <th><%= t(:ship_address)%></th>
-    <th><%= t(:bill_address)%></th>
-    <th><%= t(:delivery_confirm)%></th>
-    <th><%= t(:pay_data)%></th>
-  </tr>
-
-  <td>
-    <ul>
-      <% if @checkout.same_address != "1" %>
-        <li><%= @checkout.ship_f_name %> <%= @checkout.ship_l_name %></li>
-        <li><%= @checkout.ship_street %></li>
-        <li><%= @checkout.ship_city %> <%= @checkout.ship_country %> <%= @checkout.ship_zip %></li>
-        <li><%= t(:phone)%> <%= @checkout.ship_phone %></li> 
-      <% else %>
-        <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
-        <li><%= @checkout.bill_street %></li>
-        <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
-        <li><%= t(:phone)%> <%= @checkout.bill_phone %></li>
-      <% end %>
-    </ul>
-  </td>
-  
-  <td>
-    <ul>
-      <li><%= @checkout.bill_f_name %> <%= @checkout.bill_l_name %></li>
-      <li><%= @checkout.bill_street %></li>
-      <li><%= @checkout.bill_city %> <%= @checkout.bill_country %> <%= @checkout.bill_zip %></li>
-      <li>Phone <%= @checkout.bill_phone %></li>
-    </ul>
-  </td>
-  
-  <td>
-    <ul>
-      <li><%= @checkout.get_delivery.method %></li>  
-    </ul>
-  </td>
-  
-  <td>
-    <ul>
-      <li><%= hidden_card_number %></li>
-      <li><%= @checkout.exp_month %>/<%= @checkout.exp_year %></li>
-    </ul>
-  </td>
-</table>
-
-<table class="cart">
-  
-  <th><%= t(:book) %></th>
-  <th><%= t(:price) %></th>
-  <th><%= t(:qty) %></th>
-  <th><%= t(:total) %></th>
-  
-  <% @checkout.order_items.each do |item| %>
-  <tr>
-    <td>
-      <div class="cover">
-        <%= cl_image_tag("bookshop/#{item.book.cover_line}", :secure => true, :width => 180, :height => 250, :crop => :fill) %>
-      </div>
-      <div class="book_info_in_cart">
-        <div class="book_title">
-          <%= item.book.title %>
-        </div>
-        <div class = "desc">
-          <%= item.book.description %>
-        </div>
-      </div>
-    </td>
-    <td>
-      <%= item.book.price %>
-    </td>
-    <td>
-      <%= item.quantity %>
-    </td>
-    <td>
-      <%= item.book.price * item.quantity %>
-    </td>
-  </tr>
-  <% end %>
-</table>
-<div class="order_total">
-  <div>
-    <%= t(:subtotal)%>: $ <%= sub_total %>
+  <%= render "info_order" %>
+  <table class="cart"> 
+    <th><%= t(:book) %></th>
+    <th><%= t(:price) %></th>
+    <th><%= t(:qty) %></th>
+    <th><%= t(:total) %></th>
+    <%= render "orders/orders_items", collection: @checkout.order_items %>
+  </table>
+  <div class="order_total">
+    <div>
+      <%= t(:subtotal)%>: $ <%= sub_total %>
+    </div>
+    <div>
+      <%= t(:discount)%>: <%= discount %> %
+    </div>
+    <div>
+      <%= t(:total)%>: $ <%= sub_total_with_discount %>
+    </div>
+    <div>
+     <%= t(:shipping)%>: $ <%= @checkout.get_delivery.price %>
+    </div>
+    <div>
+      <%= t(:ord_total)%>: $ <%= @checkout.total_price %>
+    </div>
   </div>
-  <div>
-    <%= t(:discount)%>: <%= discount %> %
-  </div>
-  <div>
-    <%= t(:total)%>: $ <%= sub_total_with_discount %>
-  </div>
-  <div>
-   <%= t(:shipping)%>: $ <%= @checkout.get_delivery.price %>
-  </div>
-  <div>
-    <%= t(:ord_total)%>: $ <%= @checkout.total_price %>
-  </div>
-</div>
-<div class="dotted"></div>
+  <div class="dotted"></div>
 
   <%= form_for @checkout, url: checkouts_path, method: :post do |f| %>   
     <%= f.hidden_field :current_step, value: session[:last_step] %>

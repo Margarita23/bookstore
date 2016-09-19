@@ -1,5 +1,4 @@
 require "rails_helper"
-
 RSpec.describe CartsController, :type => :controller do
   
   describe "GET #show" do
@@ -78,7 +77,5 @@ RSpec.describe CartsController, :type => :controller do
       put :update_items, id: cart.id, ids: @ids, coupon: {code: "123456789"}
       expect(flash[:alert]).to eq I18n.t(:coupon_code_is_not_right)
     end
-    
   end
- 
 end

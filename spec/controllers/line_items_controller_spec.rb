@@ -78,6 +78,5 @@ RSpec.describe LineItemsController, :type => :controller do
         expect{subject}.to change(LineItem, :count).by(-1)
       end
     end
-  
   end
 end

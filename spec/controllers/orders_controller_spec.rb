@@ -21,7 +21,6 @@ RSpec.describe OrdersController, :type => :controller do
     it "assigns @order is nil when view is false or nil" do
       get :index, id: orders.last.id
       expect(assigns(:order)).to eq nil
-    end
-    
+    end 
   end
 end

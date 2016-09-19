@@ -116,7 +116,7 @@ RSpec.describe Checkout, type: :model do
       @billing = @checkout.send(:billing)
       @billing.update_attributes(order_shipping_id: order.id, order_billing_id: nil)
       allow(@checkout).to receive(:same_address) {'1'}
-      expect(@checkout.send(:shipping)).to eq true
+      expect(@checkout.send(:shipping).first_name).to eq @billing.first_name
     end
     
     it "shipping is not like a billing" do

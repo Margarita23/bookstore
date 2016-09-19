@@ -1,5 +1,6 @@
 class Checkout 
   include ActiveModel::Model
+  include CartsHelper
   attr_accessor(
     :bill_f_name,
     :bill_l_name,
@@ -74,11 +75,11 @@ class Checkout
   end
   
   def valid_new_quantity
-    order_items.each do |l|
-      book = Book.find_by(id: l.book_id)
-      new_quan = book.quantity - l.quantity
-      l.update(quantity: book.quantity) if new_quan < 0 
-      l.destroy if book.quantity == 0
+    order_items.each do |item|
+      book = Book.find_by(id: item.book_id)
+      new_quan = book.quantity - item.quantity
+      item.update(quantity: book.quantity) if new_quan < 0 
+      item.destroy if book.quantity == 0
     end
   end
   
@@ -99,24 +100,20 @@ class Checkout
   end
   
   def coupon_discount
-    if coupon
-      coupon.discount
-    else
-      0
-    end
+    coupon ? coupon.discount : 0
   end
 
   def get_delivery
-    if delivery.to_s.empty?
+    if delivery.blank?
       Delivery.first
     else
       Delivery.find_by(id: self.delivery)
     end
   end
-  
+    
   def books_price
     return 0 if order_items.count == 0
-    order_items.collect{|book| book.price * book.quantity}.sum(:price).round(2)
+    get_items_price(order_items)
   end
   
   def total_price
@@ -125,7 +122,7 @@ class Checkout
   end
   
   def order
-    @order = Order.create!(order_params) 
+    @order = Order.create(order_params) 
   end
   
   def get_coupon
@@ -137,15 +134,17 @@ class Checkout
 private
   
   def get_line_items
-    order_items.each do |l|
-      book_bought(l)
-      l.update_attributes(order_id: order_id, cart_id: nil)
+    order_items.each do |item|
+      book_bought(item)
+      item.update_attributes(order_id: order_id, cart_id: nil)
     end
   end
     
   def book_bought(item)
     book = Book.find_by(id: item.book_id)
-    book.update_attributes(quantity: book.quantity -= item.quantity, bought: book.bought += item.quantity)
+    quantity = book.quantity - item.quantity
+    bought = book.bought + item.quantity
+    book.update_attributes(quantity: quantity, bought: bought)
   end
 
   def billing
@@ -154,8 +153,8 @@ private
   
   def shipping
     if self.same_address == '1'
-      @ship_address = Address.create(billing_params)
-      @ship_address.update_attributes(order_shipping_id: order_id, order_billing_id: nil)
+      address_params = billing_params.merge(order_shipping_id: order_id, order_billing_id: nil)
+      @ship_address = Address.create(address_params)
     else
        @ship_address = Address.create(shipping_params)
     end

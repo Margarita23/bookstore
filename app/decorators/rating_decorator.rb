@@ -2,11 +2,7 @@ class RatingDecorator < Draper::Decorator
   delegate_all
   
   def author_name
-    if !first_name.blank?
-      "#{first_name} #{last_name}"
-    else
-      email
-    end
+    !first_name.blank? ? "#{first_name} #{last_name}" : email
   end
   
   def first_name
@@ -20,5 +16,4 @@ class RatingDecorator < Draper::Decorator
   def email
     object.user.email
   end
-
 end

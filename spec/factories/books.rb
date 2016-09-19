@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :book do
     title { Faker::Name.title }
     description { Faker::Lorem.paragraph }

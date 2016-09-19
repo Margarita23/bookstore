@@ -25,7 +25,6 @@ module FeatureHelper
   end
   
   def fill_address
-    #visit "/checkouts/address"
     fill_in "checkout_bill_f_name", :with => "John"
     fill_in "checkout_bill_l_name", :with => "Dandy"
     fill_in "checkout_bill_street", :with => "Hanty Roude, 12"
@@ -50,5 +49,4 @@ module FeatureHelper
     fill_in "user_password_confirmation", :with => "password"
     click_button "Sign up"
   end
-  
 end

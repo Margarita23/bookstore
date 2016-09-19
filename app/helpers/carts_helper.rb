@@ -3,8 +3,12 @@ module CartsHelper
     @sub_total = if carts_items.count ==  0
       0
     else
-      carts_items.collect{|book| book.price * book.quantity}.sum(:price).round(2)
+      get_items_price(carts_items)
     end
+  end
+
+  def get_items_price(items)
+    items.collect{|book| book.price * book.quantity}.sum(:price).round(2)
   end
   
   def quantity_incart
@@ -40,5 +44,4 @@ module CartsHelper
     total = sub_total - @discount
     total.round(2)
   end
-  
 end

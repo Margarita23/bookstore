@@ -5,18 +5,16 @@ class CheckoutsController < ApplicationController
   steps :address, :delivery, :payment, :confirm
 
   def show   
-    return redirect_to new_user_session_path, alert: I18n.t(:authorize_please) if current_user.new_record?
-    return redirect_to shopping_path, alert: I18n.t(:order_must_contain_books) if current_user.cart.line_items == []
+    checking_user_with_items
     @checkout = Checkout.new(checkout_params)
-    if future_step?(session[:last_step].to_sym) || @checkout.valid?
+    if can_go_to_next_step
       session[:last_step] = step
     end
     render checkout_path(session[:last_step]), method: :get
   end
   
   def create
-    return redirect_to new_user_session_path, alert: I18n.t(:authorize_please) if current_user.new_record?
-    return redirect_to shopping_path, alert: I18n.t(:order_must_contain_books) if current_user.cart.line_items == []
+    checking_user_with_items
     @checkout = Checkout.new(checkout_params)
     if @checkout.save
       session[:checkout] = nil
@@ -29,6 +27,15 @@ class CheckoutsController < ApplicationController
   end
   
   private
+  
+  def checking_user_with_items
+    return redirect_to new_user_session_path, alert: I18n.t(:authorize_please) if current_user.new_record?
+    return redirect_to shopping_path, alert: I18n.t(:order_must_contain_books) unless current_user.cart.line_items.present?
+  end
+  
+  def can_go_to_next_step
+    future_step?(session[:last_step].to_sym) || @checkout.valid?
+  end
   
   def checkout_params
     session[:checkout] ||= {}

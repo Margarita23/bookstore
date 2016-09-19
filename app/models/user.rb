@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   has_one :coupon, dependent: :destroy
   has_many :credit_cards, dependent: :destroy
   
-  
   ratyrate_rater
   
   has_one :billing_address, :class_name => "Address", :foreign_key => "user_billing_id",  dependent: :destroy
@@ -24,5 +23,4 @@ class User < ActiveRecord::Base
       user.update_attributes(provider: auth.provider, first_name: auth.info.first_name, last_name: auth.info.last_name, uid: auth.uid, email: auth.info.email, password: Devise.friendly_token[0,20])
     end
   end
-  
 end

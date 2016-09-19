@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 describe RatingDecorator do
   let!(:rating) { FactoryGirl.create(:rating).decorate }
   it "#email return user`s email" do
