@@ -19,9 +19,9 @@ class CartsController < ApplicationController
     @cart.update_items_quantity(params[:ids])
     @cart.coupon = Coupon.find_by(code: params[:coupon][:code], user_id: current_user.id)
     if invalid_coupon_code
-      flash[:alert] = t(:coupon_code_is_not_right)
-    else
       flash[:notice] = t(:quantity_changed)
+    else
+      flash[:alert] = t(:coupon_code_is_not_right)
     end
     redirect_to :back
   end
