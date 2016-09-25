@@ -152,12 +152,12 @@ private
   end
   
   def shipping
-    if self.same_address == '1'
-      address_params = billing_params.merge(order_shipping_id: order_id, order_billing_id: nil)
-      @ship_address = Address.create(address_params)
-    else
-       @ship_address = Address.create(shipping_params)
-    end
+    address_params = if self.same_address == '1'
+                       billing_params.merge(order_shipping_id: order_id, order_billing_id: nil)
+                     else
+                       shipping_params
+                     end
+    @ship_address = Address.create(address_params)
   end
   
   def payment
