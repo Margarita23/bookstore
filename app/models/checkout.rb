@@ -37,6 +37,7 @@ class Checkout
   validates_presence_of :bill_country, :message => I18n.t(:'enter.billing_data.country'), if: :on_address_step 
   validates_presence_of :bill_zip, :message => I18n.t(:'enter.billing_data.zip'), if: :on_address_step 
   validates_presence_of :bill_phone, :message => I18n.t(:'enter.billing_data.phone'), if: :on_address_step 
+  validates_numericality_of :bill_zip, only_integer: true, message: I18n.t(:'enter.billing_data.zip_only_numbers'), if: :on_address_step
   validates_numericality_of :bill_phone, message: I18n.t(:only_numbers), only_integer: true, if: :on_address_step
   
   validates_presence_of :ship_f_name, :message => I18n.t(:'enter.shipping_data.first_name'), unless: :valid_ship_address
@@ -46,6 +47,7 @@ class Checkout
   validates_presence_of :ship_country , :message => I18n.t(:'enter.shipping_data.country'), unless: :valid_ship_address
   validates_presence_of :ship_zip , :message => I18n.t(:'enter.shipping_data.zip'), unless: :valid_ship_address
   validates_presence_of :ship_phone , :message => I18n.t(:'enter.shipping_data.phone'), unless: :valid_ship_address
+  validates_numericality_of :ship_zip, only_integer: true, message: I18n.t(:'enter.shipping_data.zip_only_numbers'), unless: :valid_ship_address
   validates_numericality_of :ship_phone, only_integer: true, message: I18n.t(:only_numbers), unless: :valid_ship_address
   
   validates_presence_of :card_code, message: I18n.t(:"enter.card_code"), if: :on_payment_step
