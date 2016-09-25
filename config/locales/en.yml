@@ -111,6 +111,7 @@ en:
       country: "Enter country for billing address. "
       zip: "Enter zip for billing address. "
       phone: "Enter phone for billing address. "
+      zip_only_numbers: "Zip must contain only numbers for billing address. "
     shipping_data:
       first_name: "Enter first name for shipping address. " 
       last_name: "Enter last name for shipping address. "
@@ -119,6 +120,7 @@ en:
       country: "Enter country for shipping address. "
       zip: "Enter zip for shipping address. "
       phone: "Enter phone for shipping address. "
+      zip_only_numbers: "Zip must contain only numbers for shipping address. "
     card_code: "Enter card code. "
     code_numbers: "Card code must contain only numbers. "
     card_number: "Enter cart number. "
