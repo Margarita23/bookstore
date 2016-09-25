@@ -127,7 +127,7 @@ class Checkout
   
   def get_coupon
     if coupon
-      @coupon = Coupon.find_by(id: coupon.id).update(user_id: nil, cart_id: nil, order_id: order_id)
+      @coupon = Coupon.find_by(id: coupon.id).reset_coupon_params(order_id)
     end
   end
   
