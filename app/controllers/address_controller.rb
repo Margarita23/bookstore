@@ -13,12 +13,6 @@ class AddressController < ApplicationController
 
   private
     def address_params
-      @address_params = {first_name: params[:first_name], 
-                      last_name: params[:last_name], 
-                      street: params[:street], 
-                      city: params[:city], 
-                      country: params[:country], 
-                      zip: params[:zip], 
-                      phone: params[:phone]}
+      params.permit(:first_name, :last_name, :street, :city, :country, :zip, :phone)
     end
 end
