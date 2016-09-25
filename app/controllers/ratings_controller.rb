@@ -1,6 +1,7 @@
+# RatingsController
 class RatingsController < ApplicationController
   load_and_authorize_resource :book
-  load_and_authorize_resource :rating, :through => :book
+  load_and_authorize_resource :rating, through: :book
 
   def show
     @rating = Rating.find(params[:id]).decorate
@@ -21,9 +22,10 @@ class RatingsController < ApplicationController
       flash[:alert] = t(:rating_not_saved)
     end
   end
-  
+
   private
-    def rating_params
-      params.require(:rating).permit( :headline, :review, :book_id, :user_id)
-    end
+
+  def rating_params
+    params.require(:rating).permit(:headline, :review, :book_id, :user_id)
+  end
 end

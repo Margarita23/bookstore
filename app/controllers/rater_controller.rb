@@ -1,3 +1,4 @@
+# RaterController
 class RaterController < ApplicationController
   def create
     if user_signed_in?

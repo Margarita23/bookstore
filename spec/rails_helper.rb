@@ -1,15 +1,13 @@
 require 'simplecov'
 SimpleCov.start 'rails'
-require "bundler/setup"
+require 'bundler/setup'
 ::Bundler.require(:default, :test)
 
 ::Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
-    
     with.library :active_record
     with.library :active_model
-    #with.library :action_controller
   end
 end
 
@@ -50,11 +48,10 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FeatureHelper, type: :feature
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, type: :controller
   config.mock_with :rspec do |mocks|
     mocks.allow_message_expectations_on_nil = true
   end
-
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -80,8 +77,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  
-  config.include Capybara::DSL
-  
-end
 
+  config.include Capybara::DSL
+
+end

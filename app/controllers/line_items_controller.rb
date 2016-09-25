@@ -1,3 +1,4 @@
+# LineItemsController
 class LineItemsController < ApplicationController
   include CartsHelper
   load_and_authorize_resource
@@ -20,6 +21,7 @@ class LineItemsController < ApplicationController
   end
 
   private
+
   def line_item_params
     params.permit(:book_id)
   end

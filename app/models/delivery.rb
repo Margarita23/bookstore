@@ -1,3 +1,4 @@
+# Delivery model
 class Delivery < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   validates :method, :price, presence: true

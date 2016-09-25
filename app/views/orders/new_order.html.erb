@@ -15,10 +15,10 @@
     <%= t(:subtotal)%>: $ <%= @order.order_sub_total %>
     </div>
     <div>
-      <%= t(:discount)%>: <%= discount %> %
+      <%= t(:discount)%>: <%= @order.coupon.nil? ? 0 : @order.coupon.discount %> %
     </div>
     <div>
-      <%= t(:subtotal)%>: $ <%= @order.total_price - @order.delivery.price %>
+      <%= t(:total)%>: $ <%= @order.total_price - @order.delivery.price %>
     </div>
     <div>
       <%= t(:shipping)%>: $ <%= @order.delivery.price %>
@@ -26,7 +26,7 @@
     <div>
       <%= t(:ord_total)%>: $ <%= @order.total_price %>
     </div>
-  </div>
+  </div> 
   <div class="dotted"></div>
   <div class="back_to_store">
     <%= button_to t(:to_store), shopping_path, method: :get %>

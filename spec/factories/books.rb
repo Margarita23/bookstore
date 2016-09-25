@@ -6,6 +6,6 @@ FactoryGirl.define do
     quantity { Faker::Number.number(2) }
     bought 0
     author
-    category 
+    category
   end
 end

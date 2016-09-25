@@ -1,21 +1,24 @@
-class GenerateUsersInstrumentsService  
+# GenerateUsersInstrumentsService
+class GenerateUsersInstrumentsService
   def initialize(user)
     @user = user
   end
 
   def call
     unless Address.exists?(user_billing_id: @user.id)
-      billing_address = Address.create(user_billing_id: @user.id, first_name: @user.first_name, last_name: @user.last_name)
+      Address.create(user_billing_id: @user.id, first_name: @user.first_name, last_name: @user.last_name)
     end
     unless Address.exists?(user_shipping_id: @user.id)
-      shipping_address = Address.create(user_shipping_id: @user.id, first_name: @user.first_name, last_name: @user.last_name)
+      Address.create(user_shipping_id: @user.id, first_name: @user.first_name, last_name: @user.last_name)
     end
-    unless Cart.exists?(user_id: @user.id) && !@user.admin
-      cart = Cart.create(id: @user.id, user_id: @user.id)
-    end
+    Cart.create(id: @user.id, user_id: @user.id) unless checking_cart
   end
-  
+
+  def checking_cart
+    Cart.exists?(user_id: @user.id) && @user.admin
+  end
+
   def facebook_info
-    User.from_omniauth(request.env["omniauth.auth"])
+    User.from_omniauth(request.env['omniauth.auth'])
   end
 end

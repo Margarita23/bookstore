@@ -7,13 +7,13 @@ RSpec.describe User, type: :model do
   it { should have_one(:shipping_address) }
 
   before do
-    @auth = OmniAuth::AuthHash.new({
+    @auth = OmniAuth::AuthHash.new({ 
                   provider: 'facebook',
-                  uid: '123545', 
-                  info: {email: "test@test.ru"}
+                  uid: '123545',
+                  info: { email: 'test@test.ru' }
                   })
   end
-  it "#from_omniauth" do
-    expect(User.from_omniauth(@auth)).to eq User.first 
+  it '#from_omniauth' do
+    expect(User.from_omniauth(@auth)).to eq User.first
   end
 end
