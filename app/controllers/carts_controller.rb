@@ -17,8 +17,11 @@ class CartsController < ApplicationController
     return redirect_to root_path if @cart.nil? || params[:ids].nil?
     @cart.update_items_quantity(params[:ids])
     @cart.coupon = Coupon.find_by(code: params[:coupon][:code], user_id: current_user.id)
-    flash[:alert] = t(:coupon_code_is_not_right) if invalid_coupon_code
-    flash[:notice] = t(:quantity_changed)
+    if invalid_coupon_code
+      flash[:alert] = t(:coupon_code_is_not_right) 
+    else
+      flash[:notice] = t(:quantity_changed)
+    end
     redirect_to :back
   end
   
