@@ -5,7 +5,7 @@ class Book < ActiveRecord::Base
   belongs_to :category
   belongs_to :author
   has_many :ratings, dependent: :destroy
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   delegate :first_name, :last_name, to: :author
   before_destroy :not_referenced_by_any_item
 

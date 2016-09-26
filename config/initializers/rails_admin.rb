@@ -139,9 +139,7 @@ RailsAdmin.config do |config|
     edit do
       field :code
       field :discount
-      field :user do
-        searchable [:id, :email]
-      end
+      field :user
     end
   end
   
