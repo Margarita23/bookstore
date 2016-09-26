@@ -37,9 +37,7 @@ RailsAdmin.config do |config|
     end
     export
     bulk_delete
-    show do
-      except ['Address']
-    end
+    show
     edit
     delete
     show_in_app do
@@ -98,15 +96,7 @@ RailsAdmin.config do |config|
       field :bought
       field :category
       field :cover_line
-    end
-    #edit do
-    #  exclude_fields :id 
-    #  exclude_fields :created_at 
-    #  exclude_fields :updated_at 
-    #  exclude_fields :line_items
-    #  exclude_fields :ratings
-    #end
-    
+    end   
   end
   
   config.model 'Author' do
