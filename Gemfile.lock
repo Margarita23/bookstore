@@ -352,7 +352,7 @@ DEPENDENCIES
   jquery-rails
   mini_magick
   omniauth
-  omniauth-facebook (= 1.4.0)
+  omniauth-facebook
   owlcarousel-rails
   paperclip
   pg
