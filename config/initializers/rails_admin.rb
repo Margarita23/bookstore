@@ -139,7 +139,7 @@ RailsAdmin.config do |config|
     edit do
       field :code
       field :discount
-      field :user_id, :string
+      field :user_id, User
     end
   end
   
