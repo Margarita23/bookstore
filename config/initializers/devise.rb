@@ -6,7 +6,7 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '558c87a4ffc3b4fd717ce34ea5f91a9ec29d5f701774cee19cb76fcf05967310f8a76e2e4d0bd4410c848ce3ddc38cae92957e3b773500a17250c1de1e3c8f51'
 
-  config.omniauth :facebook, "1605409069769187", "43e51f51f6d2c31025372e95015ebc7b", :scope => 'email', info_fields: 'email, first_name, last_name', provider_ignore_state: true
+  config.omniauth :facebook, "1605409069769187", "43e51f51f6d2c31025372e95015ebc7b", { :scope => 'email', info_fields: 'email, first_name, last_name', provider_ignore_state: true }
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -31,7 +31,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:email]
+  config.authentication_keys = [:email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
