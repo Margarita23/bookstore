@@ -37,7 +37,9 @@ RailsAdmin.config do |config|
     end
     export
     bulk_delete
-    show
+    show do
+      except ["Address"]
+    end
     edit
     delete
     show_in_app
