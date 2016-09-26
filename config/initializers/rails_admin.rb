@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app do
-      except ['Address', 'LineItem', 'Delivery']
+      except ['Address', 'LineItem', 'Delivery', 'CreditCard', 'BillingAddress', 'ShippingAddress']
     end
     state
     ## With an audit adapter, you can add:
@@ -132,6 +132,14 @@ RailsAdmin.config do |config|
     list do
       field :method
       field :price
+    end
+  end
+  
+  config.model 'Coupon' do
+    edit do
+      field :code
+      field :discount
+      field :user_id
     end
   end
   
