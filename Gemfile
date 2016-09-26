@@ -43,7 +43,7 @@ gem 'carrierwave'
 gem 'cloudinary'
 #gem 'aws-sdk', '~> 2.3'
 gem 'dynamic_form'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth'
 gem 'cancancan', '~> 1.10'
 gem 'rails_12factor', group: :production
