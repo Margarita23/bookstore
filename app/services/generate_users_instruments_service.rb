@@ -17,8 +17,4 @@ class GenerateUsersInstrumentsService
   def checking_cart
     Cart.exists?(user_id: @user.id) && @user.admin
   end
-
-  def facebook_info
-    User.from_omniauth(request.env['omniauth.auth'])
-  end
 end
