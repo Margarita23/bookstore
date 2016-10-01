@@ -31,5 +31,4 @@ class Ability
     can :read, [Book, Category, Author, Rating]
     can :update, Coupon
   end
-
 end

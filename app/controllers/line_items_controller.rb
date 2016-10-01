@@ -4,7 +4,7 @@ class LineItemsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @line_item = ItemWithCheckingQuantityService.new(params[:book_id], params[:new_quantity], current_cart).call
+    @line_item = CheckingQuantityService.new(params[:book_id], params[:new_quantity], current_cart).call
     if @line_item.nil?
       flash[:alert] = t(:books_not_added)
     else
