@@ -1,8 +1,8 @@
 # SetLessQuantityService
 class SetLessQuantityService
-  def initialize(item, book)
+  def initialize(item, book_id)
     @item = item
-    @book = book
+    @book = Book.find_by(id: book_id)
   end
 
   def call
