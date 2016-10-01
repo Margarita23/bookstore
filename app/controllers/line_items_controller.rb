@@ -4,12 +4,12 @@ class LineItemsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    book = Book.find_by(id: params[:book_id])
-    return redirect_to root_path, alert: t(:books_not_added) if book.nil?
-    @line_item = ItemWithCheckingQuantityService.new(book, params[:new_quantity], current_cart).call
-    return redirect_to :back, alert: t(:books_not_added) if @line_item.nil?
-    if @line_item.save
-      flash[:notice] = SetLessQuantityService.new(@line_item, book).call
+    @line_item = ItemWithCheckingQuantityService.new(params[:book_id], params[:new_quantity], current_cart).call
+    if @line_item.nil?
+      flash[:alert] = t(:books_not_added)
+    else
+      @line_item.save
+      flash[:notice] = SetLessQuantityService.new(@line_item, params[:book_id]).call
     end
     redirect_to :back
   end
