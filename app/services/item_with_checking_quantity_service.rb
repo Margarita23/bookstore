@@ -1,12 +1,13 @@
 # ItemWithCheckingQuantityService
 class ItemWithCheckingQuantityService
-  def initialize(book, new_quantity, current_cart)
-    @book = book
+  def initialize(book_id, new_quantity, current_cart)
+    @book = Book.find_by(id: book_id)
     @new_qty = new_quantity
     @current_items = current_cart.line_items
   end
 
   def call
+    return nil if @book.nil?
     item = @current_items.find_by(book_id: @book)
     return item unless check_params(@new_qty)
     if item.nil?
