@@ -17,6 +17,6 @@ class GenerateUsersInstrumentsService
   end
 
   def checking_cart
-    Cart.exists?(user_id: @user.id) && @user.admin
+    Cart.exists?(user_id: @user.id) || @user.admin
   end
 end
